@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1ebte16oy5lt"
-path="res://.godot/imported/icon.svg-673dbec0f4b0ce39cdd6e0f218bd1217.ctex"
+uid="uid://cun0gn6xpgacw"
+path="res://.godot/imported/pointLightTexture.webp-1d367b9de6669853c4433c735cbbd87b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FogOfWar/icon.svg"
-dest_files=["res://.godot/imported/icon.svg-673dbec0f4b0ce39cdd6e0f218bd1217.ctex"]
+source_file="res://Assets/pointLightTexture.webp"
+dest_files=["res://.godot/imported/pointLightTexture.webp-1d367b9de6669853c4433c735cbbd87b.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1ewf686c7o4s"]
 
-[ext_resource type="Script" path="res://Selection/CharacterBody2D.gd" id="1_w5li0"]
-[ext_resource type="Texture2D" uid="uid://cun0gn6xpgacw" path="res://FogOfWar/pointLightTexture.webp" id="2_m0rvv"]
-[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://FogOfWar/icon.svg" id="4_eq7pt"]
+[ext_resource type="Script" path="res://Selection/scripts/CharacterBody2D.gd" id="1_w5li0"]
+[ext_resource type="Texture2D" uid="uid://cun0gn6xpgacw" path="res://Assets/pointLightTexture.webp" id="2_m0rvv"]
+[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="4_eq7pt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c60u"]
 

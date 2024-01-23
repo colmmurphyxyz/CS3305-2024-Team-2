@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://jopvmc1r5vq1"]
 
-[ext_resource type="Script" path="res://FogOfWar/game.gd" id="1_0jfh1"]
-[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://FogOfWar/icon.svg" id="1_jkwob"]
-[ext_resource type="PackedScene" uid="uid://bnfq0vicquvnj" path="res://FogOfWar/player.tscn" id="2_cftim"]
-[ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://FogOfWar/Light.png" id="4_h7eus"]
+[ext_resource type="Script" path="res://FogOfWar/scripts/game.gd" id="1_0jfh1"]
+[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="1_jkwob"]
+[ext_resource type="PackedScene" uid="uid://bnfq0vicquvnj" path="res://FogOfWar/scenes/player.tscn" id="2_cftim"]
+[ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="4_h7eus"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hd4fs"]
 blend_mode = 3
