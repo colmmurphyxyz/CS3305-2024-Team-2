@@ -1,23 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://jopvmc1r5vq1"]
+[gd_scene load_steps=6 format=3 uid="uid://jopvmc1r5vq1"]
 
 [ext_resource type="Script" path="res://FogOfWar/scripts/game.gd" id="1_0jfh1"]
-[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="1_jkwob"]
 [ext_resource type="PackedScene" uid="uid://bnfq0vicquvnj" path="res://FogOfWar/scenes/player.tscn" id="2_cftim"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="4_h7eus"]
+
+[sub_resource type="GDScript" id="GDScript_vteno"]
+script/source = "extends Node2D
+@export var width:int
+@export var height:int
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hd4fs"]
 blend_mode = 3
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oy4l"]
-
 [node name="game" type="Node2D"]
+script = SubResource("GDScript_vteno")
 
 [node name="FogOfWar" type="Node2D" parent="." node_paths=PackedStringArray("fog", "Player")]
 script = ExtResource("1_0jfh1")
 fog = NodePath("../fog")
 LightTexture = ExtResource("4_h7eus")
-lightWidth = 900
-lightHeight = 900
 Player = NodePath("../Player")
 
 [node name="fog" type="Sprite2D" parent="."]
@@ -28,15 +38,10 @@ centered = false
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.341176, 0.341176, 0.341176, 1)
 
-[node name="Player" parent="." groups=["Units"] instance=ExtResource("2_cftim")]
+[node name="Player" parent="." instance=ExtResource("2_cftim")]
 position = Vector2(373, 222)
 detectionRadiusSize = 3
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Units"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_8oy4l")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(1089, 576)
-texture = ExtResource("1_jkwob")
+[node name="Player2" parent="." instance=ExtResource("2_cftim")]
+position = Vector2(687, 84)
+detectionRadiusSize = 3

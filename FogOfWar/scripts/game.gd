@@ -1,6 +1,6 @@
 extends Node2D
-@onready var fogWidth =  get_tree().get_root().get_size().x
-@onready var fogHeight =  get_tree().get_root().get_size().y
+@onready var fogWidth =  get_tree().get_root().get_size().x*2
+@onready var fogHeight =  get_tree().get_root().get_size().y*2
 # exports for editor
 @export var fog: Sprite2D
 @export var LightTexture: CompressedTexture2D
@@ -11,7 +11,6 @@ extends Node2D
 
 # debounce counter helper
 var time_since_last_fog_update = 0.0
-
 var fogImage: Image
 var lightImage: Image
 var light_offset: Vector2
@@ -23,18 +22,15 @@ func _ready():
   # get Image from CompressedTexture2D and resize it
 	lightImage = LightTexture.get_image()
 	lightImage.resize(lightWidth, lightHeight)
-
-  # get center
 	light_offset = Vector2(lightWidth/2, lightHeight/2)
-
-  # create black canvas (fog)
+	light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
+	
 	fogImage = Image.create(fogWidth, fogHeight, false, Image.FORMAT_RGBA8)
 	fogImage.fill(Color.BLACK)
 	fogTexture = ImageTexture.create_from_image(fogImage)
 	fog.texture = fogTexture
 
   # get Rect2 from our Image to use it with .blend_rect() later
-	light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
 
   # update fog once or player will be under fog until you start move
 	update_fog(Player.position)
@@ -51,13 +47,14 @@ func update_fog(pos):
 # Here I don't use single if block for debounce + player input because we don't need to check input
 # if debounce is not ready. 
 func _process(delta):
-	time_since_last_fog_update += delta
-	if (time_since_last_fog_update >= debounce_time):
-		var player_input = Player.get_input()
-		if player_input.length() > 0:
-			time_since_last_fog_update = 0.0
-			update_fog(Player.position)
-
+	for unit in get_tree().get_nodes_in_group("Units"):
+		var light_radius = unit.detectionRadiusSize*180
+		lightImage.resize(light_radius, light_radius)
+		light_offset = Vector2(light_radius/2, light_radius/2)
+		light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
+		print(unit.detectionRadiusSize,unit.name)
+		update_fog(unit.position)
+		
 ### If you want to stick to mouse
 ### make sure you add optimizations here
 #func _input(event):

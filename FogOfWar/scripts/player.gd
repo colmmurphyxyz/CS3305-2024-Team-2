@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var detectionRadius: Area2D = $DetectionRadius
 
 func _ready():
+	add_to_group("Units")
 	light.scale=Vector2(detectionRadiusSize,detectionRadiusSize)
 	detectionRadius.scale=Vector2(detectionRadiusSize,detectionRadiusSize)
 func get_input():
