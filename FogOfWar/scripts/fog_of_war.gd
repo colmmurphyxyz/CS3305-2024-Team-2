@@ -1,9 +1,10 @@
 extends Node2D
 @onready var fogWidth =  get_tree().get_root().get_size().x*2
 @onready var fogHeight =  get_tree().get_root().get_size().y*2
+@onready var fog: Sprite2D = get_node("fog")
 # exports for editor
-@export var fog: Sprite2D
-@export var LightTexture: CompressedTexture2D
+
+@export var LightTexture: CompressedTexture2D = load("res://Assets/Light.png")
 @export var lightWidth = 300
 @export var lightHeight = 300
 @export var Player: CharacterBody2D
@@ -30,11 +31,6 @@ func _ready():
 	fogTexture = ImageTexture.create_from_image(fogImage)
 	fog.texture = fogTexture
 
-  # get Rect2 from our Image to use it with .blend_rect() later
-
-  # update fog once or player will be under fog until you start move
-	update_fog(Player.position)
-	
 
 # update our fog
 func update_fog(pos):
@@ -48,11 +44,10 @@ func update_fog(pos):
 # if debounce is not ready. 
 func _process(delta):
 	for unit in get_tree().get_nodes_in_group("Units"):
-		var light_radius = unit.detectionRadiusSize*180
+		var light_radius = unit.visible_radius_size*180
 		lightImage.resize(light_radius, light_radius)
 		light_offset = Vector2(light_radius/2, light_radius/2)
 		light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
-		print(unit.detectionRadiusSize,unit.name)
 		update_fog(unit.position)
 		
 ### If you want to stick to mouse

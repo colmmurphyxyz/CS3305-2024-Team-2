@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://jopvmc1r5vq1"]
+
+[ext_resource type="Script" path="res://FogOfWar/scripts/fog_of_war.gd" id="1_0jfh1"]
+[ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="4_h7eus"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hd4fs"]
+blend_mode = 3
+
+[node name="FogOfWar" type="Node2D"]
+script = ExtResource("1_0jfh1")
+
+[node name="fog" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_hd4fs")
+texture = ExtResource("4_h7eus")
+centered = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.341176, 0.341176, 0.341176, 1)

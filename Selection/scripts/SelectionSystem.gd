@@ -7,13 +7,13 @@ var weakref_selected = []
 var drag_start = Vector2.ZERO
 var select_rectangle = RectangleShape2D.new()
 
-@onready var select_draw = $SelectDraw
+@onready var select_draw = $DrawSelection
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			for unit in selected:
-				unit.collider.deselect()
+				unit.collider.get_parent().deselect()
 			selected = []
 			dragging = true
 			drag_start = event.position
@@ -28,7 +28,7 @@ func _unhandled_input(event):
 			query.transform = Transform2D(0, (drag_end + drag_start)/2)
 			selected = space.intersect_shape(query)
 			for unit in selected:
-				unit.collider.select()
+				unit.collider.get_parent().select()
 
 	if dragging:
 		if event is InputEventMouseMotion:
