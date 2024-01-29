@@ -52,7 +52,9 @@ func deselect():
 	selection_sprite.visible=false
 	
 
-
+# Test PUSH
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position.x+=1
+	
+
