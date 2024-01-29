@@ -13,7 +13,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			for unit in selected:
-				unit.collider.get_parent().deselect()
+				#unit.collider.get_parent().deselect()
+				pass
 			selected = []
 			dragging = true
 			drag_start = event.position
@@ -28,7 +29,8 @@ func _unhandled_input(event):
 			query.transform = Transform2D(0, (drag_end + drag_start)/2)
 			selected = space.intersect_shape(query)
 			for unit in selected:
-				unit.collider.get_parent().select()
+				#unit.collider.get_parent().select()
+				pass
 
 	if dragging:
 		if event is InputEventMouseMotion:
