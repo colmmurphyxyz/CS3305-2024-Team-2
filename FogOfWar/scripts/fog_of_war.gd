@@ -18,6 +18,9 @@ var light_offset: Vector2
 var fogTexture: ImageTexture
 var light_rect: Rect2
 
+var interval:float = .2
+var timer:float =0.0
+
 # here we cache things when Node2D is ready
 func _ready():
   # get Image from CompressedTexture2D and resize it
@@ -43,13 +46,17 @@ func update_fog(pos):
 # Here I don't use single if block for debounce + player input because we don't need to check input
 # if debounce is not ready. 
 func _process(delta):
-	for unit in get_tree().get_nodes_in_group("Units"):
-		var light_radius = unit.visible_radius_size*180
-		lightImage.resize(light_radius, light_radius)
-		light_offset = Vector2(light_radius/2, light_radius/2)
-		light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
-		update_fog(unit.position)
-		
+	timer+=delta
+	if timer>=interval:
+		for unit in get_tree().get_nodes_in_group("Units"):
+			if unit.body.velocity != Vector2.ZERO:
+				var light_radius = unit.visible_radius_size*180
+				lightImage.resize(light_radius, light_radius)
+				light_offset = Vector2(light_radius/2, light_radius/2)
+				light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
+				update_fog(unit.body.global_position)
+				timer = 0
+
 ### If you want to stick to mouse
 ### make sure you add optimizations here
 #func _input(event):
