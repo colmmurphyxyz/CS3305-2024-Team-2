@@ -23,6 +23,7 @@ func spawn_object():
 	
 	# Add the instance as a child of the Node2D
 	add_child(spawned_object)
+	spawned_object.collision_layer = 0
 
 func move_object():
 	# You can add logic for moving the object here if needed

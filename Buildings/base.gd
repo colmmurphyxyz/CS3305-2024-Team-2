@@ -15,6 +15,8 @@ func _ready():
 	add_child(collision_shape)
 	#set shape of collision
 	
+	
+	
 func _process(delta):
 	if is_following_mouse:
 		# Move the object with the mouse
