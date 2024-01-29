@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cylybcl5txpup"]
+
+[ext_resource type="PackedScene" uid="uid://b7voe0is0ydkr" path="res://unit.tscn" id="1_oehxh"]
+[ext_resource type="PackedScene" uid="uid://jopvmc1r5vq1" path="res://FogOfWar/scenes/FogSystem.tscn" id="2_v4nr2"]
+[ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
+[ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Unit" parent="." instance=ExtResource("1_oehxh")]
+position = Vector2(457, 306)
+
+[node name="FogSystem" parent="." instance=ExtResource("2_v4nr2")]
+position = Vector2(3, 0)
+
+[node name="SelectionSystem" parent="." instance=ExtResource("3_0hf7f")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="Buildings" type="Node2D" parent="."]
+script = ExtResource("4_atcb7")
