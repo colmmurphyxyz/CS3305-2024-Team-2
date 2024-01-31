@@ -81,7 +81,6 @@ text = "HQ"
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position = Vector2(576, 324)
-zoom = Vector2(2, 2)
 script = ExtResource("5_ml1v8")
 
 [connection signal="mouse_entered" from="VBoxContainer/Mine" to="Buildings" method="_button_entered"]
