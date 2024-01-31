@@ -22,7 +22,7 @@ func _ready():
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	collision_layer = 0 # disable collisions with units
-	
+	collision_mask=2
 	# add boarder lines
 	border = Line2D.new()
 	add_child(border)
@@ -67,8 +67,8 @@ func stop_following_mouse():
 		border.visible = false
 		# add end-user feedback
 		is_following_mouse = false
-		collision_layer = 1 # re-enable collisions to prevent stacking
-		return true
+		collision_layer = 2# re-enable collisions to prevent stacking
+		return true 
 
 func select():
 	start_following_mouse()

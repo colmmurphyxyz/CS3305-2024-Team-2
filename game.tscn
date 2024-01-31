@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b7voe0is0ydkr" path="res://Unit/unit.tscn" id="1_oehxh"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
-[ext_resource type="TileSet" uid="uid://bvik12oq21b5g" path="res://test_tileset.tres" id="4_6aa3j"]
+[ext_resource type="TileSet" uid="uid://bbt72fasgd50h" path="res://test_tileset.tres" id="4_6aa3j"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
