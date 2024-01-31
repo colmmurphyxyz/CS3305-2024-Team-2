@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=7 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://b7voe0is0ydkr" path="res://Unit/unit.tscn" id="1_oehxh"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="TileSet" uid="uid://bbt72fasgd50h" path="res://test_tileset.tres" id="4_6aa3j"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
+[ext_resource type="Script" path="res://PlayerCamera.gd" id="5_ml1v8"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -77,6 +78,11 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.321569, 0.635294, 0.352941, 1)
 theme_override_colors/font_hover_color = Color(0.384314, 0.572549, 0.670588, 1)
 text = "HQ"
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+zoom = Vector2(2, 2)
+script = ExtResource("5_ml1v8")
 
 [connection signal="mouse_entered" from="VBoxContainer/Mine" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/Mine" to="Buildings" method="_button_exited"]
