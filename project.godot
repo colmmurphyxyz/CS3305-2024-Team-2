@@ -62,6 +62,12 @@ placement={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Units"
+2d_physics/layer_2="World/Terrain"
+2d_physics/layer_12="UnitAttackAreaCollision"
+
 [navigation]
 
 2d/default_link_connection_radius=8.0

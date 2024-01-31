@@ -14,11 +14,12 @@ func _unhandled_input(event):
 		if event.pressed:
 			var prev_selected=[]
 			for unit in selected:
-				if unit.collider.get_parent().has_method("deselect"):
-					if Input.is_key_pressed(KEY_SHIFT):
-						prev_selected.append(unit)
-					else:	
-						unit.collider.get_parent().deselect()
+				if is_instance_valid(unit.collider):
+					if unit.collider.get_parent().has_method("deselect"):
+						if Input.is_key_pressed(KEY_SHIFT):
+							prev_selected.append(unit)
+						else:	
+							unit.collider.get_parent().deselect()
 			print("prev slected",prev_selected)
 			selected = []
 			selected.append_array(prev_selected)
@@ -37,8 +38,9 @@ func _unhandled_input(event):
 			selected = space.intersect_shape(query,512)
 			
 			for unit in selected:
-				if unit.collider.get_parent().has_method("select"):
-					unit.collider.get_parent().select()
+				if is_instance_valid(unit.collider):
+					if unit.collider.get_parent().has_method("select") and is_instance_valid(unit.collider):
+						unit.collider.get_parent().select()
 
 	if dragging:
 		if event is InputEventMouseMotion:
@@ -48,7 +50,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.is_released():
 			for unit in selected:
-				if unit.collider.get_parent().has_method("select"):
-					var pos:Vector2 = get_viewport().get_mouse_position()
-					unit.collider.get_parent().path_to_point(pos)
+				if is_instance_valid(unit.collider):
+					if unit.collider.get_parent().has_method("select"):
+						var pos:Vector2 = get_viewport().get_mouse_position()
+						unit.collider.get_parent().path_to_point(pos)
 

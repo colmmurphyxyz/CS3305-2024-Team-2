@@ -10,8 +10,7 @@ var body:CharacterBody2D
 func _ready():
 
 	print("moving")
-	#THIS NEEDS TO BE CHANGEO IM JUST NOT BOTHERED AT THE MOMENT
-	body = get_parent().get_children()[0]
+	body = persistent_state.body
 	last_position=body.global_position
 
 func _process(delta):
