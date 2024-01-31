@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx1hcllycp2xl"]
+
+[ext_resource type="Script" path="res://Buildings/mine.gd" id="1_eoo7v"]
+[ext_resource type="Texture2D" uid="uid://dot7fuxwat44f" path="res://Assets/spelunky_shop.png" id="2_3dcde"]
+
+[node name="Mines" type="StaticBody2D"]
+script = ExtResource("1_eoo7v")
+sprite_texture = ExtResource("2_3dcde")

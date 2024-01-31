@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-
 @export var sprite_texture:Texture2D
 var is_following_mouse = true
 var border: Line2D
