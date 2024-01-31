@@ -1,6 +1,10 @@
 extends Camera2D
 
 @export var camera_pan_speed: int = 400
+@export var camera_zoom: float = 0.1
+@export var camera_zoom_min: float = 0.3
+@export var camera_zoom_max: float = 2.5
+@onready var camera_zoom_delta = Vector2(camera_zoom, camera_zoom)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +14,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity: Vector2 = Vector2.ZERO
+	# pan camera with arrow keys
 	if Input.is_action_pressed("camera_pan_left"):
 		velocity.x -= 1
 	if Input.is_action_pressed("camera_pan_down"):
@@ -18,5 +23,17 @@ func _process(delta):
 		velocity.x += 1
 	if Input.is_action_pressed("camera_pan_up"):
 		velocity.y -= 1
+		
+	# camera zoom
+	if Input.is_action_just_released("camera_zoom_in"):
+		zoom += camera_zoom_delta
+		if zoom.x > camera_zoom_max:
+			zoom = Vector2(camera_zoom_max, camera_zoom_max)
+		print(zoom)
+	if Input.is_action_just_released("camera_zoom_out"):
+		zoom -= camera_zoom_delta
+		if zoom.x < camera_zoom_min:
+			zoom = Vector2(camera_zoom_min, camera_zoom_min)
+		print(zoom)
 		
 	position += velocity * camera_pan_speed * delta
