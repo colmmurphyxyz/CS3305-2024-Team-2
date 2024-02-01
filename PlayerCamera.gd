@@ -10,9 +10,10 @@ extends Camera2D
 func _ready():
 	pass # Replace with function body.
 
-
+var mmb_initial_pos: Vector2 = Vector2.ZERO
+var mmb_pressed_initial_camera_pos: Vector2 = Vector2.ZERO
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float):
 	var velocity: Vector2 = Vector2.ZERO
 	# pan camera with arrow keys
 	if Input.is_action_pressed("camera_pan_left"):
@@ -36,4 +37,18 @@ func _process(delta):
 			zoom = Vector2(camera_zoom_min, camera_zoom_min)
 		print(zoom)
 		
+	# mmb camera pan
+	if Input.is_action_just_pressed("camera_pan_mmb"):
+		mmb_initial_pos = get_global_mouse_position()
+		mmb_pressed_initial_camera_pos = global_position
+	if Input.is_action_pressed("camera_pan_mmb"):
+		var mmb_distance: Vector2 = get_global_mouse_position() - mmb_initial_pos
+		global_position = mmb_pressed_initial_camera_pos - mmb_distance
+	
+		
+	# pan camera if mouse at camera bounds
+	var mouse_position: Vector2 = get_global_mouse_position()
+	var camera_center: Vector2 = get_screen_center_position()
+	# if cursor's distance from center is > 0.9 * distance from center to bounds
+	# pan the camera in that direction
 	position += velocity * camera_pan_speed * delta
