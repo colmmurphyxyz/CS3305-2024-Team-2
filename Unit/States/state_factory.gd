@@ -6,7 +6,8 @@ func _init():
 	states = {
 		"idle": IdleState,
 		"moving": MovingState,
-		"attacking":AttackingState
+		"attacking":AttackingState,
+		"interacting_with_building":InteractingWithBuildingState
 }
 
 func get_state(state_name):

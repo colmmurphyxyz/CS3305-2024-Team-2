@@ -9,7 +9,6 @@ var last_position:Vector2
 var body:CharacterBody2D
 func _ready():
 
-	print("moving")
 	body = persistent_state.body
 	last_position=body.global_position
 
@@ -19,6 +18,16 @@ func _process(delta):
 		body.target =body.global_position
 		body.velocity = Vector2.ZERO
 		persistent_state.change_state("idle")
+	
+	#If object has a valid body to chase, repath
+	if (is_instance_valid(persistent_state.is_chasing) and persistent_state.is_chasing !=null):
+			if body.global_position.distance_to(persistent_state.is_chasing.global_position) < persistent_state.attack_area_shape.shape.radius:
+				print("near")
+				persistent_state.path_to_point(persistent_state.body.global_position)			
+				persistent_state.change_state("attacking")
+			else:
+				persistent_state.path_to_point(persistent_state.is_chasing.global_position)
+			
 		
 	
 
