@@ -1,0 +1,130 @@
+[gd_scene load_steps=7 format=3 uid="uid://dq4opma3tj3tg"]
+
+[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="1_x3qgi"]
+[ext_resource type="Texture2D" uid="uid://dnfhrkepdis33" path="res://Assets/striking-diamonds.svg" id="2_7meta"]
+[ext_resource type="Texture2D" uid="uid://pmhxbohcbctc" path="res://Assets/i-beam.svg" id="3_3h8nw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x13c"]
+bg_color = Color(0, 0.592157, 0.686275, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2pnp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cfjb"]
+
+[node name="PlayerInfo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="info_box" type="Panel" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 1
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 548.0
+offset_bottom = 173.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3x13c")
+
+[node name="logo_panel" type="Panel" parent="info_box"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -60.5
+offset_right = 138.0
+offset_bottom = 59.5
+grow_vertical = 2
+
+[node name="logo_image" type="TextureRect" parent="info_box/logo_panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_x3qgi")
+
+[node name="diamond" type="Panel" parent="info_box"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.5
+offset_top = -45.0
+offset_right = 4.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c2pnp")
+
+[node name="diamond_icon" type="TextureRect" parent="info_box/diamond"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7meta")
+expand_mode = 1
+
+[node name="diamond_value" type="Label" parent="info_box/diamond"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 3.5
+offset_right = 130.0
+offset_bottom = 86.5
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+
+[node name="iron" type="Panel" parent="info_box"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 74.5
+offset_top = -45.0
+offset_right = 164.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1cfjb")
+
+[node name="iron_icon" type="TextureRect" parent="info_box/iron"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_3h8nw")
+expand_mode = 1
+
+[node name="iron_value" type="Label" parent="info_box/iron"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 7.0
+offset_right = 132.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
