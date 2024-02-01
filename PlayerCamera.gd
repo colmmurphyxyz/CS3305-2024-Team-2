@@ -16,7 +16,6 @@ var mmb_initial_pos: Vector2 = Vector2.ZERO
 var mmb_pressed_initial_camera_pos: Vector2 = Vector2.ZERO
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
-	print("DEBUG: camera position: ", position, ", global position: ", global_position)
 	var velocity: Vector2 = Vector2.ZERO
 	# pan camera with arrow keys
 	if Input.is_action_pressed("camera_pan_left"):
@@ -33,13 +32,11 @@ func _process(delta: float):
 		zoom += camera_zoom_delta
 		if zoom.x > camera_zoom_max:
 			zoom = Vector2(camera_zoom_max, camera_zoom_max)
-		print(zoom)
 	if Input.is_action_just_released("camera_zoom_out"):
 		zoom -= camera_zoom_delta
 		if zoom.x < camera_zoom_min:
 			zoom = Vector2(camera_zoom_min, camera_zoom_min)
-		print(zoom)
-		
+
 	# mmb camera pan
 	if Input.is_action_just_pressed("camera_pan_mmb"):
 		mmb_initial_pos = get_global_mouse_position()
