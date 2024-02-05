@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=7 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://b7voe0is0ydkr" path="res://Unit/unit.tscn" id="1_oehxh"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="TileSet" uid="uid://bvik12oq21b5g" path="res://test_tileset.tres" id="4_6aa3j"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
+[ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -78,9 +79,22 @@ theme_override_colors/font_pressed_color = Color(0.321569, 0.635294, 0.352941, 1
 theme_override_colors/font_hover_color = Color(0.384314, 0.572549, 0.670588, 1)
 text = "HQ"
 
+[node name="OreDeposits" type="Node2D" parent="."]
+
+[node name="Areas" type="Area2D" parent="OreDeposits"]
+script = ExtResource("5_7lovr")
+
+[node name="East" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
+polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
+
+[node name="South" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
+polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
+
 [connection signal="mouse_entered" from="VBoxContainer/Mine" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/Mine" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="VBoxContainer/Mine" to="Buildings" method="_button_press_select" binds= ["mine"]]
 [connection signal="mouse_entered" from="VBoxContainer/HQ" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/HQ" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="VBoxContainer/HQ" to="Buildings" method="_button_press_select" binds= ["hq"]]
+[connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
+[connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]
