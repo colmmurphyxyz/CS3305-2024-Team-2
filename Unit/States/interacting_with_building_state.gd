@@ -1,8 +1,11 @@
 extends State
 class_name InteractingWithBuildingState
 
-# Called when the node enters the scene tree for the first time.
+#An inbetween state that checks if unit can build/mine, if they can, switch to that state, 
+#else, just move to build/attack it
 func _ready():
+	#if persistent_state.target_building !=null:
+		
 	pass # Replace with function body.
 
 

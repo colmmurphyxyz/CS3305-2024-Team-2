@@ -18,12 +18,12 @@ func _unhandled_input(event):
 							unit.collider.get_parent().deselect()
 			selected = []
 			dragging = true
-			drag_start = event.position
+			drag_start = get_viewport().get_camera_2d().get_global_mouse_position()
 		#If dragging mouse, draw a box, anything in that box is added to selected array
 		elif dragging:
 			dragging = false
-			select_draw.update_status(drag_start, event.position, dragging)
-			var drag_end = event.position
+			select_draw.update_status(drag_start, get_viewport().get_camera_2d().get_global_mouse_position(), dragging)
+			var drag_end = get_viewport().get_camera_2d().get_global_mouse_position()
 			select_rectangle.extents = abs((drag_end - drag_start) / 2)
 			var space = get_world_2d().direct_space_state
 			var query = PhysicsShapeQueryParameters2D.new()
@@ -39,7 +39,7 @@ func _unhandled_input(event):
 						
 	if dragging:
 		if event is InputEventMouseMotion:
-			select_draw.update_status(drag_start, event.position, dragging)
+			select_draw.update_status(drag_start, get_viewport().get_camera_2d().get_global_mouse_position(), dragging)
 	
 	#When right click, give unit a path
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
@@ -48,7 +48,7 @@ func _unhandled_input(event):
 				if is_instance_valid(unit.collider):
 					if unit.collider.get_parent().has_method("select") and is_instance_valid(unit.collider):
 			
-						var pos:Vector2 = get_viewport().get_mouse_position()
+						var pos:Vector2 = get_viewport().get_camera_2d().get_global_mouse_position()
 						var cursor_unit = get_node_under_cursor(pos)
 						if cursor_unit:
 							unit.collider.get_parent().set_chase(cursor_unit)

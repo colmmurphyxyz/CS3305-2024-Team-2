@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv3gu01247wbe"]
+
+[ext_resource type="Script" path="res://FogOfWar/scenes/shader.gd" id="1_6urqq"]
+[ext_resource type="Shader" path="res://FogOfWar/scenes/fog.gdshader" id="1_vmxie"]
+[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="2_ygwth"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2b5jb"]
+shader = ExtResource("1_vmxie")
+shader_parameter/transparency_radius = 0.05
+
+[node name="Shader" type="Node2D"]
+position = Vector2(38, 53)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(571, 421)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = 2.0
+offset_top = 99.0
+offset_right = 1151.0
+offset_bottom = 689.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2b5jb")
+position = Vector2(296, 307)
+scale = Vector2(3.35156, 2.74219)
+texture = ExtResource("2_ygwth")
+script = ExtResource("1_6urqq")

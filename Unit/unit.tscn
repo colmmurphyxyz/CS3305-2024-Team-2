@@ -45,7 +45,7 @@ shape = SubResource("CircleShape2D_i2y3c")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
 path_desired_distance = 30.68
 target_desired_distance = 32.0
-navigation_layers = 3
+navigation_layers = 7
 radius = 5.58
 neighbor_distance = 16.6
 max_speed = 400.0
