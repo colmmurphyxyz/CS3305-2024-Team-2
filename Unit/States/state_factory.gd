@@ -7,7 +7,9 @@ func _init():
 		"idle": IdleState,
 		"moving": MovingState,
 		"attacking":AttackingState,
-		"interacting_with_building":InteractingWithBuildingState
+		"interacting_with_building":InteractingWithBuildingState,
+		"mining":MiningState,
+		"building":BuildingState
 }
 
 func get_state(state_name):
