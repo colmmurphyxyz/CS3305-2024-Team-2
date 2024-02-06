@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://caphtwt6h6con"]
+
+[ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="1_2br50"]
+[ext_resource type="Shader" path="res://game.gdshader" id="2_sgos1"]
+[ext_resource type="Texture2D" uid="uid://dsu5unigaw2w6" path="res://Assets/temp_bullet.png" id="3_rpn68"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsrn7"]
+shader = ExtResource("2_sgos1")
+shader_parameter/player_position = Vector2(1000, 900)
+shader_parameter/hole_radius = 188.835
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(421, 125)
+texture = ExtResource("1_2br50")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_nsrn7")
+position = Vector2(27.9999, 45)
+scale = Vector2(-172.277, 89.2464)
+texture = ExtResource("3_rpn68")

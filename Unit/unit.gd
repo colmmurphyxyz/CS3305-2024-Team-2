@@ -21,6 +21,7 @@ var state_factory
 
 var units_within_attack_range =[]
 var current_target:CharacterBody2D=null
+var is_chasing:CharacterBody2D = null
 @export var attack_speed:int=1
 @export var bullet : PackedScene
 
@@ -28,6 +29,7 @@ var current_target:CharacterBody2D=null
 @onready var sprite2d:Sprite2D = $Body/Sprite2D
 
 @onready var attack_area=$Body/AttackArea
+@onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
 func _ready():
 	add_to_group("Units")	
 	#State system setup
@@ -66,6 +68,9 @@ func change_state(new_state_name):
 	state.name = "current_state"
 	add_child(state)
 
+func get_team():
+	return team
+
 func select():
 	selected = true
 	selection_sprite.visible=true
@@ -80,9 +85,14 @@ func path_to_point(point:Vector2):
 	body.target = point
 	body.get_collision_mask_value(3)
 	change_state("moving")
+	
+func reset_chase():
+	is_chasing=null
+func set_chase(chase:CharacterBody2D):
+	is_chasing=chase
+	
 func damage(damage_amount):
 	hp-=damage_amount
-	print("damaged",hp)
 	if hp <= 0:
 		queue_free()
 #Enemies that enter into attack area are sorted by distance from unit
@@ -94,9 +104,10 @@ func _on_attack_area_body_entered(body):
 	
 func _on_attack_area_body_exited(body):
 	units_within_attack_range.erase(body)
-	
+
 func sort_enemies_in_attack_area_by_distance(list):
 	 # Custom comparison function for sorting based on size
+	
 	var list_compare_lamda = func compare_items(a, b) -> int:
 		var a_distance = a.global_position.distance_to(body.global_position)
 		var b_distance = b.global_position.distance_to(body.global_position)

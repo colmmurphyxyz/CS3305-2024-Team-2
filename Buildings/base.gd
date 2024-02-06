@@ -22,7 +22,8 @@ func _ready():
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	collision_layer = 0 # disable collisions with units
-	collision_mask=2
+	collision_mask = 1 + 2
+	
 	# add boarder lines
 	border = Line2D.new()
 	add_child(border)

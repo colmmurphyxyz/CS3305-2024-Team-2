@@ -11,8 +11,9 @@ var nav_path : PackedVector2Array
 func _ready():
 	#Set target to self if nesecessary 
 	target = get_position_delta()
-	
+	position
 func _physics_process(delta):
+
 	var direction:Vector2 = to_local(nav_agent.get_next_path_position()).normalized()
 	var intended_velocty:Vector2 = direction*speed
 	velocity=intended_velocty

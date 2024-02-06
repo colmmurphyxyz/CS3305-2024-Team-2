@@ -7,7 +7,6 @@
 size = Vector2(115, 134)
 
 [node name="Headquarters" type="StaticBody2D"]
-collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_rcxq8")
 sprite_texture = ExtResource("2_msyjy")
