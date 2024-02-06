@@ -1,0 +1,113 @@
+[gd_scene load_steps=5 format=3 uid="uid://csnaat1gu7uyn"]
+
+[ext_resource type="Theme" uid="uid://bqgwg6jqqupa1" path="res://UI/scenes/MainMenu/MainMenuTheme.tres" id="1_hvcae"]
+[ext_resource type="Script" path="res://UI/scenes/MainMenu/MainMenu.gd" id="1_o5ron"]
+[ext_resource type="Texture2D" uid="uid://sww5crim4ijv" path="res://UI/scenes/MainMenu/dune2_cropped.jpg" id="3_i2gh8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_val4m"]
+bg_color = Color(1, 0.48886, 0.469093, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hvcae")
+script = ExtResource("1_o5ron")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.902821, 1.59204)
+texture = ExtResource("3_i2gh8")
+centered = false
+
+[node name="GameTitleLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 112.0
+offset_right = 864.0
+offset_bottom = 192.0
+theme = ExtResource("1_hvcae")
+theme_override_font_sizes/font_size = 40
+text = "We Need a Name!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerNameField" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 192.0
+offset_right = 864.0
+offset_bottom = 240.0
+placeholder_text = "Player Name"
+
+[node name="JoinAddressField" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 368.0
+offset_right = 784.0
+offset_bottom = 432.0
+placeholder_text = "host address"
+
+[node name="JoinPortField" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 368.0
+offset_right = 864.0
+offset_bottom = 432.0
+placeholder_text = "1992"
+
+[node name="HostPortField" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 272.0
+offset_right = 864.0
+offset_bottom = 336.0
+placeholder_text = "port (default 1992)"
+
+[node name="HostGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 272.0
+offset_right = 528.0
+offset_bottom = 336.0
+text = "Host Game"
+
+[node name="JoinGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 368.0
+offset_right = 528.0
+offset_bottom = 432.0
+text = "Join Game"
+
+[node name="PlayComputerButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 464.0
+offset_right = 864.0
+offset_bottom = 528.0
+text = "Play against computer"
+
+[node name="ErrorAlertLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 384.0
+offset_right = 768.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_val4m")
+text = "default error message"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ErrorAlertLabelShowTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[connection signal="pressed" from="HostGameButton" to="." method="_on_host_game_button_pressed"]
+[connection signal="pressed" from="JoinGameButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="PlayComputerButton" to="." method="_on_play_computer_button_pressed"]
+[connection signal="timeout" from="ErrorAlertLabelShowTimer" to="." method="_on_error_alert_label_show_timer_timeout"]
