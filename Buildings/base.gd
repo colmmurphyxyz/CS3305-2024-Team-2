@@ -4,7 +4,7 @@ extends StaticBody2D
 var is_following_mouse = true
 var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
-
+var team:String = "1"
 func _ready():
 	# add Sprite2D
 	var sprite: Sprite2D = Sprite2D.new()
@@ -71,8 +71,14 @@ func stop_following_mouse():
 		collision_layer = 2# re-enable collisions to prevent stacking
 		return true 
 
+
+# This is for selection system, not for building placement, please use other function names and see 
+# select/deselect usage in unit - Ben
 func select():
 	start_following_mouse()
 
 func deselect():
 	stop_following_mouse()
+
+func get_team():
+	return team

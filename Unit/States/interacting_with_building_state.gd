@@ -9,7 +9,7 @@ func _ready():
 	if persistent_state.target_building !=null and is_instance_valid(persistent_state.target_building):
 		#IF building is not a team building
 		if persistent_state.target_building.get_team() != persistent_state.team:
-			persistent_state.target=persistent_state.target_building.get_body()
+			persistent_state.target=persistent_state.target_building
 		else:
 		#IF can mine
 			if persistent_state.target_building in get_tree().get_nodes_in_group("Mines") and persistent_state.can_mine==true:

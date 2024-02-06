@@ -1,10 +1,12 @@
 extends Node2D
 class_name Unit
 
+#Building stuff
 var team:String = str(randi_range(1,2))
 @export var hp:int= 8
 @export var attack_damage:int = 2
 
+#Selection
 var selected:bool = false
 var selected_texture_path:String
 @export var selection_sprite:Sprite2D
@@ -14,17 +16,23 @@ var selected_texture_path:String
 var light:PointLight2D
 var light_texture_path:String
 var detection_area:Area2D
-
+#State
 var state
 var state_factory
 
-
+#Enemy detection/attack
 var units_within_attack_range =[]
 var current_target:CharacterBody2D=null
 var is_chasing:CharacterBody2D = null
 @export var attack_speed:int=1
 @export var bullet : PackedScene
 
+#Building things
+var can_build:bool=false
+var can_mine:bool=true
+var target_building:Node2D = null
+
+#Node accessing
 @onready var body:CharacterBody2D = $Body 
 @onready var sprite2d:Sprite2D = $Body/Sprite2D
 
@@ -88,9 +96,11 @@ func path_to_point(point:Vector2):
 	
 func reset_chase():
 	is_chasing=null
+	
 func set_chase(chase:CharacterBody2D):
 	is_chasing=chase
-	
+func set_target_building(building:StaticBody2D):
+	target_building=building
 func damage(damage_amount):
 	hp-=damage_amount
 	if hp <= 0:
