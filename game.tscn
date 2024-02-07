@@ -90,9 +90,11 @@ position = Vector2(575, 326)
 script = ExtResource("5_7lovr")
 
 [node name="East" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
+position = Vector2(-508, -337)
 polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
 
 [node name="South" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
+position = Vector2(-694, -147)
 polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
 
 [connection signal="mouse_entered" from="VBoxContainer/Mine" to="Buildings" method="_button_entered"]

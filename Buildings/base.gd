@@ -5,7 +5,9 @@ var is_following_mouse = true
 var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 var team:String = "1"
+
 func _ready():
+	add_to_group("Buildings")
 	# add Sprite2D
 	var sprite: Sprite2D = Sprite2D.new()
 	add_child(sprite)

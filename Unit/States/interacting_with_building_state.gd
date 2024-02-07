@@ -5,8 +5,10 @@ class_name InteractingWithBuildingState
 #else, just move to build/attack it
 #Ugly if statement chain but necessary for all the cases but logic is fairly simple for all
 func _ready():
+
 	#Check if building is
 	if persistent_state.target_building !=null and is_instance_valid(persistent_state.target_building):
+		print("UH")
 		#IF building is not a team building
 		if persistent_state.target_building.get_team() != persistent_state.team:
 			persistent_state.target=persistent_state.target_building

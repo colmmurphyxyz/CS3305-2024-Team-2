@@ -32,6 +32,8 @@ var can_build:bool=false
 var can_mine:bool=true
 var target_building:Node2D = null
 
+#Mining
+var carrying_ore:bool = false
 #Node accessing
 @onready var body:CharacterBody2D = $Body 
 @onready var sprite2d:Sprite2D = $Body/Sprite2D

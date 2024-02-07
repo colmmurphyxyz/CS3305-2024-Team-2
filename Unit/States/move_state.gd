@@ -22,7 +22,6 @@ func _process(delta):
 	#If object has a valid body to chase, repath
 	if (is_instance_valid(persistent_state.is_chasing) and persistent_state.is_chasing !=null):
 			if body.global_position.distance_to(persistent_state.is_chasing.global_position) < persistent_state.attack_area_shape.shape.radius:
-				print("near")
 				persistent_state.path_to_point(persistent_state.body.global_position)			
 				persistent_state.change_state("attacking")
 			else:
