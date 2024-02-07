@@ -51,17 +51,12 @@ func _process(delta: float):
 		velocity.x += 1
 	if Input.is_action_pressed("camera_pan_up"):
 		velocity.y -= 1
-		
+
 	# camera zoom
 	if Input.is_action_just_released("camera_zoom_in"):
-		zoom += CAMERA_ZOOM_DELTA
-		if zoom.x > CAMERA_ZOOM_MAX:
-			zoom = Vector2(CAMERA_ZOOM_MAX, CAMERA_ZOOM_MAX)
+		zoom_in()
 	if Input.is_action_just_released("camera_zoom_out"):
-		zoom -= CAMERA_ZOOM_DELTA
-		if zoom.x < CAMERA_ZOOM_MIN:
-			zoom = Vector2(CAMERA_ZOOM_MIN, CAMERA_ZOOM_MIN)
-
+		zoom_out()
 	# mmb camera pan
 	if Input.is_action_just_pressed("camera_pan_mmb"):
 		mmb_initial_pos = get_global_mouse_position()
@@ -75,3 +70,21 @@ func _process(delta: float):
 			
 	if velocity.length() > 0:
 		position += velocity * CAMERA_PAN_SPEED * delta
+
+func zoom_in():
+		zoom += CAMERA_ZOOM_DELTA
+		if zoom.x > CAMERA_ZOOM_MAX:
+			zoom = Vector2(CAMERA_ZOOM_MAX, CAMERA_ZOOM_MAX)
+func zoom_out():
+		zoom -= CAMERA_ZOOM_DELTA
+		if zoom.x < CAMERA_ZOOM_MIN:
+			zoom = Vector2(CAMERA_ZOOM_MIN, CAMERA_ZOOM_MIN)
+
+func _input(event):
+	if event is InputEventPanGesture:
+		if event.delta.y < 0.0:
+			zoom_in()
+		elif event.delta.y >0.0:
+			zoom_out()
+		
+
