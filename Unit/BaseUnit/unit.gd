@@ -5,11 +5,10 @@ class_name Unit
 var team:String = str(randi_range(1,2))
 @export var hp:int= 8
 @export var attack_damage:int = 2
-
+@export var speed =300
 #Selection
 var selected:bool = false
 var selected_texture_path:String
-@export var selection_sprite:Sprite2D
 
 #Light radius, fog dispersal radius and detection radius tied to same value
 @export var visible_radius_size:int = 2
@@ -24,12 +23,12 @@ var state_factory
 var units_within_attack_range =[]
 var current_target:CharacterBody2D=null
 var is_chasing:CharacterBody2D = null
-@export var attack_speed:int=1
+@export var attack_speed:float=1
 @export var bullet : PackedScene
-
+@export var bullet_speed:int = 300
 #Building things
-var can_build:bool=false
-var can_mine:bool=true
+@export var can_build:bool=false
+@export var can_mine:bool=true
 var target_building:Node2D = null
 
 #Mining
@@ -41,23 +40,18 @@ var carrying_ore:bool = false
 @onready var attack_area=$Body/AttackArea
 @onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
 func _ready():
+
 	add_to_group("Units")	
 	#State system setup
 	state_factory = StateFactory.new()
 	change_state("idle")
 	if team == "1":
-		sprite2d.texture = load("res://Assets/unit_temp2.png")
+		print(load("res://Assets/unit_temp2.png"))
+		sprite2d.texture = load("res://Assets/unit_temp.png")
+
 	sprite2d.material.set("shader_param/shader_enabled",false)
 	#Selection sprite setting up
-	
-	
-	selection_sprite = Sprite2D.new()
-	body.add_child(selection_sprite)
-	selection_sprite.z_index=RenderingServer.CANVAS_ITEM_Z_MIN+34
-	selected_texture_path = "res://Assets/pointLightTexture.webp"
-	selection_sprite.texture = load(selected_texture_path)
-	selection_sprite.visible=false
-	
+
 	#Light setting
 	light = PointLight2D.new()
 	body.add_child(light)
@@ -68,7 +62,7 @@ func _ready():
 	detection_area = Area2D.new()
 	body.add_child(detection_area)
 	detection_area.scale=Vector2(visible_radius_size,visible_radius_size)
-	
+	#Attack Radius
 func change_state(new_state_name):
 	if state != null:
 		state.queue_free()
@@ -83,12 +77,10 @@ func get_team():
 
 func select():
 	selected = true
-	selection_sprite.visible=true
 	sprite2d.material.set("shader_param/shader_enabled",true)
 	
 func deselect():
 	selected=false
-	selection_sprite.visible=false
 	sprite2d.material.set("shader_param/shader_enabled",false)
 
 func path_to_point(point:Vector2):
@@ -109,13 +101,17 @@ func damage(damage_amount):
 		queue_free()
 #Enemies that enter into attack area are sorted by distance from unit
 #Unit will try to select closest one when in idle state
-func _on_attack_area_body_entered(body):
-	if body.get_parent().team != team:
-		units_within_attack_range.append(body)
+func _on_attack_area_body_entered(enemy_body):
+	print("enemy_body.get_parent().teamehy")
+	print(enemy_body.get_parent().team)
+	if enemy_body.get_parent().team != team:
+		units_within_attack_range.append(enemy_body)
+		print(units_within_attack_range)
 		sort_enemies_in_attack_area_by_distance(units_within_attack_range)
 	
-func _on_attack_area_body_exited(body):
-	units_within_attack_range.erase(body)
+func _on_attack_area_body_exited(enemy_body):
+	print("gone")
+	units_within_attack_range.erase(enemy_body)
 
 func sort_enemies_in_attack_area_by_distance(list):
 	 # Custom comparison function for sorting based on size

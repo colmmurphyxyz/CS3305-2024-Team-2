@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed:int=300
+var speed:int
 var target:Vector2 = Vector2.ZERO
 var target_max:int=1
 #navigation
@@ -11,12 +11,13 @@ var nav_path : PackedVector2Array
 func _ready():
 	#Set target to self if nesecessary 
 	target = get_position_delta()
-	position
+	speed=get_parent().speed
 func _physics_process(delta):
 
 	var direction:Vector2 = to_local(nav_agent.get_next_path_position()).normalized()
 	var intended_velocty:Vector2 = direction*speed
 	velocity=intended_velocty
+	get_parent().sprite2d.rotation = velocity.angle()+180
 	move_and_slide()
 
 func create_path():
