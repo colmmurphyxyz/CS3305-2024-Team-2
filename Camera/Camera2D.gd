@@ -16,8 +16,6 @@ const CURSOR_PAN_SPEED: int = 1
 @export var enable_cursor_pan: bool = true
 @export var is_locked: bool = false
 
-@onready var camera_size: Vector2 = get_viewport_rect().size
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -27,16 +25,17 @@ func handle_cursor_pan():
 	var velocity: Vector2 = Vector2.ZERO
 	var mouse_pos = get_global_mouse_position()
 	var camera_center = global_position
-	var viewport_size = get_viewport_rect().size
+	#var viewport_size = get_viewport_rect().size
+	var camera_size = get_parent().camera_size
 	var mouse_dist_from_center = mouse_pos - camera_center
-	if mouse_dist_from_center.x > (0.45 * viewport_size.x):
+	if mouse_dist_from_center.x > (0.45 * camera_size.x):
 		velocity.x += CURSOR_PAN_SPEED
-	elif mouse_dist_from_center.x < (-0.45 * viewport_size.x):
+	elif mouse_dist_from_center.x < (-0.45 * camera_size.x):
 		velocity.x -= CURSOR_PAN_SPEED
 		
-	if mouse_dist_from_center.y > (0.45 * viewport_size.y):
+	if mouse_dist_from_center.y > (0.45 * camera_size.y):
 		velocity.y += CURSOR_PAN_SPEED
-	elif mouse_dist_from_center.y < (-0.45 * viewport_size.y):
+	elif mouse_dist_from_center.y < (-0.45 * camera_size.y):
 		velocity.y -= CURSOR_PAN_SPEED
 	return velocity
 
@@ -60,7 +59,7 @@ func _process(delta: float):
 		zoom_in()
 	if Input.is_action_just_released("camera_zoom_out"):
 		zoom_out()
-	camera_size = get_viewport_rect().size / zoom
+	get_parent().camera_size = get_viewport_rect().size / zoom
 	# mmb camera pan
 	if Input.is_action_just_pressed("camera_pan_mmb"):
 		mmb_initial_pos = get_global_mouse_position()
