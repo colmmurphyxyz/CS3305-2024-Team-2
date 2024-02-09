@@ -1,10 +1,16 @@
 extends StaticBody2D
 
 @export var sprite_texture:Texture2D
-var is_following_mouse = true
-var border: Line2D
+@export var is_following_mouse = true
+@onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 var team:String = "1"
+
+#const ACTION_INTERVAL = 1.0
+#var time_accumulator: float = 0.0
+
+var is_broken = true
+var in_area: Array = []
 
 func _ready():
 	add_to_group("Buildings")
@@ -23,6 +29,19 @@ func _ready():
 	var rectangle_shape = RectangleShape2D.new()
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
+	
+	var detection_area = Area2D.new()
+	add_child(detection_area)
+	
+	var collision_circle = CollisionShape2D.new()
+	collision_circle.shape = CircleShape2D.new()
+	collision_circle.shape.radius = sprite_half_extents.length() * 1.2
+	
+	detection_area.add_child(collision_circle)
+	
+	detection_area.body_entered.connect(_on_detection_area_body_entered)
+	detection_area.body_exited.connect(_on_detection_area_body_exited)
+
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
 	
@@ -40,6 +59,7 @@ func _ready():
 	]
 
 	border.default_color = Color(1, 1, 1)  # Set the border color to red
+	border.default_color = Color(1, 1, 1)  # Set the border color to white
 	border.width = 2  # Adjust the width of the border
 	
 func _process(delta):
@@ -49,8 +69,11 @@ func _process(delta):
 		final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)
 		if final_collision != null:
 			border.default_color = Color(1,0,0)
+			change_border_colour(Color(1,0,0))
 		else:
 			border.default_color = Color(0,1,0)
+			change_border_colour(Color(0,1,0))
+		
 
 func start_following_mouse():
 	# enable placement
@@ -71,6 +94,7 @@ func stop_following_mouse():
 		# add end-user feedback
 		is_following_mouse = false
 		collision_layer = 2# re-enable collisions to prevent stacking
+		#collision_layer = 2# re-enable collisions to prevent stacking
 		return true 
 
 
@@ -82,5 +106,16 @@ func select():
 func deselect():
 	stop_following_mouse()
 
-func get_team():
-	return team
+func change_border_colour(color):
+	border.default_color = color
+	
+func _on_detection_area_body_entered(object):
+	var parent = object.get_parent()
+	if parent.get_team() == "1":
+		in_area.append(object)
+	print(in_area)
+
+# Signal handler for body exited
+func _on_detection_area_body_exited(object):
+	in_area.erase(object)
+	print(in_area)
