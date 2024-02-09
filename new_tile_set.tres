@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dske6hm1wpec8"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://r0qg3disbpm0"]
 
-[ext_resource type="Texture2D" uid="uid://buybtmnbwpgwe" path="res://Assets/colony-grounds-ready.png" id="1_wi40l"]
+[ext_resource type="Texture2D" path="res://Assets/colony-grounds-ready.png" id="1_wi40l"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_t1myk"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
