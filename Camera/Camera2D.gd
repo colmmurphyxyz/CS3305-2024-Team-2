@@ -16,9 +16,8 @@ const CURSOR_PAN_SPEED: int = 1
 @export var enable_cursor_pan: bool = true
 @export var is_locked: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 	
 func handle_cursor_pan():
 	# mouse cursor pan logic
@@ -45,6 +44,8 @@ var mmb_initial_pos: Vector2 = Vector2.ZERO
 var mmb_pressed_initial_camera_pos: Vector2 = Vector2.ZERO
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
+	if get_parent().is_locked:
+		return
 	var velocity: Vector2 = Vector2.ZERO
 	# pan camera with arrow keys
 	if Input.is_action_pressed("camera_pan_left"):
