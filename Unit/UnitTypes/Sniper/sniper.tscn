@@ -30,7 +30,7 @@ speed = 50
 visible_radius_size = 5
 attack_speed = 0.05
 bullet = ExtResource("2_p8aom")
-bullet_speed = 700
+bullet_speed = 1000
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 2053
