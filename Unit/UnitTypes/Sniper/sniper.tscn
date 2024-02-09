@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8dvsq2pks7yl"]
+
+[ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_ybkgh"]
+[ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_p8aom"]
+[ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="3_bxfdf"]
+[ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_od0ol"]
+[ext_resource type="Texture2D" uid="uid://bt2bhnppik5k1" path="res://Assets/sniper.png" id="5_7xqu2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gfyqw"]
+resource_local_to_scene = true
+shader = ExtResource("4_od0ol")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/shader_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e4e7f"]
+radius = 10.0499
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qhwn"]
+radius = 284.007
+
+[node name="Sniper" type="Node2D"]
+script = ExtResource("1_ybkgh")
+hp = 4
+attack_damage = 80
+speed = 50
+visible_radius_size = 5
+attack_speed = 0.05
+bullet = ExtResource("2_p8aom")
+bullet_speed = 700
+
+[node name="Body" type="CharacterBody2D" parent="."]
+collision_layer = 2053
+collision_mask = 3
+motion_mode = 1
+wall_min_slide_angle = 0.0
+floor_stop_on_slope = false
+script = ExtResource("3_bxfdf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Body"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_gfyqw")
+texture = ExtResource("5_7xqu2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource("CircleShape2D_e4e7f")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
+path_desired_distance = 30.68
+target_desired_distance = 32.0
+navigation_layers = 7
+radius = 5.58
+neighbor_distance = 16.6
+max_speed = 400.0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="Body"]
+wait_time = 0.1
+autostart = true
+
+[node name="AttackArea" type="Area2D" parent="Body"]
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea"]
+show_behind_parent = true
+shape = SubResource("CircleShape2D_4qhwn")
+debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
+
+[connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
