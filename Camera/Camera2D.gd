@@ -3,7 +3,7 @@ extends Camera2D
 ##### constants #####
 const CAMERA_PAN_SPEED: int = 400
 # how much the increment/decrement the camera zoom with each 'press' of the scroll wheel
-const CAMERA_ZOOM_DELTA: Vector2 = Vector2(0.05, 0.05)
+const CAMERA_ZOOM_DELTA: Vector2 = Vector2(0.1, 0.1)
 const CAMERA_ZOOM_MIN: float = 0.3
 const CAMERA_ZOOM_MAX: float = 3.0
 
@@ -29,14 +29,14 @@ func handle_cursor_pan():
 	var camera_size = get_parent().camera_size
 	var mouse_dist_from_center = mouse_pos - camera_center
 	if mouse_dist_from_center.x > (0.45 * camera_size.x):
-		velocity.x += CURSOR_PAN_SPEED
+		velocity.x += CURSOR_PAN_SPEED * (1.0 / zoom.x)
 	elif mouse_dist_from_center.x < (-0.45 * camera_size.x):
-		velocity.x -= CURSOR_PAN_SPEED
+		velocity.x -= CURSOR_PAN_SPEED * (1.0 / zoom.y)
 		
 	if mouse_dist_from_center.y > (0.45 * camera_size.y):
-		velocity.y += CURSOR_PAN_SPEED
+		velocity.y += CURSOR_PAN_SPEED * (1.0 / zoom.y)
 	elif mouse_dist_from_center.y < (-0.45 * camera_size.y):
-		velocity.y -= CURSOR_PAN_SPEED
+		velocity.y -= CURSOR_PAN_SPEED * (1.0 / zoom.x)
 	return velocity
 
 var mmb_initial_pos: Vector2 = Vector2.ZERO
