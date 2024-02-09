@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 [ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
-[ext_resource type="Script" path="res://PlayerCamera.gd" id="5_ml1v8"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
+[ext_resource type="PackedScene" uid="uid://cgxnh6ddpdie" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -100,10 +100,6 @@ color = Color(0.313726, 0.313726, 0.313726, 1)
 
 [node name="SelectionSystem" parent="." instance=ExtResource("3_0hf7f")]
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
-position = Vector2(576, 324)
-script = ExtResource("5_ml1v8")
-
 [node name="OreDeposits" type="Node2D" parent="."]
 
 [node name="Areas" type="Area2D" parent="OreDeposits"]
@@ -117,6 +113,8 @@ polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
 [node name="South" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
 position = Vector2(-694, -147)
 polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
+
+[node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 
 [connection signal="mouse_entered" from="VBoxContainer/Mine" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/Mine" to="Buildings" method="_button_exited"]
