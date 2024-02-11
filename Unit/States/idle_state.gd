@@ -18,5 +18,9 @@ func _process(delta):
 		var result = space_state.intersect_ray(query)
 		if result.size() == 0:
 			persistent_state.current_target=enemy
-			persistent_state.change_state("attacking")
+			if persistent_state.melee==true:
+				persistent_state.is_chasing=enemy
+				persistent_state.change_state("moving")
+			else:
+				persistent_state.change_state("attacking")
 			

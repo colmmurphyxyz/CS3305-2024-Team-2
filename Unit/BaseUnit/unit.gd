@@ -23,6 +23,7 @@ var state_factory
 var units_within_attack_range =[]
 var current_target:CharacterBody2D=null
 var is_chasing:CharacterBody2D = null
+@export var melee:bool = false
 @export var attack_speed:float=1
 @export var bullet : PackedScene
 @export var bullet_speed:int = 300
