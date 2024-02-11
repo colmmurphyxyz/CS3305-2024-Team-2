@@ -2,11 +2,12 @@ extends "res://Buildings/base.gd"
 	
 var increase_value: int = 0
 var increase_timer: Timer
-var is_mine_active = false
-var health = 10
 
-const REPAIR_TIME = 30.0
-var repair_remaining: float = REPAIR_TIME
+const max_hp = 100.0
+var health = 1.0
+
+const max_storage = 250
+var stored_resources = 0
 
 func _ready():
 	super._ready()
@@ -15,24 +16,26 @@ func _ready():
 	increase_timer.timeout.connect(_on_increase_timer_timeout)
 	add_child(increase_timer)
 	increase_timer.start()
-	is_mine_active = true
 	
 func _process(delta):
 	super._process(delta)
 	if health <= 0:
-		is_broken = true
-	if is_broken:
+		queue_free()
+	if not health >= max_hp:
 		if in_area.size() > 0:
-			repair_remaining -= delta * in_area.size()
-			if repair_remaining <= 0:
-				repair_remaining = REPAIR_TIME
-				is_broken = false
+			health += delta * in_area.size()
+			if health >= max_hp:
+				is_active = true
 				print("Repair complete!")
-			print("Repairing...", "Repair Remaining:", repair_remaining)
+			print("Repairing...", health, "/", max_hp)
 		else:
 			print("Repair stopped")
 	
 func _on_increase_timer_timeout():
-	if is_mine_active && not is_broken:
+	if is_active and stored_resources < max_storage:
 		increase_value += 1
 		print("Increased Value:", increase_value)
+		
+func _on_unit_collecting():
+	#add logit to transfer resources from storage to unit if unit type matches.
+	pass

@@ -56,3 +56,4 @@ func cancel_placement():
 	if spawned_object != null:
 		spawned_object.queue_free()
 		spawned_object = null
+		mine = false
