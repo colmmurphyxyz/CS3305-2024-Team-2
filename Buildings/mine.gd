@@ -26,15 +26,16 @@ func _process(delta):
 			health += delta * in_area.size()
 			if health >= max_hp:
 				is_active = true
-				print("Repair complete!")
-			print("Repairing...", health, "/", max_hp)
+				#print("Repair complete!")
+			#print("Repairing...", health, "/", max_hp)
 		else:
 			print("Repair stopped")
+			pass
 	
 func _on_increase_timer_timeout():
 	if is_active and stored_resources < max_storage:
 		increase_value += 1
-		print("Increased Value:", increase_value)
+		#print("Increased Value:", increase_value)
 		
 func _on_unit_collecting():
 	#add logit to transfer resources from storage to unit if unit type matches.
