@@ -5,6 +5,7 @@ extends StaticBody2D
 @onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 var team:String = "1"
+var is_active = false
 
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
@@ -97,7 +98,8 @@ func stop_following_mouse():
 		#collision_layer = 2# re-enable collisions to prevent stacking
 		return true 
 
-
+func get_team():
+	return team
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
 func select():
@@ -113,9 +115,7 @@ func _on_detection_area_body_entered(object):
 	var parent = object.get_parent()
 	if parent.get_team() == "1":
 		in_area.append(object)
-	print(in_area)
 
 # Signal handler for body exited
 func _on_detection_area_body_exited(object):
 	in_area.erase(object)
-	print(in_area)
