@@ -29,7 +29,7 @@ func _process(delta):
 				#print("Repair complete!")
 			#print("Repairing...", health, "/", max_hp)
 		else:
-			print("Repair stopped")
+			#print("Repair stopped")
 			pass
 	
 func _on_increase_timer_timeout():
