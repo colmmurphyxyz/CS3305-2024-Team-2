@@ -107,8 +107,7 @@ func select():
 
 func deselect():
 	stop_following_mouse()
-func get_team():
-	return team
+
 func change_border_colour(color):
 	border.default_color = color
 	
