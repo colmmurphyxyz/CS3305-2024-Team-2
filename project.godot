@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
+GameManager="*res://GameManager.gd"
 
 [dotnet]
 
