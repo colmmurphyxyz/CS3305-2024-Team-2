@@ -192,7 +192,7 @@ radius = 205.0
 script = ExtResource("1_yfqk7")
 hp = 15
 attack_damage = 4
-speed = 200
+speed = 150
 melee = true
 attack_speed = 0.5
 bullet = ExtResource("2_yvu3u")
@@ -211,7 +211,7 @@ script = ExtResource("3_boljh")
 material = SubResource("ShaderMaterial_kq8om")
 sprite_frames = SubResource("SpriteFrames_382tn")
 animation = &"attack"
-frame_progress = 0.051867
+frame_progress = 0.908591
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_e4e7f")

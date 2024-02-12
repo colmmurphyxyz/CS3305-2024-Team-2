@@ -45,9 +45,11 @@ func _process(delta):
 		else:
 			#????? bullet.queu?
 			queue_free()
-	if persistent_state.sprite2d.sprite_frames.get_frame_count("attack")+1 == persistent_state.sprite2d.frame:
+
+	if persistent_state.sprite2d.sprite_frames.get_frame_count("attack")-1 == persistent_state.sprite2d.frame:
+		print("done")
 		attack_timer_count=10
-		persistent_state.sprite2d.play("attack")
+		persistent_state.sprite2d.frame=0
 		persistent_state.sprite2d.pause()
 		fired=false
 	
