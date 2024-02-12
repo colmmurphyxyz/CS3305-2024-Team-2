@@ -84,6 +84,7 @@ text = "HQ"
 
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
+enable_cursor_pan = false
 
 [connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]
