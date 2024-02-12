@@ -86,7 +86,7 @@ offset_right = 496.0
 offset_bottom = 432.0
 text = "Join Game"
 
-[node name="PlayComputerButton" type="Button" parent="."]
+[node name="StartLanGameButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 288.0
 offset_top = 464.0
@@ -133,5 +133,5 @@ autowrap_mode = 3
 
 [connection signal="pressed" from="HostGameButton" to="." method="_on_host_game_button_pressed"]
 [connection signal="pressed" from="JoinGameButton" to="." method="_on_join_game_button_pressed"]
-[connection signal="pressed" from="PlayComputerButton" to="." method="_on_play_computer_button_pressed"]
+[connection signal="pressed" from="StartLanGameButton" to="." method="_on_start_lan_game_button_pressed"]
 [connection signal="timeout" from="ErrorAlertLabelShowTimer" to="." method="_on_error_alert_label_show_timer_timeout"]

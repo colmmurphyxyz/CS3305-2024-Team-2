@@ -1,7 +1,7 @@
 extends Node
 
-var Host: ENetMultiplayerPeer
-var Client: ENetMultiplayerPeer
+var Host
+var Client
 
 
 func _ready():
