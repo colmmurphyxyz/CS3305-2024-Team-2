@@ -9,9 +9,11 @@ const CAMERA_ZOOM_MAX: float = 3.0
 
 # multiplier for the speed the camera moves at when panning with the middle mouse button
 # change as needed
-const CAMERA_MMB_PAN_MULTIPLIER: float = 0.2
+const CAMERA_MMB_PAN_MULTIPLIER: float = 0.05
 # speed at which the camera should move when being panned by the cursor
 const CURSOR_PAN_SPEED: int = 1
+
+var zoom_scaling: float = 1.0
 
 func _ready():
 	pass
@@ -25,16 +27,15 @@ func handle_cursor_pan():
 	var mouse_dist_from_center: Vector2 = mouse_pos - camera_center
 	var pan_activation_threshold: Vector2 = 0.45 * camera_size
 	# x and y components of zoom vector are always equal
-	var zoom_scaling: float = 1.0 / zoom.x
 	if mouse_dist_from_center.x > pan_activation_threshold.x:
-		velocity.x += CURSOR_PAN_SPEED * zoom_scaling
+		velocity.x += CURSOR_PAN_SPEED
 	elif mouse_dist_from_center.x < -pan_activation_threshold.x:
-		velocity.x -= CURSOR_PAN_SPEED * zoom_scaling
+		velocity.x -= CURSOR_PAN_SPEED
 		
 	if mouse_dist_from_center.y > pan_activation_threshold.y:
-		velocity.y += CURSOR_PAN_SPEED * zoom_scaling
+		velocity.y += CURSOR_PAN_SPEED
 	elif mouse_dist_from_center.y < -pan_activation_threshold.y:
-		velocity.y -= CURSOR_PAN_SPEED * zoom_scaling
+		velocity.y -= CURSOR_PAN_SPEED
 	return velocity
 
 var mmb_initial_pos: Vector2 = Vector2.ZERO
@@ -60,6 +61,7 @@ func _process(delta: float):
 	if Input.is_action_just_released("camera_zoom_out"):
 		zoom_out()
 	get_parent().camera_size = get_viewport_rect().size / zoom
+	zoom_scaling = 1.0 / zoom.x
 	# mmb camera pan
 	if Input.is_action_just_pressed("camera_pan_mmb"):
 		mmb_initial_pos = get_global_mouse_position()
@@ -72,7 +74,7 @@ func _process(delta: float):
 		velocity += handle_cursor_pan()
 			
 	if velocity.length() > 0:
-		position += velocity * CAMERA_PAN_SPEED * delta
+		position += velocity * CAMERA_PAN_SPEED * zoom_scaling * delta
 
 func zoom_in():
 		zoom += CAMERA_ZOOM_DELTA
@@ -87,7 +89,7 @@ func _input(event):
 	if event is InputEventPanGesture:
 		if event.delta.y < 0.0:
 			zoom_in()
-		elif event.delta.y >0.0:
+		elif event.delta.y > 0.0:
 			zoom_out()
 		
 
