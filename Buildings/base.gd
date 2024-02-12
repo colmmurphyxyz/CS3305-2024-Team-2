@@ -63,7 +63,7 @@ func _ready():
 	border.default_color = Color(1, 1, 1)  # Set the border color to white
 	border.width = 2  # Adjust the width of the border
 	
-func _process(delta):
+func _process(_delta: float):
 	if is_following_mouse:
 		# follow mouse movement
 		global_position = get_global_mouse_position()

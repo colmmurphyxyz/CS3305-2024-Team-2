@@ -5,7 +5,7 @@ var placement_allowed = false
 var deposit = false
 var mine = false
 
-func _process(delta):
+func _process(_delta: float):
 	if Input.is_action_just_pressed("right_click"):
 		cancel_placement()
 

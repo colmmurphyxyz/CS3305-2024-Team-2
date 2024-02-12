@@ -12,7 +12,7 @@ var camera_size: Vector2
 func _ready():
 	camera_size = get_viewport_rect().size
 	
-func _process(delta: float):
+func _process(_delta: float):
 	camera_size = get_viewport_rect().size / $Camera2D.zoom
 	if Input.is_action_just_pressed("toggle_camera_lock"):
 		is_locked = !is_locked
