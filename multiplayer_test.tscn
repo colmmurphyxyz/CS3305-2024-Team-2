@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnot8vltyaxk7"]
+[gd_scene load_steps=8 format=3 uid="uid://dnot8vltyaxk7"]
 
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
-[ext_resource type="PackedScene" uid="uid://b7voe0is0ydkr" path="res://Unit/BaseUnit/unit.tscn" id="1_oehxh"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 [ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
@@ -22,40 +21,6 @@ layer_1/tile_data = PackedInt32Array(3604591, 655360, 0, 3735658, 720896, 0)
 
 [node name="Buildings" type="Node2D" parent="."]
 script = ExtResource("4_atcb7")
-
-[node name="Unit4" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(852, 519)
-
-[node name="Unit" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(650, 401)
-attack_speed = 4
-
-[node name="Unit2" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(893, 337)
-
-[node name="Unit3" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(900, 780)
-
-[node name="Unit5" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(693, 766)
-
-[node name="Unit9" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(808, 724)
-
-[node name="Unit10" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(725, 636)
-
-[node name="Unit11" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(640, 644)
-
-[node name="Unit6" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(1042, 268)
-
-[node name="Unit7" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(963, 496)
-
-[node name="Unit8" parent="." instance=ExtResource("1_oehxh")]
-position = Vector2(764, 443)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(501, 1445)
