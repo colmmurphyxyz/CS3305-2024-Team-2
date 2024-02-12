@@ -13,9 +13,6 @@ const CAMERA_MMB_PAN_MULTIPLIER: float = 0.2
 # speed at which the camera should move when being panned by the cursor
 const CURSOR_PAN_SPEED: int = 1
 
-@export var enable_cursor_pan: bool = true
-@export var is_locked: bool = false
-
 func _ready():
 	pass
 	
@@ -71,7 +68,7 @@ func _process(delta: float):
 		var mmb_distance: Vector2 = get_global_mouse_position() - mmb_initial_pos
 		velocity += -CAMERA_MMB_PAN_MULTIPLIER * mmb_distance
 		# assume player isn't trying to pan with the cursor if they are already trying to pan with mmb
-	elif enable_cursor_pan:
+	elif get_parent().enable_cursor_pan:
 		velocity += handle_cursor_pan()
 			
 	if velocity.length() > 0:

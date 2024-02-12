@@ -9,7 +9,7 @@
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
-[node name="Game" type="Node2D"]
+[node name="MultiplayerTest" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-143.0]
 
 [node name="TileMap" type="TileMap" parent="."]
