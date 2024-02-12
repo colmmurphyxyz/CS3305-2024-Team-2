@@ -17,9 +17,8 @@ func _physics_process(delta):
 	var direction:Vector2 = to_local(nav_agent.get_next_path_position()).normalized()
 	var intended_velocty:Vector2 = direction*speed
 	velocity=intended_velocty
-	get_parent().sprite2d.rotation = velocity.angle()+180
 	move_and_slide()
-
+	
 func create_path():
 		nav_agent.target_position = target
 

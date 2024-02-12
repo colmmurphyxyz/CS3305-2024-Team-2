@@ -28,6 +28,7 @@ func _unhandled_input(event):
 			var space = get_world_2d().direct_space_state
 			var query = PhysicsShapeQueryParameters2D.new()
 			query.set_shape(select_rectangle)
+			query.collision_mask=1 
 			query.transform = Transform2D(0, (drag_end + drag_start)/2)
 			selected = space.intersect_shape(query,512)
 

@@ -8,10 +8,9 @@ func _ready():
 
 	#Check if building is
 	if persistent_state.target_building !=null and is_instance_valid(persistent_state.target_building):
-		print("UH")
 		#IF building is not a team building
 		if persistent_state.target_building.get_team() != persistent_state.team:
-			persistent_state.target=persistent_state.target_building
+			persistent_state.body.target=persistent_state.target_building.position
 		else:
 		#IF can mine
 			if persistent_state.target_building in get_tree().get_nodes_in_group("Mines") and persistent_state.can_mine==true:
@@ -21,7 +20,7 @@ func _ready():
 				persistent_state.change_state("building")
 			else:
 			#Otherwise just path towards the building and do nothing
-				persistent_state.path_toward(persistent_state.target_building.global_position)
+				persistent_state.path_to_point(persistent_state.target_building.global_position)
 				persistent_state.target_building = null
 	else:
 		persistent_state.change_state("idle")

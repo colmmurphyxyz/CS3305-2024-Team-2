@@ -107,13 +107,14 @@ func select():
 
 func deselect():
 	stop_following_mouse()
-
+func get_team():
+	return team
 func change_border_colour(color):
 	border.default_color = color
 	
 func _on_detection_area_body_entered(object):
 	var parent = object.get_parent()
-	if parent.get_team() == "1":
+	if parent.get_team() == team:
 		in_area.append(object)
 
 # Signal handler for body exited
