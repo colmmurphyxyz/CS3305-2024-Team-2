@@ -3,7 +3,8 @@ extends State
 class_name IdleState
 
 func _ready():
-	#animated_sprite.play("idle")
+	
+	persistent_state.sprite2d.play("idle")
 	persistent_state.sort_enemies_in_attack_area_by_distance(persistent_state.units_within_attack_range)
 	persistent_state.body.nav_agent.target_position=persistent_state.body.global_position
 func _process(delta):

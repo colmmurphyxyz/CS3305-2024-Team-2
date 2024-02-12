@@ -27,6 +27,7 @@ var is_chasing:CharacterBody2D = null
 @export var attack_speed:float=1
 @export var bullet : PackedScene
 @export var bullet_speed:int = 300
+@export var attack_frame:int = 0
 #Building things
 @export var can_build:bool=false
 @export var can_mine:bool=true
@@ -36,7 +37,7 @@ var target_building:Node2D = null
 var carrying_ore:bool = false
 #Node accessing
 @onready var body:CharacterBody2D = $Body 
-@onready var sprite2d:Sprite2D = $Body/Sprite2D
+@onready var sprite2d:AnimatedSprite2D = $Body/AnimatedSprite2D
 
 @onready var attack_area=$Body/AttackArea
 @onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
@@ -48,7 +49,7 @@ func _ready():
 	change_state("idle")
 	if team == "1":
 		print(load("res://Assets/unit_temp2.png"))
-		sprite2d.texture = load("res://Assets/unit_temp.png")
+		#sprite2d.texture = load("res://Assets/unit_temp.png")
 
 	sprite2d.material.set("shader_param/shader_enabled",false)
 	#Selection sprite setting up
@@ -103,17 +104,13 @@ func damage(damage_amount):
 #Enemies that enter into attack area are sorted by distance from unit
 #Unit will try to select closest one when in idle state
 func _on_attack_area_body_entered(enemy_body):
-	print("enemy_body.get_parent().teamehy")
-	print(enemy_body.get_parent().team)
 	if enemy_body.get_parent().team != team:
 		units_within_attack_range.append(enemy_body)
-		print(units_within_attack_range)
 		sort_enemies_in_attack_area_by_distance(units_within_attack_range)
 	
 func _on_attack_area_body_exited(enemy_body):
-	print("gone")
 	units_within_attack_range.erase(enemy_body)
-
+	print("gone")
 func sort_enemies_in_attack_area_by_distance(list):
 	 # Custom comparison function for sorting based on size
 	

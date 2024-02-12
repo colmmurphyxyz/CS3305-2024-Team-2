@@ -13,6 +13,7 @@ func _ready():
 		attack_radius = 40
 	body = persistent_state.body
 	last_position=body.global_position
+	persistent_state.sprite2d.play("move")
 
 func _process(delta):
 			

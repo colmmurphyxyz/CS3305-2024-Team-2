@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://b7voe0is0ydkr"]
+[gd_scene load_steps=8 format=3 uid="uid://b7voe0is0ydkr"]
 
 [ext_resource type="Script" path="res://Unit/BaseUnit/unit.gd" id="1_ybso1"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_yax1t"]
-[ext_resource type="Texture2D" uid="uid://bh3yo0co125ns" path="res://Assets/unit_temp.png" id="3_g1lwn"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="3_kjohr"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_jnwd5"]
 
@@ -34,10 +33,9 @@ wall_min_slide_angle = 0.0
 floor_stop_on_slope = false
 script = ExtResource("3_kjohr")
 
-[node name="Sprite2D" type="Sprite2D" parent="Body"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Body"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_52cwb")
-texture = ExtResource("3_g1lwn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_i2y3c")
@@ -57,7 +55,7 @@ autostart = true
 
 [node name="AttackArea" type="Area2D" parent="Body"]
 collision_layer = 0
-collision_mask = 2048
+collision_mask = 2049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea"]
 show_behind_parent = true

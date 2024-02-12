@@ -19,7 +19,7 @@ func _physics_process(delta):
 	velocity=intended_velocty
 	get_parent().sprite2d.rotation = velocity.angle()+180
 	move_and_slide()
-
+	
 func create_path():
 		nav_agent.target_position = target
 
