@@ -2,7 +2,9 @@ extends Node2D
 class_name Unit
 
 #Building stuff
-var team:String = str(randi_range(1,2))
+@export_group("Main Stats")
+## 1 or 2
+@export var team:String = "1"
 @export var hp:int= 8
 @export var attack_damage:int = 2
 @export var speed =300
@@ -23,11 +25,13 @@ var state_factory
 var units_within_attack_range =[]
 var current_target:CharacterBody2D=null
 var is_chasing:CharacterBody2D = null
+@export_subgroup("Combat Properties")
 @export var melee:bool = false
 @export var attack_speed:float=1
 @export var bullet : PackedScene
 @export var bullet_speed:int = 300
 @export var attack_frame:int = 0
+@export_subgroup("Building Properties")
 #Building things
 @export var can_build:bool=false
 @export var can_mine:bool=true

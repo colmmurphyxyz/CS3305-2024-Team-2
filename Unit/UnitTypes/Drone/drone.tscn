@@ -131,6 +131,7 @@ attack_damage = 1
 speed = 125
 attack_speed = 0.5
 bullet = ExtResource("2_cidp4")
+attack_frame = 1
 can_build = true
 
 [node name="Body" type="CharacterBody2D" parent="."]
