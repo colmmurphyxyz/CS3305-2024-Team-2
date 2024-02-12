@@ -14,9 +14,10 @@ func _input(event):
 		spawn_sniper.rpc_id(1, multiplayer.get_unique_id(), \
 				get_global_mouse_position())
 	
-@rpc("call_local")
+@rpc("any_peer", "call_local")
 func spawn_sniper(called_by: int, spawn_pos: Vector2):
 	var new_sniper = preload("res://Unit/UnitTypes/Sniper/sniper.tscn").instantiate()
 	new_sniper.global_position = spawn_pos
-	new_sniper.team = "1"
+	new_sniper.team = "1" if called_by == 1 else "2"
 	$SpawnRoot.add_child(new_sniper, true)
+	new_sniper.get_node("MultiplayerSynchronizer").set_multiplayer_authority(called_by)
