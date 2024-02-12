@@ -211,7 +211,7 @@ script = ExtResource("3_boljh")
 material = SubResource("ShaderMaterial_kq8om")
 sprite_frames = SubResource("SpriteFrames_382tn")
 animation = &"attack"
-frame_progress = 0.908591
+frame_progress = 0.129721
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_e4e7f")

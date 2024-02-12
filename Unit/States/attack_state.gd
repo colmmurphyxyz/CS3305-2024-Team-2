@@ -47,7 +47,7 @@ func _process(delta):
 			queue_free()
 
 	if persistent_state.sprite2d.sprite_frames.get_frame_count("attack")-1 == persistent_state.sprite2d.frame:
-		print("done")
+
 		attack_timer_count=10
 		persistent_state.sprite2d.frame=0
 		persistent_state.sprite2d.pause()

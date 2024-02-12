@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://nkqmpoud0qax" path="res://Assets/sniper-attack-Sheet.png" id="5_4dqn2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k2ju"]
+resource_local_to_scene = true
 shader = ExtResource("4_od0ol")
 shader_parameter/color = Vector4(1, 1, 1, 1)
 shader_parameter/width = 1.0

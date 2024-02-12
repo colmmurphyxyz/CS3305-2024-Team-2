@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqktfbnalbrhf"]
+[gd_scene load_steps=24 format=3 uid="uid://cqktfbnalbrhf"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Drone/drone.gd" id="1_eb3s1"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_cidp4"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="2_hrvbj"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_paml7"]
+[ext_resource type="Texture2D" uid="uid://deewykrm304jx" path="res://Assets/drone-attack-Sheet.png" id="5_qpnxo"]
+[ext_resource type="Texture2D" uid="uid://sajdfqsbg1hm" path="res://Assets/drone_idle-Sheet.png" id="6_4qh8p"]
+[ext_resource type="Texture2D" uid="uid://dptey81feiux6" path="res://Assets/drone_move.png" id="7_eeq0u"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gfyqw"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rvk1"]
 shader = ExtResource("3_paml7")
 shader_parameter/color = Vector4(1, 1, 1, 1)
 shader_parameter/width = 1.0
@@ -14,6 +16,108 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/shader_enabled = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mukg8"]
+atlas = ExtResource("5_qpnxo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te3u4"]
+atlas = ExtResource("5_qpnxo")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq3ow"]
+atlas = ExtResource("5_qpnxo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rripi"]
+atlas = ExtResource("6_4qh8p")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acy3n"]
+atlas = ExtResource("6_4qh8p")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huasj"]
+atlas = ExtResource("6_4qh8p")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7x342"]
+atlas = ExtResource("6_4qh8p")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bi7y"]
+atlas = ExtResource("6_4qh8p")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntdgu"]
+atlas = ExtResource("6_4qh8p")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_710vl"]
+atlas = ExtResource("7_eeq0u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqfb8"]
+atlas = ExtResource("7_eeq0u")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p178l"]
+atlas = ExtResource("7_eeq0u")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e18to"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mukg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te3u4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq3ow")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rripi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acy3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huasj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7x342")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bi7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntdgu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_710vl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqfb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p178l")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4e7f"]
 radius = 10.0499
@@ -37,9 +141,10 @@ wall_min_slide_angle = 0.0
 floor_stop_on_slope = false
 script = ExtResource("2_hrvbj")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="Body"]
-texture_filter = 1
-material = SubResource("ShaderMaterial_gfyqw")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
+material = SubResource("ShaderMaterial_8rvk1")
+sprite_frames = SubResource("SpriteFrames_e18to")
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_e4e7f")

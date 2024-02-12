@@ -16,12 +16,12 @@ func _ready():
 	persistent_state.sprite2d.play("move")
 
 func _process(delta):
-			
+	persistent_state.sprite2d.rotation = body.velocity.angle()+4.71239		
 	if body.target.distance_squared_to(body.global_position) < 300:
 		body.target =body.global_position
 		body.velocity = Vector2.ZERO
 		persistent_state.change_state("idle")
-	
+
 	#If object has a valid body to chase, repath
 	if (is_instance_valid(persistent_state.is_chasing) and persistent_state.is_chasing !=null):
 			if body.global_position.distance_to(persistent_state.is_chasing.global_position) < attack_radius:

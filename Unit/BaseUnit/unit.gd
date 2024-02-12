@@ -48,12 +48,12 @@ func _ready():
 	state_factory = StateFactory.new()
 	change_state("idle")
 	if team == "1":
-		print(load("res://Assets/unit_temp2.png"))
+		pass
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
-
+	
 	sprite2d.material.set("shader_param/shader_enabled",false)
 	#Selection sprite setting up
-
+	sprite2d.rotation=randi_range(0,360)
 	#Light setting
 	light = PointLight2D.new()
 	body.add_child(light)
@@ -110,7 +110,6 @@ func _on_attack_area_body_entered(enemy_body):
 	
 func _on_attack_area_body_exited(enemy_body):
 	units_within_attack_range.erase(enemy_body)
-	print("gone")
 func sort_enemies_in_attack_area_by_distance(list):
 	 # Custom comparison function for sorting based on size
 	
