@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cylybcl5txpup"]
 
-[ext_resource type="TileSet" uid="uid://67mnay1me64r" path="res://new_tile_set.tres" id="1_hhckg"]
+[ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
 [ext_resource type="PackedScene" uid="uid://b7voe0is0ydkr" path="res://Unit/BaseUnit/unit.tscn" id="1_oehxh"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]

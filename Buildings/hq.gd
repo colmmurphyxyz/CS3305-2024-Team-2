@@ -54,7 +54,7 @@ func show_context_menu():
 		context_menu_instance = context_menu_scene.instantiate()
 		
 		# Set the position of the context menu next to the StaticBody2D
-		var position = get_global_mouse_position()
+		var position = get_viewport().get_camera_2d().get_global_mouse_position()
 		
 		position.x += 10  # Offset to the right
 		context_menu_instance.global_position = position

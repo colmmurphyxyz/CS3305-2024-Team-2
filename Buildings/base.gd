@@ -98,7 +98,8 @@ func stop_following_mouse():
 		#collision_layer = 2# re-enable collisions to prevent stacking
 		return true 
 
-
+func get_team():
+	return team
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
 func select():
