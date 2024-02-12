@@ -20,6 +20,10 @@ config/icon="res://Assets/icon.svg"
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 GameManager="*res://GameManager.gd"
 
+[display]
+
+window/size/viewport_width=800
+
 [dotnet]
 
 project/assembly_name="RTS"
