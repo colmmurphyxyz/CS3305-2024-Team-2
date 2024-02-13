@@ -20,4 +20,10 @@ func spawn_sniper(called_by: int, spawn_pos: Vector2):
 	new_sniper.global_position = spawn_pos
 	new_sniper.team = "1" if called_by == 1 else "2"
 	$SpawnRoot.add_child(new_sniper, true)
-	new_sniper.get_node("MultiplayerSynchronizer").set_multiplayer_authority(called_by)
+	#new_sniper.get_node("MultiplayerSynchronizer").set_multiplayer_authority(called_by)
+	set_authority.rpc(new_sniper.name, called_by)
+	
+@rpc("authority", "call_local")
+func set_authority(node_name: String, auth: int):
+	$SpawnRoot.get_node(node_name).get_node("MultiplayerSynchronizer")\
+			.set_multiplayer_authority(auth)
