@@ -35,7 +35,8 @@ func _process(delta):
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
 		fired=true
 		var bullet = persistent_state.bullet.instantiate()
-		get_parent().owner.add_child(bullet)
+		#get_parent().owner.add_child(bullet)
+		add_sibling(bullet, true)
 		if is_instance_valid(current_target):
 			bullet.set_target(current_target)
 			bullet.global_position=persistent_state.body.global_position

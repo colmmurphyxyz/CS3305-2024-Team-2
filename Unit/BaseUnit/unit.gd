@@ -18,7 +18,7 @@ var light:PointLight2D
 var light_texture_path:String
 var detection_area:Area2D
 #State
-var state
+@export var state: State
 var state_factory
 
 #Enemy detection/attack
