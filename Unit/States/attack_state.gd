@@ -21,7 +21,7 @@ func _process(delta):
 	attack_timer_count=attack_timer_count-persistent_state.attack_speed
 
 	#if target is null or not found in attack range switch to idle
-	if current_target == null or current_target not in persistent_state.units_within_attack_range:
+	if fired == false and (current_target == null or current_target not in persistent_state.units_within_attack_range):
 		persistent_state.change_state("idle")
 	if is_instance_valid(current_target):
 		persistent_state.sprite2d.rotation = persistent_state.body.global_position.angle_to_point(current_target.global_position)+ 1.5708*3

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bqhkrpubvqvqn" path="res://Assets/brusier_move-Sheet.png" id="7_ixh5c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq8om"]
+resource_local_to_scene = true
 shader = ExtResource("4_xn4ue")
 shader_parameter/color = Vector4(1, 1, 1, 1)
 shader_parameter/width = 1.0

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dptey81feiux6" path="res://Assets/drone_move.png" id="7_eeq0u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rvk1"]
+resource_local_to_scene = true
 shader = ExtResource("3_paml7")
 shader_parameter/color = Vector4(1, 1, 1, 1)
 shader_parameter/width = 1.0

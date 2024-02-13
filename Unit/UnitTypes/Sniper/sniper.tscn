@@ -246,7 +246,7 @@ radius = 284.007
 [node name="Sniper" type="Node2D"]
 script = ExtResource("1_ybkgh")
 hp = 4
-attack_damage = 80
+attack_damage = 20
 speed = 50
 visible_radius_size = 5
 attack_speed = 0.05
