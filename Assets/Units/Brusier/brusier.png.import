@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dptey81feiux6"
-path="res://.godot/imported/drone_move.png-d4b837d662517fd6cb0bdf6a6353a554.ctex"
+uid="uid://brfqd80tixsqu"
+path="res://.godot/imported/brusier.png-dbee0dc060c1b4740483f44ef7a97f7f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/drone_move.png"
-dest_files=["res://.godot/imported/drone_move.png-d4b837d662517fd6cb0bdf6a6353a554.ctex"]
+source_file="res://Assets/Units/Brusier/brusier.png"
+dest_files=["res://.godot/imported/brusier.png-dbee0dc060c1b4740483f44ef7a97f7f.ctex"]
 
 [params]
 

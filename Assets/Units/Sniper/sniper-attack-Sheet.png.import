@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3whwvgr168ff"
-path="res://.godot/imported/brusier_idle-Sheet.png-a530b8222f7f0d2a8a50d74849112f39.ctex"
+uid="uid://nkqmpoud0qax"
+path="res://.godot/imported/sniper-attack-Sheet.png-b6a20d7ff94f699b3718ace369428208.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/brusier_idle-Sheet.png"
-dest_files=["res://.godot/imported/brusier_idle-Sheet.png-a530b8222f7f0d2a8a50d74849112f39.ctex"]
+source_file="res://Assets/Units/Sniper/sniper-attack-Sheet.png"
+dest_files=["res://.godot/imported/sniper-attack-Sheet.png-b6a20d7ff94f699b3718ace369428208.ctex"]
 
 [params]
 

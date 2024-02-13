@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sajdfqsbg1hm"
-path="res://.godot/imported/drone_idle-Sheet.png-2d070432f75666febd6cc97aa880be15.ctex"
+uid="uid://d3xeal81v7xre"
+path="res://.godot/imported/warden-idle.png-4eb100b3e7395affa100701684f1b3bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/drone_idle-Sheet.png"
-dest_files=["res://.godot/imported/drone_idle-Sheet.png-2d070432f75666febd6cc97aa880be15.ctex"]
+source_file="res://Assets/Units/Warden/warden-idle.png"
+dest_files=["res://.godot/imported/warden-idle.png-4eb100b3e7395affa100701684f1b3bc.ctex"]
 
 [params]
 

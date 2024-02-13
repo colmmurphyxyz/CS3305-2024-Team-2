@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxn3jsc6ioovw"
-path="res://.godot/imported/warden-move-Sheet.png-6cdb16a98dbd40d31ee69342b9406bd1.ctex"
+uid="uid://dptey81feiux6"
+path="res://.godot/imported/drone_move.png-c9a639ecf76fe4ef42841b87456e773d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/warden-move-Sheet.png"
-dest_files=["res://.godot/imported/warden-move-Sheet.png-6cdb16a98dbd40d31ee69342b9406bd1.ctex"]
+source_file="res://Assets/Units/Drone/drone_move.png"
+dest_files=["res://.godot/imported/drone_move.png-c9a639ecf76fe4ef42841b87456e773d.ctex"]
 
 [params]
 

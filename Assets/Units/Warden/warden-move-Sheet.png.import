@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deewykrm304jx"
-path="res://.godot/imported/drone-attack-Sheet.png-1b9cf0dded2feb014f98fee3c78c1dd6.ctex"
+uid="uid://dxn3jsc6ioovw"
+path="res://.godot/imported/warden-move-Sheet.png-1b17019fd46764f33b334affb47f05ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/drone-attack-Sheet.png"
-dest_files=["res://.godot/imported/drone-attack-Sheet.png-1b9cf0dded2feb014f98fee3c78c1dd6.ctex"]
+source_file="res://Assets/Units/Warden/warden-move-Sheet.png"
+dest_files=["res://.godot/imported/warden-move-Sheet.png-1b17019fd46764f33b334affb47f05ca.ctex"]
 
 [params]
 

@@ -42,7 +42,7 @@ var carrying_ore:bool = false
 #Node accessing
 @onready var body:CharacterBody2D = $Body 
 @onready var sprite2d:AnimatedSprite2D = $Body/AnimatedSprite2D
-
+@onready var healthbar = $Body/Healthbar
 @onready var attack_area=$Body/AttackArea
 @onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
 func _ready():
@@ -51,6 +51,8 @@ func _ready():
 	#State system setup
 	state_factory = StateFactory.new()
 	change_state("idle")
+	healthbar.max_value=hp
+	healthbar.value=hp
 	if team == "1":
 		pass
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
@@ -103,6 +105,7 @@ func set_target_building(building:StaticBody2D):
 	target_building=building
 func damage(damage_amount):
 	hp-=damage_amount
+	healthbar.value=hp
 	if hp <= 0:
 		queue_free()
 #Enemies that enter into attack area are sorted by distance from unit

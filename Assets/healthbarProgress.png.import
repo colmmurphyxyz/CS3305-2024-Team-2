@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nkqmpoud0qax"
-path="res://.godot/imported/sniper-attack-Sheet.png-a764ceba363c772cf4767272dcd99150.ctex"
+uid="uid://bkch8xx3r1esm"
+path="res://.godot/imported/healthbarProgress.png-a748215137f2124c043adc938a3a090f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sniper-attack-Sheet.png"
-dest_files=["res://.godot/imported/sniper-attack-Sheet.png-a764ceba363c772cf4767272dcd99150.ctex"]
+source_file="res://Assets/healthbarProgress.png"
+dest_files=["res://.godot/imported/healthbarProgress.png-a748215137f2124c043adc938a3a090f.ctex"]
 
 [params]
 

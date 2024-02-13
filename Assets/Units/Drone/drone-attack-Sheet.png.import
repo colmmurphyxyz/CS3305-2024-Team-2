@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt2bhnppik5k1"
-path="res://.godot/imported/sniper.png-c986f84c450d97cf18edb1ff9841237a.ctex"
+uid="uid://deewykrm304jx"
+path="res://.godot/imported/drone-attack-Sheet.png-80a866ba80053353d2673809cece0331.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sniper.png"
-dest_files=["res://.godot/imported/sniper.png-c986f84c450d97cf18edb1ff9841237a.ctex"]
+source_file="res://Assets/Units/Drone/drone-attack-Sheet.png"
+dest_files=["res://.godot/imported/drone-attack-Sheet.png-80a866ba80053353d2673809cece0331.ctex"]
 
 [params]
 
