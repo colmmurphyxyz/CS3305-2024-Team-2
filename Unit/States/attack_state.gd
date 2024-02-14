@@ -29,7 +29,6 @@ func _process(delta):
 
 	#Attack on timer end
 	if attack_timer_count <=0 and persistent_state.sprite2d.animation == "attack":
-
 		persistent_state.sprite2d.play("attack")
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:

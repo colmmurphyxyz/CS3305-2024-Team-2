@@ -32,6 +32,7 @@ var is_chasing:CharacterBody2D = null
 @export var bullet : PackedScene
 @export var bullet_speed:int = 300
 @export var attack_frame:int = 0
+@export var explosion: PackedScene = load("res://Unit/BaseUnit/Explosion.tscn")
 @export_subgroup("Building Properties")
 #Building things
 @export var can_build:bool=false
@@ -46,14 +47,18 @@ var carrying_ore:bool = false
 @onready var healthbar = $Body/Healthbar
 @onready var attack_area=$Body/AttackArea
 @onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
+var width:int
 func _ready():
-
+	
 	add_to_group("Units")	
 	#State system setup
 	state_factory = StateFactory.new()
 	change_state("idle")
 	healthbar.max_value=hp
 	healthbar.value=hp
+	
+	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
+	
 	if team == "1":
 		pass
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
@@ -122,10 +127,18 @@ func set_chase(chase:CharacterBody2D):
 	is_chasing=chase
 func set_target_building(building:StaticBody2D):
 	target_building=building
+	
 func damage(damage_amount):
+	
 	hp-=damage_amount
 	healthbar.value=hp
+	
 	if hp <= 0:
+		var explosion = explosion.instantiate()
+		print(explosion)
+		get_parent().add_child(explosion)
+		explosion.global_position = body.global_position
+		explosion.scale*=(width/32)
 		queue_free()
 #Enemies that enter into attack area are sorted by distance from unit
 #Unit will try to select closest one when in idle state
