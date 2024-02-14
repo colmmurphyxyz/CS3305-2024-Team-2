@@ -26,7 +26,7 @@ func _ready():
 	add_child(collision_shape)
 
 	# set shape of collision
-	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 2.00
+	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
@@ -61,7 +61,7 @@ func _ready():
 
 	border.default_color = Color(1, 1, 1)  # Set the border color to red
 	border.default_color = Color(1, 1, 1)  # Set the border color to white
-	border.width = 2  # Adjust the width of the border
+	border.width = 1  # Adjust the width of the border
 	
 func _process(_delta: float):
 	if is_following_mouse:
@@ -100,6 +100,7 @@ func stop_following_mouse():
 
 func get_team():
 	return team
+	
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
 func select():

@@ -7,7 +7,7 @@ var  timer: Timer
 
 const max_hp = 100.0
 var health = 100.0
-
+var close_mining_units = []
 var free_spawn = 60
 
 func _ready():
@@ -83,3 +83,16 @@ func _on_context_menu_button_pressed(button_text):
 	# Remove the context menu from the scene
 	context_menu_instance.queue_free()
 	context_menu_instance = null
+
+
+func _on_area_2d_body_entered(body):
+	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
+		var unit:Unit = body.get_parent()
+		if unit.carrying_ore == true: 
+			unit.load_ore()
+			#Total ore ++++++
+			unit.change_state("mining")
+		
+			
+func _on_area_2d_body_exited(body):
+	close_mining_units.erase(body)

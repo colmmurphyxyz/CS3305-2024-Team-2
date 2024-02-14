@@ -201,6 +201,7 @@ attack_speed = 0.5
 bullet = ExtResource("2_yvu3u")
 bullet_speed = 700
 attack_frame = 5
+can_mine = false
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 2053

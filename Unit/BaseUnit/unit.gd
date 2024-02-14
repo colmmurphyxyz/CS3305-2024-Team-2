@@ -20,6 +20,7 @@ var detection_area:Area2D
 #State
 var state
 var state_factory
+var state_name:String
 
 #Enemy detection/attack
 var units_within_attack_range =[]
@@ -72,9 +73,11 @@ func _ready():
 	detection_area.scale=Vector2(visible_radius_size,visible_radius_size)
 	#Attack Radius
 func change_state(new_state_name):
+	
 	if state != null:
 		state.queue_free()
 	state = state_factory.get_state(new_state_name).new()
+	state_name=new_state_name
 	#replace null with animated sprite when animating
 	state.setup(Callable(self, "change_state"), null, self)
 	state.name = "current_state"
@@ -98,7 +101,23 @@ func path_to_point(point:Vector2):
 	
 func reset_chase():
 	is_chasing=null
+
+func get_state()->String:
+	return state_name
 	
+func load_ore():
+	if carrying_ore == false:
+		carrying_ore=true
+		var ore_sprite:Sprite2D = Sprite2D.new()
+		ore_sprite.texture=load("res://Assets/iron.png")
+		ore_sprite.name="Ore"
+		body.add_child(ore_sprite)
+	else:
+		print("huh")
+		
+		body.remove_child(body.get_node("Ore"))
+		carrying_ore=false
+			
 func set_chase(chase:CharacterBody2D):
 	is_chasing=chase
 func set_target_building(building:StaticBody2D):

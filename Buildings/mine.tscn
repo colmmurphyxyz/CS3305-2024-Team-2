@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://0icby4tj0lfw"]
+[gd_scene load_steps=4 format=3 uid="uid://0icby4tj0lfw"]
 
 [ext_resource type="Script" path="res://Buildings/mine.gd" id="1_eoo7v"]
 [ext_resource type="Texture2D" uid="uid://bhg4gi80jp5m0" path="res://Assets/gold_mine0001.png" id="2_6rbdp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_663ki"]
+radius = 223.433
 
 [node name="Mines" type="StaticBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_eoo7v")
 sprite_texture = ExtResource("2_6rbdp")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2049
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.38419e-07, 0)
+shape = SubResource("CircleShape2D_663ki")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
