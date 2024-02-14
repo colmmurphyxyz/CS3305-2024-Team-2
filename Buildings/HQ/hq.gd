@@ -1,4 +1,4 @@
-extends "res://Buildings/base.gd"
+extends "res://Buildings/Base/base.gd"
 
 var context_menu_scene = preload("res://UI/scenes/structure_interaction.tscn")
 var context_menu_instance
@@ -24,15 +24,16 @@ func _process(delta):
 	if health <= 0:
 		#loss senario
 		pass
-	if not health >= max_hp:
+	if not health < max_hp:
 		if in_area.size() > 0:
 			health += delta * in_area.size()
 			if health >= max_hp:
 				is_active = true
-				print("Repair complete!")
-			print("Repairing...", health, "/", max_hp)
+				#print("Repair complete!")
+			#print("Repairing...", health, "/", max_hp)
 		else:
-			print("Repair stopped")
+			pass
+			#print("Repair stopped")
 
 func _on_timer():
 	if free_spawn > 0:

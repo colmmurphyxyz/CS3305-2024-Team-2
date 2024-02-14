@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk80g7cgdc68h"]
-
-[ext_resource type="Script" path="res://Buildings/hq.gd" id="1_gkjck"]
-[ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_15a3g"]
-
-[node name="Hq" type="StaticBody2D"]
-scale = Vector2(0.5, 0.5)
-script = ExtResource("1_gkjck")
-sprite_texture = ExtResource("2_15a3g")

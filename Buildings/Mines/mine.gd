@@ -1,4 +1,4 @@
-extends "res://Buildings/base.gd"
+extends "res://Buildings/Base/base.gd"
 	
 var increase_value: int = 0
 var increase_timer: Timer
@@ -21,7 +21,7 @@ func _process(delta):
 	super._process(delta)
 	if health <= 0:
 		queue_free()
-	if not health >= max_hp:
+	if not health < max_hp:
 		if in_area.size() > 0:
 			health += delta * in_area.size()
 			if health >= max_hp:

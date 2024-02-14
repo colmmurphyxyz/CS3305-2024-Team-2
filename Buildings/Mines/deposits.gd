@@ -1,4 +1,4 @@
-extends "res://Buildings/base.gd"
+extends "res://Buildings/Base/base.gd"
 
 @onready var EnemyNode : Area2D = get_node()
 # Called when the node enters the scene tree for the first time.
