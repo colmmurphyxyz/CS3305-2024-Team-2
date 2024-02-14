@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_rd1fs"]
-[ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_bvfnb"]
+[ext_resource type="Texture2D" uid="uid://dywhdoevufl4m" path="res://Assets/hq.png" id="2_oucw4"]
 
 [node name="Hq" type="StaticBody2D"]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(3, 3)
 script = ExtResource("1_rd1fs")
-sprite_texture = ExtResource("2_bvfnb")
+sprite_texture = ExtResource("2_oucw4")
