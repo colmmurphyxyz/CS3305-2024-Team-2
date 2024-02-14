@@ -132,10 +132,8 @@ func damage(damage_amount):
 	
 	hp-=damage_amount
 	healthbar.value=hp
-	
 	if hp <= 0:
 		var explosion = explosion.instantiate()
-		print(explosion)
 		get_parent().add_child(explosion)
 		explosion.global_position = body.global_position
 		explosion.scale*=(width/32)

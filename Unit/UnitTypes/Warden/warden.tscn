@@ -276,8 +276,9 @@ radius = 10.0499
 radius = 205.0
 
 [node name="Warden" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_ajir7")
-hp = 120
+hp = 150
 attack_damage = 30
 speed = 75
 visible_radius_size = 3

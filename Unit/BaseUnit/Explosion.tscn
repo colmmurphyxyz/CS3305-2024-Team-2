@@ -73,7 +73,7 @@ script = ExtResource("2_jnud0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_os2b6")
-frame_progress = 0.480571
+frame_progress = 0.721286
 script = ExtResource("3_7nbn3")
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

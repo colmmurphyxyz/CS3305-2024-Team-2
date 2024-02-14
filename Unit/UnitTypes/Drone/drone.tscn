@@ -129,6 +129,7 @@ radius = 10.0499
 radius = 65.0
 
 [node name="Drone" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_eb3s1")
 attack_damage = 1
 speed = 75

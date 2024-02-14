@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0o05umwn6rcb"]
+
+[ext_resource type="Script" path="res://Unit/BaseUnit/Explosion.gd" id="1_2ym67"]
+[ext_resource type="Texture2D" uid="uid://cst0ernascvpw" path="res://Assets/Units/bullet-hit-sheet.png" id="2_wb3j3"]
+[ext_resource type="Script" path="res://Unit/BaseUnit/AnimatedSprite2D.gd" id="3_a3fha"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ntiu"]
+atlas = ExtResource("2_wb3j3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbeir"]
+atlas = ExtResource("2_wb3j3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yufsv"]
+atlas = ExtResource("2_wb3j3")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_os2b6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ntiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbeir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yufsv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
+[node name="BulletHit" type="StaticBody2D"]
+script = ExtResource("1_2ym67")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_os2b6")
+frame_progress = 0.480571
+script = ExtResource("3_a3fha")
+
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

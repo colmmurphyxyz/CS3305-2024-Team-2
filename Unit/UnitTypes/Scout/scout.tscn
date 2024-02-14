@@ -110,6 +110,7 @@ radius = 10.0499
 radius = 17.2627
 
 [node name="Scout" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_yrkb0")
 hp = 4
 attack_damage = 0
