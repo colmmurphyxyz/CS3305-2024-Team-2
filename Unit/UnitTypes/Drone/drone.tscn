@@ -132,7 +132,7 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("Body:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("Body/Sprite2D:rotation")
+properties/2/path = NodePath("Body/AnimatedSprite2D:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 

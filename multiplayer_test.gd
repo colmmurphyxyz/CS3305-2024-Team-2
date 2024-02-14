@@ -14,24 +14,24 @@ func _input(event):
 			KEY_S:
 				print("spawning new sniper")
 				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
-						preload("res://Unit/UnitTypes/Sniper/sniper.tscn"), \
+						"res://Unit/UnitTypes/Sniper/sniper.tscn", \
 						get_global_mouse_position())
 			KEY_B:
 				print("spawning bruiser")
 				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
-						preload("res://Unit/UnitTypes/Bruiser/bruiser.tscn"), \
+						"res://Unit/UnitTypes/Bruiser/bruiser.tscn", \
 						get_global_mouse_position())
 			KEY_D:
 				print("spawning drone")
 				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
-						preload("res://Unit/UnitTypes/Drone/drone.tscn"), \
+						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						get_global_mouse_position())
 		#spawn_sniper.rpc_id(1, multiplayer.get_unique_id(), \
 				#get_global_mouse_position())
 				
 @rpc("any_peer", "call_local")
-func spawn_unit(called_by: int, unit_type: Resource, spawn_pos: Vector2):
-	var new_unit = unit_type.instantiate()
+func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
+	var new_unit = load(scene_path).instantiate()
 	new_unit.global_position = spawn_pos
 	new_unit.team = "1" if called_by == 1 else "2"
 	$SpawnRoot.add_child(new_unit, true)
