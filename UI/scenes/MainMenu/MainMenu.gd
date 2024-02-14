@@ -37,11 +37,13 @@ func exchange_player_info(name: String, id: int):
 			"name": name,
 			"id": id,
 		}
+		GameManager.team = "2"
 	else: # receiving host info, executed on client side
 		GameManager.Host = {
 			"name": name,
 			"id": 1,
 		}
+		GameManager.team = "1"
 	if id != 1 and multiplayer.is_server():
 		exchange_player_info.rpc($PlayerNameField.text, "host",
 				multiplayer.get_unique_id())
