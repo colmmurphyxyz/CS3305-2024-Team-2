@@ -1,23 +1,56 @@
 extends "res://Buildings/Base/base.gd"
-	
-var reload_value: int = 0
-var reload_timer: Timer
 
-var reload: float = 7.0
+var bullet_scene: PackedScene = preload("res://Bullet/Bullet.tscn")
+
+const reload = 5.0
+
+var current_target: Node = null
+var attack_timer_count: float = reload
+var fired: bool = false
 
 const max_hp = 100.0
 var health = 1.0
 
 func _ready():
 	super._ready()
-	reload_timer = Timer.new()
-	reload_timer.wait_time = reload  # Wait time in seconds
-	reload_timer.timeout.connect(_on_reload_timeout)
-	add_child(reload_timer)
-	reload_timer.start()
+	is_active=true
 	
 func _process(delta):
 	super._process(delta)
+	repair(delta)
+	if is_active:
+		update_target()
+		if is_instance_valid(current_target):
+			attack_timer_count -= delta
+			if attack_timer_count <= 0:
+				attack_timer_count = reload
+				attack()
+				fired = false
+
+func update_target():
+	if enemy_in_area.size() > 0:
+		current_target = enemy_in_area[0]
+		print(current_target)
+	else:
+		current_target = null
+		
+	
+func attack():
+	if not fired:
+		fired = true
+		attack_timer_count = reload
+		var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
+		get_parent().add_child(bullet)
+		if is_instance_valid(current_target):
+			bullet.set_target(current_target)
+			bullet.global_position = global_position
+			bullet.damage = 10  # Set the appropriate damage value
+			bullet.speed = 150  # Set the appropriate speed value
+		else:
+			bullet.queue_free()
+	
+	
+func repair(delta):
 	if health <= 0:
 		queue_free()
 	if not health >= max_hp:
@@ -30,6 +63,3 @@ func _process(delta):
 		else:
 			#print("Repair stopped")
 			pass
-	
-func _on_reload_timeout():
-	pass

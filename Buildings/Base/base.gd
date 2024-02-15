@@ -4,7 +4,7 @@ extends StaticBody2D
 @export var is_following_mouse = true
 @onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
-var team:String = "1"
+@export var team:String = "1"
 var is_active = false
 
 #const ACTION_INTERVAL = 1.0
@@ -12,6 +12,7 @@ var is_active = false
 
 var is_broken = true
 var in_area: Array = []
+var enemy_in_area: Array = []
 
 func _ready():
 	add_to_group("Buildings")
@@ -36,7 +37,7 @@ func _ready():
 	
 	var collision_circle = CollisionShape2D.new()
 	collision_circle.shape = CircleShape2D.new()
-	collision_circle.shape.radius = sprite_half_extents.length() * 1.2
+	collision_circle.shape.radius = sprite_half_extents.length() * 2
 	
 	detection_area.add_child(collision_circle)
 	
@@ -75,6 +76,11 @@ func _process(_delta: float):
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
 		
+#func set_collision_circle_radius(radius: float):
+	#var detection_area = get_node("Area2D")
+	#var collision_circle = detection_area.get_node("CollisionShape2D").shape
+	#if collision_circle is CircleShape2D:
+		#collision_circle.radius = radius
 
 func start_following_mouse():
 	# enable placement
@@ -115,7 +121,13 @@ func _on_detection_area_body_entered(object):
 	var parent = object.get_parent()
 	if parent.get_team() == team:
 		in_area.append(object)
+	else:
+		enemy_in_area.append(object)
 
 # Signal handler for body exited
 func _on_detection_area_body_exited(object):
-	in_area.erase(object)
+	var parent = object.get_parent()
+	if parent.get_team() == team:
+		in_area.erase(object)
+	else:
+		enemy_in_area.erase(object)
