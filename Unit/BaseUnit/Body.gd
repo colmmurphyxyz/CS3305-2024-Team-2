@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed:int
-var target:Vector2 = Vector2.ZERO
+@export var target:Vector2 = Vector2.ZERO
 var target_max:int=1
 #navigation
 var nav_path : PackedVector2Array

@@ -36,7 +36,7 @@ func _process(delta):
 		fired=true
 		var bullet = persistent_state.bullet.instantiate()
 		#get_parent().owner.add_child(bullet)
-		add_sibling(bullet, true)
+		get_parent().add_sibling(bullet, true)
 		if is_instance_valid(current_target):
 			bullet.set_target(current_target)
 			bullet.global_position=persistent_state.body.global_position
