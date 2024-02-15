@@ -7,6 +7,11 @@ uniform bool inside = false;
 uniform bool add_margins = true; // only useful when inside is false
 uniform bool shader_enabled = true; // Added parameter to enable or disable the shader
 
+
+
+uniform bool active = false; // damage shader
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+
 void vertex() {
     if (add_margins) {
         VERTEX += (UV * 2.0 - 1.0) * width;
@@ -43,6 +48,15 @@ void fragment() {
     if (!shader_enabled) {
         // If the shader is disabled, simply output the texture color
         COLOR = texture(TEXTURE, UV);
+		vec4 tint_copy = tint;
+		vec4 previous_color = texture(TEXTURE, UV);
+		
+		if (active == true)
+		{
+			tint_copy.a = previous_color.a;
+			COLOR = tint_copy;
+		}
+
     } else {
         vec2 uv = UV;
         

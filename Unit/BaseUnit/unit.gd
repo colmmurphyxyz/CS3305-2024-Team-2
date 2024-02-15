@@ -47,6 +47,7 @@ var carrying_ore:bool = false
 @onready var healthbar = $Body/Healthbar
 @onready var attack_area=$Body/AttackArea
 @onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
+@onready var hit_timer:Timer = Timer.new()
 var width:int
 func _ready():
 	
@@ -57,12 +58,18 @@ func _ready():
 	healthbar.max_value=hp
 	healthbar.value=hp
 	
+	add_child(hit_timer)
+	hit_timer.wait_time=.1
+	hit_timer.start()
+	hit_timer.timeout.connect(hit_timer_timeout)
+
 	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
 	
 	if team == "1":
 		pass
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
 	
+
 	sprite2d.material.set("shader_param/shader_enabled",false)
 	#Selection sprite setting up
 	sprite2d.rotation=randi_range(0,360)
@@ -118,8 +125,6 @@ func load_ore():
 		ore_sprite.name="Ore"
 		body.add_child(ore_sprite)
 	else:
-		print("huh")
-		
 		body.remove_child(body.get_node("Ore"))
 		carrying_ore=false
 			
@@ -129,7 +134,7 @@ func set_target_building(building:StaticBody2D):
 	target_building=building
 	
 func damage(damage_amount):
-	
+	sprite2d.material.set("shader_param/active",true)
 	hp-=damage_amount
 	healthbar.value=hp
 	if hp <= 0:
@@ -138,6 +143,9 @@ func damage(damage_amount):
 		explosion.global_position = body.global_position
 		explosion.scale*=(width/32)
 		queue_free()
+
+func hit_timer_timeout():
+	sprite2d.material.set("shader_param/active",false)
 #Enemies that enter into attack area are sorted by distance from unit
 #Unit will try to select closest one when in idle state
 func _on_attack_area_body_entered(enemy_body):
