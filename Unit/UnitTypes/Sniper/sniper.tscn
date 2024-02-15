@@ -18,6 +18,8 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/shader_enabled = true
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ntv60"]
 atlas = ExtResource("7_5x7ia")
@@ -246,6 +248,7 @@ radius = 10.0499
 radius = 284.007
 
 [node name="Sniper" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_ybkgh")
 hp = 4
 attack_damage = 20
@@ -255,6 +258,7 @@ attack_speed = 0.05
 bullet = ExtResource("2_p8aom")
 bullet_speed = 700
 attack_frame = 7
+can_mine = false
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 2053

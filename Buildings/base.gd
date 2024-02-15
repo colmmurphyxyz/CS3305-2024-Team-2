@@ -6,7 +6,7 @@ extends StaticBody2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 var team:String = "1"
 var is_active = false
-
+var sprite:Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
 
@@ -16,7 +16,7 @@ var in_area: Array = []
 func _ready():
 	add_to_group("Buildings")
 	# add Sprite2D
-	var sprite: Sprite2D = Sprite2D.new()
+	sprite= Sprite2D.new()
 	add_child(sprite)
 	sprite.texture = sprite_texture
 	sprite.scale = Vector2(0.3, 0.3)
@@ -26,7 +26,7 @@ func _ready():
 	add_child(collision_shape)
 
 	# set shape of collision
-	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 2.00
+	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
@@ -61,7 +61,7 @@ func _ready():
 
 	border.default_color = Color(1, 1, 1)  # Set the border color to red
 	border.default_color = Color(1, 1, 1)  # Set the border color to white
-	border.width = 2  # Adjust the width of the border
+	border.width = 1  # Adjust the width of the border
 	
 func _process(_delta: float):
 	if is_following_mouse:
@@ -100,6 +100,7 @@ func stop_following_mouse():
 
 func get_team():
 	return team
+	
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
 func select():
