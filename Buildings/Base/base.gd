@@ -9,8 +9,6 @@ var is_active = false
 
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
-@onready var detection_area = Area2D.new()
-@onready var collision_circle = CollisionShape2D.new()
 
 var is_broken = true
 var in_area: Array = []
@@ -34,12 +32,17 @@ func _ready():
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	
+	var detection_area = Area2D.new()
 	add_child(detection_area)
 	
+	var collision_circle = CollisionShape2D.new()
 	collision_circle.shape = CircleShape2D.new()
 	collision_circle.shape.radius = sprite_half_extents.length() * 2
 	
 	detection_area.add_child(collision_circle)
+	
+	detection_area.body_entered.connect(_on_detection_area_body_entered)
+	detection_area.body_exited.connect(_on_detection_area_body_exited)
 
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
@@ -73,8 +76,11 @@ func _process(_delta: float):
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
 		
-func set_collision_circle_radius(radius: float):
-	collision_circle.shape.radius = radius
+#func set_collision_circle_radius(radius: float):
+	#var detection_area = get_node("Area2D")
+	#var collision_circle = detection_area.get_node("CollisionShape2D").shape
+	#if collision_circle is CircleShape2D:
+		#collision_circle.radius = radius
 
 func start_following_mouse():
 	# enable placement
@@ -96,8 +102,6 @@ func stop_following_mouse():
 		is_following_mouse = false
 		collision_layer = 2# re-enable collisions to prevent stacking
 		#collision_layer = 2# re-enable collisions to prevent stacking
-		detection_area.body_entered.connect(_on_detection_area_body_entered)
-		detection_area.body_exited.connect(_on_detection_area_body_exited)
 		return true 
 
 func get_team():
