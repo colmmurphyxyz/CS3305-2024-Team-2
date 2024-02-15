@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://0icby4tj0lfw"]
-
-[ext_resource type="Script" path="res://Buildings/Mines/mine.gd" id="1_wp2t0"]
-[ext_resource type="Texture2D" uid="uid://coemhghnr54xq" path="res://Assets/mine.png" id="2_1cplw"]
-
-[node name="Mines" type="StaticBody2D"]
-scale = Vector2(3, 3)
-script = ExtResource("1_wp2t0")
-sprite_texture = ExtResource("2_1cplw")

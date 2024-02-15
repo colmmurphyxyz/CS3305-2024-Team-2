@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
-[ext_resource type="Script" path="res://Buildings/Mines/DepositAreas.gd" id="5_7lovr"]
+[ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 
@@ -51,11 +51,11 @@ position = Vector2(575, 326)
 script = ExtResource("5_7lovr")
 
 [node name="East" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-841, 205)
+position = Vector2(-508, -337)
 polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
 
 [node name="South" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-1393, 871)
+position = Vector2(-694, -147)
 polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -63,7 +63,7 @@ layout_direction = 3
 offset_left = -1365.0
 offset_top = 190.0
 offset_right = -1252.0
-offset_bottom = 299.0
+offset_bottom = 259.0
 script = SubResource("GDScript_tgthy")
 
 [node name="Mine" type="Button" parent="VBoxContainer"]
@@ -82,10 +82,6 @@ theme_override_colors/font_pressed_color = Color(0.321569, 0.635294, 0.352941, 1
 theme_override_colors/font_hover_color = Color(0.384314, 0.572549, 0.670588, 1)
 text = "HQ"
 
-[node name="Defence" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Defence"
-
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
 
@@ -97,6 +93,3 @@ position = Vector2(809, 494)
 [connection signal="mouse_entered" from="VBoxContainer/HQ" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/HQ" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="VBoxContainer/HQ" to="Buildings" method="_button_press_select" binds= ["hq"]]
-[connection signal="mouse_entered" from="VBoxContainer/Defence" to="Buildings" method="_button_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/Defence" to="Buildings" method="_button_exited"]
-[connection signal="pressed" from="VBoxContainer/Defence" to="Buildings" method="_button_press_select" binds= ["defence"]]

@@ -1,21 +1,17 @@
 extends StaticBody2D
 
-var sprite: Sprite2D
 @export var sprite_texture:Texture2D
 @export var is_following_mouse = true
 @onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
-@export var team:String = "1"
+var team:String = "1"
 var is_active = false
 var sprite:Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
-@onready var detection_area = Area2D.new()
-@onready var collision_circle = CollisionShape2D.new()
 
 var is_broken = true
 var in_area: Array = []
-var enemy_in_area: Array = []
 
 func _ready():
 	add_to_group("Buildings")
@@ -35,12 +31,17 @@ func _ready():
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	
+	var detection_area = Area2D.new()
 	add_child(detection_area)
 	
+	var collision_circle = CollisionShape2D.new()
 	collision_circle.shape = CircleShape2D.new()
-	collision_circle.shape.radius = sprite_half_extents.length() * 2
+	collision_circle.shape.radius = sprite_half_extents.length() * 1.2
 	
 	detection_area.add_child(collision_circle)
+	
+	detection_area.body_entered.connect(_on_detection_area_body_entered)
+	detection_area.body_exited.connect(_on_detection_area_body_exited)
 
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
@@ -74,8 +75,6 @@ func _process(_delta: float):
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
 		
-func set_collision_circle_radius(radius: float):
-	collision_circle.shape.radius = radius
 
 func start_following_mouse():
 	# enable placement
@@ -97,8 +96,6 @@ func stop_following_mouse():
 		is_following_mouse = false
 		collision_layer = 2# re-enable collisions to prevent stacking
 		#collision_layer = 2# re-enable collisions to prevent stacking
-		detection_area.body_entered.connect(_on_detection_area_body_entered)
-		detection_area.body_exited.connect(_on_detection_area_body_exited)
 		return true 
 
 func get_team():
@@ -119,13 +116,7 @@ func _on_detection_area_body_entered(object):
 	var parent = object.get_parent()
 	if parent.get_team() == team:
 		in_area.append(object)
-	else:
-		enemy_in_area.append(object)
 
 # Signal handler for body exited
 func _on_detection_area_body_exited(object):
-	var parent = object.get_parent()
-	if parent.get_team() == team:
-		in_area.erase(object)
-	else:
-		enemy_in_area.erase(object)
+	in_area.erase(object)
