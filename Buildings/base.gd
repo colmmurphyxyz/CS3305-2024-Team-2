@@ -6,7 +6,7 @@ extends StaticBody2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 var team:String = "1"
 var is_active = false
-
+var sprite:Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
 
@@ -16,7 +16,7 @@ var in_area: Array = []
 func _ready():
 	add_to_group("Buildings")
 	# add Sprite2D
-	var sprite: Sprite2D = Sprite2D.new()
+	sprite= Sprite2D.new()
 	add_child(sprite)
 	sprite.texture = sprite_texture
 	sprite.scale = Vector2(0.3, 0.3)

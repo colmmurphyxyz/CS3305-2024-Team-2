@@ -10,28 +10,38 @@ const max_storage = 250
 var stored_resources = 0
 
 var close_mining_units:Array = []
-
+@onready var healthbar = $Healthbar
 func _ready():
 	super._ready()
+	is_active=false
+	healthbar.max_value=round(max_hp)
 	increase_timer = Timer.new()
 	increase_timer.wait_time = 1.0  # Wait time in seconds
 	increase_timer.timeout.connect(_on_increase_timer_timeout)
 	add_child(increase_timer)
 	increase_timer.start()
-	add_to_group("Mines")
-	health=100
-	is_active=true
+	add_to_group("Constructions")
 	
 	
 func _process(delta):
 	super._process(delta)
+	healthbar.value=health
 	if health <= 0:
 		queue_free()
 	if not health >= max_hp:
+		sprite.modulate=Color.DIM_GRAY
 		if in_area.size() > 0:
-			health += delta * in_area.size()
+			
+			for body in in_area:
+				var unit:Unit = body.get_parent()
+				if unit.state_name=="building":
+						health += .1
+						
 			if health >= max_hp:
 				is_active = true
+				sprite.modulate=Color(1,1,1)
+				remove_from_group("Constructions")
+				add_to_group("Mines")
 				#print("Repair complete!")
 			#print("Repairing...", health, "/", max_hp)
 		else:
