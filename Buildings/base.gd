@@ -20,7 +20,6 @@ func _ready():
 	add_child(sprite)
 	sprite.texture = sprite_texture
 	sprite.scale = Vector2(0.3, 0.3)
-
 	# add collision box
 	var collision_shape = CollisionShape2D.new()
 	add_child(collision_shape)
@@ -94,12 +93,13 @@ func stop_following_mouse():
 		border.visible = false
 		# add end-user feedback
 		is_following_mouse = false
-		collision_layer = 2# re-enable collisions to prevent stacking
+		collision_layer = 2 + 13# re-enable collisions to prevent stacking
 		#collision_layer = 2# re-enable collisions to prevent stacking
 		return true 
 
 func get_team():
 	return team
+
 	
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
@@ -114,6 +114,8 @@ func change_border_colour(color):
 	
 func _on_detection_area_body_entered(object):
 	var parent = object.get_parent()
+	if object in get_tree().get_nodes_in_group("Buildings"):
+		parent=object
 	if parent.get_team() == team:
 		in_area.append(object)
 
