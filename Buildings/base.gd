@@ -20,7 +20,6 @@ func _ready():
 	add_child(sprite)
 	sprite.texture = sprite_texture
 	sprite.scale = Vector2(0.3, 0.3)
-
 	# add collision box
 	var collision_shape = CollisionShape2D.new()
 	add_child(collision_shape)
@@ -94,7 +93,7 @@ func stop_following_mouse():
 		border.visible = false
 		# add end-user feedback
 		is_following_mouse = false
-		collision_layer = 2# re-enable collisions to prevent stacking
+		collision_layer = 2 + 13# re-enable collisions to prevent stacking
 		#collision_layer = 2# re-enable collisions to prevent stacking
 		return true 
 

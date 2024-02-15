@@ -1,11 +1,14 @@
 extends CharacterBody2D
-var target_unit:CharacterBody2D=null
+var target_unit=null
 var target_brain:Node2D=null
 var damage=1
 var speed=300
-func set_target(unit:CharacterBody2D):
+func set_target(unit):
 	target_unit=unit
-	target_brain=unit.get_parent()
+	if target_unit in get_tree().get_nodes_in_group("Buildings"):
+		target_brain=unit
+	else:
+		target_brain=unit.get_parent()
 func _physics_process(delta):
 	if is_instance_valid(target_unit):
 		var direction = (target_unit.global_position - global_position).normalized()
