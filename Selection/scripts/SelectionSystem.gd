@@ -30,7 +30,12 @@ func _unhandled_input(event):
 			query.set_shape(select_rectangle)
 			query.collision_mask=1 
 			query.transform = Transform2D(0, (drag_end + drag_start)/2)
-			selected = space.intersect_shape(query,512)
+			selected = space.intersect_shape(query,512).filter(
+				func(unit):
+					return unit.collider.get_parent()\
+							.get_node("MultiplayerSynchronizer")\
+							.is_multiplayer_authority()
+			)
 
 			for unit in selected:
 				if is_instance_valid(unit.collider):
