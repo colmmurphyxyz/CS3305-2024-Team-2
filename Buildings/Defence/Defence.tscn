@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvch8a2g3uky"]
+[gd_scene load_steps=4 format=3 uid="uid://dvch8a2g3uky"]
 
 [ext_resource type="Script" path="res://Buildings/Defence/Defence.gd" id="1_6nmb0"]
 [ext_resource type="Texture2D" uid="uid://xn2em5ylx6v1" path="res://Assets/defence_base.png" id="2_2rmui"]
+[ext_resource type="Texture2D" uid="uid://n1hh6oitptk" path="res://Assets/defence_mid.png" id="2_s6x42"]
 
 [node name="Defence" type="StaticBody2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_6nmb0")
+sprite_texture_tier_2 = ExtResource("2_s6x42")
 sprite_texture = ExtResource("2_2rmui")

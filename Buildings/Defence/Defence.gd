@@ -1,24 +1,45 @@
 extends "res://Buildings/Base/base.gd"
 
+@export var sprite_texture_tier_2:Texture2D
+@export var sprite_texture_tier_3:Texture2D
+
 var bullet_scene: PackedScene = preload("res://Bullet/Bullet.tscn")
 
-const reload = 5.0
+var tier: int = 1
+
+var attack_damage: int
+var attack_speed: int
+var reload: float
+var attack_range: float
+
+var max_hp: float
+var health = 1.0
 
 var current_target: Node = null
 var attack_timer_count: float = reload
 var fired: bool = false
 
-const max_hp = 100.0
-var health = 1.0
-
 func _ready():
 	super._ready()
-	is_active=true
-	set_collision_circle_radius(30.0)
+	update_tower_stats()
+	set_collision_circle_radius(attack_range)
 	
 func _process(delta):
 	super._process(delta)
-	repair(delta)
+	
+	if health <= 0:
+		queue_free()
+	if not health >= max_hp:
+		if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
+			health += delta * in_area.size()
+			if health >= max_hp: 
+				is_active = true
+				#print("Repair complete!")
+			#print("Repairing...", health, "/", max_hp)
+		else:
+			#print("Repair stopped")
+			pass
+			
 	if is_active:
 		attack_timer_count -= delta
 		update_target()
@@ -45,23 +66,47 @@ func attack():
 		if is_instance_valid(current_target):
 			bullet.set_target(current_target)
 			bullet.global_position = global_position
-			bullet.damage = 10  # Set the appropriate damage value
-			bullet.speed = 150  # Set the appropriate speed value
+			bullet.damage = attack_damage  # Set the appropriate damage value
+			bullet.speed = attack_speed  # Set the appropriate speed value
 		else:
 			bullet.queue_free()
-	
-	
-func repair(delta):
-	if health <= 0:
-		queue_free()
-	if not health >= max_hp:
-		if in_area.size() > 0:
-			health += delta * in_area.size()
-			if health >= max_hp:
-				is_active = true
-				#print("Repair complete!")
-			#print("Repairing...", health, "/", max_hp)
-		else:
-			#print("Repair stopped")
-			pass
-			
+
+func update_tower_stats():
+# Adjust variables based on the current tier
+	match tier:
+		1:
+			attack_damage = 10
+			attack_speed = 200
+			reload = 5.0
+			attack_range = 15.0
+			max_hp = 100.0
+		2:
+			attack_damage = 10
+			attack_speed = 200
+			reload = 5.0
+			attack_range = 15.0
+			max_hp = 100.0
+			sprite.texture = sprite_texture_tier_2
+		3:
+			attack_damage = 10
+			attack_speed = 200
+			reload = 5.0
+			attack_range = 15.0
+			max_hp = 100.0
+			#change sprite
+# Add more cases for additional tiers
+
+# Function to upgrade the tower
+func upgrade():
+	if tier < 3:  # Adjust the max tier as needed
+		tier += 1
+		update_tower_stats()
+		print("Tower upgraded to tier:", tier)
+
+# Function to downgrade the tower
+func downgrade():
+	if tier > 1:  # Adjust the min tier as needed
+		tier -= 1
+		update_tower_stats()
+		print("Tower downgraded to tier:", tier)
+

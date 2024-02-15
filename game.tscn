@@ -95,8 +95,7 @@ position = Vector2(624, 696)
 team = "2"
 
 [node name="Bruiser2" parent="." instance=ExtResource("7_q726h")]
-position = Vector2(462, 884)
-team = "2"
+position = Vector2(1010, 467)
 
 [node name="Bruiser3" parent="." instance=ExtResource("7_q726h")]
 position = Vector2(778, 887)
