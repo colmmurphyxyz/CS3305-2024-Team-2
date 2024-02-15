@@ -14,14 +14,15 @@ var health = 1.0
 func _ready():
 	super._ready()
 	is_active=true
+	set_collision_circle_radius(30.0)
 	
 func _process(delta):
 	super._process(delta)
 	repair(delta)
 	if is_active:
+		attack_timer_count -= delta
 		update_target()
 		if is_instance_valid(current_target):
-			attack_timer_count -= delta
 			if attack_timer_count <= 0:
 				attack_timer_count = reload
 				attack()
@@ -30,7 +31,7 @@ func _process(delta):
 func update_target():
 	if enemy_in_area.size() > 0:
 		current_target = enemy_in_area[0]
-		print(current_target)
+		#print(current_target)
 	else:
 		current_target = null
 		
@@ -63,3 +64,4 @@ func repair(delta):
 		else:
 			#print("Repair stopped")
 			pass
+			
