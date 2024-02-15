@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://0icby4tj0lfw"]
+[gd_scene load_steps=7 format=3 uid="uid://0icby4tj0lfw"]
 
 [ext_resource type="Script" path="res://Buildings/mine.gd" id="1_eoo7v"]
 [ext_resource type="Texture2D" uid="uid://bhg4gi80jp5m0" path="res://Assets/gold_mine0001.png" id="2_6rbdp"]
+[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="2_3871t"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="3_xvtit"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="4_swif4"]
 
@@ -11,6 +12,7 @@ radius = 223.433
 [node name="Mines" type="StaticBody2D"]
 scale = Vector2(0.3, 0.3)
 script = ExtResource("1_eoo7v")
+explosion = ExtResource("2_3871t")
 sprite_texture = ExtResource("2_6rbdp")
 
 [node name="Area2D" type="Area2D" parent="."]

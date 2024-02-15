@@ -15,7 +15,10 @@ func _physics_process(delta):
 		global_position += direction * speed * delta
 		
 		if global_position.distance_to(target_unit.global_position) < 20:  
-			target_unit.get_parent().damage(damage)
+			if target_unit != target_brain:
+				target_unit.get_parent().damage(damage)
+			else:
+				target_unit.damage(damage)
 			
 			var bullet_hit: PackedScene = load("res://Unit/BaseUnit/BulletHit.tscn")
 			var bullet_unit = bullet_hit.instantiate()

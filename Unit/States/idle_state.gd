@@ -15,7 +15,6 @@ func _process(delta):
 	if persistent_state.is_chasing != null:
 		persistent_state.change_state("moving")
 	for enemy in enemy_list:
-
 		persistent_state.current_target=enemy
 		if persistent_state.melee==true:
 			persistent_state.is_chasing=enemy

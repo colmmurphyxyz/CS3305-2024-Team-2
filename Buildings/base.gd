@@ -99,6 +99,7 @@ func stop_following_mouse():
 
 func get_team():
 	return team
+
 	
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
@@ -113,6 +114,8 @@ func change_border_colour(color):
 	
 func _on_detection_area_body_entered(object):
 	var parent = object.get_parent()
+	if object in get_tree().get_nodes_in_group("Buildings"):
+		parent=object
 	if parent.get_team() == team:
 		in_area.append(object)
 
