@@ -19,6 +19,8 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/shader_enabled = true
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mukg8"]
 atlas = ExtResource("7_y4hjt")
@@ -129,9 +131,10 @@ radius = 10.0499
 radius = 65.0
 
 [node name="Drone" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_eb3s1")
 attack_damage = 1
-speed = 125
+speed = 75
 attack_speed = 0.5
 bullet = ExtResource("2_cidp4")
 attack_frame = 1

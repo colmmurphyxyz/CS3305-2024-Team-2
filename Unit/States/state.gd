@@ -5,7 +5,7 @@ class_name State
 #Unit script is the persistant state
 var change_state
 var animated_sprite
-var persistent_state
+var persistent_state:Unit
 
 func setup(change_state, animated_sprite, persistent_state):
 	self.change_state = change_state
