@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dptey81feiux6"
-path="res://.godot/imported/drone_move.png-d4b837d662517fd6cb0bdf6a6353a554.ctex"
+uid="uid://deewykrm304jx"
+path="res://.godot/imported/drone-attack-Sheet.png-80a866ba80053353d2673809cece0331.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/drone_move.png"
-dest_files=["res://.godot/imported/drone_move.png-d4b837d662517fd6cb0bdf6a6353a554.ctex"]
+source_file="res://Assets/Units/Drone/drone-attack-Sheet.png"
+dest_files=["res://.godot/imported/drone-attack-Sheet.png-80a866ba80053353d2673809cece0331.ctex"]
 
 [params]
 

@@ -3,12 +3,15 @@
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_yfqk7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_yvu3u"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="3_boljh"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_4tx4v"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_xn4ue"]
-[ext_resource type="Texture2D" uid="uid://dtjm2iu2x8sah" path="res://Assets/bruiser-attack-Sheet.png" id="5_jlthe"]
-[ext_resource type="Texture2D" uid="uid://c3whwvgr168ff" path="res://Assets/brusier_idle-Sheet.png" id="6_bq23m"]
-[ext_resource type="Texture2D" uid="uid://bqhkrpubvqvqn" path="res://Assets/brusier_move-Sheet.png" id="7_ixh5c"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_6uemm"]
+[ext_resource type="Texture2D" uid="uid://dtjm2iu2x8sah" path="res://Assets/Units/Brusier/bruiser-attack-Sheet.png" id="7_hn543"]
+[ext_resource type="Texture2D" uid="uid://c3whwvgr168ff" path="res://Assets/Units/Brusier/brusier_idle-Sheet.png" id="8_8boe0"]
+[ext_resource type="Texture2D" uid="uid://bqhkrpubvqvqn" path="res://Assets/Units/Brusier/brusier_move-Sheet.png" id="9_r15ro"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq8om"]
+resource_local_to_scene = true
 shader = ExtResource("4_xn4ue")
 shader_parameter/color = Vector4(1, 1, 1, 1)
 shader_parameter/width = 1.0
@@ -16,89 +19,91 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/shader_enabled = true
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_led4n"]
-atlas = ExtResource("5_jlthe")
+atlas = ExtResource("7_hn543")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mshyd"]
-atlas = ExtResource("5_jlthe")
+atlas = ExtResource("7_hn543")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fra84"]
-atlas = ExtResource("5_jlthe")
+atlas = ExtResource("7_hn543")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sg20g"]
-atlas = ExtResource("5_jlthe")
+atlas = ExtResource("7_hn543")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qbl3d"]
-atlas = ExtResource("5_jlthe")
+atlas = ExtResource("7_hn543")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hsshi"]
-atlas = ExtResource("5_jlthe")
+atlas = ExtResource("7_hn543")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k44og"]
-atlas = ExtResource("5_jlthe")
+atlas = ExtResource("7_hn543")
 region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ia5tu"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kybw0"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wab6"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6yp1w"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yjx33"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g3xvb"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_526tq"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_umyle"]
-atlas = ExtResource("6_bq23m")
+atlas = ExtResource("8_8boe0")
 region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_24ni7"]
-atlas = ExtResource("7_ixh5c")
+atlas = ExtResource("9_r15ro")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6vkpr"]
-atlas = ExtResource("7_ixh5c")
+atlas = ExtResource("9_r15ro")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38fhu"]
-atlas = ExtResource("7_ixh5c")
+atlas = ExtResource("9_r15ro")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qfwr5"]
-atlas = ExtResource("7_ixh5c")
+atlas = ExtResource("9_r15ro")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_use4u"]
-atlas = ExtResource("7_ixh5c")
+atlas = ExtResource("9_r15ro")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p0h4t"]
-atlas = ExtResource("7_ixh5c")
+atlas = ExtResource("9_r15ro")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_382tn"]
@@ -200,6 +205,7 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [node name="Bruiser" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_yfqk7")
 hp = 15
 attack_damage = 4
@@ -209,6 +215,7 @@ attack_speed = 0.5
 bullet = ExtResource("2_yvu3u")
 bullet_speed = 700
 attack_frame = 5
+can_mine = false
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 2053
@@ -217,6 +224,22 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 floor_stop_on_slope = false
 script = ExtResource("3_boljh")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Body"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = 15.0
+offset_right = 11.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("4_4tx4v")
+texture_progress = ExtResource("5_6uemm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 material = SubResource("ShaderMaterial_kq8om")
@@ -245,6 +268,7 @@ collision_layer = 0
 collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/AttackArea"]
+visible = false
 show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)

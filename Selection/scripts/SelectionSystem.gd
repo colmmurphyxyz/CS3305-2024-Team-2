@@ -60,11 +60,10 @@ func _unhandled_input(event):
 							if cursor_unit in get_tree().get_nodes_in_group("Buildings"):
 								unit.collider.get_parent().target_building=cursor_unit
 								unit.collider.get_parent().change_state("interacting_with_building")
-
-								break;
 							else:
 								unit.collider.get_parent().set_chase(cursor_unit)
-						unit.collider.get_parent().path_to_point(pos)
+						else:
+							unit.collider.get_parent().path_to_point(pos)
 					
 func get_node_under_cursor(cursor_position: Vector2) :
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deewykrm304jx"
-path="res://.godot/imported/drone-attack-Sheet.png-1b9cf0dded2feb014f98fee3c78c1dd6.ctex"
+uid="uid://dtjm2iu2x8sah"
+path="res://.godot/imported/bruiser-attack-Sheet.png-b9fe6ebd7d5a47520480adae59709c1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/drone-attack-Sheet.png"
-dest_files=["res://.godot/imported/drone-attack-Sheet.png-1b9cf0dded2feb014f98fee3c78c1dd6.ctex"]
+source_file="res://Assets/Units/Brusier/bruiser-attack-Sheet.png"
+dest_files=["res://.godot/imported/bruiser-attack-Sheet.png-b9fe6ebd7d5a47520480adae59709c1f.ctex"]
 
 [params]
 

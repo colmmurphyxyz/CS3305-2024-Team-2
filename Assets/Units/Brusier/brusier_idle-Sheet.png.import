@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sajdfqsbg1hm"
-path="res://.godot/imported/drone_idle-Sheet.png-2d070432f75666febd6cc97aa880be15.ctex"
+uid="uid://c3whwvgr168ff"
+path="res://.godot/imported/brusier_idle-Sheet.png-42a41ac89d8da5a311ba5df4f463c076.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/drone_idle-Sheet.png"
-dest_files=["res://.godot/imported/drone_idle-Sheet.png-2d070432f75666febd6cc97aa880be15.ctex"]
+source_file="res://Assets/Units/Brusier/brusier_idle-Sheet.png"
+dest_files=["res://.godot/imported/brusier_idle-Sheet.png-42a41ac89d8da5a311ba5df4f463c076.ctex"]
 
 [params]
 

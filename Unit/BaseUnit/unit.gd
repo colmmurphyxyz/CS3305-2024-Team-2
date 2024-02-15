@@ -20,6 +20,7 @@ var detection_area:Area2D
 #State
 @export var state: State
 var state_factory
+var state_name:String
 
 #Enemy detection/attack
 var units_within_attack_range =[]
@@ -31,6 +32,7 @@ var is_chasing:CharacterBody2D = null
 @export var bullet : PackedScene
 @export var bullet_speed:int = 300
 @export var attack_frame:int = 0
+@export var explosion: PackedScene = load("res://Unit/BaseUnit/Explosion.tscn")
 @export_subgroup("Building Properties")
 #Building things
 @export var can_build:bool=false
@@ -42,19 +44,32 @@ var carrying_ore:bool = false
 #Node accessing
 @onready var body:CharacterBody2D = $Body 
 @onready var sprite2d:AnimatedSprite2D = $Body/AnimatedSprite2D
-
+@onready var healthbar = $Body/Healthbar
 @onready var attack_area=$Body/AttackArea
 @onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
+@onready var hit_timer:Timer = Timer.new()
+var width:int
 func _ready():
-
+	
 	add_to_group("Units")	
 	#State system setup
 	state_factory = StateFactory.new()
 	change_state("idle")
+	healthbar.max_value=hp
+	healthbar.value=hp
+	
+	add_child(hit_timer)
+	hit_timer.wait_time=.1
+	hit_timer.start()
+	hit_timer.timeout.connect(hit_timer_timeout)
+
+	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
+	
 	if team == "1":
 		pass
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
 	
+
 	sprite2d.material.set("shader_param/shader_enabled",false)
 	#Selection sprite setting up
 	sprite2d.rotation=randi_range(0,360)
@@ -70,9 +85,11 @@ func _ready():
 	detection_area.scale=Vector2(visible_radius_size,visible_radius_size)
 	#Attack Radius
 func change_state(new_state_name):
+	
 	if state != null:
 		state.queue_free()
 	state = state_factory.get_state(new_state_name).new()
+	state_name=new_state_name
 	#replace null with animated sprite when animating
 	state.setup(Callable(self, "change_state"), null, self)
 	state.name = "current_state"
@@ -96,15 +113,39 @@ func path_to_point(point:Vector2):
 	
 func reset_chase():
 	is_chasing=null
+
+func get_state()->String:
+	return state_name
 	
+func load_ore():
+	if carrying_ore == false:
+		carrying_ore=true
+		var ore_sprite:Sprite2D = Sprite2D.new()
+		ore_sprite.texture=load("res://Assets/iron.png")
+		ore_sprite.name="Ore"
+		body.add_child(ore_sprite)
+	else:
+		body.remove_child(body.get_node("Ore"))
+		carrying_ore=false
+			
 func set_chase(chase:CharacterBody2D):
 	is_chasing=chase
 func set_target_building(building:StaticBody2D):
 	target_building=building
+	
 func damage(damage_amount):
+	sprite2d.material.set("shader_param/active",true)
 	hp-=damage_amount
+	healthbar.value=hp
 	if hp <= 0:
+		var explosion = explosion.instantiate()
+		get_parent().add_child(explosion)
+		explosion.global_position = body.global_position
+		explosion.scale*=(width/32)
 		queue_free()
+
+func hit_timer_timeout():
+	sprite2d.material.set("shader_param/active",false)
 #Enemies that enter into attack area are sorted by distance from unit
 #Unit will try to select closest one when in idle state
 func _on_attack_area_body_entered(enemy_body):

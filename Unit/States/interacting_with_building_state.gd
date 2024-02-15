@@ -5,7 +5,7 @@ class_name InteractingWithBuildingState
 #else, just move to build/attack it
 #Ugly if statement chain but necessary for all the cases but logic is fairly simple for all
 func _ready():
-
+	print("Interacting")
 	#Check if building is
 	if persistent_state.target_building !=null and is_instance_valid(persistent_state.target_building):
 		#IF building is not a team building
@@ -13,7 +13,9 @@ func _ready():
 			persistent_state.body.target=persistent_state.target_building.position
 		else:
 		#IF can mine
-			if persistent_state.target_building in get_tree().get_nodes_in_group("Mines") and persistent_state.can_mine==true:
+			if persistent_state.target_building in get_tree().get_nodes_in_group("Mines") and persistent_state.can_mine==true and persistent_state.target_building.is_active == true:
+				print("Interacting with mine")
+				
 				persistent_state.change_state("mining")
 			elif persistent_state.target_building in get_tree().get_nodes_in_group("Constructions") and persistent_state.can_build==true:
 			#IF can build

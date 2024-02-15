@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqhkrpubvqvqn"
-path="res://.godot/imported/brusier_move-Sheet.png-655f3528fa17724fe01ff219f9381545.ctex"
+uid="uid://cst0ernascvpw"
+path="res://.godot/imported/bullet-hit-sheet.png-2b92acef5930b4fff3382e6757fe5ad2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/brusier_move-Sheet.png"
-dest_files=["res://.godot/imported/brusier_move-Sheet.png-655f3528fa17724fe01ff219f9381545.ctex"]
+source_file="res://Assets/Units/bullet-hit-sheet.png"
+dest_files=["res://.godot/imported/bullet-hit-sheet.png-2b92acef5930b4fff3382e6757fe5ad2.ctex"]
 
 [params]
 

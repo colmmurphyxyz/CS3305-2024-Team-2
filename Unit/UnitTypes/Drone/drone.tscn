@@ -1,14 +1,18 @@
-[gd_scene load_steps=25 format=3 uid="uid://cqktfbnalbrhf"]
+
+[gd_scene load_steps=26 format=3 uid="uid://cqktfbnalbrhf"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Drone/drone.gd" id="1_eb3s1"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_cidp4"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="2_hrvbj"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_paml7"]
-[ext_resource type="Texture2D" uid="uid://deewykrm304jx" path="res://Assets/drone-attack-Sheet.png" id="5_qpnxo"]
-[ext_resource type="Texture2D" uid="uid://sajdfqsbg1hm" path="res://Assets/drone_idle-Sheet.png" id="6_4qh8p"]
-[ext_resource type="Texture2D" uid="uid://dptey81feiux6" path="res://Assets/drone_move.png" id="7_eeq0u"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_wpd88"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_xuftl"]
+[ext_resource type="Texture2D" uid="uid://deewykrm304jx" path="res://Assets/Units/Drone/drone-attack-Sheet.png" id="7_y4hjt"]
+[ext_resource type="Texture2D" uid="uid://sajdfqsbg1hm" path="res://Assets/Units/Drone/drone_idle-Sheet.png" id="8_v4x17"]
+[ext_resource type="Texture2D" uid="uid://dptey81feiux6" path="res://Assets/Units/Drone/drone_move.png" id="9_tr1fq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rvk1"]
+resource_local_to_scene = true
 shader = ExtResource("3_paml7")
 shader_parameter/color = Vector4(1, 1, 1, 1)
 shader_parameter/width = 1.0
@@ -16,53 +20,55 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/shader_enabled = true
+shader_parameter/active = false
+shader_parameter/tint = Color(1, 1, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mukg8"]
-atlas = ExtResource("5_qpnxo")
+atlas = ExtResource("7_y4hjt")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_te3u4"]
-atlas = ExtResource("5_qpnxo")
+atlas = ExtResource("7_y4hjt")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq3ow"]
-atlas = ExtResource("5_qpnxo")
+atlas = ExtResource("7_y4hjt")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rripi"]
-atlas = ExtResource("6_4qh8p")
+atlas = ExtResource("8_v4x17")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_acy3n"]
-atlas = ExtResource("6_4qh8p")
+atlas = ExtResource("8_v4x17")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_huasj"]
-atlas = ExtResource("6_4qh8p")
+atlas = ExtResource("8_v4x17")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7x342"]
-atlas = ExtResource("6_4qh8p")
+atlas = ExtResource("8_v4x17")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8bi7y"]
-atlas = ExtResource("6_4qh8p")
+atlas = ExtResource("8_v4x17")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ntdgu"]
-atlas = ExtResource("6_4qh8p")
+atlas = ExtResource("8_v4x17")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_710vl"]
-atlas = ExtResource("7_eeq0u")
+atlas = ExtResource("9_tr1fq")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qqfb8"]
-atlas = ExtResource("7_eeq0u")
+atlas = ExtResource("9_tr1fq")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p178l"]
-atlas = ExtResource("7_eeq0u")
+atlas = ExtResource("9_tr1fq")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e18to"]
@@ -137,9 +143,10 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [node name="Drone" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_eb3s1")
 attack_damage = 1
-speed = 125
+speed = 75
 attack_speed = 0.5
 bullet = ExtResource("2_cidp4")
 attack_frame = 1
@@ -152,6 +159,22 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 floor_stop_on_slope = false
 script = ExtResource("2_hrvbj")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Body"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = 9.0
+offset_right = 8.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("4_wpd88")
+texture_progress = ExtResource("5_xuftl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 material = SubResource("ShaderMaterial_8rvk1")
@@ -175,6 +198,7 @@ wait_time = 0.1
 autostart = true
 
 [node name="AttackArea" type="Area2D" parent="Body"]
+visible = false
 collision_layer = 0
 collision_mask = 2049
 

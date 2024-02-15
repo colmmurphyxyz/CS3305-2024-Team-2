@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj73amlrl4a64"
-path="res://.godot/imported/bruiser-Sheet.png-553ce472041c27ee6a7923d9a59cb6bd.ctex"
+uid="uid://bt2bhnppik5k1"
+path="res://.godot/imported/sniper.png-ff599c54d6901e797f054f1d52cb818c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/bruiser-Sheet.png"
-dest_files=["res://.godot/imported/bruiser-Sheet.png-553ce472041c27ee6a7923d9a59cb6bd.ctex"]
+source_file="res://Assets/Units/Sniper/sniper.png"
+dest_files=["res://.godot/imported/sniper.png-ff599c54d6901e797f054f1d52cb818c.ctex"]
 
 [params]
 
