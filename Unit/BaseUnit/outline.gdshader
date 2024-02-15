@@ -10,7 +10,7 @@ uniform bool shader_enabled = true; // Added parameter to enable or disable the 
 
 
 uniform bool active = false; // damage shader
-uniform vec4 tint : source_color = vec4(1., 1., 0., 1);
+uniform vec4 tint : source_color = vec4(.1, .1, .1, 1.);
 
 void vertex() {
     if (add_margins) {
@@ -50,10 +50,12 @@ void fragment() {
         COLOR = texture(TEXTURE, UV);
 		vec4 tint_copy = tint;
 		vec4 previous_color = texture(TEXTURE, UV);
-		
 		if (active == true)
 		{
 			tint_copy.a = previous_color.a;
+			tint_copy.rb*=2.0;
+			
+			tint_copy.rgb*=previous_color.rgb;
 			COLOR = tint_copy;
 		}
 
