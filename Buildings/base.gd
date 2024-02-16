@@ -9,9 +9,19 @@ var is_active = false
 var sprite:Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
+@onready var detection_area = Area2D.new()
+@onready var collision_circle = CollisionShape2D.new()
 
 var is_broken = true
 var in_area: Array = []
+var enemy_in_area: Array = []
+
+@onready var healthbar = $Healthbar
+@export var explosion:PackedScene
+var close_mining_units:Array = []
+
+var max_hp = 100.0
+var health = 1.0
 
 func _ready():
 	add_to_group("Buildings")
@@ -19,7 +29,7 @@ func _ready():
 	sprite= Sprite2D.new()
 	add_child(sprite)
 	sprite.texture = sprite_texture
-	sprite.scale = Vector2(0.3, 0.3)
+	sprite.scale = Vector2(3, 3)
 	# add collision box
 	var collision_shape = CollisionShape2D.new()
 	add_child(collision_shape)
@@ -30,18 +40,13 @@ func _ready():
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	
-	var detection_area = Area2D.new()
 	add_child(detection_area)
 	
-	var collision_circle = CollisionShape2D.new()
 	collision_circle.shape = CircleShape2D.new()
-	collision_circle.shape.radius = sprite_half_extents.length() * 1.2
+	collision_circle.shape.radius = sprite_half_extents.length() * 2
 	
 	detection_area.add_child(collision_circle)
 	
-	detection_area.body_entered.connect(_on_detection_area_body_entered)
-	detection_area.body_exited.connect(_on_detection_area_body_exited)
-
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
 	
@@ -61,6 +66,8 @@ func _ready():
 	border.default_color = Color(1, 1, 1)  # Set the border color to red
 	border.default_color = Color(1, 1, 1)  # Set the border color to white
 	border.width = 1  # Adjust the width of the border
+
+	healthbar.max_value = round(max_hp)
 	
 func _process(_delta: float):
 	if is_following_mouse:
@@ -73,7 +80,6 @@ func _process(_delta: float):
 		else:
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
-		
 
 func start_following_mouse():
 	# enable placement
@@ -95,12 +101,15 @@ func stop_following_mouse():
 		is_following_mouse = false
 		collision_layer = 2 + 13# re-enable collisions to prevent stacking
 		#collision_layer = 2# re-enable collisions to prevent stacking
+		detection_area.body_entered.connect(_on_detection_area_body_entered)
+		detection_area.body_exited.connect(_on_detection_area_body_exited)
 		return true 
 
 func get_team():
 	return team
 
-	
+func set_collision_circle_radius(radius: float):
+	collision_circle.shape.radius = radius
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
 func select():
@@ -112,13 +121,39 @@ func deselect():
 func change_border_colour(color):
 	border.default_color = color
 	
+func damage(damage_amount):
+	#sprite2d.material.set("shader_param/active",true)
+	health-=damage_amount
+	healthbar.value=health
+	
+	if health <= 0:
+		var explosion_node = explosion.instantiate()
+		get_parent().add_child(explosion_node)
+		explosion_node.global_position = global_position
+		explosion_node.scale*=(sprite.texture.get_width()/400)
+		queue_free()
+	
 func _on_detection_area_body_entered(object):
 	var parent = object.get_parent()
 	if object in get_tree().get_nodes_in_group("Buildings"):
 		parent=object
 	if parent.get_team() == team:
 		in_area.append(object)
+	else:
+		enemy_in_area.append(object)
 
 # Signal handler for body exited
 func _on_detection_area_body_exited(object):
-	in_area.erase(object)
+	var parent = object.get_parent()
+	if parent.get_team() == team:
+		in_area.erase(object)
+	else:
+		enemy_in_area.erase(object)
+	
+func _on_area_2d_body_exited(body):
+	close_mining_units.erase(body)
+	
+func _on_area_2d_body_entered(body):
+	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
+		if body.get_parent().can_mine == true: 
+			close_mining_units.append(body)

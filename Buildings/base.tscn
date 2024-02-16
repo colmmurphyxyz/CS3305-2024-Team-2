@@ -1,15 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://chcffv7xahe1u"]
+[gd_scene load_steps=8 format=3 uid="uid://chcffv7xahe1u"]
 
 [ext_resource type="Script" path="res://Buildings/base.gd" id="1_rcxq8"]
 [ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_msyjy"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="3_8vxph"]
+[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_icdr1"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="4_p5w77"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke4o0"]
 size = Vector2(115, 134)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3bx1k"]
+radius = 126.063
 
 [node name="Headquarters" type="StaticBody2D"]
 collision_mask = 3
 script = ExtResource("1_rcxq8")
 sprite_texture = ExtResource("2_msyjy")
+explosion = ExtResource("3_icdr1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -21,3 +28,25 @@ visible = false
 position = Vector2(2, 4)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_msyjy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2049
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_3bx1k")
+
+[node name="Healthbar" type="TextureProgressBar" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = 100.0
+offset_right = 130.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("3_8vxph")
+texture_progress = ExtResource("4_p5w77")

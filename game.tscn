@@ -63,7 +63,7 @@ layout_direction = 3
 offset_left = -1365.0
 offset_top = 190.0
 offset_right = -1252.0
-offset_bottom = 259.0
+offset_bottom = 294.0
 script = SubResource("GDScript_tgthy")
 
 [node name="Mine" type="Button" parent="VBoxContainer"]
@@ -82,6 +82,10 @@ theme_override_colors/font_pressed_color = Color(0.321569, 0.635294, 0.352941, 1
 theme_override_colors/font_hover_color = Color(0.384314, 0.572549, 0.670588, 1)
 text = "HQ"
 
+[node name="Defence" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Defence"
+
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
 
@@ -93,3 +97,6 @@ position = Vector2(809, 494)
 [connection signal="mouse_entered" from="VBoxContainer/HQ" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/HQ" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="VBoxContainer/HQ" to="Buildings" method="_button_press_select" binds= ["hq"]]
+[connection signal="mouse_entered" from="VBoxContainer/Defence" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Defence" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="VBoxContainer/Defence" to="Buildings" method="_button_press_select" binds= ["defence"]]

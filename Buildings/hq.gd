@@ -5,13 +5,12 @@ var context_menu_instance
 
 var  timer: Timer
 
-const max_hp = 100.0
-var health = 100.0
-var close_mining_units = []
 var free_spawn = 60
 
 func _ready():
 	super._ready()
+	max_hp = 100.0
+	health = 100.0
 	is_active = true
 	timer = Timer.new()
 	timer.wait_time = 1.0  # Wait time in seconds
@@ -24,15 +23,16 @@ func _process(delta):
 	if health <= 0:
 		#loss senario
 		pass
-	if not health >= max_hp:
+	if health < max_hp:
 		if in_area.size() > 0:
 			health += delta * in_area.size()
 			if health >= max_hp:
 				is_active = true
-				print("Repair complete!")
-			print("Repairing...", health, "/", max_hp)
+				#print("Repair complete!")
+			#print("Repairing...", health, "/", max_hp)
 		else:
-			print("Repair stopped")
+			#print("Repair stopped")
+			pass
 
 func _on_timer():
 	if free_spawn > 0:
