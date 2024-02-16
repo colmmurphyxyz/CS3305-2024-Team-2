@@ -63,7 +63,7 @@ func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damag
 	var new_bullet = persistent_state.bullet.instantiate()
 	new_bullet.target_brain_name = target_name
 	new_bullet.damage = damage
-	new_bullet.speed = 50
+	new_bullet.speed = speed
 	new_bullet.position = spawn_pos
 	get_parent().add_sibling(new_bullet, true)
 	set_bullet_authority.rpc(new_bullet.name, called_by)
