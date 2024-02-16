@@ -23,29 +23,30 @@ func peer_disconnected(id: int):
 # called only on the connecting peer
 func connected_to_server():
 	print("Connected to server!")
-	exchange_player_info($PlayerNameField.text, multiplayer.get_unique_id())
+	GameManager.Client = {
+		"name": $PlayerNameField.text,
+		"id": multiplayer.get_unique_id(),
+	}
+	send_client_info_to_server.rpc_id(1, GameManager.Client.name, GameManager.Client.id)
 	
 # called only from clients
 func connection_failed():
 	printerr("Connection failed")
 	
-@rpc("any_peer")
-func exchange_player_info(name: String, id: int):
-	# if receiving client info, executed on host machine
-	if id != 1:
-		GameManager.Client = {
-			"name": name,
-			"id": id,
-		}
-		GameManager.team = "2"
-	else: # receiving host info, executed on client side
-		GameManager.Host = {
-			"name": name,
-			"id": 1,
-		}
-		GameManager.team = "1"
-	if multiplayer.is_server():
-		exchange_player_info.rpc($PlayerNameField.text, multiplayer.get_unique_id())
+@rpc("authority", "call_remote", "reliable")
+func send_host_info_to_client(name: String):
+	GameManager.Host = {
+		"name": name,
+		"id": 1,
+	}
+	
+@rpc("any_peer", "call_remote", "reliable")
+func send_client_info_to_server(name: String, id: int):
+	GameManager.Client = {
+		"name": name,
+		"id": id,
+	}
+	send_host_info_to_client.rpc_id(GameManager.Client.id, $PlayerNameField.text)
 
 func _on_play_computer_button_pressed():
 	if !_is_player_name_valid():
@@ -64,6 +65,10 @@ func _on_host_game_button_pressed():
 	elif !_is_host_port_valid():
 		_show_error_message("Enter a port number greater than 1024")
 	else:
+		GameManager.Host = {
+			"name": $PlayerNameField.text,
+			"id": 1
+		}
 		var port = int($HostPortField.text)
 		print("using port ", port)
 		peer = ENetMultiplayerPeer.new()
