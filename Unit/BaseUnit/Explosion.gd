@@ -5,7 +5,6 @@ extends StaticBody2D
 func _ready():
 	
 	$AnimatedSprite2D.play("default")
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

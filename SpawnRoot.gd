@@ -26,11 +26,6 @@ func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
 	add_child(new_unit, true)
 	set_authority.rpc(new_unit.name, called_by)
 	
-#@rpc("any_peer", "call_local")
-#func add_node_to_spawn_root(called_by: int, new_node: Node):
-	#add_child(new_node, true)
-	#set_authority.rpc(new_node.name, called_by)
-	
 @rpc("authority", "call_local")
 func set_authority(node_name: String, auth: int):
 	#get_node(node_name).get_node("MultiplayerSynchronizer")\

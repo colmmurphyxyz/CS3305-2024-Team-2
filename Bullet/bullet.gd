@@ -20,18 +20,18 @@ func _physics_process(delta):
 		position += direction * speed * delta
 		
 		if global_position.distance_to(target_unit.global_position) < 20:
-			print("you hit my battleship")
 			target_unit.get_parent().damage(damage)
+			spawn_bullet_hit_scene.rpc()
 			
-			var bullet_hit: PackedScene = load("res://Unit/BaseUnit/BulletHit.tscn")
-			var bullet_unit = bullet_hit.instantiate()
-			get_parent().add_child(bullet_unit)
-			bullet_unit.sprite.rotation=direction.angle()
-			bullet_unit.position = position
-			var size = round(damage/5)
-			if size < 1:
-				size=1 
-			bullet_unit.scale*= size
+			#var bullet_hit: PackedScene = load("res://Unit/BaseUnit/BulletHit.tscn")
+			#var bullet_unit = bullet_hit.instantiate()
+			#get_parent().add_child(bullet_unit)
+			#bullet_unit.sprite.rotation=direction.angle()
+			#bullet_unit.position = position
+			#var size = round(damage/5)
+			#if size < 1:
+				#size=1 
+			#bullet_unit.scale*= size
 			
 			queue_free()
 		move_and_slide()
@@ -41,3 +41,13 @@ func _physics_process(delta):
 func set_target_by_name(n: String):
 	var target_body: CharacterBody2D = get_parent().get_node(n).get_node("Body")
 	set_target(target_body)
+	
+@rpc("any_peer", "call_local")
+func spawn_bullet_hit_scene():
+	var bullet_unit = preload("res://Unit/BaseUnit/BulletHit.tscn").instantiate()
+	bullet_unit.position = position
+	var size = round(damage/5)
+	if size < 1:
+		size=1 
+	bullet_unit.scale*= size
+	add_sibling(bullet_unit, true)
