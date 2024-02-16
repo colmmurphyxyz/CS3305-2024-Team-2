@@ -36,7 +36,7 @@ func _process(delta):
 		spawn_bullet.rpc_id(1, \
 				multiplayer.get_unique_id(),\
 				current_target.get_parent().name,\
-				get_parent().position,\
+				$"../Body".global_position,\
 				persistent_state.attack_damage,\
 				persistent_state.bullet_speed)
 		#var bullet = persistent_state.bullet.instantiate()
@@ -64,7 +64,7 @@ func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damag
 	new_bullet.target_brain_name = target_name
 	new_bullet.damage = damage
 	new_bullet.speed = speed
-	new_bullet.position = spawn_pos
+	new_bullet.global_position = spawn_pos
 	get_parent().add_sibling(new_bullet, true)
 	set_bullet_authority.rpc(new_bullet.name, called_by)
 	
