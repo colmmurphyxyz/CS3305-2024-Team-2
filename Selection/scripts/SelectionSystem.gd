@@ -2,18 +2,20 @@ extends Node2D
 
 var dragging = false
 var selected = []
-
+signal units_selected(units)
 var drag_start = Vector2.ZERO
 var select_rectangle = RectangleShape2D.new()
 var team="1"
 @onready var select_draw = $DrawSelection
+var export_selected:Array = []
 func _unhandled_input(event):
-	
+
 	#If mouse is clicked without dragging it, deselect all objects 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			for unit in selected:
 				if is_instance_valid(unit.collider):
+
 					if unit.collider.get_parent().has_method("deselect"):
 							unit.collider.get_parent().deselect()
 			selected = []
@@ -21,6 +23,7 @@ func _unhandled_input(event):
 			drag_start = get_viewport().get_camera_2d().get_global_mouse_position()
 		#If dragging mouse, draw a box, anything in that box is added to selected array
 		elif dragging:
+			export_selected=[]
 			dragging = false
 			select_draw.update_status(drag_start, get_viewport().get_camera_2d().get_global_mouse_position(), dragging)
 			var drag_end = get_viewport().get_camera_2d().get_global_mouse_position()
@@ -31,13 +34,17 @@ func _unhandled_input(event):
 			query.collision_mask=1 
 			query.transform = Transform2D(0, (drag_end + drag_start)/2)
 			selected = space.intersect_shape(query,512)
-
+				
 			for unit in selected:
 				if is_instance_valid(unit.collider):
 					if unit.collider.get_parent().has_method("select") and is_instance_valid(unit.collider):
+						export_selected.append(unit.collider.get_parent())
 						unit.collider.get_parent().select()
 						unit.collider.get_parent().reset_chase()
-						
+			print(export_selected)
+			
+			#Sends signal out containing Unit Nodes when mouse finishes dragging
+			units_selected.emit(export_selected)
 	if dragging:
 		if event is InputEventMouseMotion:
 			select_draw.update_status(drag_start, get_viewport().get_camera_2d().get_global_mouse_position(), dragging)
