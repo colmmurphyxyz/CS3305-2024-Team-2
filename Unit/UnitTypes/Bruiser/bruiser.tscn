@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dts3ydmuiulbc"]
+[gd_scene load_steps=36 format=3 uid="uid://dts3ydmuiulbc"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_yfqk7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_yvu3u"]
@@ -203,6 +203,18 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("Body/AnimatedSprite2D:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("Body:target")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Body/AnimatedSprite2D:frame")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Body/AnimatedSprite2D:animation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Body/Healthbar:value")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
 [node name="Bruiser" type="Node2D"]
 y_sort_enabled = true

@@ -44,9 +44,8 @@ func exchange_player_info(name: String, id: int):
 			"id": 1,
 		}
 		GameManager.team = "1"
-	if id != 1 and multiplayer.is_server():
-		exchange_player_info.rpc($PlayerNameField.text, "host",
-				multiplayer.get_unique_id())
+	if multiplayer.is_server():
+		exchange_player_info.rpc($PlayerNameField.text, multiplayer.get_unique_id())
 
 func _on_play_computer_button_pressed():
 	if !_is_player_name_valid():

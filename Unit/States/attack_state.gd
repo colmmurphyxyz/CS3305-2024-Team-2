@@ -8,7 +8,7 @@ func _ready():
 	attack_timer_count=10.0
 	persistent_state.sprite2d.play("attack")
 	persistent_state.sprite2d.pause()
-	pass # Replace with function body.
+	multiplayer.allow_object_decoding = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,18 +33,23 @@ func _process(delta):
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
 		fired=true
-		var bullet = persistent_state.bullet.instantiate()
-		#get_parent().owner.add_child(bullet)
-		get_parent().add_sibling(bullet, true)
-		if is_instance_valid(current_target):
-			bullet.set_target(current_target)
-			bullet.global_position=persistent_state.body.global_position
-			bullet.damage=persistent_state.attack_damage
-			bullet.speed=persistent_state.bullet_speed
-
-		else:
-			#????? bullet.queu?
-			queue_free()
+		spawn_bullet.rpc_id(1, \
+				multiplayer.get_unique_id(),\
+				current_target.get_parent().name,\
+				get_parent().position,\
+				persistent_state.attack_damage,\
+				persistent_state.bullet_speed)
+		#var bullet = persistent_state.bullet.instantiate()
+		##get_parent().owner.add_child(bullet)
+		#get_parent().add_sibling(bullet, true)
+		#if is_instance_valid(current_target):
+			#bullet.set_target(current_target)
+			#bullet.global_position=persistent_state.body.global_position
+			#bullet.damage=persistent_state.attack_damage
+			#bullet.speed=persistent_state.bullet_speed
+		#else:
+			##????? bullet.queu?
+			#queue_free()
 
 	if persistent_state.sprite2d.sprite_frames.get_frame_count("attack")-1 == persistent_state.sprite2d.frame:
 
@@ -53,7 +58,17 @@ func _process(delta):
 		persistent_state.sprite2d.pause()
 		fired=false
 	
+@rpc("any_peer", "call_local")
+func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
+	var new_bullet = persistent_state.bullet.instantiate()
+	new_bullet.target_brain_name = target_name
+	new_bullet.damage = damage
+	new_bullet.speed = 50
+	new_bullet.position = spawn_pos
+	get_parent().add_sibling(new_bullet, true)
+	set_bullet_authority.rpc(new_bullet.name, called_by)
 	
-	
-	
-	
+@rpc("authority", "call_local")
+func set_bullet_authority(node_name: String, auth: int):
+	get_parent().get_parent().get_node(node_name).get_node("MultiplayerSynchronizer")\
+			.set_multiplayer_authority(auth)

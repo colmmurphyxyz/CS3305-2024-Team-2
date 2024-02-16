@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=26 format=3 uid="uid://cqktfbnalbrhf"]
+[gd_scene load_steps=27 format=3 uid="uid://cqktfbnalbrhf"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Drone/drone.gd" id="1_eb3s1"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_cidp4"]
