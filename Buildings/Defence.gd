@@ -29,7 +29,7 @@ func _process(delta):
 	
 	if health <= 0:
 		queue_free()
-	if not health >= max_hp:
+	if health < max_hp:
 		if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
 			health += delta * in_area.size()
 			if health >= max_hp: 

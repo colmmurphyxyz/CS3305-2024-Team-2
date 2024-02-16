@@ -37,7 +37,7 @@ func _process(delta):
 				if unit.state_name=="building":
 						health += delta
 						
-			if health >= max_hp:
+			if health < max_hp:
 				is_active = true
 				sprite.modulate=Color(1,1,1)
 				remove_from_group("Constructions")

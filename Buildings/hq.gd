@@ -23,7 +23,7 @@ func _process(delta):
 	if health <= 0:
 		#loss senario
 		pass
-	if not health < max_hp:
+	if health < max_hp:
 		if in_area.size() > 0:
 			health += delta * in_area.size()
 			if health >= max_hp:
