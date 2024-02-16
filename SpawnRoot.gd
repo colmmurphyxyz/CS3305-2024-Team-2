@@ -35,5 +35,5 @@ func set_authority(node_name: String, auth: int):
 
 func _on_child_entered_tree(node: Node):
 	print("child entered: ", node.to_string(), node.name)
-	if node.name.contains("Bullet"):
-		print("pew pew")
+	if node.name.contains("Explosion") && multiplayer.get_unique_id() > 1:
+		print("kaboom")

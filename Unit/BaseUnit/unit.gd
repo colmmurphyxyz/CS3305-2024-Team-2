@@ -32,7 +32,7 @@ var is_chasing:CharacterBody2D = null
 @export var bullet : PackedScene
 @export var bullet_speed:int = 300
 @export var attack_frame:int = 0
-@export var explosion: PackedScene = load("res://Unit/BaseUnit/Explosion.tscn")
+@export var explosion_scene: PackedScene = preload("res://Unit/BaseUnit/Explosion.tscn")
 @export_subgroup("Building Properties")
 #Building things
 @export var can_build:bool=false
@@ -138,10 +138,11 @@ func damage(damage_amount):
 	hp-=damage_amount
 	healthbar.value=hp
 	if hp <= 0:
-		var explosion = explosion.instantiate()
-		get_parent().add_child(explosion)
-		explosion.global_position = body.global_position
-		explosion.scale*=(width/32)
+		spawn_explosion_scene.rpc_id(1, body.position)
+		#var explosion = explosion.instantiate()
+		#get_parent().add_child(explosion)
+		#explosion.global_position = body.global_position
+		#explosion.scale*=(width/32)
 		queue_free()
 
 func hit_timer_timeout():
@@ -170,3 +171,10 @@ func sort_enemies_in_attack_area_by_distance(list):
 
 		# Sort the list based on the custom comparison function
 		list.sort_custom(self, "list_compare_lamda")
+		
+@rpc("any_peer", "call_local")
+func spawn_explosion_scene(spawn_pos: Vector2):
+	var explosion = explosion_scene.instantiate()
+	explosion.position = spawn_pos
+	explosion.scale *= (width / 32)
+	add_sibling(explosion, true)
