@@ -3,19 +3,18 @@ extends "res://Buildings/base.gd"
 var increase_value: int = 0
 var increase_timer: Timer
 
-const max_hp = 100.0
-var health = 1.0
-
 const max_storage = 250
 var stored_resources = 0
 
-var close_mining_units:Array = []
-@onready var healthbar = $Healthbar
-@export var explosion:PackedScene
+#var close_mining_units:Array = []
+#@onready var healthbar = $Healthbar
+#@export var explosion:PackedScene
 func _ready():
+	max_hp = 100.0
+	health = 1.0
 	super._ready()
 	is_active=false
-	healthbar.max_value=round(max_hp)
+	#healthbar.max_value=round(max_hp)
 	increase_timer = Timer.new()
 	increase_timer.wait_time = 1.0  # Wait time in seconds
 	increase_timer.timeout.connect(_on_increase_timer_timeout)
@@ -36,7 +35,7 @@ func _process(delta):
 			for body in in_area:
 				var unit:Unit = body.get_parent()
 				if unit.state_name=="building":
-						health += .1
+						health += delta
 						
 			if health >= max_hp:
 				is_active = true
@@ -44,7 +43,7 @@ func _process(delta):
 				remove_from_group("Constructions")
 				add_to_group("Mines")
 				#print("Repair complete!")
-			#print("Repairing...", health, "/", max_hp)
+			print("Repairing...", health, "/", max_hp)
 		else:
 			#print("Repair stopped")
 			pass
