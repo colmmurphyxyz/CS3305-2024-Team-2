@@ -215,6 +215,9 @@ properties/5/replication_mode = 1
 properties/6/path = NodePath("Body/Healthbar:value")
 properties/6/spawn = true
 properties/6/replication_mode = 1
+properties/7/path = NodePath(".:team")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [node name="Bruiser" type="Node2D"]
 y_sort_enabled = true
