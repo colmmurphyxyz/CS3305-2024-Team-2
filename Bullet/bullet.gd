@@ -39,8 +39,9 @@ func _physics_process(delta):
 		queue_free()
 		
 func set_target_by_name(n: String):
-	var target_body: CharacterBody2D = get_parent().get_node(n).get_node("Body")
-	set_target(target_body)
+	var target_unit: Node2D = get_parent().get_node_or_null(n)
+	if target_unit != null:
+		set_target(target_unit.get_node("Body"))
 	
 @rpc("any_peer", "call_local")
 func spawn_bullet_hit_scene():
