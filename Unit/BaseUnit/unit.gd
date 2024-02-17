@@ -74,7 +74,7 @@ func _ready():
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
 	
 	#Selection sprite setting up
-	sprite2d.material.set("shader_param/shader_enabled",false)
+	sprite2d.material.set("shader_parameter/shader_enabled",false)
 	#Random rotation applied so they dont all look the same 
 	sprite2d.rotation=randi_range(0,360)
 	#Light setting
@@ -105,11 +105,11 @@ func get_team():
 
 func select():
 	selected = true
-	sprite2d.material.set("shader_param/shader_enabled",true)
+	sprite2d.material.set("shader_parameter/shader_enabled",true)
 	
 func deselect():
 	selected=false
-	sprite2d.material.set("shader_param/shader_enabled",false)
+	sprite2d.material.set("shader_parameter/shader_enabled",false)
 
 func path_to_point(point:Vector2):
 	body.target = point
@@ -139,7 +139,7 @@ func set_target_building(building:StaticBody2D):
 	target_building=building
 	
 func damage(damage_amount):
-	sprite2d.material.set("shader_param/active",true)
+	sprite2d.material.set("shader_parameter/active",true)
 	hp-=damage_amount
 	healthbar.value=hp
 	if hp <= 0:
@@ -150,7 +150,7 @@ func damage(damage_amount):
 		queue_free()
 
 func hit_timer_timeout():
-	sprite2d.material.set("shader_param/active",false)
+	sprite2d.material.set("shader_parameter/active",false)
 #Enemies that enter into attack area are sorted by distance from unit
 #Unit will try to select closest one when in idle state
 func _on_attack_area_body_entered(enemy_body):
