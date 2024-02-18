@@ -1,6 +1,6 @@
 extends Node2D
 
-func _input(event):
+func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_S:
@@ -15,8 +15,6 @@ func _input(event):
 				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						get_global_mouse_position())
-		#spawn_sniper.rpc_id(1, multiplayer.get_unique_id(), \
-				#get_global_mouse_position())
 				
 @rpc("any_peer", "call_local")
 func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
@@ -28,8 +26,6 @@ func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
 	
 @rpc("authority", "call_local")
 func set_authority(node_name: String, auth: int):
-	#get_node(node_name).get_node("MultiplayerSynchronizer")\
-			#.set_multiplayer_authority(auth)
 	get_node(node_name).set_multiplayer_authority(auth, true)
 
 
