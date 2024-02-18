@@ -32,6 +32,7 @@ func _process(delta):
 		persistent_state.sprite2d.play("attack")
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
+		persistent_state.attack_sound.play()
 		fired=true
 		var bullet = persistent_state.bullet.instantiate()
 		get_parent().owner.add_child(bullet)

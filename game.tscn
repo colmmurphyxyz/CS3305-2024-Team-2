@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=9 format=3 uid="uid://cylybcl5txpup"]
 
+[ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
@@ -88,6 +89,13 @@ text = "Defence"
 
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
+
+[node name="Drone" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1172, 379)
+team = "2"
+
+[node name="Drone2" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(934, 424)
 
 [connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]

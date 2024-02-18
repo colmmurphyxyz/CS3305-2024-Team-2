@@ -4,8 +4,8 @@ extends Camera2D
 const CAMERA_PAN_SPEED: int = 400
 # how much the increment/decrement the camera zoom with each 'press' of the scroll wheel
 const CAMERA_ZOOM_DELTA: Vector2 = Vector2(0.1, 0.1)
-const CAMERA_ZOOM_MIN: float = 0.3
-const CAMERA_ZOOM_MAX: float = 3.0
+const CAMERA_ZOOM_MIN: float = 0.4
+const CAMERA_ZOOM_MAX: float = 4.0
 
 # multiplier for the speed the camera moves at when panning with the middle mouse button
 # change as needed
@@ -80,16 +80,26 @@ func zoom_in():
 		zoom += CAMERA_ZOOM_DELTA
 		if zoom.x > CAMERA_ZOOM_MAX:
 			zoom = Vector2(CAMERA_ZOOM_MAX, CAMERA_ZOOM_MAX)
+		change_volume(zoom.x)
 func zoom_out():
 		zoom -= CAMERA_ZOOM_DELTA
 		if zoom.x < CAMERA_ZOOM_MIN:
 			zoom = Vector2(CAMERA_ZOOM_MIN, CAMERA_ZOOM_MIN)
-
+		change_volume(zoom.x)
 func _input(event):
 	if event is InputEventPanGesture:
 		if event.delta.y < 0.0:
 			zoom_in()
 		elif event.delta.y > 0.0:
 			zoom_out()
+			
+func change_volume(zoom_amount:float):
+	const max_db = 0.0
+	const min_db = -60.0
+	
+	var	volume = (min_db + ((zoom_amount - CAMERA_ZOOM_MIN) / (CAMERA_ZOOM_MAX - CAMERA_ZOOM_MIN)) * (max_db - min_db))
+	print(volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),volume)
+	
 		
 
