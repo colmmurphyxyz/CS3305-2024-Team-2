@@ -39,25 +39,14 @@ func _process(delta):
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
 		fired=true
-		print("firing (by %d)" % multiplayer.get_unique_id())
-		get_parent()
-		get_parent().spawn_bullet.rpc_id(1, \
-				multiplayer.get_unique_id(),\
-				current_target.get_parent().name,\
-				$"../Body".global_position,\
-				persistent_state.attack_damage,\
-				persistent_state.bullet_speed)
-		#var bullet = persistent_state.bullet.instantiate()
-		##get_parent().owner.add_child(bullet)
-		#get_parent().add_sibling(bullet, true)
-		#if is_instance_valid(current_target):
-			#bullet.set_target(current_target)
-			#bullet.global_position=persistent_state.body.global_position
-			#bullet.damage=persistent_state.attack_damage
-			#bullet.speed=persistent_state.bullet_speed
-		#else:
-			##????? bullet.queu?
-			#queue_free()
+		# don't shoot if target is invalid (doesn't exist)
+		if is_instance_valid(current_target):
+			get_parent().spawn_bullet.rpc_id(1, \
+					multiplayer.get_unique_id(),\
+					current_target.get_parent().name,\
+					$"../Body".global_position,\
+					persistent_state.attack_damage,\
+					persistent_state.bullet_speed)
 
 	if persistent_state.sprite2d.sprite_frames.get_frame_count("attack")-1 == persistent_state.sprite2d.frame:
 
