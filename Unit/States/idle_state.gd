@@ -9,7 +9,7 @@ func _ready():
 	persistent_state.sort_enemies_in_attack_area_by_distance(persistent_state.units_within_attack_range)
 	persistent_state.body.nav_agent.target_position=persistent_state.body.global_position
 
-func _process(delta):
+func _process(_delta: float):
 	var enemy_list = persistent_state.units_within_attack_range
 	#Scan a raycast to list of enemies near target, if it hits a wall, dont target that
 	if persistent_state.is_chasing != null:

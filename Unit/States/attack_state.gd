@@ -8,11 +8,8 @@ func _ready():
 	attack_timer_count=10.0
 	persistent_state.sprite2d.play("attack")
 	persistent_state.sprite2d.pause()
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float):
 	#A BIT MESSY BUT HOW IT WORKS
 	#When Attack timer count hits 0, play attacking animation, when attacking animation is
 	#on attack frame, fire attack, when animation finishes, set attack timer back and pause animation

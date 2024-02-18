@@ -143,10 +143,11 @@ func damage(damage_amount):
 	hp-=damage_amount
 	healthbar.value=hp
 	if hp <= 0:
-		var explosion = explosion.instantiate()
-		get_parent().add_child(explosion)
-		explosion.global_position = body.global_position
-		explosion.scale*=(width/32)
+		var explosion_instance = explosion.instantiate()
+		get_parent().add_child(explosion_instance)
+		explosion_instance.global_position = body.global_position
+		@warning_ignore("integer_division")
+		explosion_instance.scale *= (width / 32)
 		queue_free()
 
 func hit_timer_timeout():
@@ -167,7 +168,7 @@ func _on_attack_area_body_exited(enemy_body):
 	units_within_attack_range.erase(enemy_body)
 func sort_enemies_in_attack_area_by_distance(list):
 	 # Custom comparison function for sorting based on size
-	
+	@warning_ignore("unused_variable") # variable is clearly used below
 	var list_compare_lamda = func compare_items(a, b) -> int:
 		var a_distance = a.global_position.distance_to(body.global_position)
 		var b_distance = b.global_position.distance_to(body.global_position)
@@ -179,4 +180,5 @@ func sort_enemies_in_attack_area_by_distance(list):
 			return 0   # a and b are the same size
 
 		# Sort the list based on the custom comparison function
+		@warning_ignore("unreachable_code") # not sure why the list.sort is indented here
 		list.sort_custom(self, "list_compare_lamda")

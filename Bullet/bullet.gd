@@ -25,7 +25,8 @@ func _physics_process(delta):
 			get_parent().add_child(bullet_unit)
 			bullet_unit.sprite.rotation=direction.angle()
 			bullet_unit.global_position = global_position
-			var size = round(damage/5)
+			@warning_ignore("integer_division")
+			var size = round(damage / 5)
 			if size < 1:
 				size=1 
 			bullet_unit.scale*= size
