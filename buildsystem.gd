@@ -34,6 +34,10 @@ func _button_press_select(name: String):
 			spawn_object(preload("res://Buildings/hq.tscn"))
 		"defence":
 			spawn_object(preload("res://Buildings/Defence.tscn"))
+		"barracks":
+			spawn_object(preload("res://Buildings/barracks.tscn"))
+		"laboratory":
+			spawn_object(preload("res://Buildings/Laboratory.tscn"))
 		_:
 			print("Not valid structure")
 	pass

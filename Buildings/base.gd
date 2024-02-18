@@ -23,6 +23,9 @@ var close_mining_units:Array = []
 var max_hp = 100.0
 var health = 1.0
 
+var barrack_placed = false
+var laboratory_placed = false
+
 func _ready():
 	add_to_group("Buildings")
 	# add Sprite2D
