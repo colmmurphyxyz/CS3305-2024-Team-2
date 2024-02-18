@@ -71,7 +71,7 @@ polygon = PackedVector2Array(933, 331, 928, 450, 978.901, 450, 1122, 450)
 script = ExtResource("8_5iud4")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn")
+_spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn", "res://Unit/UnitTypes/Scout/scout.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
