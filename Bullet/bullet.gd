@@ -46,7 +46,7 @@ func set_target_by_name(n: String):
 	
 @rpc("any_peer", "call_local")
 func spawn_bullet_hit_scene():
-	var bullet_unit: CharacterBody2D = \
+	var bullet_unit: StaticBody2D = \
 			preload("res://Unit/BaseUnit/BulletHit.tscn").instantiate()
 	bullet_unit.position = position
 	var size: int = round(damage / 5)
