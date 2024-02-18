@@ -1,7 +1,9 @@
 extends State
 class_name AttackingState
-var attack_timer_count:float;
-var fired=false
+
+var attack_timer_count: float;
+var fired = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -13,6 +15,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if !is_multiplayer_authority():
+		#print("not processing attack state for %s. owned by %d\t\t and i am %d\t\t" % \
+				#[get_parent().name, get_multiplayer_authority(), multiplayer.get_unique_id()])
+		return
 	#A BIT MESSY BUT HOW IT WORKS
 	#When Attack timer count hits 0, play attacking animation, when attacking animation is
 	#on attack frame, fire attack, when animation finishes, set attack timer back and pause animation
@@ -33,7 +39,9 @@ func _process(delta):
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
 		fired=true
-		spawn_bullet.rpc_id(1, \
+		print("firing (by %d)" % multiplayer.get_unique_id())
+		get_parent()
+		get_parent().spawn_bullet.rpc_id(1, \
 				multiplayer.get_unique_id(),\
 				current_target.get_parent().name,\
 				$"../Body".global_position,\
@@ -58,17 +66,3 @@ func _process(delta):
 		persistent_state.sprite2d.pause()
 		fired=false
 	
-@rpc("any_peer", "call_local")
-func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
-	var new_bullet = persistent_state.bullet.instantiate()
-	new_bullet.target_brain_name = target_name
-	new_bullet.damage = damage
-	new_bullet.speed = speed
-	new_bullet.global_position = spawn_pos
-	get_parent().add_sibling(new_bullet, true)
-	set_bullet_authority.rpc(new_bullet.name, called_by)
-	
-@rpc("authority", "call_local")
-func set_bullet_authority(node_name: String, auth: int):
-	get_parent().get_parent().get_node(node_name).get_node("MultiplayerSynchronizer")\
-			.set_multiplayer_authority(auth)

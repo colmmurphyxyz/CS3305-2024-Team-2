@@ -20,7 +20,7 @@ func _input(event):
 				
 @rpc("any_peer", "call_local")
 func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
-	var new_unit = load(scene_path).instantiate()
+	var new_unit: Node2D = load(scene_path).instantiate()
 	new_unit.global_position = spawn_pos
 	new_unit.team = "1" if called_by == 1 else "2"
 	add_child(new_unit, true)

@@ -85,3 +85,4 @@ replication_config = SubResource("SceneReplicationConfig_4mu3k")
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="tree_entered" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_tree_entered"]
