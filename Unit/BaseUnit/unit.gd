@@ -192,7 +192,7 @@ func _on_multiplayer_synchronizer_tree_entered():
 	set_multiplayer_authority(auth, true)
 	change_state("idle")
 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
 	var new_bullet = preload("res://Bullet/Bullet.tscn").instantiate()
 	new_bullet.target_brain_name = target_name
@@ -202,7 +202,7 @@ func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damag
 	add_sibling(new_bullet, true)
 	#set_bullet_authority.rpc(new_bullet.name, called_by)
 	
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func set_bullet_authority(node_name: String, auth: int):
 	get_parent().get_node(node_name).get_node("MultiplayerSynchronizer")\
 			.set_multiplayer_authority(auth)

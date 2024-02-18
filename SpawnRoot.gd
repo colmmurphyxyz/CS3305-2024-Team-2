@@ -16,7 +16,7 @@ func _input(event: InputEvent):
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						get_global_mouse_position())
 				
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
 	var new_unit: Node2D = load(scene_path).instantiate()
 	new_unit.global_position = spawn_pos
@@ -24,7 +24,7 @@ func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
 	add_child(new_unit, true)
 	set_authority.rpc(new_unit.name, called_by)
 	
-@rpc("authority", "call_local")
+@rpc("authority", "call_local", "reliable")
 func set_authority(node_name: String, auth: int):
 	get_node(node_name).set_multiplayer_authority(auth, true)
 
