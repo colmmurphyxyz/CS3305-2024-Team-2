@@ -17,22 +17,23 @@ func _ready():
 	timer.timeout.connect(_on_timer)
 	add_child(timer)
 	timer.start()
+	remove_from_group("Constructions")
 	
 func _process(delta):
 	super._process(delta)
-	if health <= 0:
-		#loss senario
-		pass
-	if health < max_hp:
-		if in_area.size() > 0:
-			health += delta * in_area.size()
-			if health >= max_hp:
-				is_active = true
-				#print("Repair complete!")
-			#print("Repairing...", health, "/", max_hp)
-		else:
-			#print("Repair stopped")
-			pass
+	#if health <= 0:
+		##loss senario
+		#pass
+	#if health < max_hp:
+		#if in_area.size() > 0:
+			#health += delta * in_area.size()
+			#if health >= max_hp:
+				#is_active = true
+				##print("Repair complete!")
+			##print("Repairing...", health, "/", max_hp)
+		#else:
+			##print("Repair stopped")
+			#pass
 
 func _on_timer():
 	if free_spawn > 0:

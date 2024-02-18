@@ -24,21 +24,22 @@ func _ready():
 	max_hp = 200.0
 	health = 200.0
 	healthbar.max_value = max_hp
+	
 func _process(delta):
 	super._process(delta)
 	
-	if health <= 0:
-		queue_free()
-	if health < max_hp:
-		if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
-			health += delta * in_area.size()
-			if health >= max_hp: 
-				is_active = true
-				#print("Repair complete!")
-			#print("Repairing...", health, "/", max_hp)
-		else:
-			#print("Repair stopped")
-			pass
+	#if health <= 0:
+		#queue_free()
+	#if health < max_hp:
+		#if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
+			#health += delta * in_area.size()
+			#if health >= max_hp: 
+				#is_active = true
+				##print("Repair complete!")
+			##print("Repairing...", health, "/", max_hp)
+		#else:
+			##print("Repair stopped")
+			#pass
 			
 	if is_active:
 		attack_timer_count -= delta
