@@ -94,6 +94,10 @@ text = "Barracks"
 layout_mode = 2
 text = "Laboratory"
 
+[node name="Fusion" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Fusion Lab"
+
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
 
@@ -114,3 +118,6 @@ position = Vector2(809, 494)
 [connection signal="mouse_entered" from="VBoxContainer/Laboratory" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/Laboratory" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="VBoxContainer/Laboratory" to="Buildings" method="_button_press_select" binds= ["laboratory"]]
+[connection signal="mouse_entered" from="VBoxContainer/Fusion" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/Fusion" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="VBoxContainer/Fusion" to="Buildings" method="_button_press_select" binds= ["fusion"]]

@@ -10,7 +10,6 @@
 radius = 126.063
 
 [node name="Mines" type="StaticBody2D"]
-scale = Vector2(0.3, 0.3)
 script = ExtResource("1_eoo7v")
 sprite_texture = ExtResource("3_5v77c")
 explosion = ExtResource("2_3871t")
@@ -26,12 +25,13 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -106.667
-offset_top = 100.0
-offset_right = 110.333
-offset_bottom = 137.0
+offset_left = -54.0
+offset_top = 61.0
+offset_right = 163.0
+offset_bottom = 89.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(0.5, 0.5)
 rounded = true
 nine_patch_stretch = true
 texture_under = ExtResource("3_xvtit")

@@ -25,6 +25,7 @@ var health = 1.0
 
 var barrack_placed = false
 var laboratory_placed = false
+var fusion_lab_placed = false
 
 func _ready():
 	add_to_group("Buildings")
@@ -32,7 +33,7 @@ func _ready():
 	sprite= Sprite2D.new()
 	add_child(sprite)
 	sprite.texture = sprite_texture
-	sprite.scale = Vector2(3, 3)
+	sprite.scale = Vector2(2, 2)
 	# add collision box
 	var collision_shape = CollisionShape2D.new()
 	add_child(collision_shape)
