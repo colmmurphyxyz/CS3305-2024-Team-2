@@ -20,7 +20,13 @@ func _physics_process(delta):
 		position += direction * speed * delta
 		
 		if global_position.distance_to(target_unit.global_position) < 20:
-			target_unit.get_parent().damage(damage)
+			# do damage calculation on the unit's owner's machinem to ensure
+			# updated health values are replicated
+			# and to avoid race consitions etc...
+			target_unit.get_parent().damage.rpc_id(
+				target_brain.get_node("MultiplayerSynchronizer").get_multiplayer_authority(),
+				damage
+				)
 			spawn_bullet_hit_scene.rpc()
 			
 			#var bullet_hit: PackedScene = load("res://Unit/BaseUnit/BulletHit.tscn")
