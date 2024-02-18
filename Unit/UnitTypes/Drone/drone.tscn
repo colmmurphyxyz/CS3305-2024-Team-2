@@ -151,6 +151,7 @@ script = ExtResource("2_hrvbj")
 
 [node name="AttackSnd" type="AudioStreamPlayer2D" parent="Body"]
 stream = ExtResource("4_a7y1c")
+volume_db = -5.718
 max_distance = 300.0
 bus = &"SFX"
 

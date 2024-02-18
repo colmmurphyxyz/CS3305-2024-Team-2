@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=12 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
+[ext_resource type="PackedScene" uid="uid://c8dvsq2pks7yl" path="res://Unit/UnitTypes/Sniper/sniper.tscn" id="2_2ip8b"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
+[ext_resource type="PackedScene" uid="uid://dts3ydmuiulbc" path="res://Unit/UnitTypes/Bruiser/bruiser.tscn" id="3_clc6p"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 [ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
+[ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -32,7 +35,7 @@ texture = ExtResource("7_is7xx")
 texture_scale = 6.72
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(1885, 324)
+position = Vector2(1688, 151)
 scale = Vector2(1.85854, 1.59069)
 color = Color(0.819608, 0.12549, 0.607843, 1)
 energy = 0.72
@@ -91,11 +94,78 @@ text = "Defence"
 position = Vector2(809, 494)
 
 [node name="Drone" parent="." instance=ExtResource("1_5c3c7")]
-position = Vector2(1172, 379)
+position = Vector2(1203, 416)
+team = "2"
+
+[node name="Drone13" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1165, 391)
+team = "2"
+
+[node name="Drone8" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1172, 434)
+team = "2"
+
+[node name="Drone12" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1172, 434)
+team = "2"
+
+[node name="Drone9" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1172, 325)
+team = "2"
+
+[node name="Drone10" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1210, 368)
+team = "2"
+
+[node name="Drone11" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1202, 323)
 team = "2"
 
 [node name="Drone2" parent="." instance=ExtResource("1_5c3c7")]
 position = Vector2(934, 424)
+
+[node name="Drone3" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(967, 448)
+
+[node name="Drone4" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(965, 394)
+
+[node name="Drone5" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(966, 371)
+
+[node name="Drone6" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(971, 347)
+
+[node name="Drone7" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(992, 338)
+
+[node name="Bruiser" parent="." instance=ExtResource("3_clc6p")]
+position = Vector2(1122, 306)
+
+[node name="Bruiser2" parent="." instance=ExtResource("3_clc6p")]
+position = Vector2(1124, 354)
+
+[node name="Bruiser3" parent="." instance=ExtResource("3_clc6p")]
+position = Vector2(1118, 392)
+
+[node name="Warden" parent="." instance=ExtResource("10_d8kfn")]
+position = Vector2(1079, 242)
+team = "2"
+
+[node name="Warden2" parent="." instance=ExtResource("10_d8kfn")]
+position = Vector2(1064, 411)
+
+[node name="Sniper" parent="." instance=ExtResource("2_2ip8b")]
+position = Vector2(1102, 596)
+team = "2"
+
+[node name="Sniper2" parent="." instance=ExtResource("2_2ip8b")]
+position = Vector2(1422, 562)
+team = "2"
+
+[node name="Sniper3" parent="." instance=ExtResource("2_2ip8b")]
+position = Vector2(1359, 643)
+team = "2"
 
 [connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]

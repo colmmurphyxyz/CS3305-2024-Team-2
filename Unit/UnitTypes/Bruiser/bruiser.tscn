@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://dts3ydmuiulbc"]
+[gd_scene load_steps=36 format=3 uid="uid://dts3ydmuiulbc"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_yfqk7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_yvu3u"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="3_boljh"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_4tx4v"]
+[ext_resource type="AudioStream" uid="uid://ej2b0pqj4jxl" path="res://Assets/SFX/brusier_attack.wav" id="4_j5dbc"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_xn4ue"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_6uemm"]
 [ext_resource type="Texture2D" uid="uid://dtjm2iu2x8sah" path="res://Assets/Units/Brusier/bruiser-attack-Sheet.png" id="7_hn543"]
@@ -213,6 +214,12 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 floor_stop_on_slope = false
 script = ExtResource("3_boljh")
+
+[node name="AttackSnd" type="AudioStreamPlayer2D" parent="Body"]
+stream = ExtResource("4_j5dbc")
+volume_db = 0.272
+max_distance = 300.0
+bus = &"SFX"
 
 [node name="Healthbar" type="TextureProgressBar" parent="Body"]
 anchors_preset = 12
