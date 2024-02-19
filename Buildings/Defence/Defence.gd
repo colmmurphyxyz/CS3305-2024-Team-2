@@ -48,7 +48,8 @@ func _process(delta):
 
 func update_target():
 	if enemy_in_area.size() > 0:
-		current_target = enemy_in_area[0]
+		if is_instance_valid(enemy_in_area[0]):
+			current_target = enemy_in_area[0]
 		#print(current_target)
 	else:
 		current_target = null

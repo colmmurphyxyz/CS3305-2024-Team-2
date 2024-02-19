@@ -28,6 +28,7 @@ var barrack_placed = false
 var laboratory_placed = false
 var fusion_lab_placed = false
 
+var overlapping: Array = []
 
 func _ready():
 	add_to_group("Buildings")
@@ -96,10 +97,11 @@ func _process(_delta: float):
 			sprite.modulate=Color.DIM_GRAY
 			if in_area.size() > 0:
 				for body in in_area:
-					var unit:Unit = body.get_parent()
-					if unit.state_name=="building":
-						health += 0.1
-						print("Repairing...", round(health), "/", max_hp)
+					if is_instance_valid(body):
+						var unit:Unit = body.get_parent()
+						if unit.state_name=="building":
+							health += 0.1
+						#print("Repairing...", round(health), "/", max_hp)
 				if health >= max_hp:
 					is_active = true
 					sprite.modulate=Color(1,1,1)
@@ -109,6 +111,17 @@ func _process(_delta: float):
 		else:
 			#print("Repair stopped")
 			pass
+		overlapping = get_node("Area2D").get_overlapping_bodies()
+		for object in overlapping:
+			var parent = object.get_parent()
+			if object in get_tree().get_nodes_in_group("Buildings"):
+				parent=object
+			if parent.get_team() == team:
+				if not object in in_area:
+					in_area.append(object)
+			else:
+				if not object in enemy_in_area:
+					enemy_in_area.append(object)
 
 func start_following_mouse():
 	# enable placement
