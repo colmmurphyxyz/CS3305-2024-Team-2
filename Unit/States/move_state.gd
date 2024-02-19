@@ -16,6 +16,10 @@ func _ready():
 	persistent_state.sprite2d.play("move")
 
 func _process(delta):
+	if !is_multiplayer_authority():
+		#print("not processing move state for %s. owned by %d and i am %d" % \
+				#[get_parent().name, get_multiplayer_authority(), multiplayer.get_unique_id()])
+		return
 	persistent_state.sprite2d.rotation = body.velocity.angle()+4.71239		
 	if body.target.distance_squared_to(body.global_position) < 300:
 		body.target =body.global_position

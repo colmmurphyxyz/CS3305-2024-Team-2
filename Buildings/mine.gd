@@ -74,17 +74,19 @@ func _on_unit_collecting():
 		#if body.get_parent().can_mine == true: 
 			#close_mining_units.append(body)
 			
-#func damage(damage_amount):
-	##sprite2d.material.set("shader_param/active",true)
-	#health-=damage_amount
-	#healthbar.value=health
-	#
-	#if health <= 0:
-		#var explosion_node = explosion.instantiate()
-		#get_parent().add_child(explosion_node)
-		#explosion_node.global_position = global_position
-		#explosion_node.scale*=(sprite.texture.get_width()/400)
-		#queue_free()
+
+func damage(damage_amount):
+	#sprite2d.material.set("shader_param/active",true)
+	health-=damage_amount
+	healthbar.value=health
+	
+	if health <= 0:
+		var explosion_node = explosion.instantiate()
+		get_parent().add_child(explosion_node)
+		explosion_node.global_position = global_position
+		@warning_ignore("integer_division")
+		explosion_node.scale *= (sprite.texture.get_width() / 400)
+		queue_free()
 
 #func _on_area_2d_body_exited(body):
 	#close_mining_units.erase(body)

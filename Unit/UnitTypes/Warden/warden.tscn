@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b7kqn0grwhcue"]
+[gd_scene load_steps=48 format=3 uid="uid://b7kqn0grwhcue"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_ajir7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_dfqyy"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d3xeal81v7xre" path="res://Assets/Units/Warden/warden-idle.png" id="8_e1saw"]
 [ext_resource type="Texture2D" uid="uid://dxn3jsc6ioovw" path="res://Assets/Units/Warden/warden-move-Sheet.png" id="9_ftrya"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="9_vydme"]
+[ext_resource type="AudioStream" uid="uid://d2a4onbe6p2i0" path="res://Assets/SFX/warden_attack.wav" id="10_ou61j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq8om"]
 resource_local_to_scene = true
@@ -277,6 +278,32 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qhwn"]
 radius = 205.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r0gwd"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Body:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Body/AnimatedSprite2D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Body/AnimatedSprite2D:animation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Body/AnimatedSprite2D:frame")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Body:target")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:team")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath("Body/Healthbar:value")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+
 [node name="Warden" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ajir7")
@@ -344,6 +371,15 @@ collision_mask = 2048
 show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
+
+[node name="AttackSnd" type="AudioStreamPlayer2D" parent="Body"]
+stream = ExtResource("10_ou61j")
+volume_db = 1.0
+max_distance = 300.0
+bus = &"SFX"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_r0gwd")
 
 [connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]

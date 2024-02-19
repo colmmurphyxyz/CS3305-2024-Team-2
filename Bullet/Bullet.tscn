@@ -1,11 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cu6458xvv561i"]
+[gd_scene load_steps=5 format=3 uid="uid://cu6458xvv561i"]
 
 [ext_resource type="Script" path="res://Bullet/bullet.gd" id="1_wgyuk"]
 [ext_resource type="Texture2D" uid="uid://dsu5unigaw2w6" path="res://Assets/temp_bullet.png" id="2_1e36p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbbls"]
 
-[node name="Node2D" type="CharacterBody2D"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uwhjn"]
+properties/0/path = NodePath(".:damage")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:speed")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:target_brain_name")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="Bullet" type="CharacterBody2D"]
 scale = Vector2(4, 4)
 collision_layer = 0
 collision_mask = 0
@@ -17,3 +31,6 @@ disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_1e36p")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_uwhjn")

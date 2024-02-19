@@ -1,9 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://cqktfbnalbrhf"]
+[gd_scene load_steps=28 format=3 uid="uid://cqktfbnalbrhf"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Drone/drone.gd" id="1_eb3s1"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_cidp4"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="2_hrvbj"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_paml7"]
+[ext_resource type="AudioStream" uid="uid://csbxjjfdn60ep" path="res://Assets/SFX/basic_attack.wav" id="4_a7y1c"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_wpd88"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_xuftl"]
 [ext_resource type="Texture2D" uid="uid://deewykrm304jx" path="res://Assets/Units/Drone/drone-attack-Sheet.png" id="7_y4hjt"]
@@ -130,6 +131,23 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qhwn"]
 radius = 65.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7ga7d"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Body:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Body/AnimatedSprite2D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:team")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Body/Healthbar:value")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
 [node name="Drone" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_eb3s1")
@@ -147,6 +165,12 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 floor_stop_on_slope = false
 script = ExtResource("2_hrvbj")
+
+[node name="AttackSnd" type="AudioStreamPlayer2D" parent="Body"]
+stream = ExtResource("4_a7y1c")
+volume_db = -5.718
+max_distance = 300.0
+bus = &"SFX"
 
 [node name="Healthbar" type="TextureProgressBar" parent="Body"]
 anchors_preset = 12
@@ -194,6 +218,9 @@ collision_mask = 2049
 show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7ga7d")
 
 [connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]

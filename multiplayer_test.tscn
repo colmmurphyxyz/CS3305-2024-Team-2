@@ -1,16 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnot8vltyaxk7"]
+[gd_scene load_steps=10 format=3 uid="uid://dnot8vltyaxk7"]
 
+[ext_resource type="Script" path="res://multiplayer_test.gd" id="1_4nmqo"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 [ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
+[ext_resource type="Script" path="res://SpawnRoot.gd" id="8_5iud4"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
 [node name="MultiplayerTest" type="Node2D"]
+script = ExtResource("1_4nmqo")
 metadata/_edit_horizontal_guides_ = [-143.0]
+
+[node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
+position = Vector2(509, 1426)
+enable_cursor_pan = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_hhckg")
@@ -51,22 +58,33 @@ position = Vector2(575, 326)
 script = ExtResource("5_7lovr")
 
 [node name="East" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-508, -337)
+position = Vector2(-639, -468.639)
+scale = Vector2(1, 1.70763)
 polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
 
 [node name="South" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-694, -147)
-polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
+position = Vector2(-1093, -25)
+scale = Vector2(2.17783, 2.20588)
+polygon = PackedVector2Array(933, 331, 928, 450, 978.901, 450, 1122, 450)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="SpawnRoot" type="Node2D" parent="."]
+script = ExtResource("8_5iud4")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn", "res://Unit/UnitTypes/Scout/scout.tscn")
+spawn_path = NodePath("../SpawnRoot")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 layout_direction = 3
-offset_left = -1365.0
-offset_top = 190.0
-offset_right = -1252.0
-offset_bottom = 259.0
+offset_left = 623.0
+offset_top = 64.0
+offset_right = 736.0
+offset_bottom = 133.0
 script = SubResource("GDScript_tgthy")
 
-[node name="Mine" type="Button" parent="VBoxContainer"]
+[node name="Mine" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_direction = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -74,7 +92,7 @@ theme_override_colors/font_pressed_color = Color(0.0941176, 0.745098, 0.388235, 
 theme_override_colors/font_hover_color = Color(0.184314, 0.490196, 0.635294, 1)
 text = "Mine"
 
-[node name="HQ" type="Button" parent="VBoxContainer"]
+[node name="HQ" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_direction = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -82,14 +100,12 @@ theme_override_colors/font_pressed_color = Color(0.321569, 0.635294, 0.352941, 1
 theme_override_colors/font_hover_color = Color(0.384314, 0.572549, 0.670588, 1)
 text = "HQ"
 
-[node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
-position = Vector2(809, 494)
-
 [connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="VBoxContainer/Mine" to="Buildings" method="_button_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/Mine" to="Buildings" method="_button_exited"]
-[connection signal="pressed" from="VBoxContainer/Mine" to="Buildings" method="_button_press_select" binds= ["mine"]]
-[connection signal="mouse_entered" from="VBoxContainer/HQ" to="Buildings" method="_button_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/HQ" to="Buildings" method="_button_exited"]
-[connection signal="pressed" from="VBoxContainer/HQ" to="Buildings" method="_button_press_select" binds= ["hq"]]
+[connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_press_select" binds= ["mine"]]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/HQ" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/HQ" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HQ" to="Buildings" method="_button_press_select" binds= ["hq"]]

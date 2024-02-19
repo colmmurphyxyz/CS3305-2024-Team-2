@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0o05umwn6rcb"]
+[gd_scene load_steps=9 format=3 uid="uid://d0o05umwn6rcb"]
 
 [ext_resource type="Script" path="res://Unit/BaseUnit/Explosion.gd" id="1_2ym67"]
 [ext_resource type="Texture2D" uid="uid://cst0ernascvpw" path="res://Assets/Units/bullet-hit-sheet.png" id="2_wb3j3"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/AnimatedSprite2D.gd" id="3_a3fha"]
+[ext_resource type="AudioStream" uid="uid://bv6560rii1n28" path="res://Assets/SFX/bullet_hit.wav" id="4_uon5r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ntiu"]
 atlas = ExtResource("2_wb3j3")
@@ -40,5 +41,11 @@ script = ExtResource("1_2ym67")
 sprite_frames = SubResource("SpriteFrames_os2b6")
 frame_progress = 0.480571
 script = ExtResource("3_a3fha")
+
+[node name="Bullet_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_uon5r")
+volume_db = -3.0
+max_distance = 300.0
+bus = &"SFX"
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

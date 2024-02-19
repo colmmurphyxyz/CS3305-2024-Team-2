@@ -1,18 +1,23 @@
 extends State
 class_name AttackingState
-var attack_timer_count:float;
-var fired=false
+
+var attack_timer_count: float;
+var fired = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
 	attack_timer_count=10.0
 	persistent_state.sprite2d.play("attack")
 	persistent_state.sprite2d.pause()
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if !is_multiplayer_authority():
+		#print("not processing attack state for %s. owned by %d\t\t and i am %d\t\t" % \
+				#[get_parent().name, get_multiplayer_authority(), multiplayer.get_unique_id()])
+		return
 	#A BIT MESSY BUT HOW IT WORKS
 	#When Attack timer count hits 0, play attacking animation, when attacking animation is
 	#on attack frame, fire attack, when animation finishes, set attack timer back and pause animation
@@ -32,18 +37,16 @@ func _process(delta):
 		persistent_state.sprite2d.play("attack")
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
+		persistent_state.attack_sound.play()
 		fired=true
-		var bullet = persistent_state.bullet.instantiate()
-		get_parent().owner.add_child(bullet)
+		# don't shoot if target is invalid (doesn't exist)
 		if is_instance_valid(current_target):
-			bullet.set_target(current_target)
-			bullet.global_position=persistent_state.body.global_position
-			bullet.damage=persistent_state.attack_damage
-			bullet.speed=persistent_state.bullet_speed
-
-		else:
-			bullet.queue_free()
-			
+			get_parent().spawn_bullet.rpc_id(1, \
+					multiplayer.get_unique_id(),\
+					current_target.get_parent().name,\
+					$"../Body".global_position,\
+					persistent_state.attack_damage,\
+					persistent_state.bullet_speed)
 
 	if persistent_state.sprite2d.sprite_frames.get_frame_count("attack")-1 == persistent_state.sprite2d.frame:
 
@@ -51,8 +54,4 @@ func _process(delta):
 		persistent_state.sprite2d.frame=0
 		persistent_state.sprite2d.pause()
 		fired=false
-	
-	
-	
-	
 	

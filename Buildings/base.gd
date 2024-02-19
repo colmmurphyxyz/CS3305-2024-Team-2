@@ -156,7 +156,8 @@ func damage(damage_amount):
 		var explosion_node = explosion.instantiate()
 		get_parent().add_child(explosion_node)
 		explosion_node.global_position = global_position
-		explosion_node.scale*=(sprite.texture.get_width()/400)
+		@warning_ignore("integer_division")
+		explosion_node.scale *= (sprite.texture.get_width() / 400)
 		queue_free()
 	
 func _on_detection_area_body_entered(object):

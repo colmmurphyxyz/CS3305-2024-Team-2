@@ -18,7 +18,7 @@ var light:PointLight2D
 var light_texture_path:String
 var detection_area:Area2D
 #State
-var state
+@export var state: State
 var state_factory
 var state_name:String
 
@@ -32,7 +32,7 @@ var is_chasing = null
 @export var bullet : PackedScene
 @export var bullet_speed:int = 300
 @export var attack_frame:int = 0
-@export var explosion: PackedScene = load("res://Unit/BaseUnit/Explosion.tscn")
+@export var explosion_scene: PackedScene = preload("res://Unit/BaseUnit/Explosion.tscn")
 @export_subgroup("Building Properties")
 #Building things
 @export var can_build:bool=false
@@ -42,6 +42,7 @@ var target_building:Node2D = null
 #Mining
 var carrying_ore:bool = false
 #Node accessing
+@onready var attack_sound:AudioStreamPlayer2D=$Body/AttackSnd
 @onready var body:CharacterBody2D = $Body 
 @onready var sprite2d:AnimatedSprite2D = $Body/AnimatedSprite2D
 @onready var healthbar = $Body/Healthbar
@@ -90,7 +91,6 @@ func _ready():
 	#Attack Radius
 	attack_area.collision_mask=12+13
 func change_state(new_state_name):
-	
 	if state != null:
 		state.queue_free()
 	state = state_factory.get_state(new_state_name).new()
@@ -98,8 +98,9 @@ func change_state(new_state_name):
 	#replace null with animated sprite when animating
 	state.setup(Callable(self, "change_state"), null, self)
 	state.name = "current_state"
+	state.set_multiplayer_authority(get_multiplayer_authority())
 	add_child(state)
-
+	
 func get_team():
 	return team
 
@@ -138,16 +139,20 @@ func set_chase(chase:CharacterBody2D):
 func set_target_building(building:StaticBody2D):
 	target_building=building
 	
+@rpc("any_peer", "call_local", "reliable")
 func damage(damage_amount):
 	sprite2d.material.set("shader_parameter/active",true)
 	hp-=damage_amount
 	healthbar.value=hp
 	if hp <= 0:
-		var explosion = explosion.instantiate()
-		get_parent().add_child(explosion)
-		explosion.global_position = body.global_position
-		explosion.scale*=(width/32)
-		queue_free()
+		spawn_explosion_scene.rpc_id(1, body.position)
+		# have the server do the despawning
+		# the MultiplayerSpawner will signal for all other clients to despawn this node
+		queue_free_on_server.rpc_id(1)
+		
+@rpc("any_peer", "call_local", "reliable")
+func queue_free_on_server():
+	queue_free()
 
 func hit_timer_timeout():
 	sprite2d.material.set("shader_parameter/active",false)
@@ -167,7 +172,7 @@ func _on_attack_area_body_exited(enemy_body):
 	units_within_attack_range.erase(enemy_body)
 func sort_enemies_in_attack_area_by_distance(list):
 	 # Custom comparison function for sorting based on size
-	
+	@warning_ignore("unused_variable") # variable is clearly used below
 	var list_compare_lamda = func compare_items(a, b) -> int:
 		var a_distance = a.global_position.distance_to(body.global_position)
 		var b_distance = b.global_position.distance_to(body.global_position)
@@ -179,4 +184,33 @@ func sort_enemies_in_attack_area_by_distance(list):
 			return 0   # a and b are the same size
 
 		# Sort the list based on the custom comparison function
+		@warning_ignore("unreachable_code") # not sure why the list.sort is indented here
 		list.sort_custom(self, "list_compare_lamda")
+		
+@rpc("any_peer", "call_local")
+func spawn_explosion_scene(spawn_pos: Vector2):
+	var explosion = explosion_scene.instantiate()
+	explosion.position = spawn_pos
+	explosion.scale *= (width / 32)
+	add_sibling(explosion, true)
+
+
+func _on_multiplayer_synchronizer_tree_entered():
+	var auth: int = GameManager.Host["id"] if team == "1" else GameManager.Client["id"]
+	set_multiplayer_authority(auth, true)
+	change_state("idle")
+
+@rpc("any_peer", "call_local", "reliable")
+func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
+	var new_bullet = preload("res://Bullet/Bullet.tscn").instantiate()
+	new_bullet.target_brain_name = target_name
+	new_bullet.damage = damage
+	new_bullet.speed = speed
+	new_bullet.global_position = spawn_pos
+	add_sibling(new_bullet, true)
+	#set_bullet_authority.rpc(new_bullet.name, called_by)
+	
+@rpc("any_peer", "call_local", "reliable")
+func set_bullet_authority(node_name: String, auth: int):
+	get_parent().get_node(node_name).get_node("MultiplayerSynchronizer")\
+			.set_multiplayer_authority(auth)
