@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://v7st32ioke3w"]
+[gd_scene load_steps=2 format=3 uid="uid://beiyerc6nuxbi"]
 
 [ext_resource type="Script" path="res://UI/scenes/Volume_UI.gd" id="1_gwxj8"]
 
@@ -32,8 +32,10 @@ offset_left = 259.0
 offset_top = 287.0
 offset_right = 290.0
 offset_bottom = 314.0
+button_pressed = true
 
 [node name="value2" type="Label" parent="Panel/CheckBox"]
+layout_mode = 0
 offset_left = 31.0
 offset_right = 126.0
 offset_bottom = 23.0
