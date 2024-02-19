@@ -33,6 +33,6 @@ func _ready():
 			persistent_state.change_state("attacking")
 	else:
 		persistent_state.change_state("idle")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+
+func _process(_delta: float):
 	pass

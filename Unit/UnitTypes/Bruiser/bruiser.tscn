@@ -194,6 +194,32 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qhwn"]
 radius = 205.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u1tnv"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Body:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Body/AnimatedSprite2D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Body:target")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Body/AnimatedSprite2D:frame")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Body/AnimatedSprite2D:animation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("Body/Healthbar:value")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:team")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+
 [node name="Bruiser" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_yfqk7")
@@ -268,6 +294,9 @@ visible = false
 show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_u1tnv")
 
 [connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]

@@ -67,15 +67,19 @@ polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
 position = Vector2(-694, -147)
 polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
+position = Vector2(809, 494)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 layout_direction = 3
-offset_left = -1365.0
-offset_top = 190.0
-offset_right = -1252.0
-offset_bottom = 294.0
+offset_top = 30.0
+offset_right = 113.0
+offset_bottom = 134.0
 script = SubResource("GDScript_tgthy")
 
-[node name="Mine" type="Button" parent="VBoxContainer"]
+[node name="Mine" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_direction = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -83,7 +87,7 @@ theme_override_colors/font_pressed_color = Color(0.0941176, 0.745098, 0.388235, 
 theme_override_colors/font_hover_color = Color(0.184314, 0.490196, 0.635294, 1)
 text = "Mine"
 
-[node name="HQ" type="Button" parent="VBoxContainer"]
+[node name="HQ" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_direction = 3
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -91,7 +95,7 @@ theme_override_colors/font_pressed_color = Color(0.321569, 0.635294, 0.352941, 1
 theme_override_colors/font_hover_color = Color(0.384314, 0.572549, 0.670588, 1)
 text = "HQ"
 
-[node name="Defence" type="Button" parent="VBoxContainer"]
+[node name="Defence" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Defence"
 
@@ -172,14 +176,15 @@ team = "2"
 position = Vector2(1359, 643)
 team = "2"
 
+
 [connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="VBoxContainer/Mine" to="Buildings" method="_button_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/Mine" to="Buildings" method="_button_exited"]
-[connection signal="pressed" from="VBoxContainer/Mine" to="Buildings" method="_button_press_select" binds= ["mine"]]
-[connection signal="mouse_entered" from="VBoxContainer/HQ" to="Buildings" method="_button_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/HQ" to="Buildings" method="_button_exited"]
-[connection signal="pressed" from="VBoxContainer/HQ" to="Buildings" method="_button_press_select" binds= ["hq"]]
-[connection signal="mouse_entered" from="VBoxContainer/Defence" to="Buildings" method="_button_entered"]
-[connection signal="mouse_exited" from="VBoxContainer/Defence" to="Buildings" method="_button_exited"]
-[connection signal="pressed" from="VBoxContainer/Defence" to="Buildings" method="_button_press_select" binds= ["defence"]]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_press_select" binds= ["mine"]]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/HQ" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/HQ" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HQ" to="Buildings" method="_button_press_select" binds= ["hq"]]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Defence" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Defence" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Defence" to="Buildings" method="_button_press_select" binds= ["defence"]]
