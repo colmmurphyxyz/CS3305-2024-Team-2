@@ -1,4 +1,4 @@
-extends "res://Buildings/base.gd"
+extends Base
 
 @export var sprite_texture_tier_2:Texture2D
 @export var sprite_texture_tier_3:Texture2D
