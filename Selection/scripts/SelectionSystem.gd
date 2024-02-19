@@ -33,7 +33,6 @@ func _unhandled_input(event):
 			selected = space.intersect_shape(query,512).filter(
 				func(unit):
 					return unit.collider.get_parent()\
-							.get_node("MultiplayerSynchronizer")\
 							.is_multiplayer_authority()
 			)
 

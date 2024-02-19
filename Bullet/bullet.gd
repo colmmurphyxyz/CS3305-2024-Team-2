@@ -4,8 +4,8 @@ extends CharacterBody2D
 
 @export_group("Targetting")
 @export var target_brain_name: String
-@export var target_unit:CharacterBody2D=null
-@export var target_brain:Node2D=null
+@export var target_unit:CharacterBody2D = null
+@export var target_brain:Node2D = null
 
 @export_group("Physics and damage")
 @export var damage: int = 1
@@ -13,22 +13,17 @@ extends CharacterBody2D
 
 func _ready():
 	set_target_by_name(target_brain_name)
-	
-func _physics_process(delta: float):
-	if !get_node("MultiplayerSynchronizer").is_multiplayer_authority():
-		return
 
-var target_unit=null
-var target_brain:Node2D=null
-var damage=1
-var speed=300
 func set_target(unit):
 	target_unit=unit
 	if target_unit in get_tree().get_nodes_in_group("Buildings"):
 		target_brain=unit
 	else:
 		target_brain=unit.get_parent()
+		
 func _physics_process(delta):
+	if !get_node("MultiplayerSynchronizer").is_multiplayer_authority():
+		return
 	if is_instance_valid(target_unit):
 		var direction: Vector2 = (target_unit.global_position - global_position).normalized()
 		position += direction * speed * delta
@@ -47,10 +42,6 @@ func _physics_process(delta):
 		move_and_slide()
 	else:
 		queue_free()
-		
-func set_target(unit:CharacterBody2D):
-	target_unit=unit
-	target_brain=unit.get_parent()
 		
 func set_target_by_name(n: String):
 	var target_unit: Node2D = get_parent().get_node_or_null(n)
