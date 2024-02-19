@@ -1,19 +1,19 @@
 [gd_scene load_steps=7 format=3 uid="uid://bk80g7cgdc68h"]
 
-[ext_resource type="Script" path="res://Buildings/hq.gd" id="1_gkjck"]
-[ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_1mn8b"]
-[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_dgqxl"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="3_j8xri"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="4_hbnbh"]
+[ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
+[ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
+[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_0fqvu"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spgvb"]
 radius = 204.245
 
 [node name="Hq" type="StaticBody2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_gkjck")
-sprite_texture = ExtResource("2_1mn8b")
-explosion = ExtResource("3_dgqxl")
+script = ExtResource("1_udwv5")
+sprite_texture = ExtResource("2_wmued")
+explosion = ExtResource("3_0fqvu")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2049
@@ -34,8 +34,8 @@ grow_horizontal = 2
 grow_vertical = 0
 rounded = true
 nine_patch_stretch = true
-texture_under = ExtResource("3_j8xri")
-texture_progress = ExtResource("4_hbnbh")
+texture_under = ExtResource("4_uju10")
+texture_progress = ExtResource("5_g862d")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

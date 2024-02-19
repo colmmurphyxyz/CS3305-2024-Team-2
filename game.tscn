@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="PackedScene" uid="uid://dts3ydmuiulbc" path="res://Unit/UnitTypes/Bruiser/bruiser.tscn" id="3_clc6p"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
-[ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
+[ext_resource type="Script" path="res://Buildings/Mine/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]

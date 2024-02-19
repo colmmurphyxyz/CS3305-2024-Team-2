@@ -1,4 +1,4 @@
-extends "res://Buildings/base.gd"
+extends Base
 	
 var increase_value: int = 0
 var increase_timer: Timer

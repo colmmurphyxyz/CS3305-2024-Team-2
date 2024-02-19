@@ -1,13 +1,13 @@
-extends "res://Buildings/base.gd"
+extends Base
 
 func _ready():
 	max_hp = 250.0
 	super._ready()
 	add_to_group("Constructions")
-	fusion_lab_placed = true
+	barrack_placed = true
 	
 	
 func _process(delta):
 	super._process(delta)
 	if health <= 0:
-		fusion_lab_placed = false
+		barrack_placed = false

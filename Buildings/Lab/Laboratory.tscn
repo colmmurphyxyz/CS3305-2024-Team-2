@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://krjni0wkbq25"]
+
+[ext_resource type="Script" path="res://Buildings/Lab/Laboratory.gd" id="1_1s287"]
+[ext_resource type="Texture2D" uid="uid://c0b2r88y3u3lt" path="res://Assets/laboratory.png" id="2_ny8f0"]
+[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_wb6bu"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_htyui"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_rfr5v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ymofy"]
+radius = 108.005
+
+[node name="Laboratory" type="StaticBody2D"]
+script = ExtResource("1_1s287")
+sprite_texture = ExtResource("2_ny8f0")
+explosion = ExtResource("3_wb6bu")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2049
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ymofy")
+
+[node name="Healthbar" type="TextureProgressBar" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -46.0
+offset_top = 43.0
+offset_right = 71.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("4_htyui")
+texture_progress = ExtResource("5_rfr5v")
