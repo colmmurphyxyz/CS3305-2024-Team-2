@@ -55,6 +55,18 @@ text = "HQ"
 layout_mode = 2
 text = "Defence"
 
+[node name="Barracks" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Barracks"
+
+[node name="Laboratory" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Laboratory"
+
+[node name="Fusion Lab" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Fusion Lab"
+
 [node name="Buildings" type="Node2D" parent="."]
 script = ExtResource("4_atcb7")
 
@@ -185,5 +197,14 @@ team = "2"
 [connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Defence" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Defence" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Defence" to="Buildings" method="_button_press_select" binds= ["defence"]]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Barracks" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Barracks" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Barracks" to="Buildings" method="_button_press_select" binds= ["barracks"]]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Laboratory" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Laboratory" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Laboratory" to="Buildings" method="_button_press_select" binds= ["laboratory"]]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_exited"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_press_select" binds= ["fusion"]]
 [connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]
