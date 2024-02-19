@@ -16,6 +16,7 @@ const CURSOR_PAN_SPEED: int = 1
 var zoom_scaling: float = 1.0
 
 func _ready():
+	change_volume(zoom.x)
 	pass
 	
 func handle_cursor_pan():
