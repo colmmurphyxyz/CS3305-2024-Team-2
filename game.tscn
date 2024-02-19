@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=14 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 [ext_resource type="Script" path="res://Buildings/Mine/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
+[ext_resource type="Texture2D" uid="uid://ca0d7iipih2xs" path="res://Assets/temp_ore_texture.png" id="7_4hrch"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
@@ -98,13 +99,25 @@ color = Color(0.313726, 0.313726, 0.313726, 1)
 position = Vector2(575, 326)
 script = ExtResource("5_7lovr")
 
-[node name="East" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-508, -337)
-polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
+[node name="Sprite2D" type="Sprite2D" parent="OreDeposits/Areas"]
+position = Vector2(201, 207)
+scale = Vector2(0.0867604, 0.0867705)
+texture = ExtResource("7_4hrch")
 
-[node name="South" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-694, -147)
-polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
+[node name="Sprite2D2" type="Sprite2D" parent="OreDeposits/Areas"]
+position = Vector2(433, 385)
+scale = Vector2(0.0867604, 0.0867705)
+texture = ExtResource("7_4hrch")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
+position = Vector2(201, 207)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
+position = Vector2(433, 385)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
 
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)

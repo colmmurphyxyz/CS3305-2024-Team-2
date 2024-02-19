@@ -75,6 +75,7 @@ func _ready():
 
 	healthbar.max_value = round(max_hp)
 	add_to_group("Constructions")
+	z_index = 10
 	
 func _process(_delta: float):
 	if is_following_mouse:
