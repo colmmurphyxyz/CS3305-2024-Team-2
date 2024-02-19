@@ -18,6 +18,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:target_brain_name")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("Sprite2D:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Bullet" type="CharacterBody2D"]
 scale = Vector2(4, 4)
