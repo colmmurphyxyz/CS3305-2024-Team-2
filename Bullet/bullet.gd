@@ -4,8 +4,8 @@ extends CharacterBody2D
 
 @export_group("Targetting")
 @export var target_brain_name: String
-@export var target_unit:CharacterBody2D = null
-@export var target_brain:Node2D = null
+var target_unit = null
+var target_brain = null
 
 @export_group("Physics and damage")
 @export var damage: int = 1
@@ -16,9 +16,11 @@ func _ready():
 
 func set_target(unit):
 	target_unit=unit
+	print("Unit:",unit)
 	if target_unit in get_tree().get_nodes_in_group("Buildings"):
 		target_brain=unit
 	else:
+		print(get_tree().get_nodes_in_group("Buildings"))
 		target_brain=unit.get_parent()
 		
 func _physics_process(delta):

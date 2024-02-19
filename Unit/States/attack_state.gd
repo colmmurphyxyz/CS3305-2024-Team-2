@@ -39,11 +39,16 @@ func _process(delta):
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
 		persistent_state.attack_sound.play()
 		fired=true
+		var bullet_target
+		if current_target in get_tree().get_nodes_in_group("Buildings"):
+			bullet_target=current_target.name
+		else:
+			bullet_target=current_target.get_parent().name
 		# don't shoot if target is invalid (doesn't exist)
 		if is_instance_valid(current_target):
 			get_parent().spawn_bullet.rpc_id(1, \
 					multiplayer.get_unique_id(),\
-					current_target.get_parent().name,\
+					bullet_target,\
 					$"../Body".global_position,\
 					persistent_state.attack_damage,\
 					persistent_state.bullet_speed)
