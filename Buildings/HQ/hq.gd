@@ -1,4 +1,4 @@
-extends "res://Buildings/base.gd"
+extends Base
 
 var context_menu_scene = preload("res://UI/scenes/structure_interaction.tscn")
 var context_menu_instance

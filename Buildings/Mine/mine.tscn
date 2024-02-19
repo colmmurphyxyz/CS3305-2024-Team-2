@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://0icby4tj0lfw"]
 
-[ext_resource type="Script" path="res://Buildings/mine.gd" id="1_eoo7v"]
-[ext_resource type="Texture2D" uid="uid://bhg4gi80jp5m0" path="res://Assets/gold_mine0001.png" id="2_6rbdp"]
-[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="2_3871t"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="3_xvtit"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="4_swif4"]
+[ext_resource type="Script" path="res://Buildings/Mine/mine.gd" id="1_7le25"]
+[ext_resource type="Texture2D" uid="uid://citx6shaapt4p" path="res://Assets/mine.png" id="2_p52ui"]
+[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_0s7ha"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_gtleh"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_oybxj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_663ki"]
 radius = 223.433
 
 [node name="Mines" type="StaticBody2D"]
-script = ExtResource("1_eoo7v")
-sprite_texture = ExtResource("2_6rbdp")
-explosion = ExtResource("2_3871t")
+script = ExtResource("1_7le25")
+sprite_texture = ExtResource("2_p52ui")
+explosion = ExtResource("3_0s7ha")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2049
@@ -35,8 +35,8 @@ grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 rounded = true
 nine_patch_stretch = true
-texture_under = ExtResource("3_xvtit")
-texture_progress = ExtResource("4_swif4")
+texture_under = ExtResource("4_gtleh")
+texture_progress = ExtResource("5_oybxj")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

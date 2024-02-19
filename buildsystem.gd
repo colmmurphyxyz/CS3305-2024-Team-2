@@ -29,17 +29,17 @@ func _button_press_select(building_name: String):
 	match building_name:
 		"mine":
 			mine = true
-			spawn_object(preload("res://Buildings/mine.tscn"))
+			spawn_object(preload("res://Buildings/Mine/mine.tscn"))
 		"hq":
-			spawn_object(preload("res://Buildings/hq.tscn"))
+			spawn_object(preload("res://Buildings/HQ/hq.tscn"))
 		"defence":
-			spawn_object(preload("res://Buildings/Defence.tscn"))
+			spawn_object(preload("res://Buildings/Defence/Defence.tscn"))
 		"barracks":
-			spawn_object(preload("res://Buildings/barracks.tscn"))
+			spawn_object(preload("res://Buildings/Barracks/barracks.tscn"))
 		"laboratory":
-			spawn_object(preload("res://Buildings/Laboratory.tscn"))
+			spawn_object(preload("res://Buildings/Lab/Laboratory.tscn"))
 		"fusion":
-			spawn_object(preload("res://Buildings/FusionLab.tscn"))
+			spawn_object(preload("res://Buildings/Fusion/FusionLab.tscn"))
 		_:
 			print("Not valid structure")
 	pass

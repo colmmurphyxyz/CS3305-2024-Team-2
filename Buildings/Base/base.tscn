@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://chcffv7xahe1u"]
 
-[ext_resource type="Script" path="res://Buildings/base.gd" id="1_rcxq8"]
+[ext_resource type="Script" path="res://Buildings/Base/base.gd" id="1_rcxq8"]
 [ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_msyjy"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="3_8vxph"]
 [ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_icdr1"]

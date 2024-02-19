@@ -1,4 +1,5 @@
 extends StaticBody2D
+class_name Base
 
 @export var sprite_texture:Texture2D
 @export var is_following_mouse = true
@@ -26,6 +27,7 @@ var health = 1.0
 var barrack_placed = false
 var laboratory_placed = false
 var fusion_lab_placed = false
+
 
 func _ready():
 	add_to_group("Buildings")
