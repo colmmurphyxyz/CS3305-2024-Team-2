@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="4_hbnbh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spgvb"]
-radius = 126.063
+radius = 204.245
 
 [node name="Hq" type="StaticBody2D"]
 scale = Vector2(0.5, 0.5)
@@ -26,10 +26,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -130.0
-offset_top = 100.0
-offset_right = 130.0
-offset_bottom = 157.0
+offset_left = -94.0
+offset_top = 148.0
+offset_right = 94.0
+offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 0
 rounded = true

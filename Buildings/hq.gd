@@ -3,46 +3,39 @@ extends "res://Buildings/base.gd"
 var context_menu_scene = preload("res://UI/scenes/structure_interaction.tscn")
 var context_menu_instance
 
-var  timer: Timer
-
-var free_spawn = 60
+var free_spawn = 60.0
 
 func _ready():
 	super._ready()
 	max_hp = 100.0
-	health = 100.0
-	is_active = true
-	timer = Timer.new()
-	timer.wait_time = 1.0  # Wait time in seconds
-	timer.timeout.connect(_on_timer)
-	add_child(timer)
-	timer.start()
+	health = max_hp / 2
+	is_active = false
+	remove_from_group("Constructions")
 	
 func _process(delta):
 	super._process(delta)
-	if health <= 0:
-		#loss senario
-		pass
-	if health < max_hp:
-		if in_area.size() > 0:
-			health += delta * in_area.size()
-			if health >= max_hp:
-				is_active = true
-				#print("Repair complete!")
-			#print("Repairing...", health, "/", max_hp)
-		else:
-			#print("Repair stopped")
-			pass
-
-func _on_timer():
 	if free_spawn > 0:
-		free_spawn -= 1
+		free_spawn -= delta
+	#if health <= 0:
+		##loss senario
+		#pass
+	#if health < max_hp:
+		#if in_area.size() > 0:
+			#health += delta * in_area.size()
+			#if health >= max_hp:
+				#is_active = true
+				##print("Repair complete!")
+			##print("Repairing...", health, "/", max_hp)
+		#else:
+			##print("Repair stopped")
+			#pass
 
 
 func _input(event):
 	if event.is_action_pressed("right_click"):
 		if get_global_mouse_position().distance_to(global_transform.origin) < 50:
 			on_right_click()
+	pass
 
 func on_right_click():
 	show_context_menu()
@@ -92,6 +85,8 @@ func _on_area_2d_body_entered(body):
 			unit.load_ore()
 			#Total ore ++++++
 			unit.change_state("mining")
+		if body.get_parent().can_mine == true: 
+			close_mining_units.append(body)
 		
 			
 func _on_area_2d_body_exited(body):

@@ -23,13 +23,17 @@ var close_mining_units:Array = []
 var max_hp = 100.0
 var health = 1.0
 
+var barrack_placed = false
+var laboratory_placed = false
+var fusion_lab_placed = false
+
 func _ready():
 	add_to_group("Buildings")
 	# add Sprite2D
 	sprite= Sprite2D.new()
 	add_child(sprite)
 	sprite.texture = sprite_texture
-	sprite.scale = Vector2(3, 3)
+	sprite.scale = Vector2(2, 2)
 	# add collision box
 	var collision_shape = CollisionShape2D.new()
 	add_child(collision_shape)
@@ -68,6 +72,7 @@ func _ready():
 	border.width = 1  # Adjust the width of the border
 
 	healthbar.max_value = round(max_hp)
+	add_to_group("Constructions")
 	
 func _process(_delta: float):
 	if is_following_mouse:
@@ -80,6 +85,27 @@ func _process(_delta: float):
 		else:
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
+	else:
+		healthbar.value=health
+		if health <= 0:
+			queue_free()
+		if health < max_hp:
+			sprite.modulate=Color.DIM_GRAY
+			if in_area.size() > 0:
+				for body in in_area:
+					var unit:Unit = body.get_parent()
+					if unit.state_name=="building":
+						health += 0.1
+						print("Repairing...", round(health), "/", max_hp)
+				if health >= max_hp:
+					is_active = true
+					sprite.modulate=Color(1,1,1)
+					remove_from_group("Constructions")
+					#add_to_group("Mines")
+					#print("Repair complete!")
+		else:
+			#print("Repair stopped")
+			pass
 
 func start_following_mouse():
 	# enable placement

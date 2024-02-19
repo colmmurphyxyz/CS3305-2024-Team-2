@@ -20,25 +20,22 @@ func _ready():
 	super._ready()
 	update_tower_stats()
 	set_collision_circle_radius(attack_range)
-	is_active = true
-	max_hp = 200.0
-	health = 200.0
-	healthbar.max_value = max_hp
+	
 func _process(delta):
 	super._process(delta)
 	
-	if health <= 0:
-		queue_free()
-	if health < max_hp:
-		if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
-			health += delta * in_area.size()
-			if health >= max_hp: 
-				is_active = true
-				#print("Repair complete!")
-			#print("Repairing...", health, "/", max_hp)
-		else:
-			#print("Repair stopped")
-			pass
+	#if health <= 0:
+		#queue_free()
+	#if health < max_hp:
+		#if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
+			#health += delta * in_area.size()
+			#if health >= max_hp: 
+				#is_active = true
+				##print("Repair complete!")
+			##print("Repairing...", health, "/", max_hp)
+		#else:
+			##print("Repair stopped")
+			#pass
 			
 	if is_active:
 		attack_timer_count -= delta
@@ -80,6 +77,7 @@ func update_tower_stats():
 			reload = 5.0
 			attack_range = 30.0
 			max_hp = 100.0
+			healthbar.max_value = round(max_hp)
 		2:
 			attack_damage = 10
 			attack_speed = 200
@@ -87,12 +85,14 @@ func update_tower_stats():
 			attack_range = 15.0
 			max_hp = 100.0
 			sprite.texture = sprite_texture_tier_2
+			healthbar.max_value = round(max_hp)
 		3:
 			attack_damage = 10
 			attack_speed = 200
 			reload = 5.0
 			attack_range = 15.0
 			max_hp = 100.0
+			healthbar.max_value = round(max_hp)
 			#change sprite
 # Add more cases for additional tiers
 

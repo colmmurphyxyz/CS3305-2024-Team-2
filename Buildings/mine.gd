@@ -25,28 +25,29 @@ func _ready():
 	
 func _process(delta):
 	super._process(delta)
-	healthbar.value=health
-	if health <= 0:
-		queue_free()
-	if not health >= max_hp:
-		sprite.modulate=Color.DIM_GRAY
-		if in_area.size() > 0:
-			
-			for body in in_area:
-				var unit:Unit = body.get_parent()
-				if unit.state_name=="building":
-						health += delta
-						
-			if health < max_hp:
-				is_active = true
-				sprite.modulate=Color(1,1,1)
-				remove_from_group("Constructions")
-				add_to_group("Mines")
-				#print("Repair complete!")
-			print("Repairing...", health, "/", max_hp)
-		else:
-			#print("Repair stopped")
-			pass
+	if health >= max_hp:
+		add_to_group("Mines")
+	#healthbar.value=health
+	#if health <= 0:
+		#queue_free()
+	#if health < max_hp:
+		#sprite.modulate=Color.DIM_GRAY
+		#if in_area.size() > 0:
+			#
+			#for body in in_area:
+				#var unit:Unit = body.get_parent()
+				#if unit.state_name=="building":
+						#health += delta
+			#if health >= max_hp:
+				#is_active = true
+				#sprite.modulate=Color(1,1,1)
+				#remove_from_group("Constructions")
+				#add_to_group("Mines")
+				##print("Repair complete!")
+			#print("Repairing...", health, "/", max_hp)
+		#else:
+			##print("Repair stopped")
+			#pass
 	
 func _on_increase_timer_timeout():
 	
@@ -68,11 +69,12 @@ func _on_unit_collecting():
 	pass
 
 
-func _on_area_2d_body_entered(body):
-	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
-		if body.get_parent().can_mine == true: 
-			close_mining_units.append(body)
+#func _on_area_2d_body_entered(body):
+	#if body.get_parent() in get_tree().get_nodes_in_group("Units"):
+		#if body.get_parent().can_mine == true: 
+			#close_mining_units.append(body)
 			
+
 func damage(damage_amount):
 	#sprite2d.material.set("shader_param/active",true)
 	health-=damage_amount
@@ -86,5 +88,5 @@ func damage(damage_amount):
 		explosion_node.scale *= (sprite.texture.get_width() / 400)
 		queue_free()
 
-func _on_area_2d_body_exited(body):
-	close_mining_units.erase(body)
+#func _on_area_2d_body_exited(body):
+	#close_mining_units.erase(body)
