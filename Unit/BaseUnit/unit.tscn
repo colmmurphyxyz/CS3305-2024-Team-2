@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7voe0is0ydkr"]
+[gd_scene load_steps=9 format=3 uid="uid://b7voe0is0ydkr"]
 
 [ext_resource type="Script" path="res://Unit/BaseUnit/unit.gd" id="1_ybso1"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_yax1t"]
@@ -22,6 +22,20 @@ radius = 10.0499
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mu6iq"]
 radius = 86.0233
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4mu3k"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Body:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Body/Sprite2D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:team")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="Unit" type="Node2D"]
 script = ExtResource("1_ybso1")
@@ -64,7 +78,11 @@ show_behind_parent = true
 shape = SubResource("CircleShape2D_mu6iq")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4mu3k")
+
 [connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="tree_entered" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_tree_entered"]
