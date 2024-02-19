@@ -4,7 +4,6 @@ extends StaticBody2D
 
 func _ready():
 	$AnimatedSprite2D.play("default")
-	
 	if is_instance_valid($Bullet_hit):
 		$Bullet_hit.play()
 	pass # Replace with function body.
@@ -14,7 +13,7 @@ func _process(_delta: float):
 
 
 func _on_animated_sprite_2d_animation_looped():
-	$AnimatedSprite2D.queue_free()
+	queue_free()
 
 
 
