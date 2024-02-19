@@ -42,6 +42,7 @@ var target_building:Node2D = null
 #Mining
 var carrying_ore:bool = false
 #Node accessing
+@onready var attack_sound:AudioStreamPlayer2D=$Body/AttackSnd
 @onready var body:CharacterBody2D = $Body 
 @onready var sprite2d:AnimatedSprite2D = $Body/AnimatedSprite2D
 @onready var healthbar = $Body/Healthbar

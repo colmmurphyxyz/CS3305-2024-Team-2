@@ -37,6 +37,7 @@ func _process(delta):
 		persistent_state.sprite2d.play("attack")
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
+		persistent_state.attack_sound.play()
 		fired=true
 		# don't shoot if target is invalid (doesn't exist)
 		if is_instance_valid(current_target):
