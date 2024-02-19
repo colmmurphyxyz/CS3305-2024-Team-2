@@ -68,12 +68,15 @@ text = "Laboratory"
 layout_mode = 2
 text = "Fusion Lab"
 
-[node name="Buildings" type="Node2D" parent="."]
+[node name="Buildings" type="Node2D" parent="." node_paths=PackedStringArray("building_root")]
 script = ExtResource("4_atcb7")
+building_root = NodePath("../BuildingsRoot")
+
+[node name="BuildingsRoot" type="Node2D" parent="."]
 
 [node name="BuildingMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Buildings/Base/base.tscn", "res://Buildings/Defence/Defence.tscn", "res://Buildings/Barracks/barracks.tscn")
-spawn_path = NodePath("../Buildings")
+spawn_path = NodePath("../BuildingsRoot")
 
 [node name="SpawnRoot" type="Node2D" parent="."]
 script = ExtResource("4_hiv35")
@@ -97,14 +100,14 @@ position = Vector2(1124, 354)
 position = Vector2(1118, 392)
 
 [node name="Warden" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
-position = Vector2(1079, 242)
+position = Vector2(1328, 469)
 team = "2"
 
 [node name="Warden2" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
 position = Vector2(1064, 411)
 
 [node name="Sniper" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1102, 596)
+position = Vector2(1207, 563)
 team = "2"
 
 [node name="Sniper2" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]

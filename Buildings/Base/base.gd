@@ -6,10 +6,13 @@ class_name Base
 @onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 @export var team: String = "1"
-var is_active: bool = false
+## what exactly does 'being active refer to'
+@export var is_active: bool = false
+@export var is_placed: bool = false
 var sprite: Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
+
 @onready var detection_area = Area2D.new()
 @onready var collision_circle = CollisionShape2D.new()
 
@@ -77,6 +80,7 @@ func _ready():
 	add_to_group("Constructions")
 	
 func _process(_delta: float):
+	visible = is_placed or GameManager.team == team
 	if !is_multiplayer_authority():
 		return
 	if is_following_mouse:
@@ -97,10 +101,13 @@ func _process(_delta: float):
 			sprite.modulate=Color.DIM_GRAY
 			if in_area.size() > 0:
 				for body in in_area:
-					var unit:Unit = body.get_parent()
-					if unit.state_name=="building":
+					if body is StaticBody2D: # if body is a bulding
 						health += 0.1
 						print("Repairing...", round(health), "/", max_hp)
+					#var unit: Unit = body.get_parent()
+					#if unit.state_name=="building":
+						#health += 0.1
+						#print("Repairing...", round(health), "/", max_hp)
 				if health >= max_hp:
 					is_active = true
 					sprite.modulate=Color(1,1,1)
