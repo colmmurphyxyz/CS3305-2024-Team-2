@@ -4,7 +4,7 @@ extends StaticBody2D
 @export var is_following_mouse = true
 @onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
-var team:String = "1"
+@export var team: String = "1"
 var is_active = false
 var sprite:Sprite2D
 #const ACTION_INTERVAL = 1.0
