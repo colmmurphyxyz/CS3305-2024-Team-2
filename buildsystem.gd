@@ -24,14 +24,16 @@ func spawn_object(resource):
 	spawned_object = resource.instantiate()
 	add_child(spawned_object)
 	
-func _button_press_select(name: String):
+func _button_press_select(building_name: String):
 	cancel_placement()
-	match name:
+	match building_name:
 		"mine":
 			mine = true
 			spawn_object(preload("res://Buildings/mine.tscn"))
 		"hq":
 			spawn_object(preload("res://Buildings/hq.tscn"))
+		"defence":
+			spawn_object(preload("res://Buildings/Defence.tscn"))
 		_:
 			print("Not valid structure")
 	pass

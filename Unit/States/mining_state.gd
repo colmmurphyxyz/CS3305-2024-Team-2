@@ -5,7 +5,7 @@ func _ready():
 	print("mining")
 	pass
 
-func _process(delta):
+func _process(_delta: float):
 	#Ore will be granted by mine, so when it gets ore from mine, path back to base
 	if persistent_state.target_building == null:
 		persistent_state.change_state("idle")

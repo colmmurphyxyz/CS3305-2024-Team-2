@@ -24,8 +24,8 @@ var state_name:String
 
 #Enemy detection/attack
 var units_within_attack_range =[]
-var current_target:CharacterBody2D=null
-var is_chasing:CharacterBody2D = null
+var current_target=null
+var is_chasing = null
 @export_subgroup("Combat Properties")
 @export var melee:bool = false
 @export var attack_speed:float=1
@@ -45,33 +45,37 @@ var carrying_ore:bool = false
 @onready var body:CharacterBody2D = $Body 
 @onready var sprite2d:AnimatedSprite2D = $Body/AnimatedSprite2D
 @onready var healthbar = $Body/Healthbar
-@onready var attack_area=$Body/AttackArea
+@onready var attack_area:Area2D=$Body/AttackArea
 @onready var attack_area_shape=$Body/AttackArea/CollisionShape2D
 @onready var hit_timer:Timer = Timer.new()
 var width:int
 func _ready():
-	
+
 	add_to_group("Units")	
 	#State system setup
 	state_factory = StateFactory.new()
 	change_state("idle")
+	
+	#HP bar
 	healthbar.max_value=hp
 	healthbar.value=hp
 	
+	#Hit frame shader timer
 	add_child(hit_timer)
 	hit_timer.wait_time=.1
 	hit_timer.start()
 	hit_timer.timeout.connect(hit_timer_timeout)
-
+	
+	#Used for getting explosion width by getting idle texture size
 	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
 	
 	if team == "1":
 		pass
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
 	
-
-	sprite2d.material.set("shader_parameter/shader_enabled",false)
 	#Selection sprite setting up
+	sprite2d.material.set("shader_parameter/shader_enabled",false)
+	#Random rotation applied so they dont all look the same 
 	sprite2d.rotation=randi_range(0,360)
 	#Light setting
 	light = PointLight2D.new()
@@ -84,6 +88,7 @@ func _ready():
 	body.add_child(detection_area)
 	detection_area.scale=Vector2(visible_radius_size,visible_radius_size)
 	#Attack Radius
+	attack_area.collision_mask=12+13
 func change_state(new_state_name):
 	if state != null:
 		state.queue_free()
@@ -140,10 +145,6 @@ func damage(damage_amount):
 	healthbar.value=hp
 	if hp <= 0:
 		spawn_explosion_scene.rpc_id(1, body.position)
-		#var explosion = explosion.instantiate()
-		#get_parent().add_child(explosion)
-		#explosion.global_position = body.global_position
-		#explosion.scale*=(width/32)
 		# have the server do the despawning
 		# the MultiplayerSpawner will signal for all other clients to despawn this node
 		queue_free_on_server.rpc_id(1)
@@ -157,15 +158,20 @@ func hit_timer_timeout():
 #Enemies that enter into attack area are sorted by distance from unit
 #Unit will try to select closest one when in idle state
 func _on_attack_area_body_entered(enemy_body):
-	if enemy_body.get_parent().team != team:
-		units_within_attack_range.append(enemy_body)
-		sort_enemies_in_attack_area_by_distance(units_within_attack_range)
-	
+	if enemy_body in get_tree().get_nodes_in_group("Buildings"):
+		if enemy_body.get_team() != team:
+			units_within_attack_range.append(enemy_body)
+			sort_enemies_in_attack_area_by_distance(units_within_attack_range)
+	else:
+		if enemy_body.get_parent().get_team() != team:
+			units_within_attack_range.append(enemy_body)
+			sort_enemies_in_attack_area_by_distance(units_within_attack_range)
+
 func _on_attack_area_body_exited(enemy_body):
 	units_within_attack_range.erase(enemy_body)
 func sort_enemies_in_attack_area_by_distance(list):
 	 # Custom comparison function for sorting based on size
-	
+	@warning_ignore("unused_variable") # variable is clearly used below
 	var list_compare_lamda = func compare_items(a, b) -> int:
 		var a_distance = a.global_position.distance_to(body.global_position)
 		var b_distance = b.global_position.distance_to(body.global_position)
@@ -177,6 +183,7 @@ func sort_enemies_in_attack_area_by_distance(list):
 			return 0   # a and b are the same size
 
 		# Sort the list based on the custom comparison function
+		@warning_ignore("unreachable_code") # not sure why the list.sort is indented here
 		list.sort_custom(self, "list_compare_lamda")
 		
 @rpc("any_peer", "call_local")

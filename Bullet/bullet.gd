@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 # Physics processing for Bullets is done by the server only
 
 @export_group("Targetting")
@@ -16,10 +17,22 @@ func _ready():
 func _physics_process(delta: float):
 	if !get_node("MultiplayerSynchronizer").is_multiplayer_authority():
 		return
+
+var target_unit=null
+var target_brain:Node2D=null
+var damage=1
+var speed=300
+func set_target(unit):
+	target_unit=unit
+	if target_unit in get_tree().get_nodes_in_group("Buildings"):
+		target_brain=unit
+	else:
+		target_brain=unit.get_parent()
+func _physics_process(delta):
 	if is_instance_valid(target_unit):
 		var direction: Vector2 = (target_unit.global_position - global_position).normalized()
 		position += direction * speed * delta
-		
+
 		if global_position.distance_to(target_unit.global_position) < 20:
 			# do damage calculation on the unit's owner's machinem to ensure
 			# updated health values are replicated
