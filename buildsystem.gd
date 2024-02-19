@@ -22,7 +22,7 @@ func _ready():
 
 func spawn_object(resource):
 	spawned_object = resource.instantiate()
-	add_child(spawned_object)
+	add_child(spawned_object, true)
 	
 func _button_press_select(building_name: String):
 	cancel_placement()

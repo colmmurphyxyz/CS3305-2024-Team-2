@@ -6,8 +6,8 @@ class_name Base
 @onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 @export var team: String = "1"
-var is_active = false
-var sprite:Sprite2D
+var is_active: bool = false
+var sprite: Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
 @onready var detection_area = Area2D.new()
@@ -21,8 +21,8 @@ var enemy_in_area: Array = []
 @export var explosion:PackedScene
 var close_mining_units:Array = []
 
-var max_hp = 100.0
-var health = 1.0
+@export var max_hp = 100.0
+@export var health = 1.0
 
 var barrack_placed = false
 var laboratory_placed = false
@@ -33,12 +33,12 @@ func _ready():
 	add_to_group("Buildings")
 	# add Sprite2D
 	sprite= Sprite2D.new()
-	add_child(sprite)
+	add_child(sprite, true)
 	sprite.texture = sprite_texture
 	sprite.scale = Vector2(2, 2)
 	# add collision box
 	var collision_shape = CollisionShape2D.new()
-	add_child(collision_shape)
+	add_child(collision_shape, true)
 
 	# set shape of collision
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
@@ -46,19 +46,19 @@ func _ready():
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	
-	add_child(detection_area)
+	add_child(detection_area, true)
 	
 	collision_circle.shape = CircleShape2D.new()
 	collision_circle.shape.radius = sprite_half_extents.length() * 2
 	
-	detection_area.add_child(collision_circle)
+	detection_area.add_child(collision_circle, true)
 	
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
 	
 	# add boarder lines
 	border = Line2D.new()
-	add_child(border)
+	add_child(border, true)
 	
 	# set collision box as perimeter
 	border.points = [
@@ -77,6 +77,8 @@ func _ready():
 	add_to_group("Constructions")
 	
 func _process(_delta: float):
+	if !is_multiplayer_authority():
+		return
 	if is_following_mouse:
 		# follow mouse movement
 		global_position = get_global_mouse_position()
@@ -156,7 +158,7 @@ func damage(damage_amount):
 	
 	if health <= 0:
 		var explosion_node = explosion.instantiate()
-		get_parent().add_child(explosion_node)
+		get_parent().add_child(explosion_node, true)
 		explosion_node.global_position = global_position
 		@warning_ignore("integer_division")
 		explosion_node.scale *= (sprite.texture.get_width() / 400)
