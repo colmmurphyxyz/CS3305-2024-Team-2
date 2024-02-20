@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq4opma3tj3tg"]
+[gd_scene load_steps=8 format=3 uid="uid://dq4opma3tj3tg"]
 
+[ext_resource type="Script" path="res://UI/scenes/player_info.gd" id="1_m4lsh"]
 [ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="1_x3qgi"]
-[ext_resource type="Texture2D" uid="uid://dnfhrkepdis33" path="res://Assets/striking-diamonds.svg" id="2_7meta"]
-[ext_resource type="Texture2D" uid="uid://pmhxbohcbctc" path="res://Assets/i-beam.svg" id="3_3h8nw"]
+[ext_resource type="Texture2D" path="res://i-beam.svg" id="2_mso8b"]
+[ext_resource type="Texture2D" path="res://striking-diamonds.png" id="3_vh6tl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x13c"]
 bg_color = Color(0, 0.592157, 0.686275, 1)
@@ -22,12 +23,14 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cfjb"]
 
 [node name="PlayerInfo" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_m4lsh")
 
 [node name="info_box" type="Panel" parent="."]
 custom_minimum_size = Vector2(24, 24)
@@ -81,10 +84,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_7meta")
+texture = ExtResource("3_vh6tl")
 expand_mode = 1
 
-[node name="diamond_value" type="Label" parent="info_box/diamond"]
+[node name="diamond_value_label" type="Label" parent="info_box/diamond"]
+unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 0
 offset_left = 88.0
 offset_top = 3.5
@@ -110,16 +115,18 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_1cfjb")
 
 [node name="iron_icon" type="TextureRect" parent="info_box/iron"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_3h8nw")
+texture = ExtResource("2_mso8b")
 expand_mode = 1
 
-[node name="iron_value" type="Label" parent="info_box/iron"]
+[node name="iron_value_label" type="Label" parent="info_box/iron"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 90.0
 offset_top = 7.0
