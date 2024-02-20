@@ -27,7 +27,6 @@ sprite_texture = ExtResource("2_msyjy")
 explosion = ExtResource("3_icdr1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0.5, 23)
 shape = SubResource("RectangleShape2D_ke4o0")
 

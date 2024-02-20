@@ -77,6 +77,7 @@ func update_tower_stats():
 			reload = 5.0
 			attack_range = 30.0
 			max_hp = 100.0
+			$Sprite2D.texture = sprite_texture
 			healthbar.max_value = round(max_hp)
 		2:
 			attack_damage = 10

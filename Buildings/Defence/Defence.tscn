@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dr1npldas1wa4"]
+[gd_scene load_steps=10 format=3 uid="uid://dr1npldas1wa4"]
 
 [ext_resource type="Script" path="res://Buildings/Defence/Defence.gd" id="1_akq7d"]
 [ext_resource type="Texture2D" uid="uid://2ika8fx1ppga" path="res://Assets/defence_mid.png" id="2_vucpx"]
@@ -17,6 +17,9 @@ properties/0/replication_mode = 2
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t375u"]
+size = Vector2(48, 72)
 
 [node name="Defence" type="StaticBody2D"]
 script = ExtResource("1_akq7d")
@@ -49,3 +52,11 @@ texture_progress = ExtResource("6_sg53v")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_rp7r5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_g5jrf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_t375u")

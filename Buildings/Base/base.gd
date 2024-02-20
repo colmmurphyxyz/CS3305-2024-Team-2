@@ -32,10 +32,10 @@ var fusion_lab_placed = false
 func _ready():
 	add_to_group("Buildings")
 	# add Sprite2D
-	sprite= Sprite2D.new()
-	add_child(sprite, true)
-	sprite.texture = sprite_texture
-	sprite.scale = Vector2(2, 2)
+	#sprite= Sprite2D.new()
+	#add_child(sprite, true)
+	#sprite.texture = sprite_texture
+	#sprite.scale = Vector2(2, 2)
 	# add collision box
 	var collision_shape = CollisionShape2D.new()
 	add_child(collision_shape, true)
