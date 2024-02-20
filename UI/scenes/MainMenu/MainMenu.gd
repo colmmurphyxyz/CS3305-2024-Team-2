@@ -27,6 +27,7 @@ func connected_to_server():
 		"name": $PlayerNameField.text,
 		"id": multiplayer.get_unique_id(),
 	}
+	GameManager.team = "2"
 	send_client_info_to_server.rpc_id(1, GameManager.Client.name, GameManager.Client.id)
 	
 # called only from clients
@@ -69,6 +70,7 @@ func _on_host_game_button_pressed():
 			"name": $PlayerNameField.text,
 			"id": 1
 		}
+		GameManager.team = "1"
 		var port = int($HostPortField.text)
 		print("using port ", port)
 		peer = ENetMultiplayerPeer.new()
