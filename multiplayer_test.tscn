@@ -74,13 +74,11 @@ spawn_path = NodePath("../SpawnRoot")
 
 [node name="Buildings" type="Node2D" parent="." node_paths=PackedStringArray("building_root")]
 script = ExtResource("4_atcb7")
-building_root = NodePath("../BuildingsRoot")
-
-[node name="BuildingsRoot" type="Node2D" parent="."]
+building_root = NodePath("../SpawnRoot")
 
 [node name="BuildingMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Buildings/Base/base.tscn", "res://Buildings/Defence/Defence.tscn", "res://Buildings/Barracks/barracks.tscn")
-spawn_path = NodePath("../BuildingsRoot")
+spawn_path = NodePath("../SpawnRoot")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

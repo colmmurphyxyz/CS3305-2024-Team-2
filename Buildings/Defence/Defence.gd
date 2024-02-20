@@ -60,12 +60,15 @@ func attack():
 		fired = true
 		attack_timer_count = reload
 		if is_instance_valid(current_target):
+			print("defense is firing")
 			spawn_bullet.rpc_id(1, \
 					multiplayer.get_unique_id(),\
-					current_target.name,\
-					current_target.global_position,\
+					current_target.get_parent().name,\
+					global_position,\
 					attack_damage,\
 					attack_speed)
+		else:
+			print("invalid target!!!")
 		#var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
 		#get_parent().add_child(bullet)
 		#if is_instance_valid(current_target):
@@ -83,7 +86,7 @@ func update_tower_stats():
 			attack_damage = 10
 			attack_speed = 200
 			reload = 5.0
-			attack_range = 300.0
+			attack_range = 30.0
 			max_hp = 100.0
 			sprite.texture = sprite_texture_tier_1
 			healthbar.max_value = round(max_hp)
