@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b7kqn0grwhcue"]
+[gd_scene load_steps=49 format=3 uid="uid://b7kqn0grwhcue"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_ajir7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_dfqyy"]

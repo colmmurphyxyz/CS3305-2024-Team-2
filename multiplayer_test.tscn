@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
-[ext_resource type="Script" path="res://Buildings/Mine/DepositAreas.gd" id="5_7lovr"]
+[ext_resource type="Script" path="res://Buildings/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="Script" path="res://SpawnRoot.gd" id="8_5iud4"]
@@ -71,7 +71,7 @@ polygon = PackedVector2Array(933, 331, 928, 450, 978.901, 450, 1122, 450)
 script = ExtResource("8_5iud4")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn", "res://Unit/UnitTypes/Scout/scout.tscn")
+_spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn", "res://Unit/UnitTypes/Scout/scout.tscn", "res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", "res://Bullet/lazer.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
