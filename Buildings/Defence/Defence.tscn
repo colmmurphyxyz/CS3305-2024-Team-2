@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr1npldas1wa4"]
+[gd_scene load_steps=9 format=3 uid="uid://dr1npldas1wa4"]
 
 [ext_resource type="Script" path="res://Buildings/Defence/Defence.gd" id="1_akq7d"]
 [ext_resource type="Texture2D" uid="uid://2ika8fx1ppga" path="res://Assets/defence_mid.png" id="2_vucpx"]
 [ext_resource type="Texture2D" uid="uid://dp5q1x4pn8ppx" path="res://Assets/defence_base.png" id="3_g5jrf"]
-[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="4_u7d4p"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="5_jy5te"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="6_sg53v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t375u"]
+size = Vector2(48, 72)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06idq"]
 radius = 126.063
@@ -27,14 +29,18 @@ properties/4/path = NodePath("Healthbar:value")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t375u"]
-size = Vector2(48, 72)
-
 [node name="Defence" type="StaticBody2D"]
 script = ExtResource("1_akq7d")
+sprite_texture_tier_1 = ExtResource("3_g5jrf")
 sprite_texture_tier_2 = ExtResource("2_vucpx")
-sprite_texture = ExtResource("3_g5jrf")
-explosion = ExtResource("4_u7d4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_g5jrf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_t375u")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2049
@@ -61,11 +67,3 @@ texture_progress = ExtResource("6_sg53v")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_rp7r5")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("3_g5jrf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
-shape = SubResource("RectangleShape2D_t375u")

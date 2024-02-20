@@ -1,7 +1,8 @@
 extends Base
 
-@export var sprite_texture_tier_2:Texture2D
-@export var sprite_texture_tier_3:Texture2D
+@export var sprite_texture_tier_1: Texture2D
+@export var sprite_texture_tier_2: Texture2D
+@export var sprite_texture_tier_3: Texture2D
 
 var bullet_scene: PackedScene = preload("res://Bullet/Bullet.tscn")
 
@@ -77,7 +78,7 @@ func update_tower_stats():
 			reload = 5.0
 			attack_range = 300.0
 			max_hp = 100.0
-			$Sprite2D.texture = sprite_texture
+			sprite.texture = sprite_texture_tier_1
 			healthbar.max_value = round(max_hp)
 		2:
 			attack_damage = 10

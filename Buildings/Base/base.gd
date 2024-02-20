@@ -9,7 +9,7 @@ var final_collision = move_and_collide(Vector2.ZERO, true)
 ## what exactly does 'being active refer to'
 @export var is_active: bool = false
 @export var is_placed: bool = false
-var sprite: Sprite2D
+@onready var sprite: Sprite2D = $Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
 
@@ -35,7 +35,6 @@ var fusion_lab_placed = false
 func _ready():
 	add_to_group("Buildings")
 	# add Sprite2D
-	#sprite= Sprite2D.new()
 	#add_child(sprite, true)
 	#sprite.texture = sprite_texture
 	#sprite.scale = Vector2(2, 2)
