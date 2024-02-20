@@ -3,7 +3,7 @@ class_name Base
 
 @export var sprite_texture:Texture2D
 @export var is_following_mouse = true
-@onready var border: Line2D
+@onready var border: Line2D = $Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 @export var team: String = "1"
 ## what exactly does 'being active refer to'
@@ -58,10 +58,7 @@ func _ready():
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
 	
-	# add boarder lines
-	border = Line2D.new()
-	add_child(border, true)
-	
+	border.visible = false
 	# set collision box as perimeter
 	border.points = [
 		Vector2(-sprite_half_extents.x, -sprite_half_extents.y),
@@ -194,3 +191,12 @@ func _on_area_2d_body_entered(body):
 	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
 		if body.get_parent().can_mine == true: 
 			close_mining_units.append(body)
+			
+@rpc("any_peer", "call_local", "reliable")
+func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
+	var new_bullet = preload("res://Bullet/Bullet.tscn").instantiate()
+	new_bullet.target_brain_name = target_name
+	new_bullet.damage = damage
+	new_bullet.speed = speed
+	new_bullet.global_position = spawn_pos
+	add_sibling(new_bullet, true)

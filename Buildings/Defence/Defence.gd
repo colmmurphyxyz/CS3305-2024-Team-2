@@ -59,15 +59,22 @@ func attack():
 	if not fired:
 		fired = true
 		attack_timer_count = reload
-		var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
-		get_parent().add_child(bullet)
 		if is_instance_valid(current_target):
-			bullet.set_target(current_target)
-			bullet.global_position = global_position
-			bullet.damage = attack_damage  # Set the appropriate damage value
-			bullet.speed = attack_speed  # Set the appropriate speed value
-		else:
-			bullet.queue_free()
+			spawn_bullet.rpc_id(1, \
+					multiplayer.get_unique_id(),\
+					current_target.name,\
+					current_target.global_position,\
+					attack_damage,\
+					attack_speed)
+		#var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
+		#get_parent().add_child(bullet)
+		#if is_instance_valid(current_target):
+			#bullet.set_target(current_target)
+			#bullet.global_position = global_position
+			#bullet.damage = attack_damage  # Set the appropriate damage value
+			#bullet.speed = attack_speed  # Set the appropriate speed value
+		#else:
+			#bullet.queue_free()
 
 func update_tower_stats():
 # Adjust variables based on the current tier

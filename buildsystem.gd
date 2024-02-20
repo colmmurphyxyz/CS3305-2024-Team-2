@@ -79,3 +79,10 @@ func cancel_placement():
 		spawned_object.queue_free()
 		spawned_object = null
 		mine = false
+
+# don't allow placement when mouse is over building selection VBox
+func _on_v_box_container_mouse_entered():
+	placement_allowed = false
+
+func _on_v_box_container_mouse_exited():
+	placement_allowed = true

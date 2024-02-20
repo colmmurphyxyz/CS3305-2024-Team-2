@@ -67,3 +67,5 @@ texture_progress = ExtResource("6_sg53v")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_rp7r5")
+
+[node name="Line2D" type="Line2D" parent="."]

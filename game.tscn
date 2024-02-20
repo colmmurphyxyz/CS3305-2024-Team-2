@@ -101,50 +101,39 @@ position = Vector2(1118, 392)
 
 [node name="Warden" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
 position = Vector2(1328, 469)
-team = "2"
 
 [node name="Warden2" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
 position = Vector2(1064, 411)
 
 [node name="Sniper" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
 position = Vector2(1207, 563)
-team = "2"
 
 [node name="Sniper2" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
 position = Vector2(1422, 562)
-team = "2"
 
 [node name="Sniper3" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
 position = Vector2(1359, 643)
-team = "2"
 
 [node name="Drone" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1203, 416)
-team = "2"
 
 [node name="Drone13" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1165, 391)
-team = "2"
 
 [node name="Drone8" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1172, 434)
-team = "2"
 
 [node name="Drone12" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1172, 434)
-team = "2"
 
 [node name="Drone9" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1172, 325)
-team = "2"
 
 [node name="Drone10" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1210, 368)
-team = "2"
 
 [node name="Drone11" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1202, 323)
-team = "2"
 
 [node name="Drone3" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(967, 448)
