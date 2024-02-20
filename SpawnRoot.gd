@@ -1,5 +1,14 @@
 extends Node2D
 
+func _ready():
+	# set multiplayer authority on units/buildings already in the scene
+	var client_id: int = GameManager.Client["id"] if GameManager.Client.has("id") else "2"
+	for node in get_children():
+		node.set_multiplayer_authority(
+			1 if node.team == "1" else client_id,
+			true
+		)
+
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
