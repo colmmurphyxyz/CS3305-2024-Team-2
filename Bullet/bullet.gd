@@ -39,8 +39,7 @@ func _physics_process(delta):
 				target_brain.get_node("MultiplayerSynchronizer").get_multiplayer_authority(),
 				damage
 				)
-			spawn_bullet_hit_scene.rpc()
-			
+			spawn_bullet_hit_scene()
 			queue_free()
 		move_and_slide()
 	else:
@@ -51,7 +50,6 @@ func set_target_by_name(n: String):
 	if target_unit != null:
 		set_target(target_unit.get_node("Body"))
 	
-@rpc("any_peer", "call_local")
 func spawn_bullet_hit_scene():
 	var bullet_unit: StaticBody2D = \
 			preload("res://Unit/BaseUnit/BulletHit.tscn").instantiate()
