@@ -44,7 +44,9 @@ func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
 	
 @rpc("authority", "call_local", "reliable")
 func set_authority(node_name: String, auth: int):
-	get_node(node_name).set_multiplayer_authority(auth, true)
+	var new_node = get_node(node_name)
+	new_node.set_multiplayer_authority(auth, true)
+	new_node.add_to_group("Units")
 
 
 func _on_child_entered_tree(node: Node):

@@ -6,19 +6,19 @@ class_name Base
 @onready var border: Line2D = $Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 @export var team: String = "1"
-## what exactly does 'being active refer to'
+## what exactly does 'being active' refer to?
 @export var is_active: bool = false
 @export var is_placed: bool = false
 @onready var sprite: Sprite2D = $Sprite2D
 #const ACTION_INTERVAL = 1.0
 #var time_accumulator: float = 0.0
 
-@onready var detection_area = Area2D.new()
-@onready var collision_circle = CollisionShape2D.new()
+@onready var detection_area = $DetectionArea
+@onready var collision_circle = $DetectionArea/CollisionShape2D
 
 var is_broken = true
-var in_area: Array = []
-var enemy_in_area: Array = []
+var allies_in_area: Array = []
+var enemies_in_area: Array = []
 
 @onready var healthbar = $Healthbar
 @export var explosion:PackedScene
@@ -48,12 +48,8 @@ func _ready():
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	
-	add_child(detection_area, true)
-	
 	collision_circle.shape = CircleShape2D.new()
 	collision_circle.shape.radius = sprite_half_extents.length() * 2
-	
-	detection_area.add_child(collision_circle, true)
 	
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
@@ -95,8 +91,8 @@ func _process(_delta: float):
 			queue_free()
 		if health < max_hp:
 			sprite.modulate=Color.DIM_GRAY
-			if in_area.size() > 0:
-				for body in in_area:
+			if allies_in_area.size() > 0:
+				for body in allies_in_area:
 					if body is StaticBody2D: # if body is a bulding
 						health += 0.1
 						print("Repairing...", round(health), "/", max_hp)
@@ -167,22 +163,24 @@ func damage(damage_amount):
 		explosion_node.scale *= (sprite.texture.get_width() / 400)
 		queue_free()
 	
-func _on_detection_area_body_entered(object):
+func _on_detection_area_body_entered(object: Node2D):
+	print(object, " entered the detection area")
 	var parent = object.get_parent()
 	if object in get_tree().get_nodes_in_group("Buildings"):
 		parent=object
 	if parent.get_team() == team:
-		in_area.append(object)
+		allies_in_area.append(object)
 	else:
-		enemy_in_area.append(object)
+		enemies_in_area.append(object)
 
 # Signal handler for body exited
-func _on_detection_area_body_exited(object):
+func _on_detection_area_body_exited(object: Node2D):
+	print(object, " exited the detection area")
 	var parent = object.get_parent()
 	if parent.get_team() == team:
-		in_area.erase(object)
+		allies_in_area.erase(object)
 	else:
-		enemy_in_area.erase(object)
+		enemies_in_area.erase(object)
 	
 func _on_area_2d_body_exited(body):
 	close_mining_units.erase(body)

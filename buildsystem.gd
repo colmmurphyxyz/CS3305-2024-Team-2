@@ -19,10 +19,11 @@ func _process(_delta: float):
 			print("placing(?)")
 			if mine && deposit == false:
 				print("No deposit found nearby")
-			elif spawned_object.stop_following_mouse() == true: # if placed
+			elif spawned_object.stop_following_mouse() == true:
 				# have the server spawn and replicate a new building 
 				# and delete one following the mouse
-				var spawn_pos = spawned_object.global_position
+				print("can place")
+				var spawn_pos: Vector2 = spawned_object.global_position
 				spawned_object.visible = false
 				spawned_object.free()
 				spawned_object = null
@@ -104,11 +105,11 @@ func _on_v_box_container_mouse_exited():
 func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	print("placing")
 	var new_building = load(scene_path).instantiate()
-	new_building.global_position = global_position
+	new_building.team = "1" if called_by == 1 else GameManager.Client["id"]
+	new_building.global_position = spawn_pos
 	new_building.is_placed = true
+	new_building.is_following_mouse = false
 	# remove these next 2 lines after testing
-	new_building.is_active = true
-	new_building.health = new_building.max_hp
 	building_root.add_child(new_building, true)
 	set_building_authority.rpc(new_building.name, called_by)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://chcffv7xahe1u"]
+[gd_scene load_steps=10 format=3 uid="uid://chcffv7xahe1u"]
 
 [ext_resource type="Script" path="res://Buildings/Base/base.gd" id="1_rcxq8"]
 [ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_msyjy"]
@@ -35,6 +35,9 @@ properties/6/path = NodePath(".:health")
 properties/6/spawn = true
 properties/6/replication_mode = 2
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2ros"]
+radius = 200.0
+
 [node name="Headquarters" type="StaticBody2D"]
 collision_mask = 3
 script = ExtResource("1_rcxq8")
@@ -51,6 +54,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_msyjy")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_mask = 2049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -74,3 +78,13 @@ texture_progress = ExtResource("4_p5w77")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yob7o")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_p2ros")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
