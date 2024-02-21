@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk80g7cgdc68h"]
+[gd_scene load_steps=7 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
 [ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
 [ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_0fqvu"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
-[ext_resource type="PackedScene" uid="uid://bdo23aijjgppl" path="res://UI/scenes/structure_interaction.tscn" id="6_4twao"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spgvb"]
 radius = 204.245
@@ -38,11 +37,41 @@ nine_patch_stretch = true
 texture_under = ExtResource("4_uju10")
 texture_progress = ExtResource("5_g862d")
 
-[node name="Control" parent="." instance=ExtResource("6_4twao")]
-offset_left = 76.0
-offset_top = -134.0
-offset_right = 76.0
-offset_bottom = -134.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 104.0
+offset_top = -140.0
+offset_right = 196.0
+offset_bottom = 72.0
+
+[node name="Drone" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Drone"
+
+[node name="Bruiser" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Bruiser"
+
+[node name="Sniper" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sniper"
+
+[node name="Scout" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Scout"
+
+[node name="Warden" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Warden"
+
+[node name="Marrauder" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Marrauder"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="VBoxContainer/Drone" to="." method="_spawn_unit" binds= ["drone"]]
+[connection signal="pressed" from="VBoxContainer/Bruiser" to="." method="_spawn_unit" binds= ["bruiser"]]
+[connection signal="pressed" from="VBoxContainer/Sniper" to="." method="_spawn_unit" binds= ["sniper"]]
+[connection signal="pressed" from="VBoxContainer/Scout" to="." method="_spawn_unit" binds= ["scout"]]
+[connection signal="pressed" from="VBoxContainer/Warden" to="." method="_spawn_unit" binds= ["warden"]]
+[connection signal="pressed" from="VBoxContainer/Marrauder" to="." method="_spawn_unit" binds= ["marrauder"]]

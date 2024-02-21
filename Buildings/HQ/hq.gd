@@ -1,26 +1,38 @@
 extends Base
 
-var context_menu_scene = preload("res://UI/scenes/structure_interaction.tscn")
-var context_menu_instance
-
 var free_spawn = 60.0
-
 var control = null
+var iron = 0 # replace with location of resource values
 
 func _ready():
 	super._ready()
 	max_hp = 100.0
 	health = max_hp / 2
 	is_active = false
-	control = get_node("Control")
+	control = get_node("VBoxContainer")
 	control.hide()
 	
 func _process(delta):
 	super._process(delta)
+	# toggle button uss based on criteria matched
+	#if laboratory_placed:
+		#get_node("VBoxContainer/Scout").set_disabled(false)
+		#get_node("VBoxContainer/Warden").set_disabled(false)
+	#else:
+		#get_node("VBoxContainer/Scout").disabled = true
+		#get_node("VBoxContainer/Warden").disabled = true
+	#if barrack_placed:
+		#get_node("VBoxContainer/Bruiser").disabled = false
+		#get_node("VBoxContainer/Sniper").disabled = false
+		#get_node("VBoxContainer/Marrauder").disabled = false
+	#else:
+		#get_node("VBoxContainer/Bruiser").disabled = true
+		#get_node("VBoxContainer/Sniper").disabled = true
+		#get_node("VBoxContainer/Marrauder").disabled = true
 	if free_spawn > 0:
 		free_spawn -= delta
 
-
+# if tower is clicked show interaction menu
 func _input(event):
 	if event.is_action_pressed("right_click"):
 		if get_global_mouse_position().distance_to(global_transform.origin) < 50:
@@ -29,14 +41,35 @@ func _input(event):
 			control.hide()
 	pass
 
-func _on_context_menu_button_pressed(button_text):
-	# Handle the button press
-	print("Button pressed:", button_text)
-	
-	# Remove the context menu from the scene
-	context_menu_instance.queue_free()
-	context_menu_instance = null
-
+func _spawn_unit(type: String):
+	match type:
+		# Set resources required
+		"drone":
+			if free_spawn <= 0:
+				#spawn drone
+				pass
+			elif iron > 10:
+				# buy unit, check unit cost, and iron from game controller
+				pass
+		"bruiser":
+			if barrack_placed and iron > 10:
+				# spawn unit
+				pass
+		"scout":
+			print("pressed")
+			if laboratory_placed and iron > 10:
+				pass
+		"sniper":
+			if barrack_placed and iron > 10:
+				pass
+		"warden":
+			if laboratory_placed and iron > 10:
+				pass
+		"marrauder":
+			if barrack_placed and iron > 10:
+				pass
+		_:
+			print("Not valid button")
 
 func _on_area_2d_body_entered(body):
 	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
