@@ -81,7 +81,7 @@ func damage(damage_amount):
 	healthbar.value=health
 	
 	if health <= 0:
-		var explosion_node = explosion.instantiate()
+		var explosion_node = explosion_scene.instantiate()
 		get_parent().add_child(explosion_node)
 		explosion_node.global_position = global_position
 		@warning_ignore("integer_division")

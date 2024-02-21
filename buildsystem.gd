@@ -40,6 +40,8 @@ func _ready():
 
 func spawn_object(resource):
 	spawned_object = resource.instantiate()
+	spawned_object.team = GameManager.team
+	spawned_object.set_multiplayer_authority(multiplayer.get_unique_id())
 	add_child(spawned_object, true)
 	
 func _button_press_select(building_name: String):
@@ -105,11 +107,14 @@ func _on_v_box_container_mouse_exited():
 func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	print("placing")
 	var new_building = load(scene_path).instantiate()
-	new_building.team = "1" if called_by == 1 else GameManager.Client["id"]
+	new_building.team = "1" if called_by == 1 else "2"
 	new_building.global_position = spawn_pos
 	new_building.is_placed = true
 	new_building.is_following_mouse = false
-	# remove these next 2 lines after testing
+	# set buildings to be full hp and active on spawn, for debugging reasons
+	new_building.health = new_building.max_hp
+	new_building.is_active = true
+	
 	building_root.add_child(new_building, true)
 	set_building_authority.rpc(new_building.name, called_by)
 	

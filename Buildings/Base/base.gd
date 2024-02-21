@@ -1,55 +1,47 @@
 extends StaticBody2D
 class_name Base
 
-@export var sprite_texture:Texture2D
-@export var is_following_mouse = true
-@onready var border: Line2D = $Line2D
-var final_collision = move_and_collide(Vector2.ZERO, true)
+# export variables
 @export var team: String = "1"
+@export var sprite_texture:Texture2D
+@export var max_hp = 100.0
+@export var health = 1.0
+@export var is_following_mouse = true
 ## what exactly does 'being active' refer to?
 @export var is_active: bool = false
 @export var is_placed: bool = false
-@onready var sprite: Sprite2D = $Sprite2D
-#const ACTION_INTERVAL = 1.0
-#var time_accumulator: float = 0.0
+@export var explosion_scene: PackedScene
 
-@onready var detection_area = $DetectionArea
-@onready var collision_circle = $DetectionArea/CollisionShape2D
-
+# public variables
+var final_collision = move_and_collide(Vector2.ZERO, true)
 var is_broken = true
 var allies_in_area: Array = []
 var enemies_in_area: Array = []
+var close_mining_units: Array = []
+var barrack_placed: bool = false
+var laboratory_placed: bool = false
+var fusion_lab_placed: bool = false
 
-@onready var healthbar = $Healthbar
-@export var explosion:PackedScene
-var close_mining_units:Array = []
-
-@export var max_hp = 100.0
-@export var health = 1.0
-
-var barrack_placed = false
-var laboratory_placed = false
-var fusion_lab_placed = false
+# onready variables
+@onready var border: Line2D = $Border
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var detection_area: Area2D = $DetectionArea
+@onready var collision_circle: CollisionShape2D = $DetectionArea/CollisionShape2D
+@onready var healthbar: TextureProgressBar = $Healthbar
 
 
 func _ready():
 	add_to_group("Buildings")
-	# add Sprite2D
-	#add_child(sprite, true)
-	#sprite.texture = sprite_texture
-	#sprite.scale = Vector2(2, 2)
-	# add collision box
-	var collision_shape = CollisionShape2D.new()
-	add_child(collision_shape, true)
+	var collision_shape: CollisionShape2D = $BuildingCollisionShape
 
 	# set shape of collision
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
-	rectangle_shape.extents = sprite_half_extents
-	collision_shape.shape = rectangle_shape
-	
-	collision_circle.shape = CircleShape2D.new()
-	collision_circle.shape.radius = sprite_half_extents.length() * 2
+	#rectangle_shape.extents = sprite_half_extents
+	#collision_shape.shape = rectangle_shape
+	#
+	#collision_circle.shape = CircleShape2D.new()
+	#collision_circle.shape.radius = sprite_half_extents.length() * 2
 	
 	collision_layer = 0 # disable collisions with units
 	collision_mask = 1 + 2
@@ -156,7 +148,7 @@ func damage(damage_amount):
 	healthbar.value=health
 	
 	if health <= 0:
-		var explosion_node = explosion.instantiate()
+		var explosion_node = explosion_scene.instantiate()
 		get_parent().add_child(explosion_node, true)
 		explosion_node.global_position = global_position
 		@warning_ignore("integer_division")
@@ -182,12 +174,13 @@ func _on_detection_area_body_exited(object: Node2D):
 	else:
 		enemies_in_area.erase(object)
 	
-func _on_area_2d_body_exited(body):
+func _on_area_2d_body_exited(body: Node2D):
 	close_mining_units.erase(body)
 	
-func _on_area_2d_body_entered(body):
-	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
-		if body.get_parent().can_mine == true: 
+func _on_area_2d_body_entered(body: Node2D):
+	if !(body.get_parent() in get_tree().get_nodes_in_group("Units")):
+		return
+	if body.get_parent().team == team and body.get_parent().can_mine == true: 
 			close_mining_units.append(body)
 			
 @rpc("any_peer", "call_local", "reliable")
