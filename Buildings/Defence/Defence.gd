@@ -48,7 +48,6 @@ func _process(delta):
 				fired = false
 
 func update_target():
-	print(enemies_in_area)
 	if enemies_in_area.size() > 0:
 		current_target = enemies_in_area[0]
 		#print(current_target)
