@@ -1,6 +1,7 @@
 extends StaticBody2D
 class_name Base
 
+# setup variables for placement
 @export var sprite_texture:Texture2D
 @export var is_following_mouse = true
 @onready var border: Line2D
@@ -8,15 +9,17 @@ var final_collision = move_and_collide(Vector2.ZERO, true)
 @export var team: String = "1"
 var is_active = false
 var sprite:Sprite2D
-#const ACTION_INTERVAL = 1.0
-#var time_accumulator: float = 0.0
+
+# Detection area for interation and hit box
 @onready var detection_area = Area2D.new()
 @onready var collision_circle = CollisionShape2D.new()
 
+# Track other objects nearby
 var is_broken = true
 var in_area: Array = []
 var enemy_in_area: Array = []
 
+# Health and repair
 @onready var healthbar = $Healthbar
 @export var explosion:PackedScene
 var close_mining_units:Array = []
@@ -24,44 +27,42 @@ var close_mining_units:Array = []
 var max_hp = 100.0
 var health = 1.0
 
+# Upgrade structure tracking
 var barrack_placed = false
 var laboratory_placed = false
 var fusion_lab_placed = false
 
+# failsafe for other object detection
 var overlapping: Array = []
 
 func _ready():
 	add_to_group("Buildings")
-	# add Sprite2D
 	sprite= Sprite2D.new()
 	add_child(sprite)
 	sprite.texture = sprite_texture
 	sprite.scale = Vector2(2, 2)
-	# add collision box
+
+# Collision box
 	var collision_shape = CollisionShape2D.new()
 	add_child(collision_shape)
-
-	# set shape of collision
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	
+# Detection radius
 	add_child(detection_area)
-	
 	collision_circle.shape = CircleShape2D.new()
 	collision_circle.shape.radius = sprite_half_extents.length() * 2
-	
 	detection_area.add_child(collision_circle)
 	
-	collision_layer = 0 # disable collisions with units
+# Disable collisons before placement 
+	collision_layer = 0
 	collision_mask = 1 + 2
 	
-	# add boarder lines
+# Add a colour hit box to report placeable areas
 	border = Line2D.new()
 	add_child(border)
-	
-	# set collision box as perimeter
 	border.points = [
 		Vector2(-sprite_half_extents.x, -sprite_half_extents.y),
 		Vector2(sprite_half_extents.x, -sprite_half_extents.y),
@@ -69,20 +70,21 @@ func _ready():
 		Vector2(-sprite_half_extents.x, sprite_half_extents.y),
 		Vector2(-sprite_half_extents.x, -sprite_half_extents.y),
 	]
-
 	border.default_color = Color(1, 1, 1)  # Set the border color to red
 	border.default_color = Color(1, 1, 1)  # Set the border color to white
 	border.width = 1  # Adjust the width of the border
 
+# Add healthbar and add to repairable class
 	healthbar.max_value = round(max_hp)
 	add_to_group("Constructions")
-	z_index = 10
+	z_index = 10 # Move on top layer, fix for ore deposit sprite layering
 	
 func _process(_delta: float):
+# Follow mouse when spawned
 	if is_following_mouse:
-		# follow mouse movement
 		global_position = get_global_mouse_position()
 		final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)
+		# Test for placeable areas
 		if final_collision != null:
 			border.default_color = Color(1,0,0)
 			change_border_colour(Color(1,0,0))
@@ -90,6 +92,7 @@ func _process(_delta: float):
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
 	else:
+		# Repair logic
 		healthbar.value=health
 		if health <= 0:
 			queue_free()
@@ -111,6 +114,8 @@ func _process(_delta: float):
 		else:
 			#print("Repair stopped")
 			pass
+			
+		# Failsafe for detection radius as its inactive before placement 
 		overlapping = get_node("Area2D").get_overlapping_bodies()
 		for object in overlapping:
 			var parent = object.get_parent()
@@ -124,7 +129,6 @@ func _process(_delta: float):
 					enemy_in_area.append(object)
 
 func start_following_mouse():
-	# enable placement
 	is_following_mouse = true
 
 func stop_following_mouse():
@@ -132,17 +136,14 @@ func stop_following_mouse():
 	# check for collisions with other objects at the final position
 	final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)
 	if final_collision != null:
-		print("Collision detected at the final position!")
-		# add end-user feedback
+		#print("Collision detected at the final position!")
 		return false
 
 	else:
-		print("No collision at the final position!")
+		#print("No collision at the final position!")
 		border.visible = false
-		# add end-user feedback
 		is_following_mouse = false
-		collision_layer = 2 + 13# re-enable collisions to prevent stacking
-		#collision_layer = 2# re-enable collisions to prevent stacking
+		collision_layer = 2 + 13 # re-enable collisions to prevent stacking
 		detection_area.body_entered.connect(_on_detection_area_body_entered)
 		detection_area.body_exited.connect(_on_detection_area_body_exited)
 		return true 
@@ -154,6 +155,8 @@ func set_collision_circle_radius(radius: float):
 	collision_circle.shape.radius = radius
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
+
+# Select and deselect needed on all nodes for netting to work
 func select():
 	start_following_mouse()
 
@@ -164,7 +167,7 @@ func change_border_colour(color):
 	border.default_color = color
 	
 func damage(damage_amount):
-	#sprite2d.material.set("shader_param/active",true)
+	# Handle damage event
 	health-=damage_amount
 	healthbar.value=health
 	
@@ -177,6 +180,7 @@ func damage(damage_amount):
 		queue_free()
 	
 func _on_detection_area_body_entered(object):
+	# When detection radius entered sort units into friedly and enemy
 	var parent = object.get_parent()
 	if object in get_tree().get_nodes_in_group("Buildings"):
 		parent=object
@@ -185,7 +189,7 @@ func _on_detection_area_body_entered(object):
 	else:
 		enemy_in_area.append(object)
 
-# Signal handler for body exited
+# Remove from list when radius is exited
 func _on_detection_area_body_exited(object):
 	var parent = object.get_parent()
 	if parent.get_team() == team:
@@ -193,6 +197,7 @@ func _on_detection_area_body_exited(object):
 	else:
 		enemy_in_area.erase(object)
 	
+# Helpers for drone units to work
 func _on_area_2d_body_exited(body):
 	close_mining_units.erase(body)
 	
