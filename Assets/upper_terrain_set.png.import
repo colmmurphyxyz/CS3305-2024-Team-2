@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c72v4xvr6pmtu"
-path="res://.godot/imported/fission screecher-Sheet.png-100cc6e2a1bf9ece74951181b595b0d5.ctex"
+uid="uid://b5wmf7oyiwptu"
+path="res://.godot/imported/upper_terrain_set.png-31717ac3d5734de3d0ac0c78ec91f165.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Units/fission screecher-Sheet.png"
-dest_files=["res://.godot/imported/fission screecher-Sheet.png-100cc6e2a1bf9ece74951181b595b0d5.ctex"]
+source_file="res://Assets/upper_terrain_set.png"
+dest_files=["res://.godot/imported/upper_terrain_set.png-31717ac3d5734de3d0ac0c78ec91f165.ctex"]
 
 [params]
 

@@ -70,10 +70,6 @@ func _ready():
 	#Used for getting explosion width by getting idle texture size
 	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
 	
-	if team == "1":
-		pass
-		#sprite2d.texture = load("res://Assets/unit_temp.png")
-	
 	#Selection sprite setting up
 	sprite2d.material.set("shader_parameter/shader_enabled",false)
 	#Random rotation applied so they dont all look the same 
@@ -90,6 +86,12 @@ func _ready():
 	detection_area.scale=Vector2(visible_radius_size,visible_radius_size)
 	#Attack Radius
 	attack_area.collision_mask=12+13
+	
+	if team == "2":
+		light.light_mask=2
+		sprite2d.material.set("shader_parameter/team2",true)
+		#sprite2d.texture = load("res://Assets/unit_temp.png")
+	
 func change_state(new_state_name):
 	if state != null:
 		state.queue_free()

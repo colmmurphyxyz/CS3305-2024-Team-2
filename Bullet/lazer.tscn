@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c64be60pbkhj5"]
+[gd_scene load_steps=4 format=3 uid="uid://s03sx1ku7iar"]
 
 [ext_resource type="Script" path="res://Bullet/lazer.gd" id="1_dj0u7"]
-[ext_resource type="Texture2D" uid="uid://bw3evl37nxrtj" path="res://Assets/Units/lazer.png" id="2_y57f3"]
+[ext_resource type="Texture2D" uid="uid://bw3evl37nxrtj" path="res://Assets/Units/fusionScreecher/lazer.png" id="2_da21e"]
 [ext_resource type="AudioStream" uid="uid://852xd67hq2x6" path="res://Assets/SFX/lazer.wav" id="3_43qy6"]
 
 [node name="Lazer" type="Node2D"]
@@ -10,7 +10,7 @@ script = ExtResource("1_dj0u7")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(-1, 0, 88, 0)
-texture = ExtResource("2_y57f3")
+texture = ExtResource("2_da21e")
 texture_mode = 1
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

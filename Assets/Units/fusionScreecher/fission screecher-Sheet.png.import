@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw3evl37nxrtj"
-path="res://.godot/imported/lazer.png-a2db045e512eced3bc36548b9d53af3a.ctex"
+uid="uid://c72v4xvr6pmtu"
+path="res://.godot/imported/fission screecher-Sheet.png-279e8bbfc756ac94eb545cfb73d8d248.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Units/lazer.png"
-dest_files=["res://.godot/imported/lazer.png-a2db045e512eced3bc36548b9d53af3a.ctex"]
+source_file="res://Assets/Units/fusionScreecher/fission screecher-Sheet.png"
+dest_files=["res://.godot/imported/fission screecher-Sheet.png-279e8bbfc756ac94eb545cfb73d8d248.ctex"]
 
 [params]
 

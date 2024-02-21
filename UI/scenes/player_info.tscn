@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dq4opma3tj3tg"]
+[gd_scene load_steps=5 format=3 uid="uid://dq4opma3tj3tg"]
 
 [ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="1_x3qgi"]
-[ext_resource type="Texture2D" uid="uid://dnfhrkepdis33" path="res://Assets/striking-diamonds.svg" id="2_7meta"]
-[ext_resource type="Texture2D" uid="uid://pmhxbohcbctc" path="res://Assets/i-beam.svg" id="3_3h8nw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x13c"]
 bg_color = Color(0, 0.592157, 0.686275, 1)
@@ -22,6 +20,7 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cfjb"]
 
 [node name="PlayerInfo" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,7 +80,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_7meta")
 expand_mode = 1
 
 [node name="diamond_value" type="Label" parent="info_box/diamond"]
@@ -116,7 +114,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_3h8nw")
 expand_mode = 1
 
 [node name="iron_value" type="Label" parent="info_box/iron"]

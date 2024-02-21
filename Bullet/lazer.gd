@@ -40,7 +40,8 @@ func _process(delta):
 	for i:RayCast2D in ray_array:
 		i.target_position = to_local(global_position+direction*5000)
 		if i.is_colliding():
-			if i.get_collider().get_parent() in get_tree().get_nodes_in_group("Units") and damaging==true:
+			
+			if is_instance_valid(i.get_collider()) and i.get_collider().get_parent() in get_tree().get_nodes_in_group("Units") and damaging==true:
 				var body = i.get_collider()
 				var unit = body.get_parent()
 				if unit.get_team() == team:
