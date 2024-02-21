@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk80g7cgdc68h"]
+[gd_scene load_steps=8 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
 [ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
 [ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_0fqvu"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
+[ext_resource type="PackedScene" uid="uid://bdo23aijjgppl" path="res://UI/scenes/structure_interaction.tscn" id="6_4twao"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spgvb"]
 radius = 204.245
@@ -36,6 +37,12 @@ rounded = true
 nine_patch_stretch = true
 texture_under = ExtResource("4_uju10")
 texture_progress = ExtResource("5_g862d")
+
+[node name="Control" parent="." instance=ExtResource("6_4twao")]
+offset_left = 76.0
+offset_top = -134.0
+offset_right = 76.0
+offset_bottom = -134.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
