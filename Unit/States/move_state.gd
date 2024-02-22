@@ -14,7 +14,7 @@ func _ready():
 	body = persistent_state.body
 	last_position=body.global_position
 	persistent_state.sprite2d.play("move")
-
+	persistent_state.body.create_path()
 func _process(delta):
 	if !is_multiplayer_authority():
 		#print("not processing move state for %s. owned by %d and i am %d" % \

@@ -13,6 +13,7 @@ func _ready():
 	#Set target to self if nesecessary 
 	target = get_position_delta()
 	speed=get_parent().speed
+	print(nav_agent.pathfinding_algorithm)
 
 func _physics_process(delta):
 	var direction:Vector2 = to_local(nav_agent.get_next_path_position()).normalized()
@@ -23,6 +24,4 @@ func _physics_process(delta):
 func create_path():
 		nav_agent.target_position = target
 
-func _on_timer_timeout():
-	create_path()
 

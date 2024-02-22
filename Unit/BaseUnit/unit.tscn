@@ -14,6 +14,7 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 0, 1)
 
@@ -60,13 +61,14 @@ shape = SubResource("CircleShape2D_i2y3c")
 path_desired_distance = 30.68
 target_desired_distance = 32.0
 navigation_layers = 7
+path_postprocessing = 1
 radius = 5.58
 neighbor_distance = 16.6
 max_speed = 400.0
 debug_enabled = true
 
 [node name="Timer" type="Timer" parent="Body"]
-wait_time = 0.1
+wait_time = 0.01
 autostart = true
 
 [node name="AttackArea" type="Area2D" parent="Body"]
