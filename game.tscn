@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
+[ext_resource type="PackedScene" uid="uid://dkto4ql016cfw" path="res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn" id="13_5dx1l"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -198,6 +199,88 @@ polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
 position = Vector2(809, 494)
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="PlayerCamera2" parent="." instance=ExtResource("6_m8lky")]
+position = Vector2(809, 494)
+
+[node name="Drone" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1203, 416)
+team = "2"
+
+[node name="Drone13" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1165, 391)
+team = "2"
+
+[node name="Drone8" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1172, 434)
+team = "2"
+
+[node name="Drone12" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1172, 434)
+team = "2"
+
+[node name="Drone9" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1172, 325)
+team = "2"
+
+[node name="Drone10" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1210, 368)
+team = "2"
+
+[node name="Drone11" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(1202, 323)
+team = "2"
+
+[node name="Drone2" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(934, 424)
+
+[node name="Drone3" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(967, 448)
+
+[node name="Drone4" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(965, 394)
+
+[node name="Drone5" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(966, 371)
+
+[node name="Drone6" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(971, 347)
+
+[node name="Drone7" parent="." instance=ExtResource("1_5c3c7")]
+position = Vector2(992, 338)
+
+[node name="Bruiser" parent="." instance=ExtResource("3_clc6p")]
+position = Vector2(1122, 306)
+
+[node name="Bruiser2" parent="." instance=ExtResource("3_clc6p")]
+position = Vector2(1124, 354)
+
+[node name="Bruiser3" parent="." instance=ExtResource("3_clc6p")]
+position = Vector2(1118, 392)
+
+[node name="Warden" parent="." instance=ExtResource("10_d8kfn")]
+position = Vector2(806, 241)
+team = "2"
+
+[node name="Warden2" parent="." instance=ExtResource("10_d8kfn")]
+position = Vector2(866, 352)
+
+[node name="Sniper" parent="." instance=ExtResource("2_2ip8b")]
+position = Vector2(1102, 596)
+team = "2"
+
+[node name="Sniper2" parent="." instance=ExtResource("2_2ip8b")]
+position = Vector2(1422, 562)
+team = "2"
+
+[node name="Sniper3" parent="." instance=ExtResource("2_2ip8b")]
+position = Vector2(1359, 643)
+team = "2"
+
+[node name="FusionBlaster" parent="." instance=ExtResource("13_5dx1l")]
+position = Vector2(1277, 846)
+team = "2"
+attack_speed = 0.5
 
 [connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_exited"]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://c64be60pbkhj5"]
+
+[ext_resource type="Script" path="res://Bullet/lazer.gd" id="1_dj0u7"]
+[ext_resource type="Texture2D" uid="uid://bw3evl37nxrtj" path="res://Assets/Units/lazer.png" id="2_y57f3"]
+[ext_resource type="AudioStream" uid="uid://852xd67hq2x6" path="res://Assets/SFX/lazer.wav" id="3_43qy6"]
+
+[node name="Lazer" type="Node2D"]
+position = Vector2(74, 164)
+script = ExtResource("1_dj0u7")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-1, 0, 88, 0)
+texture = ExtResource("2_y57f3")
+texture_mode = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, 39)
+target_position = Vector2(3000, 2.08165e-12)
+collision_mask = 7
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, 22)
+target_position = Vector2(3000, 2.08165e-12)
+collision_mask = 7
+
+[node name="RayCast2D5" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, -43)
+target_position = Vector2(3000, 2.08165e-12)
+collision_mask = 7
+
+[node name="RayCast2D7" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, -22)
+target_position = Vector2(3000, 2.08165e-12)
+collision_mask = 7
+
+[node name="RayCast2D6" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+target_position = Vector2(3000, 2.08165e-12)
+collision_mask = 2
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+target_position = Vector2(3000, 2.08165e-12)
+collision_mask = 7
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.53
+autostart = true
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_43qy6")
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
