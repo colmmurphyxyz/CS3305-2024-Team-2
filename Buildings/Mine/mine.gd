@@ -6,6 +6,7 @@ var increase_timer: Timer
 const max_storage = 250
 var stored_resources = 0
 
+var has_klassium = false
 
 func _ready():
 	max_hp = 100.0

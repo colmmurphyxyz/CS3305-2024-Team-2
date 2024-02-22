@@ -4,6 +4,7 @@ var spawned_object = null
 var placement_allowed = false
 var deposit = false
 var mine = false
+var klassium = false
 
 func _process(_delta: float):
 	if Input.is_action_just_pressed("right_click"):
@@ -14,6 +15,8 @@ func _process(_delta: float):
 			if mine && deposit == false:
 				print("No deposit found nearby")
 			elif spawned_object.stop_following_mouse() == true: # if placed
+				if mine:
+					spawned_object.has_klassium = klassium
 				spawned_object = null
 				mine = false
 				
@@ -55,7 +58,13 @@ func _deposit_enter():
 	
 func _deposit_exit():
 	deposit = false
-
+	
+func _klassium_area():
+	klassium = true
+	
+func _not_klassium_area():
+	klassium = false
+	
 func move_object():
 	# add move after placement
 	pass

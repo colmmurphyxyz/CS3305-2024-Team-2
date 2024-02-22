@@ -56,7 +56,6 @@ func _spawn_unit(type: String):
 				# spawn unit
 				pass
 		"scout":
-			print("pressed")
 			if laboratory_placed and iron > 10:
 				pass
 		"sniper":
