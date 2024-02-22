@@ -106,7 +106,7 @@ func _on_v_box_container_mouse_exited():
 @rpc("any_peer", "call_local", "reliable")
 func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	print("placing")
-	var new_building = load(scene_path).instantiate()
+	var new_building: StaticBody2D = load(scene_path).instantiate()
 	new_building.team = "1" if called_by == 1 else "2"
 	new_building.global_position = spawn_pos
 	new_building.is_placed = true
@@ -116,8 +116,21 @@ func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	new_building.is_active = true
 	
 	building_root.add_child(new_building, true)
+	new_building.add_to_group("Buildings")
+	# set collision layers
+	var layers = [1, 2, 12]
+	var layers_mask = 0
+	for n in layers:
+		layers_mask |= int(pow(2, n-1)) 
+	set_collision_layer.rpc(new_building.name, layers_mask)
 	set_building_authority.rpc(new_building.name, called_by)
 	
 @rpc("authority", "call_local", "reliable")
 func set_building_authority(node_name: String, auth: int):
 	building_root.get_node(node_name).set_multiplayer_authority(auth, true)
+	
+@rpc("authority", "call_local", "reliable")
+func set_collision_layer(node_name: String, layers: int):
+	var building: StaticBody2D = building_root.get_node(node_name)
+	building.collision_layer = layers
+	building.collision_mask = 1 + 2

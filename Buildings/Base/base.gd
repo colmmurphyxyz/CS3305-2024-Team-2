@@ -10,9 +10,10 @@ class_name Base
 ## what exactly does 'being active' refer to?
 @export var is_active: bool = false
 @export var is_placed: bool = false
-@export var explosion_scene: PackedScene
 
 # public variables
+var explosion_scene: PackedScene = \
+		preload("res://Unit/BaseUnit/Explosion.tscn") as PackedScene
 var final_collision = move_and_collide(Vector2.ZERO, true)
 var is_broken = true
 var allies_in_area: Array = []
@@ -142,18 +143,31 @@ func deselect():
 func change_border_colour(color):
 	border.default_color = color
 	
+@rpc("any_peer", "call_local", "reliable")
 func damage(damage_amount):
 	#sprite2d.material.set("shader_param/active",true)
-	health-=damage_amount
-	healthbar.value=health
+	health -= damage_amount
+	healthbar.value = health
 	
 	if health <= 0:
-		var explosion_node = explosion_scene.instantiate()
-		get_parent().add_child(explosion_node, true)
-		explosion_node.global_position = global_position
-		@warning_ignore("integer_division")
-		explosion_node.scale *= (sprite.texture.get_width() / 400)
-		queue_free()
+		spawn_explosion_scene.rpc_id(1)
+		#var explosion_node = explosion_scene.instantiate()
+		#get_parent().add_child(explosion_node, true)
+		#explosion_node.global_position = global_position
+		#@warning_ignore("integer_division")
+		#explosion_node.scale *= (sprite.texture.get_width() / 400)
+		queue_free_on_server.rpc_id(1)
+		
+@rpc("any_peer", "call_local")
+func spawn_explosion_scene():
+	var explosion = explosion_scene.instantiate()
+	@warning_ignore("integer_division")
+	explosion.scale *= (sprite.texture.get_width() / 400)
+	add_sibling(explosion, true)
+
+@rpc("any_peer", "call_local", "reliable")
+func queue_free_on_server():
+	queue_free()
 	
 func _on_detection_area_body_entered(object: Node2D):
 	print(object, " entered the detection area")
@@ -169,7 +183,7 @@ func _on_detection_area_body_entered(object: Node2D):
 func _on_detection_area_body_exited(object: Node2D):
 	print(object, " exited the detection area")
 	var parent = object.get_parent()
-	if parent.get_team() == team:
+	if parent.has_method("get_team") && parent.get_team() == team:
 		allies_in_area.erase(object)
 	else:
 		enemies_in_area.erase(object)
