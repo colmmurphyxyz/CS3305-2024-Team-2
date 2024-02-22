@@ -16,7 +16,6 @@ func _ready():
 
 func set_target(unit):
 	target_unit=unit
-	print("Unit:",unit)
 	if target_unit in get_tree().get_nodes_in_group("Buildings"):
 		target_brain=unit
 	else:

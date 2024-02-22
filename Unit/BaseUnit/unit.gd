@@ -145,7 +145,7 @@ func damage(damage_amount):
 	hp-=damage_amount
 	healthbar.value=hp
 	if hp <= 0:
-		spawn_explosion_scene.rpc_id(1, body.position)
+		spawn_explosion_scene.rpc_id(1, body.global_position)
 		# have the server do the despawning
 		# the MultiplayerSpawner will signal for all other clients to despawn this node
 		queue_free_on_server.rpc_id(1)
@@ -202,7 +202,7 @@ func _on_multiplayer_synchronizer_tree_entered():
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
-	var new_bullet = preload("res://Bullet/Bullet.tscn").instantiate()
+	var new_bullet = bullet.instantiate()
 	new_bullet.target_brain_name = target_name
 	new_bullet.damage = damage
 	new_bullet.speed = speed
