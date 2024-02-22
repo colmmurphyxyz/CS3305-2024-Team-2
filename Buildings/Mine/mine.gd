@@ -6,13 +6,13 @@ var increase_timer: Timer
 const max_storage = 250
 var stored_resources = 0
 
-var has_klassium = false
+var has_klassium = false # Flagset by buildsystem, if a mine was placed in a 'Klassium' ore deposit
 
 func _ready():
 	max_hp = 100.0
 	health = 1.0
 	super._ready()
-	# timer for syncronous ore generation
+	# timer for syncronous ore generation and prevent float values for resources
 	is_active=false
 	increase_timer = Timer.new()
 	increase_timer.wait_time = 1.0 

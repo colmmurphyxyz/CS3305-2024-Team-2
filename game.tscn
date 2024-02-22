@@ -226,7 +226,7 @@ team = "2"
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_press_select" binds= ["fusion"]]
 [connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="OreDeposits/Klassium" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_entered" from="OreDeposits/Klassium" to="Buildings" method="_klassium_area"]
+[connection signal="mouse_entered" from="OreDeposits/Klassium" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Klassium" to="Buildings" method="_deposit_exit"]
 [connection signal="mouse_exited" from="OreDeposits/Klassium" to="Buildings" method="_not_klassium_area"]
