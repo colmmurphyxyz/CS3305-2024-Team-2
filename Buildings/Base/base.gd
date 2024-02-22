@@ -16,6 +16,7 @@ var explosion_scene: PackedScene = \
 		preload("res://Unit/BaseUnit/Explosion.tscn") as PackedScene
 var final_collision = move_and_collide(Vector2.ZERO, true)
 var is_broken = true
+# ally/enemy references are to the CharacterBody of a unit and the StaticBody of buildings
 var allies_in_area: Array = []
 var enemies_in_area: Array = []
 var close_mining_units: Array = []
@@ -64,7 +65,7 @@ func _ready():
 	healthbar.max_value = round(max_hp)
 	add_to_group("Constructions")
 	
-func _process(_delta: float):
+func _process(delta: float):
 	visible = is_placed or GameManager.team == team
 	if !is_multiplayer_authority():
 		return
@@ -79,15 +80,15 @@ func _process(_delta: float):
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
 	else:
-		healthbar.value=health
+		healthbar.value = health
 		if health <= 0:
-			queue_free()
+			queue_free_on_server.rpc_id(1)
 		if health < max_hp:
 			sprite.modulate=Color.DIM_GRAY
 			if allies_in_area.size() > 0:
 				for body in allies_in_area:
-					if body is StaticBody2D: # if body is a bulding
-						health += 0.1
+					if !(body.is_in_group("Buildings")): # if body is not a bulding
+						health += 0.5 * delta
 						print("Repairing...", round(health), "/", max_hp)
 					#var unit: Unit = body.get_parent()
 					#if unit.state_name=="building":
@@ -171,10 +172,10 @@ func queue_free_on_server():
 	
 func _on_detection_area_body_entered(object: Node2D):
 	print(object, " entered the detection area")
-	var parent = object.get_parent()
+	var object_brain = object.get_parent()
 	if object in get_tree().get_nodes_in_group("Buildings"):
-		parent=object
-	if parent.get_team() == team:
+		object_brain = object
+	if object_brain.get_team() == team:
 		allies_in_area.append(object)
 	else:
 		enemies_in_area.append(object)
@@ -182,8 +183,10 @@ func _on_detection_area_body_entered(object: Node2D):
 # Signal handler for body exited
 func _on_detection_area_body_exited(object: Node2D):
 	print(object, " exited the detection area")
-	var parent = object.get_parent()
-	if parent.has_method("get_team") && parent.get_team() == team:
+	var object_brain = object.get_parent()
+	if object.is_in_group("Buildings"):
+		object_brain = object
+	if object_brain.get_team() == team:
 		allies_in_area.erase(object)
 	else:
 		enemies_in_area.erase(object)
