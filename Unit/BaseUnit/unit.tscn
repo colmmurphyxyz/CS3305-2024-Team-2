@@ -57,16 +57,6 @@ material = SubResource("ShaderMaterial_52cwb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_i2y3c")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
-path_desired_distance = 30.68
-target_desired_distance = 32.0
-navigation_layers = 7
-path_postprocessing = 1
-radius = 5.58
-neighbor_distance = 16.6
-max_speed = 400.0
-debug_enabled = true
-
 [node name="Timer" type="Timer" parent="Body"]
 wait_time = 0.01
 autostart = true
@@ -83,7 +73,6 @@ debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4mu3k")
 
-[connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
