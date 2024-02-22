@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=15 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
