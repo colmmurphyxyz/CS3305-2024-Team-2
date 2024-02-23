@@ -75,7 +75,7 @@ func _process(delta: float):
 	visible = is_placed or GameManager.team == team
 	if !is_multiplayer_authority():
 		return
-    
+	
 	if is_following_mouse:
 		global_position = get_global_mouse_position()
 		final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)
@@ -114,11 +114,11 @@ func _process(delta: float):
 			if object in get_tree().get_nodes_in_group("Buildings"):
 				parent=object
 			if parent.get_team() == team:
-				if not object in in_area:
-					in_area.append(object)
+				if not object in allies_in_area:
+					allies_in_area.append(object)
 			else:
-				if not object in enemy_in_area:
-					enemy_in_area.append(object)
+				if not object in enemies_in_area:
+					enemies_in_area.append(object)
 
 func start_following_mouse():
 	is_following_mouse = true
