@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk80g7cgdc68h"]
+[gd_scene load_steps=6 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
 [ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
-[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_0fqvu"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
 
@@ -13,7 +12,6 @@ radius = 204.245
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_udwv5")
 sprite_texture = ExtResource("2_wmued")
-explosion = ExtResource("3_0fqvu")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2049
@@ -63,9 +61,9 @@ text = "Scout"
 layout_mode = 2
 text = "Warden"
 
-[node name="Marrauder" type="Button" parent="VBoxContainer"]
+[node name="Fusion Screecher" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Marrauder"
+text = "Fusion Screecher"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
@@ -74,4 +72,4 @@ text = "Marrauder"
 [connection signal="pressed" from="VBoxContainer/Sniper" to="." method="_spawn_unit" binds= ["sniper"]]
 [connection signal="pressed" from="VBoxContainer/Scout" to="." method="_spawn_unit" binds= ["scout"]]
 [connection signal="pressed" from="VBoxContainer/Warden" to="." method="_spawn_unit" binds= ["warden"]]
-[connection signal="pressed" from="VBoxContainer/Marrauder" to="." method="_spawn_unit" binds= ["marrauder"]]
+[connection signal="pressed" from="VBoxContainer/Fusion Screecher" to="." method="_spawn_unit" binds= ["screecher"]]

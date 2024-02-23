@@ -20,9 +20,9 @@ var is_broken = true
 var allies_in_area: Array = []
 var enemies_in_area: Array = []
 var close_mining_units: Array = []
-var barrack_placed: bool = false
-var laboratory_placed: bool = false
-var fusion_lab_placed: bool = false
+#var barrack_placed: bool = false
+#var laboratory_placed: bool = false
+#var fusion_lab_placed: bool = false
 
 # onready variables
 @onready var border: Line2D = $Border

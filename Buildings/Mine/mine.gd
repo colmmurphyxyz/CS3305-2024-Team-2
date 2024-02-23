@@ -5,6 +5,7 @@ var increase_timer: Timer
 
 const max_storage = 250
 var stored_resources = 0
+var last_updated_value = stored_resources
 
 var has_unobtainium = false # Flagset by buildsystem, if a mine was placed in a 'Klassium' ore deposit
 
@@ -26,6 +27,12 @@ func _process(delta):
 	super._process(delta)
 	if health >= max_hp:
 		add_to_group("Mines")
+	if stored_resources != last_updated_value:
+		if has_unobtainium:
+			GameManager.unobtainium = stored_resources
+		else:
+			GameManager.iron = stored_resources
+		last_updated_value = stored_resources
 	
 func _on_increase_timer_timeout():
 	# if active tranfer ore to units to carry and generate stored ore
