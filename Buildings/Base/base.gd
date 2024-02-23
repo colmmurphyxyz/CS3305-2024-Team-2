@@ -1,78 +1,58 @@
 extends StaticBody2D
 class_name Base
 
-# setup variables for placement
-@export var sprite_texture:Texture2D
-@export var is_following_mouse = true
-@onready var border: Line2D
-var final_collision = move_and_collide(Vector2.ZERO, true)
+# export variables
 @export var team: String = "1"
-
-var is_active = false
-var sprite:Sprite2D
-
-# Detection area for interation and hit box
-
-@onready var detection_area = Area2D.new()
-@onready var collision_circle = CollisionShape2D.new()
-
-# Track other objects nearby
-var is_broken = true
-var in_area: Array = []
-var enemy_in_area: Array = []
-
-# Health and repair
-@onready var healthbar = $Healthbar
-@export var explosion:PackedScene
-var close_mining_units:Array = []
-
+@export var sprite_texture:Texture2D
 @export var max_hp = 100.0
 @export var health = 1.0
+@export var is_following_mouse = true
+## what exactly does 'being active' refer to?
+@export var is_active: bool = false
+@export var is_placed: bool = false
 
-# Upgrade structure tracking
-var barrack_placed = false
-var laboratory_placed = false
-var fusion_lab_placed = false
+# public variables
+var explosion_scene: PackedScene = \
+		preload("res://Unit/BaseUnit/Explosion.tscn") as PackedScene
+var final_collision = move_and_collide(Vector2.ZERO, true)
+var is_broken = true
+# ally/enemy references are to the CharacterBody of a unit and the StaticBody of buildings
+var allies_in_area: Array = []
+var enemies_in_area: Array = []
+var close_mining_units: Array = []
+var barrack_placed: bool = false
+var laboratory_placed: bool = false
+var fusion_lab_placed: bool = false
+
+# onready variables
+@onready var border: Line2D = $Border
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var detection_area: Area2D = $DetectionArea
+@onready var collision_circle: CollisionShape2D = $DetectionArea/CollisionShape2D
+@onready var healthbar: TextureProgressBar = $Healthbar
 
 # failsafe for other object detection
 var overlapping: Array = []
 
 func _ready():
 	add_to_group("Buildings")
-	sprite= Sprite2D.new()
-	add_child(sprite, true)
-	sprite.texture = sprite_texture
-	sprite.scale = Vector2(2, 2)
-
-# Collision box
-	var collision_shape = CollisionShape2D.new()
-
-	add_child(collision_shape, true)
+	var collision_shape: CollisionShape2D = $BuildingCollisionShape
 
 	# set shape of collision
 
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
-	rectangle_shape.extents = sprite_half_extents
-	collision_shape.shape = rectangle_shape
-	
-	add_child(detection_area, true)
-	
-	collision_circle.shape = CircleShape2D.new()
-	collision_circle.shape.radius = sprite_half_extents.length() * 2
-	
-	detection_area.add_child(collision_circle, true)
-
+	#rectangle_shape.extents = sprite_half_extents
+	#collision_shape.shape = rectangle_shape
+	#
+	#collision_circle.shape = CircleShape2D.new()
+	#collision_circle.shape.radius = sprite_half_extents.length() * 2
 	
 # Disable collisons before placement 
 	collision_layer = 0
 	collision_mask = 1 + 2
-	
-# Add a colour hit box to report placeable areas
-	border = Line2D.new()
 
-	add_child(border, true)
-	
+	border.visible = false
 	# set collision box as perimeter
 
 	border.points = [
@@ -91,10 +71,8 @@ func _ready():
 	add_to_group("Constructions")
 	z_index = 10 # Move on top layer, fix for ore deposit sprite layering
 	
-func _process(_delta: float):
-
-# Follow mouse when spawned
-
+func _process(delta: float):
+	visible = is_placed or GameManager.team == team
 	if !is_multiplayer_authority():
 		return
     
@@ -109,19 +87,16 @@ func _process(_delta: float):
 			border.default_color = Color(0,1,0)
 			change_border_colour(Color(0,1,0))
 	else:
-		# Repair logic
-		healthbar.value=health
+		healthbar.value = health
 		if health <= 0:
-			queue_free()
+			queue_free_on_server.rpc_id(1)
 		if health < max_hp:
 			sprite.modulate=Color.DIM_GRAY
-			if in_area.size() > 0:
-				for body in in_area:
-					if is_instance_valid(body):
-						var unit:Unit = body.get_parent()
-						if unit.state_name=="building":
-							health += 0.1
-						#print("Repairing...", round(health), "/", max_hp)
+			if allies_in_area.size() > 0:
+				for body in allies_in_area:
+					if !(body.is_in_group("Buildings")): # if body is not a bulding
+						health += 0.5 * delta
+						print("Repairing...", round(health), "/", max_hp)
 				if health >= max_hp:
 					is_active = true
 					sprite.modulate=Color(1,1,1)
@@ -183,42 +158,67 @@ func deselect():
 func change_border_colour(color):
 	border.default_color = color
 	
+@rpc("any_peer", "call_local", "reliable")
 func damage(damage_amount):
-	# Handle damage event
-	health-=damage_amount
-	healthbar.value=health
+	#sprite2d.material.set("shader_param/active",true)
+	health -= damage_amount
+	healthbar.value = health
 	
 	if health <= 0:
-		var explosion_node = explosion.instantiate()
-		get_parent().add_child(explosion_node, true)
-		explosion_node.global_position = global_position
-		@warning_ignore("integer_division")
-		explosion_node.scale *= (sprite.texture.get_width() / 400)
-		queue_free()
-	
-func _on_detection_area_body_entered(object):
-	# When detection radius entered sort units into friedly and enemy
-	var parent = object.get_parent()
-	if object in get_tree().get_nodes_in_group("Buildings"):
-		parent=object
-	if parent.get_team() == team:
-		in_area.append(object)
-	else:
-		enemy_in_area.append(object)
+		spawn_explosion_scene.rpc_id(1)
+		#var explosion_node = explosion_scene.instantiate()
+		#get_parent().add_child(explosion_node, true)
+		#explosion_node.global_position = global_position
+		#@warning_ignore("integer_division")
+		#explosion_node.scale *= (sprite.texture.get_width() / 400)
+		queue_free_on_server.rpc_id(1)
+		
+@rpc("any_peer", "call_local")
+func spawn_explosion_scene():
+	var explosion = explosion_scene.instantiate()
+	@warning_ignore("integer_division")
+	explosion.scale *= (sprite.texture.get_width() / 400)
+	add_sibling(explosion, true)
 
-# Remove from list when radius is exited
-func _on_detection_area_body_exited(object):
-	var parent = object.get_parent()
-	if parent.get_team() == team:
-		in_area.erase(object)
-	else:
-		enemy_in_area.erase(object)
+@rpc("any_peer", "call_local", "reliable")
+func queue_free_on_server():
+	queue_free()
 	
-# Helpers for drone units to work
-func _on_area_2d_body_exited(body):
+func _on_detection_area_body_entered(object: Node2D):
+	print(object, " entered the detection area")
+	var object_brain = object.get_parent()
+	if object in get_tree().get_nodes_in_group("Buildings"):
+		object_brain = object
+	if object_brain.get_team() == team:
+		allies_in_area.append(object)
+	else:
+		enemies_in_area.append(object)
+
+# Signal handler for body exited
+func _on_detection_area_body_exited(object: Node2D):
+	print(object, " exited the detection area")
+	var object_brain = object.get_parent()
+	if object.is_in_group("Buildings"):
+		object_brain = object
+	if object_brain.get_team() == team:
+		allies_in_area.erase(object)
+	else:
+		enemies_in_area.erase(object)
+
+func _on_area_2d_body_exited(body: Node2D):
 	close_mining_units.erase(body)
 	
-func _on_area_2d_body_entered(body):
-	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
-		if body.get_parent().can_mine == true: 
+func _on_area_2d_body_entered(body: Node2D):
+	if !(body.get_parent() in get_tree().get_nodes_in_group("Units")):
+		return
+	if body.get_parent().team == team and body.get_parent().can_mine == true: 
 			close_mining_units.append(body)
+			
+@rpc("any_peer", "call_local", "reliable")
+func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
+	var new_bullet = preload("res://Bullet/Bullet.tscn").instantiate()
+	new_bullet.target_brain_name = target_name
+	new_bullet.damage = damage
+	new_bullet.speed = speed
+	new_bullet.global_position = spawn_pos
+	add_sibling(new_bullet, true)

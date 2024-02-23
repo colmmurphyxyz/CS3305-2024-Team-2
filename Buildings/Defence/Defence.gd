@@ -1,7 +1,8 @@
 extends Base
 
-@export var sprite_texture_tier_2:Texture2D
-@export var sprite_texture_tier_3:Texture2D
+@export var sprite_texture_tier_1: Texture2D = load("res://Assets/defence_base.png") as Texture2D
+@export var sprite_texture_tier_2: Texture2D = load("res://Assets/defence_mid.png") as Texture2D
+@export var sprite_texture_tier_3: Texture2D
 
 var bullet_scene: PackedScene = preload("res://Bullet/Bullet.tscn")
 
@@ -34,9 +35,8 @@ func _process(delta):
 				fired = false
 
 func update_target():
-	if enemy_in_area.size() > 0: # If there are enemies in radius target the one entered earliest
-		if is_instance_valid(enemy_in_area[0]):
-			current_target = enemy_in_area[0]
+	if enemies_in_area.size() > 0:
+		current_target = enemies_in_area[0]
 		#print(current_target)
 	else:
 		current_target = null
@@ -47,15 +47,25 @@ func attack():
 	if not fired:
 		fired = true
 		attack_timer_count = reload
-		var bullet = bullet_scene.instantiate()
-		get_parent().add_child(bullet)
 		if is_instance_valid(current_target):
-			bullet.set_target(current_target)
-			bullet.global_position = global_position
-			bullet.damage = attack_damage  # Set the appropriate damage value
-			bullet.speed = attack_speed  # Set the appropriate speed value
+			print("defense is firing")
+			spawn_bullet.rpc_id(1, \
+					multiplayer.get_unique_id(),\
+					current_target.get_parent().name,\
+					global_position,\
+					attack_damage,\
+					attack_speed)
 		else:
-			bullet.queue_free()
+			print("invalid target!!!")
+		#var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
+		#get_parent().add_child(bullet)
+		#if is_instance_valid(current_target):
+			#bullet.set_target(current_target)
+			#bullet.global_position = global_position
+			#bullet.damage = attack_damage  # Set the appropriate damage value
+			#bullet.speed = attack_speed  # Set the appropriate speed value
+		#else:
+			#bullet.queue_free()
 
 func update_tower_stats():
 # Adjust variables based on the current tier
@@ -64,8 +74,9 @@ func update_tower_stats():
 			attack_damage = 10
 			attack_speed = 200
 			reload = 5.0
-			attack_range = 30.0
+			attack_range = 100.0
 			max_hp = 100.0
+			sprite.texture = sprite_texture_tier_1
 			healthbar.max_value = round(max_hp)
 		2:
 			attack_damage = 10

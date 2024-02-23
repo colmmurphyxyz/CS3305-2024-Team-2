@@ -1,5 +1,15 @@
 extends Node2D
 
+func _ready():
+	# set multiplayer authority on units/buildings already in the scene
+	var client_id: int = GameManager.Client["id"] if GameManager.Client.has("id") else "2"
+	for node in get_children():
+		for child in node.get_children():
+			child.set_multiplayer_authority(
+				1 if node.team == "1" else client_id,
+				true
+			)
+
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -34,7 +44,9 @@ func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
 	
 @rpc("authority", "call_local", "reliable")
 func set_authority(node_name: String, auth: int):
-	get_node(node_name).set_multiplayer_authority(auth, true)
+	var new_node = get_node(node_name)
+	new_node.set_multiplayer_authority(auth, true)
+	new_node.add_to_group("Units")
 
 
 func _on_child_entered_tree(node: Node):
