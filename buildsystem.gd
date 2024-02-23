@@ -18,7 +18,7 @@ func _ready():
 
 func spawn_object(resource):
 	spawned_object = resource.instantiate()
-	add_child(spawned_object)
+	add_child(spawned_object, true)
 	
 func placing():
 	if spawned_object != null && placement_allowed:

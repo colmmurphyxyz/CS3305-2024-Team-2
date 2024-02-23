@@ -16,7 +16,6 @@ func _ready():
 
 func set_target(unit):
 	target_unit=unit
-	print("Unit:",unit)
 	if target_unit in get_tree().get_nodes_in_group("Buildings"):
 		target_brain=unit
 	else:
@@ -29,6 +28,8 @@ func _physics_process(delta):
 	if is_instance_valid(target_unit):
 		var direction: Vector2 = (target_unit.global_position - global_position).normalized()
 		$Sprite2D.rotation = atan(direction.y / direction.x)
+		if direction.x > 0:
+			$Sprite2D.rotation += PI
 		position += direction * speed * delta
 
 		if global_position.distance_to(target_unit.global_position) < 20:

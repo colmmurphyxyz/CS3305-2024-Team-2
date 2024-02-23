@@ -1,6 +1,6 @@
 extends Control
 
-@onready var game_scene: PackedScene = preload("res://multiplayer_test.tscn")
+@onready var game_scene: PackedScene = preload("res://game.tscn")
 
 var peer: ENetMultiplayerPeer
 
@@ -120,8 +120,9 @@ func _show_error_message(message: String):
 		
 @rpc("any_peer", "call_local")
 func start_game():
-	var scene = load("res://multiplayer_test.tscn").instantiate()
+	var scene = game_scene.instantiate()
 	get_tree().root.add_child(scene)
+	scene.get_node("PlayerCamera").is_locked = true
 	self.hide()
 
 

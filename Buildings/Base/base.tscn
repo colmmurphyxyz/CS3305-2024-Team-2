@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://chcffv7xahe1u"]
+[gd_scene load_steps=9 format=3 uid="uid://chcffv7xahe1u"]
 
 [ext_resource type="Script" path="res://Buildings/Base/base.gd" id="1_rcxq8"]
 [ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_msyjy"]
@@ -12,6 +12,14 @@ size = Vector2(115, 134)
 [sub_resource type="CircleShape2D" id="CircleShape2D_3bx1k"]
 radius = 126.063
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yob7o"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:team")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
 [node name="Headquarters" type="StaticBody2D"]
 collision_mask = 3
 script = ExtResource("1_rcxq8")
@@ -24,7 +32,6 @@ position = Vector2(0.5, 23)
 shape = SubResource("RectangleShape2D_ke4o0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(2, 4)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_msyjy")
@@ -50,3 +57,6 @@ rounded = true
 nine_patch_stretch = true
 texture_under = ExtResource("3_8vxph")
 texture_progress = ExtResource("4_p5w77")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yob7o")

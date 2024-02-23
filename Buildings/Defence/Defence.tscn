@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dr1npldas1wa4"]
+[gd_scene load_steps=9 format=3 uid="uid://dr1npldas1wa4"]
 
 [ext_resource type="Script" path="res://Buildings/Defence/Defence.gd" id="1_akq7d"]
 [ext_resource type="Texture2D" uid="uid://2ika8fx1ppga" path="res://Assets/defence_mid.png" id="2_vucpx"]
@@ -9,6 +9,14 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06idq"]
 radius = 126.063
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rp7r5"]
+properties/0/path = NodePath(".:team")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Defence" type="StaticBody2D"]
 script = ExtResource("1_akq7d")
@@ -38,3 +46,6 @@ rounded = true
 nine_patch_stretch = true
 texture_under = ExtResource("5_jy5te")
 texture_progress = ExtResource("6_sg53v")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_rp7r5")

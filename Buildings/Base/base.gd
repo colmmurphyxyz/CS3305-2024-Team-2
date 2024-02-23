@@ -7,10 +7,12 @@ class_name Base
 @onready var border: Line2D
 var final_collision = move_and_collide(Vector2.ZERO, true)
 @export var team: String = "1"
+
 var is_active = false
 var sprite:Sprite2D
 
 # Detection area for interation and hit box
+
 @onready var detection_area = Area2D.new()
 @onready var collision_circle = CollisionShape2D.new()
 
@@ -24,8 +26,8 @@ var enemy_in_area: Array = []
 @export var explosion:PackedScene
 var close_mining_units:Array = []
 
-var max_hp = 100.0
-var health = 1.0
+@export var max_hp = 100.0
+@export var health = 1.0
 
 # Upgrade structure tracking
 var barrack_placed = false
@@ -38,23 +40,29 @@ var overlapping: Array = []
 func _ready():
 	add_to_group("Buildings")
 	sprite= Sprite2D.new()
-	add_child(sprite)
+	add_child(sprite, true)
 	sprite.texture = sprite_texture
 	sprite.scale = Vector2(2, 2)
 
 # Collision box
 	var collision_shape = CollisionShape2D.new()
-	add_child(collision_shape)
+
+	add_child(collision_shape, true)
+
+	# set shape of collision
+
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
 	rectangle_shape.extents = sprite_half_extents
 	collision_shape.shape = rectangle_shape
 	
-# Detection radius
-	add_child(detection_area)
+	add_child(detection_area, true)
+	
 	collision_circle.shape = CircleShape2D.new()
 	collision_circle.shape.radius = sprite_half_extents.length() * 2
-	detection_area.add_child(collision_circle)
+	
+	detection_area.add_child(collision_circle, true)
+
 	
 # Disable collisons before placement 
 	collision_layer = 0
@@ -62,7 +70,11 @@ func _ready():
 	
 # Add a colour hit box to report placeable areas
 	border = Line2D.new()
-	add_child(border)
+
+	add_child(border, true)
+	
+	# set collision box as perimeter
+
 	border.points = [
 		Vector2(-sprite_half_extents.x, -sprite_half_extents.y),
 		Vector2(sprite_half_extents.x, -sprite_half_extents.y),
@@ -80,7 +92,12 @@ func _ready():
 	z_index = 10 # Move on top layer, fix for ore deposit sprite layering
 	
 func _process(_delta: float):
+
 # Follow mouse when spawned
+
+	if !is_multiplayer_authority():
+		return
+    
 	if is_following_mouse:
 		global_position = get_global_mouse_position()
 		final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)
@@ -173,7 +190,7 @@ func damage(damage_amount):
 	
 	if health <= 0:
 		var explosion_node = explosion.instantiate()
-		get_parent().add_child(explosion_node)
+		get_parent().add_child(explosion_node, true)
 		explosion_node.global_position = global_position
 		@warning_ignore("integer_division")
 		explosion_node.scale *= (sprite.texture.get_width() / 400)
