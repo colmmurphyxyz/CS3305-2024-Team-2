@@ -7,7 +7,7 @@ uniform bool inside = false;
 uniform bool add_margins = true; // only useful when inside is false
 uniform bool shader_enabled = true; // Added parameter to enable or disable the shader
 
-
+uniform bool team2 = false; // Added parameter to enable or disable the shader
 
 uniform bool active = false; // damage shader
 uniform vec4 tint : source_color = vec4(.1, .1, .1, 1.);
@@ -45,6 +45,7 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
 }
 
 void fragment() {
+	
     if (!shader_enabled) {
         // If the shader is disabled, simply output the texture color
         COLOR = texture(TEXTURE, UV);
@@ -79,6 +80,11 @@ void fragment() {
         if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
             COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
             COLOR.a += (1.0 - COLOR.a) * color.a;
+			
         }
+		
     }
+	if (team2==false){
+		COLOR = vec4(COLOR.r*1.0,COLOR.g*.3,COLOR.b*.2,COLOR.a);
+	}
 }
