@@ -1,5 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cylybcl5txpup"]
-
+[gd_scene load_steps=14 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
@@ -7,14 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="PackedScene" uid="uid://dts3ydmuiulbc" path="res://Unit/UnitTypes/Bruiser/bruiser.tscn" id="3_clc6p"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
-[ext_resource type="Script" path="res://SpawnRoot.gd" id="4_hiv35"]
 [ext_resource type="Script" path="res://Buildings/Mine/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://ca0d7iipih2xs" path="res://Assets/temp_ore_texture.png" id="7_4hrch"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
-[ext_resource type="PackedScene" uid="uid://dkto4ql016cfw" path="res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn" id="13_5dx1l"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -74,93 +71,7 @@ text = "Fusion Lab"
 [node name="Buildings" type="Node2D" parent="."]
 script = ExtResource("4_atcb7")
 
-[node name="BuildingMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Buildings/Base/base.tscn", "res://Buildings/Defence/Defence.tscn", "res://Buildings/Barracks/barracks.tscn")
-spawn_path = NodePath("../Buildings")
-
-[node name="SpawnRoot" type="Node2D" parent="."]
-script = ExtResource("4_hiv35")
-
-[node name="Drone5" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(966, 371)
-
-[node name="Drone6" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(971, 347)
-
-[node name="Drone7" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(992, 338)
-
-[node name="Bruiser" parent="SpawnRoot" instance=ExtResource("3_clc6p")]
-position = Vector2(1122, 306)
-
-[node name="Bruiser2" parent="SpawnRoot" instance=ExtResource("3_clc6p")]
-position = Vector2(1124, 354)
-
-[node name="Bruiser3" parent="SpawnRoot" instance=ExtResource("3_clc6p")]
-position = Vector2(1118, 392)
-
-[node name="Warden" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
-position = Vector2(1079, 242)
-team = "2"
-
-[node name="Warden2" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
-position = Vector2(1064, 411)
-
-[node name="Sniper" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1102, 596)
-team = "2"
-
-[node name="Sniper2" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1422, 562)
-team = "2"
-
-[node name="Sniper3" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1359, 643)
-team = "2"
-
-[node name="Drone" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1203, 416)
-team = "2"
-
-[node name="Drone13" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1165, 391)
-team = "2"
-
-[node name="Drone8" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1172, 434)
-team = "2"
-
-[node name="Drone12" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1172, 434)
-team = "2"
-
-[node name="Drone9" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1172, 325)
-team = "2"
-
-[node name="Drone10" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1210, 368)
-team = "2"
-
-[node name="Drone11" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1202, 323)
-team = "2"
-
-[node name="Drone3" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(967, 448)
-
-[node name="Drone4" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(965, 394)
-
-[node name="Drone2" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(934, 424)
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn", "res://Unit/UnitTypes/Scout/scout.tscn")
-spawn_path = NodePath("../SpawnRoot")
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(501, 1445)
 scale = Vector2(1.85854, 1.59069)
 color = Color(0, 0.792157, 0.941176, 1)
@@ -169,7 +80,6 @@ texture = ExtResource("7_is7xx")
 texture_scale = 6.72
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(1688, 151)
 scale = Vector2(1.85854, 1.59069)
 color = Color(0.819608, 0.12549, 0.607843, 1)
@@ -209,9 +119,9 @@ position = Vector2(433, 385)
 scale = Vector2(0.0867604, 0.0867705)
 polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
 
-[node name="Unobtainium" type="Area2D" parent="OreDeposits"]
+[node name="Klassium" type="Area2D" parent="OreDeposits"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Klassium"]
 polygon = PackedVector2Array(1264, 307, 1260, 420, 1364, 420, 1366, 301)
 
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
@@ -278,11 +188,11 @@ position = Vector2(1124, 354)
 position = Vector2(1118, 392)
 
 [node name="Warden" parent="." instance=ExtResource("10_d8kfn")]
-position = Vector2(806, 241)
+position = Vector2(1079, 242)
 team = "2"
 
 [node name="Warden2" parent="." instance=ExtResource("10_d8kfn")]
-position = Vector2(866, 352)
+position = Vector2(1064, 411)
 
 [node name="Sniper" parent="." instance=ExtResource("2_2ip8b")]
 position = Vector2(1102, 596)
@@ -295,11 +205,6 @@ team = "2"
 [node name="Sniper3" parent="." instance=ExtResource("2_2ip8b")]
 position = Vector2(1359, 643)
 team = "2"
-
-[node name="FusionBlaster" parent="." instance=ExtResource("13_5dx1l")]
-position = Vector2(1277, 846)
-team = "2"
-attack_speed = 0.5
 
 [connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_exited"]
@@ -321,8 +226,3 @@ attack_speed = 0.5
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_press_select" binds= ["fusion"]]
 [connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
-[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
-[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
-[connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]

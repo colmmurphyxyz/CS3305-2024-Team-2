@@ -23,42 +23,31 @@ func _ready():
 	
 func _process(delta):
 	super._process(delta)
-	
-	#if health <= 0:
-		#queue_free()
-	#if health < max_hp:
-		#if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
-			#health += delta * in_area.size()
-			#if health >= max_hp: 
-				#is_active = true
-				##print("Repair complete!")
-			##print("Repairing...", health, "/", max_hp)
-		#else:
-			##print("Repair stopped")
-			#pass
-			
+	# If structure was built, start reloading and update target in area
 	if is_active:
 		attack_timer_count -= delta
 		update_target()
-		if is_instance_valid(current_target):
-			if attack_timer_count <= 0:
+		if is_instance_valid(current_target): 
+			if attack_timer_count <= 0: # If reloaded shoot at target
 				attack_timer_count = reload
 				attack()
 				fired = false
 
 func update_target():
-	if enemy_in_area.size() > 0:
-		current_target = enemy_in_area[0]
+	if enemy_in_area.size() > 0: # If there are enemies in radius target the one entered earliest
+		if is_instance_valid(enemy_in_area[0]):
+			current_target = enemy_in_area[0]
 		#print(current_target)
 	else:
 		current_target = null
 		
 	
 func attack():
+	# Load a bullet instance and pass current target if still in area
 	if not fired:
 		fired = true
 		attack_timer_count = reload
-		var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
+		var bullet = bullet_scene.instantiate()
 		get_parent().add_child(bullet)
 		if is_instance_valid(current_target):
 			bullet.set_target(current_target)
@@ -94,18 +83,16 @@ func update_tower_stats():
 			max_hp = 100.0
 			healthbar.max_value = round(max_hp)
 			#change sprite
-# Add more cases for additional tiers
 
-# Function to upgrade the tower
+# Upgrade and downgrade system
 func upgrade():
-	if tier < 3:  # Adjust the max tier as needed
+	if tier < 3:
 		tier += 1
 		update_tower_stats()
 		print("Tower upgraded to tier:", tier)
 
-# Function to downgrade the tower
 func downgrade():
-	if tier > 1:  # Adjust the min tier as needed
+	if tier > 1:
 		tier -= 1
 		update_tower_stats()
 		print("Tower downgraded to tier:", tier)
