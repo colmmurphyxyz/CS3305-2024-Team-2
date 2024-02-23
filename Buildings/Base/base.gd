@@ -31,12 +31,15 @@ var fusion_lab_placed: bool = false
 @onready var collision_circle: CollisionShape2D = $DetectionArea/CollisionShape2D
 @onready var healthbar: TextureProgressBar = $Healthbar
 
+# failsafe for other object detection
+var overlapping: Array = []
 
 func _ready():
 	add_to_group("Buildings")
 	var collision_shape: CollisionShape2D = $BuildingCollisionShape
 
 	# set shape of collision
+
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
 	#rectangle_shape.extents = sprite_half_extents
@@ -45,11 +48,13 @@ func _ready():
 	#collision_circle.shape = CircleShape2D.new()
 	#collision_circle.shape.radius = sprite_half_extents.length() * 2
 	
-	collision_layer = 0 # disable collisions with units
+# Disable collisons before placement 
+	collision_layer = 0
 	collision_mask = 1 + 2
-	
+
 	border.visible = false
 	# set collision box as perimeter
+
 	border.points = [
 		Vector2(-sprite_half_extents.x, -sprite_half_extents.y),
 		Vector2(sprite_half_extents.x, -sprite_half_extents.y),
@@ -57,22 +62,24 @@ func _ready():
 		Vector2(-sprite_half_extents.x, sprite_half_extents.y),
 		Vector2(-sprite_half_extents.x, -sprite_half_extents.y),
 	]
-
 	border.default_color = Color(1, 1, 1)  # Set the border color to red
 	border.default_color = Color(1, 1, 1)  # Set the border color to white
 	border.width = 1  # Adjust the width of the border
 
+# Add healthbar and add to repairable class
 	healthbar.max_value = round(max_hp)
 	add_to_group("Constructions")
+	z_index = 10 # Move on top layer, fix for ore deposit sprite layering
 	
 func _process(delta: float):
 	visible = is_placed or GameManager.team == team
 	if !is_multiplayer_authority():
 		return
+    
 	if is_following_mouse:
-		# follow mouse movement
 		global_position = get_global_mouse_position()
 		final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)
+		# Test for placeable areas
 		if final_collision != null:
 			border.default_color = Color(1,0,0)
 			change_border_colour(Color(1,0,0))
@@ -90,10 +97,6 @@ func _process(delta: float):
 					if !(body.is_in_group("Buildings")): # if body is not a bulding
 						health += 0.5 * delta
 						print("Repairing...", round(health), "/", max_hp)
-					#var unit: Unit = body.get_parent()
-					#if unit.state_name=="building":
-						#health += 0.1
-						#print("Repairing...", round(health), "/", max_hp)
 				if health >= max_hp:
 					is_active = true
 					sprite.modulate=Color(1,1,1)
@@ -103,9 +106,21 @@ func _process(delta: float):
 		else:
 			#print("Repair stopped")
 			pass
+			
+		# Failsafe for detection radius as its inactive before placement 
+		overlapping = get_node("Area2D").get_overlapping_bodies()
+		for object in overlapping:
+			var parent = object.get_parent()
+			if object in get_tree().get_nodes_in_group("Buildings"):
+				parent=object
+			if parent.get_team() == team:
+				if not object in in_area:
+					in_area.append(object)
+			else:
+				if not object in enemy_in_area:
+					enemy_in_area.append(object)
 
 func start_following_mouse():
-	# enable placement
 	is_following_mouse = true
 
 func stop_following_mouse():
@@ -113,17 +128,14 @@ func stop_following_mouse():
 	# check for collisions with other objects at the final position
 	final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)
 	if final_collision != null:
-		print("Collision detected at the final position!")
-		# add end-user feedback
+		#print("Collision detected at the final position!")
 		return false
 
 	else:
-		print("No collision at the final position!")
+		#print("No collision at the final position!")
 		border.visible = false
-		# add end-user feedback
 		is_following_mouse = false
-		collision_layer = 2 + 13# re-enable collisions to prevent stacking
-		#collision_layer = 2# re-enable collisions to prevent stacking
+		collision_layer = 2 + 13 # re-enable collisions to prevent stacking
 		detection_area.body_entered.connect(_on_detection_area_body_entered)
 		detection_area.body_exited.connect(_on_detection_area_body_exited)
 		return true 
@@ -135,6 +147,8 @@ func set_collision_circle_radius(radius: float):
 	collision_circle.shape.radius = radius
 # This is for selection system, not for building placement, please use other function names and see 
 # select/deselect usage in unit - Ben
+
+# Select and deselect needed on all nodes for netting to work
 func select():
 	start_following_mouse()
 
@@ -190,7 +204,7 @@ func _on_detection_area_body_exited(object: Node2D):
 		allies_in_area.erase(object)
 	else:
 		enemies_in_area.erase(object)
-	
+
 func _on_area_2d_body_exited(body: Node2D):
 	close_mining_units.erase(body)
 	

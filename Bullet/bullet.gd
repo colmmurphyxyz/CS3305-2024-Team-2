@@ -28,6 +28,8 @@ func _physics_process(delta):
 	if is_instance_valid(target_unit):
 		var direction: Vector2 = (target_unit.global_position - global_position).normalized()
 		$Sprite2D.rotation = atan(direction.y / direction.x)
+		if direction.x > 0:
+			$Sprite2D.rotation += PI
 		position += direction * speed * delta
 
 		if global_position.distance_to(target_unit.global_position) < 20:

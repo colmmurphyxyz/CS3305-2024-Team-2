@@ -9,9 +9,10 @@ var selected_building_path: String = ""
 var placement_allowed: bool = false
 var deposit: bool = false
 var mine: bool = false
+var unobtainium = false
 
 func _process(_delta: float):
-	if Input.is_action_just_pressed("right_click"):
+	if Input.is_action_just_pressed("right_click"): # click at any time to cancel placing an object
 		cancel_placement()
 
 	if Input.is_action_just_pressed("left_click"):
@@ -44,7 +45,17 @@ func spawn_object(resource):
 	spawned_object.set_multiplayer_authority(multiplayer.get_unique_id())
 	add_child(spawned_object, true)
 	
-func _button_press_select(building_name: String):
+func placing():
+	if spawned_object != null && placement_allowed:
+			if mine && deposit == false:
+				print("No deposit found nearby")
+			elif spawned_object.stop_following_mouse() == true: # if placed
+				if mine:
+					spawned_object.has_unobtainium = unobtainium
+				spawned_object = null
+				mine = false
+	
+func _button_press_select(building_name: String): # Arg passed by a signal for structure type
 	cancel_placement()
 	match building_name:
 		"mine":
@@ -70,25 +81,27 @@ func _button_press_select(building_name: String):
 			print("Not valid structure")
 	pass
 	
+# Prevent placing buildings on UI
 func _button_entered():
 	placement_allowed = false
 	
 func _button_exited():
 	placement_allowed = true
 	
+# Check if a mine's placement is attempted in an ore area
 func _deposit_enter():
 	deposit = true
 	
 func _deposit_exit():
 	deposit = false
-
-func move_object():
-	# add move after placement
-	pass
 	
-func move_node(node: Node, new_parent: Node):
-	node.get_parent().remove_child(node) # Get node's parent and remove node from it    
-	new_parent.add_child(node, true) # Add node to new parent as a child 
+# Special ore areas
+func _unobtainium_area():
+	unobtainium = true
+	
+func _not_unobtainium_area():
+	unobtainium = false
+	
 
 func cancel_placement():
 	if spawned_object != null:
