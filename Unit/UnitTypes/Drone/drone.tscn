@@ -148,6 +148,9 @@ properties/3/replication_mode = 2
 properties/4/path = NodePath("Body/Healthbar:value")
 properties/4/spawn = true
 properties/4/replication_mode = 2
+properties/5/path = NodePath("Body:target")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [node name="Drone" type="Node2D"]
 y_sort_enabled = true

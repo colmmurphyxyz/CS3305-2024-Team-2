@@ -19,7 +19,7 @@ func set_target(unit):
 	if target_unit in get_tree().get_nodes_in_group("Buildings"):
 		target_brain=unit
 	else:
-		print(get_tree().get_nodes_in_group("Buildings"))
+		#print(get_tree().get_nodes_in_group("Buildings"))
 		target_brain=unit.get_parent()
 		
 func _physics_process(delta):
@@ -36,12 +36,14 @@ func _physics_process(delta):
 			# do damage calculation on the unit's owner's machinem to ensure
 			# updated health values are replicated
 			# and to avoid race conditions etc...
-			target_unit.get_parent().damage.rpc_id(
+			var damage_recipient = target_unit \
+					if target_brain.is_in_group("Buildings") \
+					else target_unit.get_parent()
+			damage_recipient.damage.rpc_id(
 				target_brain.get_node("MultiplayerSynchronizer").get_multiplayer_authority(),
 				damage
 				)
-			spawn_bullet_hit_scene.rpc()
-			
+			spawn_bullet_hit_scene()
 			queue_free()
 		move_and_slide()
 	else:
@@ -49,10 +51,11 @@ func _physics_process(delta):
 		
 func set_target_by_name(n: String):
 	var target_unit: Node2D = get_parent().get_node_or_null(n)
-	if target_unit != null:
+	if target_unit.is_in_group("Buildings"):
+		set_target(target_unit)
+	else:
 		set_target(target_unit.get_node("Body"))
 	
-@rpc("any_peer", "call_local")
 func spawn_bullet_hit_scene():
 	var bullet_unit: StaticBody2D = \
 			preload("res://Unit/BaseUnit/BulletHit.tscn").instantiate()

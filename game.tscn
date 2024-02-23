@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://SpawnRoot.gd" id="4_hiv35"]
 [ext_resource type="Script" path="res://Buildings/Mine/DepositAreas.gd" id="5_7lovr"]
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
+[ext_resource type="Texture2D" uid="uid://ca0d7iipih2xs" path="res://Assets/temp_ore_texture.png" id="7_4hrch"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
@@ -70,12 +71,15 @@ text = "Laboratory"
 layout_mode = 2
 text = "Fusion Lab"
 
-[node name="Buildings" type="Node2D" parent="."]
+[node name="Buildings" type="Node2D" parent="." node_paths=PackedStringArray("building_root")]
 script = ExtResource("4_atcb7")
+building_root = NodePath("../BuildingsRoot")
+
+[node name="BuildingsRoot" type="Node2D" parent="."]
 
 [node name="BuildingMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Buildings/Base/base.tscn", "res://Buildings/Defence/Defence.tscn", "res://Buildings/Barracks/barracks.tscn")
-spawn_path = NodePath("../Buildings")
+spawn_path = NodePath("../BuildingsRoot")
 
 [node name="SpawnRoot" type="Node2D" parent="."]
 script = ExtResource("4_hiv35")
@@ -93,28 +97,22 @@ position = Vector2(992, 338)
 position = Vector2(1122, 306)
 
 [node name="Warden" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
-position = Vector2(1079, 242)
-team = "2"
+position = Vector2(1328, 469)
 
 [node name="Sniper" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1102, 596)
-team = "2"
+position = Vector2(1207, 563)
 
 [node name="Sniper2" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
 position = Vector2(1422, 562)
-team = "2"
 
 [node name="Sniper3" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
 position = Vector2(1359, 643)
-team = "2"
 
 [node name="Drone" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1203, 416)
-team = "2"
 
 [node name="Drone8" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1172, 434)
-team = "2"
 
 [node name="Drone12" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(1170, 356)
@@ -159,17 +157,34 @@ color = Color(0.313726, 0.313726, 0.313726, 1)
 
 [node name="OreDeposits" type="Node2D" parent="."]
 
-[node name="Areas" type="Area2D" parent="OreDeposits"]
+[node name="Iron" type="Area2D" parent="OreDeposits"]
 position = Vector2(575, 326)
 script = ExtResource("5_7lovr")
 
-[node name="East" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-508, -337)
-polygon = PackedVector2Array(529, 523, 811, 524, 708, 641, 406, 640)
+[node name="Sprite2D" type="Sprite2D" parent="OreDeposits/Iron"]
+position = Vector2(201, 207)
+scale = Vector2(0.0867604, 0.0867705)
+texture = ExtResource("7_4hrch")
 
-[node name="South" type="CollisionPolygon2D" parent="OreDeposits/Areas"]
-position = Vector2(-694, -147)
-polygon = PackedVector2Array(933, 331, 928, 450, 1122, 450)
+[node name="Sprite2D2" type="Sprite2D" parent="OreDeposits/Iron"]
+position = Vector2(433, 385)
+scale = Vector2(0.0867604, 0.0867705)
+texture = ExtResource("7_4hrch")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(201, 207)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(433, 385)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="Unobtainium" type="Area2D" parent="OreDeposits"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
+polygon = PackedVector2Array(1264, 307, 1260, 420, 1364, 420, 1366, 301)
 
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
@@ -208,6 +223,10 @@ layer_1/tile_data = PackedInt32Array(4718649, 65538, 3, 4653113, 458754, 0, 4653
 [connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_press_select" binds= ["fusion"]]
+[connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
+[connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
+[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
+[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
 [connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]
-[connection signal="mouse_entered" from="OreDeposits/Areas" to="Buildings" method="_deposit_enter"]
-[connection signal="mouse_exited" from="OreDeposits/Areas" to="Buildings" method="_deposit_exit"]

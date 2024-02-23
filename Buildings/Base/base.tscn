@@ -3,31 +3,49 @@
 [ext_resource type="Script" path="res://Buildings/Base/base.gd" id="1_rcxq8"]
 [ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_msyjy"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="3_8vxph"]
-[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_icdr1"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="4_p5w77"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke4o0"]
 size = Vector2(115, 134)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3bx1k"]
-radius = 126.063
+radius = 184.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yob7o"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 properties/1/path = NodePath(".:team")
 properties/1/spawn = true
 properties/1/replication_mode = 2
+properties/2/path = NodePath(".:is_placed")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:is_active")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Healthbar:value")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:max_hp")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:health")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:is_following_mouse")
+properties/7/spawn = true
+properties/7/replication_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2ros"]
+radius = 200.0
 
 [node name="Headquarters" type="StaticBody2D"]
 collision_mask = 3
 script = ExtResource("1_rcxq8")
 sprite_texture = ExtResource("2_msyjy")
-explosion = ExtResource("3_icdr1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 23)
 shape = SubResource("RectangleShape2D_ke4o0")
 
@@ -36,10 +54,11 @@ position = Vector2(2, 4)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_msyjy")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="MiningUnitDetectionArea" type="Area2D" parent="."]
+visible = false
 collision_mask = 2049
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiningUnitDetectionArea"]
 shape = SubResource("CircleShape2D_3bx1k")
 
 [node name="Healthbar" type="TextureProgressBar" parent="."]
@@ -60,3 +79,16 @@ texture_progress = ExtResource("4_p5w77")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yob7o")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_p2ros")
+
+[node name="Border" type="Line2D" parent="."]
+
+[connection signal="body_entered" from="MiningUnitDetectionArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="MiningUnitDetectionArea" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

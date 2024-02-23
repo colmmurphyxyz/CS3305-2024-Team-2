@@ -1,7 +1,8 @@
 extends Base
 
-@export var sprite_texture_tier_2:Texture2D
-@export var sprite_texture_tier_3:Texture2D
+@export var sprite_texture_tier_1: Texture2D = load("res://Assets/defence_base.png") as Texture2D
+@export var sprite_texture_tier_2: Texture2D = load("res://Assets/defence_mid.png") as Texture2D
+@export var sprite_texture_tier_3: Texture2D
 
 var bullet_scene: PackedScene = preload("res://Bullet/Bullet.tscn")
 
@@ -23,50 +24,48 @@ func _ready():
 	
 func _process(delta):
 	super._process(delta)
-	
-	#if health <= 0:
-		#queue_free()
-	#if health < max_hp:
-		#if in_area.size() > 0: # bug, if spawned next to units, they need to be move out and back in to repair
-			#health += delta * in_area.size()
-			#if health >= max_hp: 
-				#is_active = true
-				##print("Repair complete!")
-			##print("Repairing...", health, "/", max_hp)
-		#else:
-			##print("Repair stopped")
-			#pass
-			
+	# If structure was built, start reloading and update target in area
 	if is_active:
 		attack_timer_count -= delta
 		update_target()
-		if is_instance_valid(current_target):
-			if attack_timer_count <= 0:
+		if is_instance_valid(current_target): 
+			if attack_timer_count <= 0: # If reloaded shoot at target
 				attack_timer_count = reload
 				attack()
 				fired = false
 
 func update_target():
-	if enemy_in_area.size() > 0:
-		current_target = enemy_in_area[0]
+	if enemies_in_area.size() > 0:
+		current_target = enemies_in_area[0]
 		#print(current_target)
 	else:
 		current_target = null
 		
 	
 func attack():
+	# Load a bullet instance and pass current target if still in area
 	if not fired:
 		fired = true
 		attack_timer_count = reload
-		var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
-		get_parent().add_child(bullet)
 		if is_instance_valid(current_target):
-			bullet.set_target(current_target)
-			bullet.global_position = global_position
-			bullet.damage = attack_damage  # Set the appropriate damage value
-			bullet.speed = attack_speed  # Set the appropriate speed value
+			print("defense is firing")
+			spawn_bullet.rpc_id(1, \
+					multiplayer.get_unique_id(),\
+					current_target.get_parent().name,\
+					global_position,\
+					attack_damage,\
+					attack_speed)
 		else:
-			bullet.queue_free()
+			print("invalid target!!!")
+		#var bullet = bullet_scene.instantiate()  # Assuming you have a Bullet scene
+		#get_parent().add_child(bullet)
+		#if is_instance_valid(current_target):
+			#bullet.set_target(current_target)
+			#bullet.global_position = global_position
+			#bullet.damage = attack_damage  # Set the appropriate damage value
+			#bullet.speed = attack_speed  # Set the appropriate speed value
+		#else:
+			#bullet.queue_free()
 
 func update_tower_stats():
 # Adjust variables based on the current tier
@@ -75,8 +74,9 @@ func update_tower_stats():
 			attack_damage = 10
 			attack_speed = 200
 			reload = 5.0
-			attack_range = 30.0
+			attack_range = 100.0
 			max_hp = 100.0
+			sprite.texture = sprite_texture_tier_1
 			healthbar.max_value = round(max_hp)
 		2:
 			attack_damage = 10
@@ -94,18 +94,16 @@ func update_tower_stats():
 			max_hp = 100.0
 			healthbar.max_value = round(max_hp)
 			#change sprite
-# Add more cases for additional tiers
 
-# Function to upgrade the tower
+# Upgrade and downgrade system
 func upgrade():
-	if tier < 3:  # Adjust the max tier as needed
+	if tier < 3:
 		tier += 1
 		update_tower_stats()
 		print("Tower upgraded to tier:", tier)
 
-# Function to downgrade the tower
 func downgrade():
-	if tier > 1:  # Adjust the min tier as needed
+	if tier > 1:
 		tier -= 1
 		update_tower_stats()
 		print("Tower downgraded to tier:", tier)
