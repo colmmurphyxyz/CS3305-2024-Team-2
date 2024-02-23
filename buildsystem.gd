@@ -4,7 +4,7 @@ var spawned_object = null
 var placement_allowed = false
 var deposit = false
 var mine = false
-var klassium = false
+var unobtainium = false
 
 func _process(_delta: float):
 	if Input.is_action_just_pressed("right_click"): # click at any time to cancel placing an object
@@ -26,7 +26,7 @@ func placing():
 				print("No deposit found nearby")
 			elif spawned_object.stop_following_mouse() == true: # if placed
 				if mine:
-					spawned_object.has_klassium = klassium
+					spawned_object.has_unobtainium = unobtainium
 				spawned_object = null
 				mine = false
 	
@@ -65,11 +65,11 @@ func _deposit_exit():
 	deposit = false
 	
 # Special ore areas
-func _klassium_area():
-	klassium = true
+func _unobtainium_area():
+	unobtainium = true
 	
-func _not_klassium_area():
-	klassium = false
+func _not_unobtainium_area():
+	unobtainium = false
 	
 # Move object after placement !!! Action to be configured
 func _move_object(object): # 

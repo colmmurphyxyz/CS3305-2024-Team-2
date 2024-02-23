@@ -119,9 +119,9 @@ position = Vector2(433, 385)
 scale = Vector2(0.0867604, 0.0867705)
 polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
 
-[node name="Klassium" type="Area2D" parent="OreDeposits"]
+[node name="Unobtainium" type="Area2D" parent="OreDeposits"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Klassium"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
 polygon = PackedVector2Array(1264, 307, 1260, 420, 1364, 420, 1366, 301)
 
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
@@ -226,7 +226,7 @@ team = "2"
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_press_select" binds= ["fusion"]]
 [connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="OreDeposits/Klassium" to="Buildings" method="_klassium_area"]
-[connection signal="mouse_entered" from="OreDeposits/Klassium" to="Buildings" method="_deposit_enter"]
-[connection signal="mouse_exited" from="OreDeposits/Klassium" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_exited" from="OreDeposits/Klassium" to="Buildings" method="_not_klassium_area"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
+[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
+[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]

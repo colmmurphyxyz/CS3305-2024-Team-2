@@ -6,7 +6,7 @@ var increase_timer: Timer
 const max_storage = 250
 var stored_resources = 0
 
-var has_klassium = false # Flagset by buildsystem, if a mine was placed in a 'Klassium' ore deposit
+var has_unobtainium = false # Flagset by buildsystem, if a mine was placed in a 'Klassium' ore deposit
 
 func _ready():
 	max_hp = 100.0
