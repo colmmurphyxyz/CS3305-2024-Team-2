@@ -37,6 +37,10 @@ func _input(event: InputEvent):
 				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Scout/scout.tscn", \
 						get_global_mouse_position())
+			KEY_F:
+				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
+						get_global_mouse_position())
 				
 @rpc("any_peer", "call_local", "reliable")
 func spawn_unit(called_by: int, scene_path: String, spawn_pos: Vector2):
