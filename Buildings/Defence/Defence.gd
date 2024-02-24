@@ -35,6 +35,8 @@ func _process(delta):
 				fired = false
 
 func update_target():
+	# filter out recently-deceased enemies
+	enemies_in_area = enemies_in_area.filter(func(enemy): enemy != null)
 	if enemies_in_area.size() > 0:
 		current_target = enemies_in_area[0]
 		#print(current_target)
