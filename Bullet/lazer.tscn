@@ -1,8 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://c64be60pbkhj5"]
+[gd_scene load_steps=5 format=3 uid="uid://c64be60pbkhj5"]
 
 [ext_resource type="Script" path="res://Bullet/lazer.gd" id="1_dj0u7"]
 [ext_resource type="Texture2D" uid="uid://bw3evl37nxrtj" path="res://Assets/Units/lazer.png" id="2_y57f3"]
 [ext_resource type="AudioStream" uid="uid://852xd67hq2x6" path="res://Assets/SFX/lazer.wav" id="3_43qy6"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p5i5u"]
+properties/0/path = NodePath(".:team")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:damaging")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:target_brain_name")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Line2D:width")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("RayCast2D:target_position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("RayCast2D2:target_position")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("RayCast2D3:target_position")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("RayCast2D5:target_position")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath("RayCast2D6:target_position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath("RayCast2D7:target_position")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+properties/10/path = NodePath(".:position")
+properties/10/spawn = true
+properties/10/replication_mode = 1
+properties/11/path = NodePath("Line2D:points")
+properties/11/spawn = true
+properties/11/replication_mode = 1
 
 [node name="Lazer" type="Node2D"]
 position = Vector2(74, 164)
@@ -49,5 +87,8 @@ autostart = true
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_43qy6")
 bus = &"SFX"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_p5i5u")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
