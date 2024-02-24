@@ -148,10 +148,18 @@ func damage(damage_amount):
 		spawn_explosion_scene.rpc_id(1, body.global_position)
 		# have the server do the despawning
 		# the MultiplayerSpawner will signal for all other clients to despawn this node
-		queue_free_on_server.rpc_id(1)
+		#queue_free_on_server.rpc_id(1)
+		# I suspect that if a node was spawned before the MultiplayerSpawner entered the tree
+		# the MultiplayerSpawner won't handle its despawning
+		# thus we need to manually delete it on all peers
+		queue_free_onall_peers.rpc()
 		
 @rpc("any_peer", "call_local", "reliable")
 func queue_free_on_server():
+	queue_free()
+	
+@rpc("any_peer", "call_local", "reliable")
+func queue_free_onall_peers():
 	queue_free()
 
 func hit_timer_timeout():
