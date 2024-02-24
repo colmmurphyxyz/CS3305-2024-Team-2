@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk80g7cgdc68h"]
+[gd_scene load_steps=8 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
 [ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
-[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_0fqvu"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
 
@@ -42,7 +41,6 @@ properties/7/replication_mode = 2
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_udwv5")
 sprite_texture = ExtResource("2_wmued")
-explosion = ExtResource("3_0fqvu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -109,5 +107,6 @@ text = "Marrauder"
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4o1ea")
 
+[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_area_2d_body_exited"]

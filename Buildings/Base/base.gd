@@ -1,6 +1,8 @@
 extends StaticBody2D
 class_name Base
 
+signal building_destroyed
+
 # export variables
 @export var team: String = "1"
 @export var sprite_texture:Texture2D
@@ -166,6 +168,7 @@ func damage(damage_amount):
 	healthbar.value = health
 	
 	if health <= 0:
+		building_destroyed.emit()
 		spawn_explosion_scene.rpc_id(1)
 		#var explosion_node = explosion_scene.instantiate()
 		#get_parent().add_child(explosion_node, true)
