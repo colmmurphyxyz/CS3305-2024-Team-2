@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk80g7cgdc68h"]
+[gd_scene load_steps=9 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
 [ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
@@ -6,8 +6,37 @@
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nk80h"]
+size = Vector2(160, 272)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_spgvb"]
 radius = 204.245
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4o1ea"]
+properties/0/path = NodePath(".:team")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:is_placed")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:is_active")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Healthbar:value")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:is_following_mouse")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:max_hp")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:health")
+properties/7/spawn = true
+properties/7/replication_mode = 2
 
 [node name="Hq" type="StaticBody2D"]
 scale = Vector2(0.5, 0.5)
@@ -15,10 +44,18 @@ script = ExtResource("1_udwv5")
 sprite_texture = ExtResource("2_wmued")
 explosion = ExtResource("3_0fqvu")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_wmued")
+
+[node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_nk80h")
+
+[node name="DetectionArea" type="Area2D" parent="."]
 collision_mask = 2049
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_spgvb")
 
 [node name="Healthbar" type="TextureProgressBar" parent="."]
@@ -67,11 +104,10 @@ text = "Warden"
 layout_mode = 2
 text = "Marrauder"
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="pressed" from="VBoxContainer/Drone" to="." method="_spawn_unit" binds= ["drone"]]
-[connection signal="pressed" from="VBoxContainer/Bruiser" to="." method="_spawn_unit" binds= ["bruiser"]]
-[connection signal="pressed" from="VBoxContainer/Sniper" to="." method="_spawn_unit" binds= ["sniper"]]
-[connection signal="pressed" from="VBoxContainer/Scout" to="." method="_spawn_unit" binds= ["scout"]]
-[connection signal="pressed" from="VBoxContainer/Warden" to="." method="_spawn_unit" binds= ["warden"]]
-[connection signal="pressed" from="VBoxContainer/Marrauder" to="." method="_spawn_unit" binds= ["marrauder"]]
+[node name="Border" type="Line2D" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4o1ea")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_area_2d_body_exited"]

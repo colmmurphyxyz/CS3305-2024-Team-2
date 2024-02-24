@@ -51,6 +51,12 @@ func _physics_process(delta):
 		
 func set_target_by_name(n: String):
 	var target_unit: Node2D = get_parent().get_node_or_null(n)
+	# if target suddenly doesn't exist, remove the bullet
+	# im assuming this would happen if the target dies
+	#if target_unit == null or !is_instance_valid(target_unit):
+		#print("couldn't find target (did it die?)")
+		#queue_free()
+		#return
 	if target_unit.is_in_group("Buildings"):
 		set_target(target_unit)
 	else:

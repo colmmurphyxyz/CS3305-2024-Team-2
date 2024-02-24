@@ -1,7 +1,13 @@
 extends Node
 
-var Host = {}
-var Client = {}
+var Host: Dictionary = {
+	"name": "hostgamer",
+	"id": 1,
+}
+var Client: Dictionary = {
+	"name": "clientgamer",
+	"id": 3927,
+}
 ## client's team, either 1 or 2
 var team: String
 

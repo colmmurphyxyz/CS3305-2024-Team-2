@@ -94,6 +94,7 @@ func _process(delta: float):
 			sprite.modulate=Color.DIM_GRAY
 			if allies_in_area.size() > 0:
 				for body in allies_in_area:
+					if !is_instance_valid(body): continue
 					if !(body.is_in_group("Buildings")): # if body is not a bulding
 						health += 0.5 * delta
 						print("Repairing...", round(health), "/", max_hp)
@@ -108,12 +109,12 @@ func _process(delta: float):
 			pass
 			
 		# Failsafe for detection radius as its inactive before placement 
-		overlapping = get_node("Area2D").get_overlapping_bodies()
+		overlapping = detection_area.get_overlapping_bodies()
 		for object in overlapping:
 			var parent = object.get_parent()
 			if object in get_tree().get_nodes_in_group("Buildings"):
 				parent=object
-			if parent.get_team() == team:
+			if is_instance_valid(parent) and parent.get_team() == team:
 				if not object in allies_in_area:
 					allies_in_area.append(object)
 			else:
