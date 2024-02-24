@@ -18,6 +18,7 @@ shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/add_margins = true
 shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
 shader_parameter/active = false
 shader_parameter/tint = Color(1, 1, 0, 1)
 
