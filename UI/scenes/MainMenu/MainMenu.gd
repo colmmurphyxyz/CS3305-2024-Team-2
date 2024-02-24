@@ -1,6 +1,6 @@
 extends Control
 
-@onready var game_scene: PackedScene = preload("res://multiplayer_test.tscn")
+@onready var game_scene: PackedScene = preload("res://game.tscn")
 
 var peer: ENetMultiplayerPeer
 

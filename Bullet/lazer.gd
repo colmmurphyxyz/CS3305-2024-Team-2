@@ -1,9 +1,15 @@
 extends Node2D
 
-var target_brain_name = ""
-var damage = 30
-var speed = 0
-var cast_point:Vector2 = Vector2(0,0)
+@export var team: String
+@export var damaging: bool = false
+@export var target_brain_name: String = ""
+
+var damage: int = 80
+# speed is never used for the lazer, 
+# but the property is needed for compatibility with regular bullet code
+var speed: int
+var cast_point: Vector2 = Vector2.ZERO
+
 @onready var tween = get_tree().create_tween()
 @onready var ray1 = $RayCast2D
 @onready var ray2 = $RayCast2D2
@@ -12,8 +18,6 @@ var cast_point:Vector2 = Vector2(0,0)
 @onready var ray5 = $RayCast2D5
 @onready var ray6 = $RayCast2D6
 @onready var ray_array = [ray1,ray2,ray3,ray5,ray6,ray7]
-var team
-var damaging=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -32,8 +36,9 @@ func _ready():
 	tween.tween_property($Line2D,"width",100,1).set_trans(Tween.TRANS_ELASTIC)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float):
+	if !$MultiplayerSynchronizer.is_multiplayer_authority():
+		return
 	if $Line2D.width > 50:
 		damaging=true
 	var direction = global_position.direction_to(cast_point)
@@ -44,7 +49,9 @@ func _process(delta):
 				var body = i.get_collider()
 				var unit = body.get_parent()
 				if unit.get_team() == team:
-					unit.damage(80)
+					unit.damage.rpc_id(
+						unit.get_node("MultiplayerSynchronizer").get_multiplayer_authority(),
+						damage)
 			else:
 				if i == ray6:
 					$Line2D.points[1] = to_local(i.get_collision_point())
