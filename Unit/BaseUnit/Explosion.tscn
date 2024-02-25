@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://puh7h6lli8nd"]
+[gd_scene load_steps=15 format=3 uid="uid://puh7h6lli8nd"]
 
 [ext_resource type="Texture2D" uid="uid://rkjlomqoad6f" path="res://Assets/Units/explosion-Sheet.png" id="1_vqb16"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Explosion.gd" id="2_jnud0"]
@@ -69,6 +69,11 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nvtvb"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [node name="Explosion" type="StaticBody2D"]
 script = ExtResource("2_jnud0")
 
@@ -82,6 +87,9 @@ stream = ExtResource("4_kc7qc")
 volume_db = -10.89
 max_distance = 300.0
 bus = &"SFX"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nvtvb")
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="finished" from="Bullet_hit" to="." method="_on_bullet_hit_finished"]

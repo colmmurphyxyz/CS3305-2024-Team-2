@@ -198,7 +198,7 @@ func sort_enemies_in_attack_area_by_distance(list):
 @rpc("any_peer", "call_local")
 func spawn_explosion_scene(spawn_pos: Vector2):
 	var explosion = explosion_scene.instantiate()
-	explosion.position = spawn_pos
+	explosion.global_position = spawn_pos
 	explosion.scale *= (width / 32)
 	add_sibling(explosion, true)
 
