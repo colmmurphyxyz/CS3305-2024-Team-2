@@ -222,3 +222,7 @@ func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damag
 func set_bullet_authority(node_name: String, auth: int):
 	get_parent().get_node(node_name).get_node("MultiplayerSynchronizer")\
 			.set_multiplayer_authority(auth)
+			
+@rpc("any_peer", "call_local")
+func play_attack_sound():
+	attack_sound.play()
