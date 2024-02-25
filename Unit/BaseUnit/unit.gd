@@ -152,14 +152,14 @@ func damage(damage_amount):
 		# I suspect that if a node was spawned before the MultiplayerSpawner entered the tree
 		# the MultiplayerSpawner won't handle its despawning
 		# thus we need to manually delete it on all peers
-		queue_free_onall_peers.rpc()
+		queue_free_on_all_peers.rpc()
 		
 @rpc("any_peer", "call_local", "reliable")
 func queue_free_on_server():
 	queue_free()
 	
 @rpc("any_peer", "call_local", "reliable")
-func queue_free_onall_peers():
+func queue_free_on_all_peers():
 	queue_free()
 
 func hit_timer_timeout():
