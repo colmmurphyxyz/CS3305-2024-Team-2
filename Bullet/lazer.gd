@@ -23,7 +23,9 @@ func _ready():
 	
 	var target = get_parent().get_node_or_null(target_brain_name)
 	if target != null:
-		cast_point=target.body.global_position
+		cast_point = target.global_position if target.is_in_group("Buildings") \
+				else target.body.global_position
+		#cast_point=target.body.global_position
 		team = target.get_team()
 		print(cast_point)
 		$Sound.play()
@@ -45,12 +47,13 @@ func _process(_delta: float):
 	for i:RayCast2D in ray_array:
 		i.target_position = to_local(global_position+direction*5000)
 		if i.is_colliding():
-			if i.get_collider().get_parent() in get_tree().get_nodes_in_group("Units") and damaging==true:
-				var body = i.get_collider()
-				var unit = body.get_parent()
-				if unit.get_team() == team:
-					unit.damage.rpc_id(
-						unit.get_node("MultiplayerSynchronizer").get_multiplayer_authority(),
+			if (i.get_collider().get_parent() in get_tree().get_nodes_in_group("Units")\
+					or i.get_collider().is_in_group("Buildings")) and damaging==true:
+				var collider: PhysicsBody2D = i.get_collider()
+				var target_brain = collider if collider.is_in_group("Buildings") else collider.get_parent()
+				if target_brain.get_team() == team:
+					target_brain.damage.rpc_id(
+						target_brain.get_node("MultiplayerSynchronizer").get_multiplayer_authority(),
 						damage)
 			else:
 				if i == ray6:
