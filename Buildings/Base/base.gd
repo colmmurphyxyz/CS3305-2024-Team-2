@@ -139,8 +139,8 @@ func stop_following_mouse():
 		border.visible = false
 		is_following_mouse = false
 		collision_layer = 2 + 13 # re-enable collisions to prevent stacking
-		detection_area.body_entered.connect(_on_detection_area_body_entered)
-		detection_area.body_exited.connect(_on_detection_area_body_exited)
+		#detection_area.body_entered.connect(_on_detection_area_body_entered)
+		#detection_area.body_exited.connect(_on_detection_area_body_exited)
 		return true 
 
 func get_team():

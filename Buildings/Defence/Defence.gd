@@ -36,7 +36,7 @@ func _process(delta):
 
 func update_target():
 	# filter out recently-deceased enemies
-	enemies_in_area = enemies_in_area.filter(func(enemy): enemy != null)
+	enemies_in_area = enemies_in_area.filter(func(enemy): return is_instance_valid(enemy))
 	if enemies_in_area.size() > 0:
 		current_target = enemies_in_area[0]
 		#print(current_target)
@@ -45,6 +45,7 @@ func update_target():
 		
 	
 func attack():
+	print("ready to fire")
 	# Load a bullet instance and pass current target if still in area
 	if not fired:
 		fired = true
