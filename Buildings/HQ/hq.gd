@@ -41,8 +41,17 @@ func _input(event):
 		else:
 			control.hide()
 	pass
+	
+func getRandomPositionInDonut(innerRadius: float, outerRadius: float) -> Vector2:
+	var center = 0 # get from GameManager
+	var angle = randf() * (2 * PI)
+	var distance = randf_range(innerRadius, outerRadius)
+	var x = center.x + distance * cos(angle)
+	var y = center.y + distance * sin(angle)
+	return Vector2(x, y)
 
 func _spawn_unit(type: String):
+	var spawn_position = getRandomPositionInDonut(10,20)
 	match type:
 		# Set resources required
 		"drone":

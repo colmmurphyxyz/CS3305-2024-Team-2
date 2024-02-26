@@ -1,6 +1,5 @@
 [gd_scene load_steps=9 format=3 uid="uid://bmqs225p7jlxh"]
 
-
 [ext_resource type="Script" path="res://Buildings/Barracks/barracks.gd" id="1_ktc2n"]
 [ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/barracks.png" id="2_s5x6n"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_v6g7h"]
@@ -75,7 +74,6 @@ nine_patch_stretch = true
 texture_under = ExtResource("4_v6g7h")
 texture_progress = ExtResource("5_6gcog")
 
-[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
@@ -85,3 +83,5 @@ shape = SubResource("CircleShape2D_x1hw5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u74s8")
+
+[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]

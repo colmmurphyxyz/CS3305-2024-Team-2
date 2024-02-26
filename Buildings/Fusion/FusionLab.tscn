@@ -79,8 +79,9 @@ nine_patch_stretch = true
 texture_under = ExtResource("4_7167x")
 texture_progress = ExtResource("5_20sqx")
 
-[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]
 [node name="Border" type="Line2D" parent="."]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_a5uc4")
+
+[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]
