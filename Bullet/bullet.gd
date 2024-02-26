@@ -57,7 +57,9 @@ func set_target_by_name(n: String):
 		#print("couldn't find target (did it die?)")
 		#queue_free()
 		#return
-	if target_unit.is_in_group("Buildings"):
+	if !is_instance_valid(target_unit):
+		queue_free()
+	elif target_unit.is_in_group("Buildings"):
 		set_target(target_unit)
 	else:
 		set_target(target_unit.get_node("Body"))
