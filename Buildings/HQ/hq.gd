@@ -35,7 +35,7 @@ func _process(delta):
 
 # if tower is clicked show interaction menu
 func _input(event):
-	if event.is_action_pressed("right_click"):
+	if event.is_action_pressed("right_click") and $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		if get_global_mouse_position().distance_to(global_transform.origin) < 50:
 			control.show()
 		else:
@@ -43,7 +43,7 @@ func _input(event):
 	pass
 	
 func getRandomPositionInDonut(innerRadius: float, outerRadius: float) -> Vector2:
-	var center = 0 # get from GameManager
+	var center = self.global_position
 	var angle = randf() * (2 * PI)
 	var distance = randf_range(innerRadius, outerRadius)
 	var x = center.x + distance * cos(angle)
@@ -51,33 +51,45 @@ func getRandomPositionInDonut(innerRadius: float, outerRadius: float) -> Vector2
 	return Vector2(x, y)
 
 func _spawn_unit(type: String):
-	var spawn_position = getRandomPositionInDonut(10,20)
+	var spawn_position = getRandomPositionInDonut(35,60)
 	match type:
 		# Set resources required
 		"drone":
-			if free_spawn <= 0:
+			if free_spawn >= 0:
 				free_spawn = free_unit_time
-				#spawn drone
-				pass
+				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/Drone/drone.tscn", \
+						spawn_position)
 			elif iron > 10:
-				# buy unit, check unit cost, and iron from game controller
-				pass
+				free_spawn = free_unit_time
+				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/Drone/drone.tscn", \
+						spawn_position)
 		"bruiser":
 			if GameManager.barrack_placed and iron > 10:
-				# spawn unit
-				pass
+				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/Bruiser/bruiser.tscn", \
+						spawn_position)
 		"scout":
 			if GameManager.laboratory_placed and iron > 10:
-				pass
+				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/Scout/scout.tscn", \
+						spawn_position)
 		"sniper":
 			if GameManager.barrack_placed and iron > 10:
-				pass
+				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/Sniper/sniper.tscn", \
+						spawn_position)
 		"warden":
 			if GameManager.laboratory_placed and iron > 10:
-				pass
+				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/Warden/warden.tscn", \
+						spawn_position)
 		"screecher":
 			if GameManager.barrack_placed and iron > 10:
-				pass
+				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
+						spawn_position)
 		_:
 			print("Not valid button")
 

@@ -99,7 +99,7 @@ func _process(delta: float):
 					if !is_instance_valid(body): continue
 					if !(body.is_in_group("Buildings")): # if body is not a bulding
 						health += 0.5 * delta
-						print("Repairing...", round(health), "/", max_hp)
+						#print("Repairing...", round(health), "/", max_hp)
 				if health >= max_hp:
 					is_active = true
 					sprite.modulate=Color(1,1,1)
