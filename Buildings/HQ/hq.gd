@@ -1,6 +1,7 @@
 extends Base
 
-var free_spawn = 60.0
+const free_unit_time = 60.0
+var free_spawn = free_unit_time
 var control = null
 var iron = 0 # replace with location of resource values
 
@@ -46,26 +47,27 @@ func _spawn_unit(type: String):
 		# Set resources required
 		"drone":
 			if free_spawn <= 0:
+				free_spawn = free_unit_time
 				#spawn drone
 				pass
 			elif iron > 10:
 				# buy unit, check unit cost, and iron from game controller
 				pass
 		"bruiser":
-			if barrack_placed and iron > 10:
+			if GameManager.barrack_placed and iron > 10:
 				# spawn unit
 				pass
 		"scout":
-			if laboratory_placed and iron > 10:
+			if GameManager.laboratory_placed and iron > 10:
 				pass
 		"sniper":
-			if barrack_placed and iron > 10:
+			if GameManager.barrack_placed and iron > 10:
 				pass
 		"warden":
-			if laboratory_placed and iron > 10:
+			if GameManager.laboratory_placed and iron > 10:
 				pass
-		"marrauder":
-			if barrack_placed and iron > 10:
+		"screecher":
+			if GameManager.barrack_placed and iron > 10:
 				pass
 		_:
 			print("Not valid button")
