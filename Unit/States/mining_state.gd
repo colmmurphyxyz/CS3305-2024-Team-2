@@ -13,5 +13,4 @@ func _process(_delta: float):
 		persistent_state.body.target=persistent_state.target_building.global_position
 		
 	else:
-		#We need to setup team desginated HQ for this to path to, for now just path to 0,0
-		persistent_state.path_to_point(Vector2.ZERO)
+		persistent_state.path_to_point(GameManager.player_hq.global_position)
