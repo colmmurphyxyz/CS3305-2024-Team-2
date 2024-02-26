@@ -234,8 +234,7 @@ position = Vector2(809, 494)
 [connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]
 [connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
 [connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
-

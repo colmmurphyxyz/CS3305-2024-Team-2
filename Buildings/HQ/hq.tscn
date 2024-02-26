@@ -102,15 +102,6 @@ text = "Warden"
 layout_mode = 2
 text = "Fusion Screecher"
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="pressed" from="VBoxContainer/Drone" to="." method="_spawn_unit" binds= ["drone"]]
-[connection signal="pressed" from="VBoxContainer/Bruiser" to="." method="_spawn_unit" binds= ["bruiser"]]
-[connection signal="pressed" from="VBoxContainer/Sniper" to="." method="_spawn_unit" binds= ["sniper"]]
-[connection signal="pressed" from="VBoxContainer/Scout" to="." method="_spawn_unit" binds= ["scout"]]
-[connection signal="pressed" from="VBoxContainer/Warden" to="." method="_spawn_unit" binds= ["warden"]]
-[connection signal="pressed" from="VBoxContainer/Fusion Screecher" to="." method="_spawn_unit" binds= ["screecher"]]
-
 [node name="Border" type="Line2D" parent="."]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -119,3 +110,9 @@ replication_config = SubResource("SceneReplicationConfig_4o1ea")
 [connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="VBoxContainer/Drone" to="." method="_spawn_unit" binds= ["drone"]]
+[connection signal="pressed" from="VBoxContainer/Bruiser" to="." method="_spawn_unit" binds= ["bruiser"]]
+[connection signal="pressed" from="VBoxContainer/Sniper" to="." method="_spawn_unit" binds= ["sniper"]]
+[connection signal="pressed" from="VBoxContainer/Scout" to="." method="_spawn_unit" binds= ["scout"]]
+[connection signal="pressed" from="VBoxContainer/Warden" to="." method="_spawn_unit" binds= ["warden"]]
+[connection signal="pressed" from="VBoxContainer/Fusion Screecher" to="." method="_spawn_unit" binds= ["screecher"]]

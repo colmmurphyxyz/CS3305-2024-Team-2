@@ -9,5 +9,8 @@ func _ready():
 	
 func _process(delta):
 	super._process(delta)
-	if health <= 0:
-		GameManager.barrack_placed = false
+
+
+
+func _on_building_destroyed():
+	GameManager.barrack_placed = false

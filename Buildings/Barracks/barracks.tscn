@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmqs225p7jlxh"]
+[gd_scene load_steps=6 format=3 uid="uid://bmqs225p7jlxh"]
 
 [ext_resource type="Script" path="res://Buildings/Barracks/barracks.gd" id="1_ktc2n"]
 [ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/barracks.png" id="2_s5x6n"]
-[ext_resource type="PackedScene" uid="uid://puh7h6lli8nd" path="res://Unit/BaseUnit/Explosion.tscn" id="3_64kvm"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_v6g7h"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_6gcog"]
 
@@ -12,7 +11,6 @@ radius = 126.063
 [node name="Barracks" type="StaticBody2D"]
 script = ExtResource("1_ktc2n")
 sprite_texture = ExtResource("2_s5x6n")
-explosion = ExtResource("3_64kvm")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2049
@@ -35,3 +33,5 @@ rounded = true
 nine_patch_stretch = true
 texture_under = ExtResource("4_v6g7h")
 texture_progress = ExtResource("5_6gcog")
+
+[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]
