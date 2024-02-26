@@ -1,16 +1,57 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmqs225p7jlxh"]
+[gd_scene load_steps=9 format=3 uid="uid://bmqs225p7jlxh"]
+
 
 [ext_resource type="Script" path="res://Buildings/Barracks/barracks.gd" id="1_ktc2n"]
 [ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/barracks.png" id="2_s5x6n"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_v6g7h"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_6gcog"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxh0m"]
+size = Vector2(48, 84)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_bjf6f"]
 radius = 126.063
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1hw5"]
+radius = 184.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u74s8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:team")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:is_placed")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:is_active")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Healthbar:value")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+properties/5/path = NodePath(".:max_hp")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath(".:health")
+properties/6/spawn = true
+properties/6/replication_mode = 2
+properties/7/path = NodePath(".:is_following_mouse")
+properties/7/spawn = true
+properties/7/replication_mode = 2
 
 [node name="Barracks" type="StaticBody2D"]
 script = ExtResource("1_ktc2n")
 sprite_texture = ExtResource("2_s5x6n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_s5x6n")
+
+[node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_cxh0m")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2049
@@ -35,3 +76,12 @@ texture_under = ExtResource("4_v6g7h")
 texture_progress = ExtResource("5_6gcog")
 
 [connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_x1hw5")
+
+[node name="Border" type="Line2D" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_u74s8")

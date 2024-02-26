@@ -1,8 +1,5 @@
 extends Node2D
 
-const TEAM_1_HQ_POSITION: Vector2 = Vector2(500, 1250)
-const TEAM_2_HQ_POSITION: Vector2 = Vector2(750, 1600)
-
 func _ready():
 	# spawn HQ's for both teams
 	# only call RPC from server, to avoid dupicate buildings at the same location
@@ -11,13 +8,16 @@ func _ready():
 		$Buildings.place_building.rpc_id(1,
 			"res://Buildings/HQ/hq.tscn",
 			GameManager.Host["id"],
-			TEAM_1_HQ_POSITION
+			GameManager.TEAM_1_HQ_POSITION
 			)
 		$Buildings.place_building.rpc_id(1,
 			"res://Buildings/HQ/hq.tscn",
 			GameManager.Client["id"],
-			TEAM_2_HQ_POSITION
+			GameManager.TEAM_2_HQ_POSITION
 			)
+		GameManager.player_hq = $SpawnRoot.get_node("hq1")
+	if multiplayer.get_unique_id() != 1:
+		GameManager.player_hq = $SpawnRoot.get_node("hq2")
 
 func _process(_delta: float):
 	pass

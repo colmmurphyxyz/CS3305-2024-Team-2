@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://chcffv7xahe1u"]
+[gd_scene load_steps=10 format=3 uid="uid://chcffv7xahe1u"]
 
 [ext_resource type="Script" path="res://Buildings/Base/base.gd" id="1_rcxq8"]
 [ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/hq_build.png" id="2_msyjy"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="3_8vxph"]
+[ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/barracks.png" id="3_31jc6"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="4_p5w77"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke4o0"]
-size = Vector2(115, 134)
+size = Vector2(48, 84)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3bx1k"]
 radius = 184.0
@@ -38,24 +39,22 @@ properties/7/spawn = true
 properties/7/replication_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p2ros"]
-radius = 200.0
+radius = 184.0
 
 [node name="Headquarters" type="StaticBody2D"]
 collision_mask = 3
 script = ExtResource("1_rcxq8")
 sprite_texture = ExtResource("2_msyjy")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_31jc6")
+
 [node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 23)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_ke4o0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2, 4)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_msyjy")
-
 [node name="MiningUnitDetectionArea" type="Area2D" parent="."]
-visible = false
 collision_mask = 2049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MiningUnitDetectionArea"]
@@ -81,7 +80,6 @@ texture_progress = ExtResource("4_p5w77")
 replication_config = SubResource("SceneReplicationConfig_yob7o")
 
 [node name="DetectionArea" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_p2ros")
