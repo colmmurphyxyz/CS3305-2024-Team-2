@@ -1,7 +1,7 @@
 extends Node
 
 const TEAM_1_HQ_POSITION: Vector2 = Vector2(500, 1250)
-const TEAM_2_HQ_POSITION: Vector2 = Vector2(750, 1600)
+const TEAM_2_HQ_POSITION: Vector2 = Vector2(1800, 250)
 # reference to the player's HQ, will be set in game scene _ready
 var player_hq: StaticBody2D
 

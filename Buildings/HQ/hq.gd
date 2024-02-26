@@ -98,7 +98,7 @@ func _on_area_2d_body_entered(body):
 		var unit:Unit = body.get_parent()
 		if unit.carrying_ore == true: 
 			unit.load_ore()
-			#Total ore ++++++
+			GameManager.iron += 1
 			unit.change_state("mining")
 		if body.get_parent().can_mine == true: 
 			close_mining_units.append(body)

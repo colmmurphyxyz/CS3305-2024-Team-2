@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=16 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
-[ext_resource type="PackedScene" uid="uid://dkto4ql016cfw" path="res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn" id="13_5dx1l"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -69,7 +68,7 @@ script = ExtResource("4_atcb7")
 building_root = NodePath("../SpawnRoot")
 
 [node name="BuildingMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Buildings/Base/base.tscn", "res://Buildings/Defence/Defence.tscn", "res://Buildings/Barracks/barracks.tscn", "res://Buildings/HQ/hq.tscn")
+_spawnable_scenes = PackedStringArray("res://Buildings/Base/base.tscn", "res://Buildings/Defence/Defence.tscn", "res://Buildings/Barracks/barracks.tscn", "res://Buildings/HQ/hq.tscn", "res://Buildings/Fusion/FusionLab.tscn", "res://Buildings/Lab/Laboratory.tscn", "res://Buildings/Mine/mine.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="SpawnRoot" type="Node2D" parent="."]
@@ -137,11 +136,6 @@ position = Vector2(965, 394)
 
 [node name="Drone2" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(934, 424)
-
-[node name="FusionScreecher" parent="SpawnRoot" instance=ExtResource("13_5dx1l")]
-position = Vector2(547, 707)
-team = "2"
-hp = 400
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn", "res://Unit/UnitTypes/Scout/scout.tscn", "res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", "res://Bullet/lazer.tscn")
@@ -223,7 +217,7 @@ position = Vector2(809, 494)
 [connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]
 [connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]

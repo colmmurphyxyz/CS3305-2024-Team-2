@@ -70,8 +70,8 @@ func _ready():
 	#Used for getting explosion width by getting idle texture size
 	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
 	
-	if team == "1":
-		pass
+	if team == "2":
+		sprite2d.material.set("shader_parameter/team2",true)
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
 	
 	#Selection sprite setting up
@@ -115,6 +115,7 @@ func deselect():
 func path_to_point(point:Vector2):
 	body.target = point
 	body.get_collision_mask_value(3)
+	body.create_path()
 	change_state("moving")
 	
 func reset_chase():
@@ -199,6 +200,7 @@ func sort_enemies_in_attack_area_by_distance(list):
 func spawn_explosion_scene(spawn_pos: Vector2):
 	var explosion = explosion_scene.instantiate()
 	explosion.global_position = spawn_pos
+	@warning_ignore("integer_division")
 	explosion.scale *= (width / 32)
 	add_sibling(explosion, true)
 

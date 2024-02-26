@@ -11,7 +11,7 @@ var has_unobtainium = false # Flagset by buildsystem, if a mine was placed in a 
 
 func _ready():
 	max_hp = 100.0
-	health = 1.0
+	health = 99.0
 	super._ready()
 	# timer for syncronous ore generation and prevent float values for resources
 	is_active=false

@@ -15,9 +15,12 @@ func _ready():
 			GameManager.Client["id"],
 			GameManager.TEAM_2_HQ_POSITION
 			)
-		GameManager.player_hq = $SpawnRoot.get_node("hq1")
-	if multiplayer.get_unique_id() != 1:
-		GameManager.player_hq = $SpawnRoot.get_node("hq2")
+		GameManager.player_hq = $SpawnRoot.get_node("Hq")
+		set_client_hq.rpc_id(GameManager.Client["id"])
+		
+@rpc("authority", "call_remote", "reliable")
+func set_client_hq():
+	GameManager.player_hq = $SpawnRoot.get_node("Hq2")
 
 func _process(_delta: float):
 	pass

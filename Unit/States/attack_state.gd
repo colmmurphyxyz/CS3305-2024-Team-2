@@ -12,8 +12,7 @@ func _ready():
 	persistent_state.sprite2d.pause()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float):
 	if !is_multiplayer_authority():
 		#print("not processing attack state for %s. owned by %d\t\t and i am %d\t\t" % \
 				#[get_parent().name, get_multiplayer_authority(), multiplayer.get_unique_id()])
@@ -30,7 +29,11 @@ func _process(delta):
 
 	if is_instance_valid(current_target):
 		persistent_state.sprite2d.rotation = persistent_state.body.global_position.angle_to_point(current_target.global_position)+ 1.5708*3
+	if get_parent().name.begins_with("FusionScreecher") and persistent_state.sprite2d.frame==2 and persistent_state.sprite2d.animation == "attack":
 
+		if is_instance_valid( $"../ChargeSound"):
+			if $"../ChargeSound".playing == false:
+				$"../ChargeSound".play()
 	#Attack on timer end
 	if attack_timer_count <=0 and persistent_state.sprite2d.animation == "attack":
 		persistent_state.sprite2d.play("attack")

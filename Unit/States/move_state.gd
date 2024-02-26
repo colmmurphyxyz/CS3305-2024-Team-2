@@ -15,7 +15,7 @@ func _ready():
 	last_position=body.global_position
 	persistent_state.sprite2d.play("move")
 
-func _process(delta):
+func _process(_delta: float):
 	if !is_multiplayer_authority():
 		#print("not processing move state for %s. owned by %d and i am %d" % \
 				#[get_parent().name, get_multiplayer_authority(), multiplayer.get_unique_id()])
