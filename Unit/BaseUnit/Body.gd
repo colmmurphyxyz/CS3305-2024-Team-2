@@ -26,9 +26,11 @@ func _physics_process(delta):
 	velocity=intended_velocty
 	move_and_slide()
 	
+
+	
 func create_path():
 		nav_agent.target_position = target
-
+	
 func _on_timer_timeout():
-	create_path()
+	pass
 
