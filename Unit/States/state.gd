@@ -7,6 +7,7 @@ var change_state
 var animated_sprite
 var persistent_state:Unit
 
+@warning_ignore("shadowed_variable")
 func setup(change_state, animated_sprite, persistent_state):
 	@warning_ignore("shadowed_variable") self.change_state = change_state
 	@warning_ignore("shadowed_variable") self.animated_sprite = animated_sprite

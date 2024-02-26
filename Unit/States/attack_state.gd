@@ -12,8 +12,7 @@ func _ready():
 	persistent_state.sprite2d.pause()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float):
 	if !is_multiplayer_authority():
 		#print("not processing attack state for %s. owned by %d\t\t and i am %d\t\t" % \
 				#[get_parent().name, get_multiplayer_authority(), multiplayer.get_unique_id()])

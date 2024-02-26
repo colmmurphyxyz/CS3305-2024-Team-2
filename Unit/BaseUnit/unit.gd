@@ -199,6 +199,7 @@ func sort_enemies_in_attack_area_by_distance(list):
 func spawn_explosion_scene(spawn_pos: Vector2):
 	var explosion = explosion_scene.instantiate()
 	explosion.global_position = spawn_pos
+	@warning_ignore("integer_division")
 	explosion.scale *= (width / 32)
 	add_sibling(explosion, true)
 
