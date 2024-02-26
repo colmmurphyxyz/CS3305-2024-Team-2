@@ -84,7 +84,7 @@ void fragment() {
         }
 		
     }
-	if (team2==false){
+	if (team2==true){
 		COLOR = vec4(COLOR.r*1.0,COLOR.g*.3,COLOR.b*.2,COLOR.a);
 	}
 }

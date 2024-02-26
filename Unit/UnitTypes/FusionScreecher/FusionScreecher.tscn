@@ -287,11 +287,11 @@ script = ExtResource("1_fnxk6")
 hp = 40
 attack_damage = 20
 speed = 50
-visible_radius_size = 5
-attack_speed = 0.05
+visible_radius_size = 6
+attack_speed = 0.5
 bullet = ExtResource("2_qol1h")
 bullet_speed = 700
-attack_frame = 19
+attack_frame = 17
 can_mine = false
 
 [node name="Body" type="CharacterBody2D" parent="."]
@@ -359,12 +359,12 @@ show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
 
-[node name="ChargeSound" type="AudioStreamPlayer2D" parent="Body"]
-stream = ExtResource("11_ifosd")
-bus = &"SFX"
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ww76p")
+
+[node name="ChargeSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ifosd")
+bus = &"SFX"
 
 [connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
