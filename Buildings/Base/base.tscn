@@ -46,13 +46,13 @@ collision_mask = 3
 script = ExtResource("1_rcxq8")
 sprite_texture = ExtResource("2_msyjy")
 
-[node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_ke4o0")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("3_31jc6")
+
+[node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ke4o0")
 
 [node name="MiningUnitDetectionArea" type="Area2D" parent="."]
 collision_mask = 2049
