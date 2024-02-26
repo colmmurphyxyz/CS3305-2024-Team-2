@@ -291,7 +291,7 @@ visible_radius_size = 6
 attack_speed = 0.5
 bullet = ExtResource("2_qol1h")
 bullet_speed = 700
-attack_frame = 19
+attack_frame = 17
 can_mine = false
 
 [node name="Body" type="CharacterBody2D" parent="."]

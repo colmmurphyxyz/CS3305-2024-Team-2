@@ -29,8 +29,8 @@ func _process(_delta: float):
 
 	if is_instance_valid(current_target):
 		persistent_state.sprite2d.rotation = persistent_state.body.global_position.angle_to_point(current_target.global_position)+ 1.5708*3
-	if persistent_state.sprite2d.frame==2 and persistent_state.sprite2d.animation == "attack":
-		print(get_parent())
+	if get_parent().name.begins_with("FusionScreecher") and persistent_state.sprite2d.frame==2 and persistent_state.sprite2d.animation == "attack":
+
 		if is_instance_valid( $"../ChargeSound"):
 			if $"../ChargeSound".playing == false:
 				$"../ChargeSound".play()
