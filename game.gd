@@ -4,17 +4,6 @@ const TEAM_1_HQ_POSITION: Vector2 = Vector2(500, 1250)
 const TEAM_2_HQ_POSITION: Vector2 = Vector2(750, 1600)
 
 func _ready():
-	# if Host/Client info has not been set in GameManager, set it
-	if GameManager.Host.is_empty():
-		GameManager.Host = {
-			"name": "hostgamer",
-			"id": 1,
-		}
-		GameManager.Client = {
-			"name": "clientgamer",
-			"id": 2,
-		}
-		GameManager.team = "1"
 	# spawn HQ's for both teams
 	# only call RPC from server, to avoid dupicate buildings at the same location
 	# func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):

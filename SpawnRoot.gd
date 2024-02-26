@@ -2,13 +2,17 @@ extends Node2D
 
 func _ready():
 	# set multiplayer authority on units/buildings already in the scene
-	var client_id: int = GameManager.Client["id"] if GameManager.Client.has("id") else "2"
-	for node in get_children():
-		for child in node.get_children():
-			child.set_multiplayer_authority(
-				1 if node.team == "1" else client_id,
-				true
-			)
+	var client_id: int = GameManager.Client["id"]
+	for child in get_children():
+		child.set_multiplayer_authority(
+			1 if child.team == "1" else client_id,
+			true
+		)
+		#for child in node.get_children():
+			#child.set_multiplayer_authority(
+				#1 if node.team == "1" else client_id,
+				#true
+			#)
 
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed:
@@ -32,6 +36,10 @@ func _input(event: InputEvent):
 			KEY_T:
 				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Scout/scout.tscn", \
+						get_global_mouse_position())
+			KEY_F:
+				spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
+						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
 						get_global_mouse_position())
 				
 @rpc("any_peer", "call_local", "reliable")

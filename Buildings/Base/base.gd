@@ -1,6 +1,8 @@
 extends StaticBody2D
 class_name Base
 
+signal building_destroyed
+
 # export variables
 @export var team: String = "1"
 @export var sprite_texture:Texture2D
@@ -94,6 +96,7 @@ func _process(delta: float):
 			sprite.modulate=Color.DIM_GRAY
 			if allies_in_area.size() > 0:
 				for body in allies_in_area:
+					if !is_instance_valid(body): continue
 					if !(body.is_in_group("Buildings")): # if body is not a bulding
 						health += 0.5 * delta
 						print("Repairing...", round(health), "/", max_hp)
@@ -108,12 +111,12 @@ func _process(delta: float):
 			pass
 			
 		# Failsafe for detection radius as its inactive before placement 
-		overlapping = get_node("Area2D").get_overlapping_bodies()
+		overlapping = detection_area.get_overlapping_bodies()
 		for object in overlapping:
 			var parent = object.get_parent()
 			if object in get_tree().get_nodes_in_group("Buildings"):
 				parent=object
-			if parent.get_team() == team:
+			if is_instance_valid(parent) and parent.get_team() == team:
 				if not object in allies_in_area:
 					allies_in_area.append(object)
 			else:
@@ -136,8 +139,8 @@ func stop_following_mouse():
 		border.visible = false
 		is_following_mouse = false
 		collision_layer = 2 + 13 # re-enable collisions to prevent stacking
-		detection_area.body_entered.connect(_on_detection_area_body_entered)
-		detection_area.body_exited.connect(_on_detection_area_body_exited)
+		#detection_area.body_entered.connect(_on_detection_area_body_entered)
+		#detection_area.body_exited.connect(_on_detection_area_body_exited)
 		return true 
 
 func get_team():
@@ -165,6 +168,7 @@ func damage(damage_amount):
 	healthbar.value = health
 	
 	if health <= 0:
+		building_destroyed.emit()
 		spawn_explosion_scene.rpc_id(1)
 		#var explosion_node = explosion_scene.instantiate()
 		#get_parent().add_child(explosion_node, true)

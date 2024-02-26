@@ -85,3 +85,8 @@ func _on_area_2d_body_entered(body):
 			
 func _on_area_2d_body_exited(body):
 	close_mining_units.erase(body)
+
+# called when the HQ is destroyed
+func _on_building_destroyed():
+	print("Team %s just lost. rip bozo" % team)
+	#TODO Endgame logic

@@ -148,10 +148,18 @@ func damage(damage_amount):
 		spawn_explosion_scene.rpc_id(1, body.global_position)
 		# have the server do the despawning
 		# the MultiplayerSpawner will signal for all other clients to despawn this node
-		queue_free_on_server.rpc_id(1)
+		#queue_free_on_server.rpc_id(1)
+		# I suspect that if a node was spawned before the MultiplayerSpawner entered the tree
+		# the MultiplayerSpawner won't handle its despawning
+		# thus we need to manually delete it on all peers
+		queue_free_on_all_peers.rpc()
 		
 @rpc("any_peer", "call_local", "reliable")
 func queue_free_on_server():
+	queue_free()
+	
+@rpc("any_peer", "call_local", "reliable")
+func queue_free_on_all_peers():
 	queue_free()
 
 func hit_timer_timeout():
@@ -190,7 +198,7 @@ func sort_enemies_in_attack_area_by_distance(list):
 @rpc("any_peer", "call_local")
 func spawn_explosion_scene(spawn_pos: Vector2):
 	var explosion = explosion_scene.instantiate()
-	explosion.position = spawn_pos
+	explosion.global_position = spawn_pos
 	explosion.scale *= (width / 32)
 	add_sibling(explosion, true)
 
@@ -214,3 +222,7 @@ func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damag
 func set_bullet_authority(node_name: String, auth: int):
 	get_parent().get_node(node_name).get_node("MultiplayerSynchronizer")\
 			.set_multiplayer_authority(auth)
+			
+@rpc("any_peer", "call_local")
+func play_attack_sound():
+	attack_sound.play()

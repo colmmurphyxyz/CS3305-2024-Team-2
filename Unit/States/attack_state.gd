@@ -36,7 +36,7 @@ func _process(delta):
 		persistent_state.sprite2d.play("attack")
 
 	if persistent_state.sprite2d.frame == persistent_state.attack_frame and fired==false:
-		persistent_state.attack_sound.play()
+		persistent_state.play_attack_sound.rpc()
 		fired=true
 		var bullet_target
 		if current_target in get_tree().get_nodes_in_group("Buildings"):
