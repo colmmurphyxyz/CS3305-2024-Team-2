@@ -1,6 +1,6 @@
 extends Control
 
-const CAMERA_MOVE_SPEED: int = 50
+const CAMERA_MOVE_SPEED: int = 15
 
 var peer: ENetMultiplayerPeer
 

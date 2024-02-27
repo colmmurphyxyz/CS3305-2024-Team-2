@@ -81,7 +81,6 @@ centered = false
 offset = Vector2(400, 324)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="GameTitleLabel" type="Label" parent="CanvasLayer"]
 offset_left = 288.0
@@ -102,17 +101,17 @@ offset_bottom = 240.0
 placeholder_text = "Player Name"
 
 [node name="JoinAddressField" type="TextEdit" parent="CanvasLayer"]
-offset_left = 656.0
+offset_left = 608.0
 offset_top = 368.0
-offset_right = 784.0
+offset_right = 736.0
 offset_bottom = 432.0
 text = "127.0.0.1"
 placeholder_text = "host address"
 
 [node name="JoinPortField" type="TextEdit" parent="CanvasLayer"]
-offset_left = 800.0
+offset_left = 736.0
 offset_top = 368.0
-offset_right = 864.0
+offset_right = 800.0
 offset_bottom = 432.0
 text = "1992"
 placeholder_text = "1992"
