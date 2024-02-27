@@ -11,7 +11,6 @@ class_name Unit
 #Selection
 var selected:bool = false
 var selected_texture_path:String
-
 #Light radius, fog dispersal radius and detection radius tied to same value
 @export var visible_radius_size:int = 2
 var light:PointLight2D
@@ -84,10 +83,7 @@ func _ready():
 	light.scale=Vector2(visible_radius_size,visible_radius_size)
 	light.texture=load("res://Assets/pointLightTexture.webp")
 	light.blend_mode=Light2D.BLEND_MODE_MIX
-	#Detection Radius
-	detection_area = Area2D.new()
-	body.add_child(detection_area)
-	detection_area.scale=Vector2(visible_radius_size,visible_radius_size)
+
 	#Attack Radius
 	attack_area.collision_mask=12+13
 func change_state(new_state_name):
