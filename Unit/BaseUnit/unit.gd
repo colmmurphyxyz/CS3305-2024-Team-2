@@ -87,7 +87,7 @@ func _ready():
 	light.scale=Vector2(visible_radius_size,visible_radius_size)
 	light.texture=load("res://Assets/pointLightTexture.webp")
 	light.blend_mode=Light2D.BLEND_MODE_MIX
-
+	
 	#Attack Radius
 	attack_area.collision_mask=12+13
 func change_state(new_state_name):
@@ -155,8 +155,9 @@ func _on_detection_area_body_exited(body):
 		check_if_visible(unit)
 
 func check_if_visible(unit:Unit):
-	if unit.visibility_number<=1:
-		unit.visible=false
+	if unit.visibility_number<=0:
+		if unit.team != GameManager.team:
+			unit.visible=false
 	else:
 		unit.visible=true
 
