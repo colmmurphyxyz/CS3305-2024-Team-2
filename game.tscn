@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=17 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
+[ext_resource type="Script" path="res://FreeIronTimer.gd" id="15_xl2v7"]
 
 [sub_resource type="GDScript" id="GDScript_tgthy"]
 
@@ -207,6 +208,11 @@ polygon = PackedVector2Array(1264, 307, 1260, 420, 1364, 420, 1366, 301)
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
 
+[node name="FreeIronTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+script = ExtResource("15_xl2v7")
+
 [connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Mine" to="Buildings" method="_button_press_select" binds= ["mine"]]
@@ -232,3 +238,4 @@ position = Vector2(809, 494)
 [connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
+[connection signal="timeout" from="FreeIronTimer" to="FreeIronTimer" method="_on_timeout"]
