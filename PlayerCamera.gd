@@ -39,6 +39,7 @@ func _handle_cursor_pan():
 
 var mmb_initial_pos: Vector2 = Vector2.ZERO
 var mmb_pressed_initial_camera_pos: Vector2 = Vector2.ZERO
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
 	var velocity: Vector2 = Vector2.ZERO

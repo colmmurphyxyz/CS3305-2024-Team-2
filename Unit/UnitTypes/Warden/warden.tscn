@@ -280,7 +280,7 @@ radius = 10.0499
 radius = 205.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_45cop"]
-radius = 143.056
+radius = 187.011
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r0gwd"]
 properties/0/path = NodePath(".:position")

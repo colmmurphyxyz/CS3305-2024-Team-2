@@ -20,6 +20,7 @@ var cast_point: Vector2 = Vector2.ZERO
 @onready var ray_array = [ray1,ray2,ray3,ray5,ray6,ray7]
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible=true
 	
 	var target = get_parent().get_node_or_null(target_brain_name)
 	if target != null:

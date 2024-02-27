@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://clmbrda1kycju"]
+[gd_scene load_steps=24 format=3 uid="uid://clmbrda1kycju"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_yrkb0"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_k16xq"]
@@ -112,6 +112,9 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qhwn"]
 radius = 17.2627
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ae7c"]
+radius = 315.0
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ttag5"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -206,6 +209,13 @@ show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
 
+[node name="DetectionArea" type="Area2D" parent="Body"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/DetectionArea"]
+shape = SubResource("CircleShape2D_4ae7c")
+debug_color = Color(0.0823529, 0.278431, 1, 0.419608)
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ttag5")
 
@@ -213,3 +223,5 @@ replication_config = SubResource("SceneReplicationConfig_ttag5")
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="Body/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Body/DetectionArea" to="." method="_on_detection_area_body_exited"]
