@@ -73,9 +73,12 @@ scale = Vector2(1.44, 1.44)
 texture = ExtResource("8_5mhuv")
 centered = false
 
-[node name="GameTitleLabel" type="Label" parent="."]
-visible = false
-layout_mode = 0
+[node name="MainMenuCamera" type="Camera2D" parent="."]
+offset = Vector2(400, 324)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameTitleLabel" type="Label" parent="CanvasLayer"]
 offset_left = 288.0
 offset_top = 112.0
 offset_right = 864.0
@@ -86,18 +89,14 @@ text = "We Need a Name!!!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerNameField" type="TextEdit" parent="."]
-visible = false
-layout_mode = 0
+[node name="PlayerNameField" type="TextEdit" parent="CanvasLayer"]
 offset_left = 288.0
 offset_top = 192.0
 offset_right = 864.0
 offset_bottom = 240.0
 placeholder_text = "Player Name"
 
-[node name="JoinAddressField" type="TextEdit" parent="."]
-visible = false
-layout_mode = 0
+[node name="JoinAddressField" type="TextEdit" parent="CanvasLayer"]
 offset_left = 656.0
 offset_top = 368.0
 offset_right = 784.0
@@ -105,9 +104,7 @@ offset_bottom = 432.0
 text = "127.0.0.1"
 placeholder_text = "host address"
 
-[node name="JoinPortField" type="TextEdit" parent="."]
-visible = false
-layout_mode = 0
+[node name="JoinPortField" type="TextEdit" parent="CanvasLayer"]
 offset_left = 800.0
 offset_top = 368.0
 offset_right = 864.0
@@ -115,9 +112,7 @@ offset_bottom = 432.0
 text = "1992"
 placeholder_text = "1992"
 
-[node name="HostPortField" type="TextEdit" parent="."]
-visible = false
-layout_mode = 0
+[node name="HostPortField" type="TextEdit" parent="CanvasLayer"]
 offset_left = 688.0
 offset_top = 272.0
 offset_right = 864.0
@@ -125,36 +120,29 @@ offset_bottom = 336.0
 text = "1992"
 placeholder_text = "port (default 1992)"
 
-[node name="HostGameButton" type="Button" parent="."]
-visible = false
-layout_mode = 0
+[node name="HostGameButton" type="Button" parent="CanvasLayer"]
 offset_left = 288.0
 offset_top = 272.0
 offset_right = 496.0
 offset_bottom = 336.0
 text = "Host Game"
 
-[node name="JoinGameButton" type="Button" parent="."]
-visible = false
-layout_mode = 0
+[node name="JoinGameButton" type="Button" parent="CanvasLayer"]
 offset_left = 288.0
 offset_top = 368.0
 offset_right = 496.0
 offset_bottom = 432.0
 text = "Join Game"
 
-[node name="StartLanGameButton" type="Button" parent="."]
-visible = false
-layout_mode = 0
+[node name="StartLanGameButton" type="Button" parent="CanvasLayer"]
 offset_left = 288.0
 offset_top = 464.0
 offset_right = 864.0
 offset_bottom = 528.0
 text = "Play against computer (not yet)"
 
-[node name="ErrorAlertLabel" type="Label" parent="."]
+[node name="ErrorAlertLabel" type="Label" parent="CanvasLayer"]
 visible = false
-layout_mode = 0
 offset_left = 384.0
 offset_right = 768.0
 offset_bottom = 128.0
@@ -164,13 +152,7 @@ text = "default error message"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="ErrorAlertLabelShowTimer" type="Timer" parent="."]
-wait_time = 2.5
-one_shot = true
-
-[node name="HostPortLabel" type="Label" parent="."]
-visible = false
-layout_mode = 0
+[node name="HostPortLabel" type="Label" parent="CanvasLayer"]
 offset_left = 528.0
 offset_top = 272.0
 offset_right = 656.0
@@ -179,9 +161,7 @@ text = "Port"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="JoinAddressPortLabel" type="Label" parent="."]
-visible = false
-layout_mode = 0
+[node name="JoinAddressPortLabel" type="Label" parent="CanvasLayer"]
 offset_left = 512.0
 offset_top = 368.0
 offset_right = 640.0
@@ -191,7 +171,11 @@ Port"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[connection signal="pressed" from="HostGameButton" to="." method="_on_host_game_button_pressed"]
-[connection signal="pressed" from="JoinGameButton" to="." method="_on_join_game_button_pressed"]
-[connection signal="pressed" from="StartLanGameButton" to="." method="_on_start_lan_game_button_pressed"]
+[node name="ErrorAlertLabelShowTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/HostGameButton" to="." method="_on_host_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/JoinGameButton" to="." method="_on_join_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/StartLanGameButton" to="." method="_on_start_lan_game_button_pressed"]
 [connection signal="timeout" from="ErrorAlertLabelShowTimer" to="." method="_on_error_alert_label_show_timer_timeout"]
