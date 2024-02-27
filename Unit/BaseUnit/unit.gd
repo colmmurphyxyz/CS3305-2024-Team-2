@@ -25,6 +25,9 @@ var state_name:String
 var units_within_attack_range =[]
 var current_target=null
 var is_chasing = null
+
+#Visibility
+var visibility_number=0
 @export_subgroup("Combat Properties")
 @export var melee:bool = false
 @export var attack_speed:float=1
@@ -72,6 +75,7 @@ func _ready():
 	if team == "2":
 		sprite2d.material.set("shader_parameter/team2",true)
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
+	check_if_visible(self)
 	
 	#Selection sprite setting up
 	sprite2d.material.set("shader_parameter/shader_enabled",false)
@@ -136,12 +140,34 @@ func set_chase(chase:CharacterBody2D):
 func set_target_building(building:StaticBody2D):
 	target_building=building
 	
+#Visbility detection
+#Works by when body enters, its visibiltiy_number is increased by 1, if leaves, decrease by 1
+func _on_detection_area_body_entered(body):
+	var unit = body.get_parent()
+	if unit.team != team:
+		unit.visibility_number+=1
+		check_if_visible(unit)
+
+func _on_detection_area_body_exited(body):
+	var unit = body.get_parent()
+	if unit.team != team:
+		unit.visibility_number-=1
+		check_if_visible(unit)
+
+func check_if_visible(unit:Unit):
+	if unit.visibility_number<=1:
+		unit.visible=false
+	else:
+		unit.visible=true
+
 @rpc("any_peer", "call_local", "reliable")
 func damage(damage_amount):
 	sprite2d.material.set("shader_parameter/active",true)
 	hp-=damage_amount
 	healthbar.value=hp
+	
 	if hp <= 0:
+		
 		spawn_explosion_scene.rpc_id(1, body.global_position)
 		# have the server do the despawning
 		# the MultiplayerSpawner will signal for all other clients to despawn this node
