@@ -1,8 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://csnaat1gu7uyn"]
+[gd_scene load_steps=10 format=3 uid="uid://csnaat1gu7uyn"]
 
 [ext_resource type="Theme" uid="uid://bqgwg6jqqupa1" path="res://UI/scenes/MainMenu/MainMenuTheme.tres" id="1_hvcae"]
 [ext_resource type="Script" path="res://UI/scenes/MainMenu/MainMenu.gd" id="1_o5ron"]
-[ext_resource type="Texture2D" uid="uid://sww5crim4ijv" path="res://UI/scenes/MainMenu/dune2_cropped.jpg" id="3_i2gh8"]
+[ext_resource type="Texture2D" uid="uid://bc0o23n8qb5lg" path="res://Assets/background/desert_background0.png" id="3_1fw0u"]
+[ext_resource type="Texture2D" uid="uid://w0mv0i250270" path="res://Assets/background/desert_background1.png" id="4_yhw4u"]
+[ext_resource type="Texture2D" uid="uid://c1xxpa77xqar7" path="res://Assets/background/desert_background2.png" id="5_lgscq"]
+[ext_resource type="Texture2D" uid="uid://cv16ledvpvntq" path="res://Assets/background/desert_background6.png" id="6_6v8km"]
+[ext_resource type="Texture2D" uid="uid://co804uy5f5vh8" path="res://Assets/background/desert_background3.png" id="7_jm2ky"]
+[ext_resource type="Texture2D" uid="uid://dcrdx8pqawvkk" path="res://Assets/background/desert_background4.png" id="8_5mhuv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_val4m"]
 bg_color = Color(1, 0.48886, 0.469093, 1)
@@ -17,13 +22,59 @@ grow_vertical = 2
 theme = ExtResource("1_hvcae")
 script = ExtResource("1_o5ron")
 
-[node name="BackgroundSprite" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.902821, 1.59204)
-texture = ExtResource("3_i2gh8")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="BackgroundLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundLayer"]
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("3_1fw0u")
+centered = false
+
+[node name="TreeTopLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/TreeTopLayer"]
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("4_yhw4u")
+centered = false
+
+[node name="RockFaceLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/RockFaceLayer"]
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("5_lgscq")
+centered = false
+
+[node name="BackSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackSpikesLayer"]
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("6_6v8km")
+centered = false
+
+[node name="MidSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/MidSpikesLayer"]
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("7_jm2ky")
+centered = false
+
+[node name="FrontSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/FrontSpikesLayer"]
+scale = Vector2(1.44, 1.44)
+texture = ExtResource("8_5mhuv")
 centered = false
 
 [node name="GameTitleLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 288.0
 offset_top = 112.0
@@ -36,6 +87,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerNameField" type="TextEdit" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 288.0
 offset_top = 192.0
@@ -44,6 +96,7 @@ offset_bottom = 240.0
 placeholder_text = "Player Name"
 
 [node name="JoinAddressField" type="TextEdit" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 656.0
 offset_top = 368.0
@@ -53,6 +106,7 @@ text = "127.0.0.1"
 placeholder_text = "host address"
 
 [node name="JoinPortField" type="TextEdit" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 800.0
 offset_top = 368.0
@@ -62,6 +116,7 @@ text = "1992"
 placeholder_text = "1992"
 
 [node name="HostPortField" type="TextEdit" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 688.0
 offset_top = 272.0
@@ -71,6 +126,7 @@ text = "1992"
 placeholder_text = "port (default 1992)"
 
 [node name="HostGameButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 288.0
 offset_top = 272.0
@@ -79,6 +135,7 @@ offset_bottom = 336.0
 text = "Host Game"
 
 [node name="JoinGameButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 288.0
 offset_top = 368.0
@@ -87,6 +144,7 @@ offset_bottom = 432.0
 text = "Join Game"
 
 [node name="StartLanGameButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 288.0
 offset_top = 464.0
@@ -111,6 +169,7 @@ wait_time = 2.5
 one_shot = true
 
 [node name="HostPortLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 528.0
 offset_top = 272.0
@@ -121,6 +180,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="JoinAddressPortLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 512.0
 offset_top = 368.0
