@@ -3,10 +3,10 @@
 [ext_resource type="Theme" uid="uid://bqgwg6jqqupa1" path="res://UI/scenes/MainMenu/MainMenuTheme.tres" id="1_hvcae"]
 [ext_resource type="Script" path="res://UI/scenes/MainMenu/MainMenu.gd" id="1_o5ron"]
 [ext_resource type="Texture2D" uid="uid://bc0o23n8qb5lg" path="res://Assets/background/desert_background0.png" id="3_1fw0u"]
+[ext_resource type="Texture2D" uid="uid://b8pjbvcb4rg6p" path="res://Assets/background/desert_background7.png" id="3_cra6a"]
 [ext_resource type="Texture2D" uid="uid://w0mv0i250270" path="res://Assets/background/desert_background1.png" id="4_yhw4u"]
 [ext_resource type="Texture2D" uid="uid://c1xxpa77xqar7" path="res://Assets/background/desert_background2.png" id="5_lgscq"]
 [ext_resource type="Texture2D" uid="uid://cv16ledvpvntq" path="res://Assets/background/desert_background6.png" id="6_6v8km"]
-[ext_resource type="Texture2D" uid="uid://co804uy5f5vh8" path="res://Assets/background/desert_background3.png" id="7_jm2ky"]
 [ext_resource type="Texture2D" uid="uid://dcrdx8pqawvkk" path="res://Assets/background/desert_background4.png" id="8_5mhuv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_val4m"]
@@ -25,7 +25,7 @@ script = ExtResource("1_o5ron")
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="BackgroundLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0, 0)
+motion_scale = Vector2(0.1, 0)
 motion_mirroring = Vector2(1008, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundLayer"]
@@ -34,6 +34,7 @@ texture = ExtResource("3_1fw0u")
 centered = false
 
 [node name="TreeTopLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
 motion_mirroring = Vector2(1008, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/TreeTopLayer"]
@@ -50,33 +51,37 @@ texture = ExtResource("5_lgscq")
 centered = false
 
 [node name="BackSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.5, 1.5)
 motion_mirroring = Vector2(1008, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackSpikesLayer"]
 scale = Vector2(1.44, 1.44)
-texture = ExtResource("6_6v8km")
+texture = ExtResource("8_5mhuv")
 centered = false
 
 [node name="MidSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.75, 1.75)
 motion_mirroring = Vector2(1008, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/MidSpikesLayer"]
 scale = Vector2(1.44, 1.44)
-texture = ExtResource("7_jm2ky")
+texture = ExtResource("6_6v8km")
 centered = false
 
 [node name="FrontSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(2, 2)
 motion_mirroring = Vector2(1008, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/FrontSpikesLayer"]
 scale = Vector2(1.44, 1.44)
-texture = ExtResource("8_5mhuv")
+texture = ExtResource("3_cra6a")
 centered = false
 
 [node name="MainMenuCamera" type="Camera2D" parent="."]
 offset = Vector2(400, 324)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="GameTitleLabel" type="Label" parent="CanvasLayer"]
 offset_left = 288.0

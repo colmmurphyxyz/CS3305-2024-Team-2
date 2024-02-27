@@ -1,6 +1,6 @@
 extends Control
 
-const CAMERA_MOVE_SPEED: int = 10
+const CAMERA_MOVE_SPEED: int = 50
 
 var peer: ENetMultiplayerPeer
 
@@ -16,7 +16,7 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 	
 func _process(delta: float):
-	camera.position.x += CAMERA_MOVE_SPEED
+	camera.position.x += CAMERA_MOVE_SPEED * delta
 
 # called on all clients and server
 func peer_connected(id: int):
