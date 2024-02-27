@@ -1,6 +1,9 @@
 extends Node2D
 
 func _ready():
+	# set this scene's camera to be the current
+	# otherwise we keep using the camera from the main menu scene
+	$PlayerCamera/Camera2D.make_current()
 	# spawn HQ's for both teams
 	# only call RPC from server, to avoid dupicate buildings at the same location
 	# func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):

@@ -7,9 +7,18 @@ var peer: ENetMultiplayerPeer
 @onready var game_scene: PackedScene = preload("res://game.tscn")
 @onready var camera: Camera2D = $MainMenuCamera
 
+@onready var player_name_field: TextEdit = $CanvasLayer/PlayerNameField
+@onready var join_address_field: TextEdit = $CanvasLayer/JoinAddressField
+@onready var port_field: TextEdit = $CanvasLayer/PortField
+@onready var host_game_button: Button = $CanvasLayer/HostGameButton
+@onready var join_game_button: Button = $CanvasLayer/JoinGameButton
+@onready var start_game_button: Button = $CanvasLayer/StartLanGameButton
+@onready var error_alert_label: Label = $CanvasLayer/ErrorAlertLabel
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	start_game_button.visible = false
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -34,6 +43,8 @@ func connected_to_server():
 		"id": multiplayer.get_unique_id(),
 	}
 	GameManager.team = "2"
+	# connection is established, reveal start game button
+	start_game_button.visible = true
 	send_client_info_to_server.rpc_id(1, GameManager.Client.name, GameManager.Client.id)
 	
 # called only from clients
@@ -53,7 +64,9 @@ func send_client_info_to_server(name: String, id: int):
 		"name": name,
 		"id": id,
 	}
-	send_host_info_to_client.rpc_id(GameManager.Client.id, $CanvasLayer/PlayerNameField.text)
+	# connection is established, reveal start game button
+	start_game_button.visible = true
+	send_host_info_to_client.rpc_id(GameManager.Client.id, GameManager.Host["name"])
 
 func _on_play_computer_button_pressed():
 	if !_is_player_name_valid():
@@ -63,7 +76,7 @@ func _on_play_computer_button_pressed():
 
 
 func _on_error_alert_label_show_timer_timeout():
-	$CanvasLayer/ErrorAlertLabel.visible = false
+	error_alert_label.visible = false
 
 
 func _on_host_game_button_pressed():
@@ -73,11 +86,11 @@ func _on_host_game_button_pressed():
 		_show_error_message("Enter a port number greater than 1024")
 	else:
 		GameManager.Host = {
-			"name": $CanvasLayer/PlayerNameField.text,
+			"name": player_name_field.text,
 			"id": 1
 		}
 		GameManager.team = "1"
-		var port = int($CanvasLayer/HostPortField.text)
+		var port = int(port_field.text)
 		print("using port ", port)
 		peer = ENetMultiplayerPeer.new()
 		# create server on given port, with max 2 connections (including self)
@@ -96,8 +109,8 @@ func _on_join_game_button_pressed():
 	elif !_is_join_port_valid():
 		_show_error_message("Enter a port number greater than 1024")
 		return
-	var address = $CanvasLayer/JoinAddressField.text
-	var port = int($CanvasLayer/JoinPortField.text)
+	var address = join_address_field.text
+	var port = int(port_field.text)
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(address, port)
 	print("Connecting to %s on port %d" % [address, port])
@@ -106,24 +119,24 @@ func _on_join_game_button_pressed():
 		
 		
 func _is_player_name_valid() -> bool:
-	return $CanvasLayer/PlayerNameField.text != ""
+	return player_name_field.text != ""
 	
 func _is_host_port_valid() -> bool:
-	if $CanvasLayer/HostPortField.text == "":
+	if port_field.text == "":
 		return true
-	return int($CanvasLayer/HostPortField.text) > 1024
+	return int(port_field.text) > 1024
 	
 func _is_join_address_valid() -> bool:
-	return $CanvasLayer/JoinAddressField.text.is_valid_ip_address()
+	return join_address_field.text.is_valid_ip_address()
 	
 func _is_join_port_valid() -> bool:
-	if $CanvasLayer/JoinPortField.text == "":
+	if port_field.text == "":
 		return true
-	return int($CanvasLayer/JoinPortField.text) > 1024
+	return int(port_field.text) > 1024
 	
 func _show_error_message(message: String):
-	$CanvasLayer/ErrorAlertLabel.text = message
-	$CanvasLayer/ErrorAlertLabel.visible = true
+	error_alert_label.text = message
+	error_alert_label.visible = true
 	$ErrorAlertLabelShowTimer.start()
 		
 @rpc("any_peer", "call_local")
@@ -132,6 +145,7 @@ func start_game():
 	get_tree().root.add_child(scene)
 	scene.get_node("PlayerCamera").is_locked = true
 	self.hide()
+	$CanvasLayer.hide()
 
 
 func _on_start_lan_game_button_pressed():

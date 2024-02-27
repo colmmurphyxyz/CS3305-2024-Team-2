@@ -26,59 +26,60 @@ script = ExtResource("1_o5ron")
 
 [node name="BackgroundLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.1, 0)
-motion_mirroring = Vector2(1008, 0)
+motion_mirroring = Vector2(1155, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundLayer"]
-scale = Vector2(1.44, 1.44)
+position = Vector2(0, -94)
+scale = Vector2(1.65, 1.65)
 texture = ExtResource("3_1fw0u")
 centered = false
 
 [node name="TreeTopLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)
-motion_mirroring = Vector2(1008, 0)
+motion_mirroring = Vector2(1155, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/TreeTopLayer"]
-position = Vector2(0, -128)
-scale = Vector2(1.44, 1.72444)
+position = Vector2(0, -94)
+scale = Vector2(1.65, 1.65)
 texture = ExtResource("4_yhw4u")
 centered = false
 
 [node name="RockFaceLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(1008, 0)
+motion_mirroring = Vector2(1155, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/RockFaceLayer"]
-position = Vector2(0, -128)
-scale = Vector2(1.44, 1.72444)
+position = Vector2(0, -94)
+scale = Vector2(1.65, 1.65)
 texture = ExtResource("5_lgscq")
 centered = false
 
 [node name="BackSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(1.5, 1.5)
-motion_mirroring = Vector2(1008, 0)
+motion_mirroring = Vector2(1155, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackSpikesLayer"]
-position = Vector2(0, -192)
-scale = Vector2(1.44, 1.86667)
+position = Vector2(0, -94)
+scale = Vector2(1.65, 1.65)
 texture = ExtResource("8_5mhuv")
 centered = false
 
 [node name="MidSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(1.75, 1.75)
-motion_mirroring = Vector2(1008, 0)
+motion_mirroring = Vector2(1155, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/MidSpikesLayer"]
-position = Vector2(0, -128)
-scale = Vector2(1.44, 1.72444)
+position = Vector2(0, -94)
+scale = Vector2(1.65, 1.65)
 texture = ExtResource("6_6v8km")
 centered = false
 
 [node name="FrontSpikesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(2, 2)
-motion_mirroring = Vector2(1008, 0)
+motion_mirroring = Vector2(1155, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/FrontSpikesLayer"]
-position = Vector2(0, -128)
-scale = Vector2(1.44, 1.72444)
+position = Vector2(0, -94)
+scale = Vector2(1.65, 1.65)
 texture = ExtResource("3_cra6a")
 centered = false
 
@@ -87,13 +88,12 @@ visible = false
 offset = Vector2(400, 324)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="GameTitleLabel" type="Label" parent="CanvasLayer"]
-offset_left = 288.0
-offset_top = 112.0
-offset_right = 864.0
-offset_bottom = 192.0
+offset_left = 256.0
+offset_top = 32.0
+offset_right = 896.0
+offset_bottom = 112.0
 theme = ExtResource("1_hvcae")
 theme_override_font_sizes/font_size = 40
 text = "We Need a Name!!!"
@@ -101,85 +101,78 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerNameField" type="TextEdit" parent="CanvasLayer"]
-offset_left = 288.0
-offset_top = 192.0
-offset_right = 864.0
-offset_bottom = 240.0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 176.0
 placeholder_text = "Player Name"
 
 [node name="JoinAddressField" type="TextEdit" parent="CanvasLayer"]
-offset_left = 608.0
-offset_top = 368.0
-offset_right = 736.0
-offset_bottom = 432.0
+offset_left = 432.0
+offset_top = 304.0
+offset_right = 560.0
+offset_bottom = 368.0
 text = "127.0.0.1"
 placeholder_text = "host address"
 
-[node name="JoinPortField" type="TextEdit" parent="CanvasLayer"]
-offset_left = 736.0
-offset_top = 368.0
-offset_right = 800.0
-offset_bottom = 432.0
-text = "1992"
-placeholder_text = "1992"
-
-[node name="HostPortField" type="TextEdit" parent="CanvasLayer"]
-offset_left = 688.0
-offset_top = 272.0
-offset_right = 864.0
-offset_bottom = 336.0
+[node name="PortField" type="TextEdit" parent="CanvasLayer"]
+offset_left = 432.0
+offset_top = 208.0
+offset_right = 560.0
+offset_bottom = 272.0
 text = "1992"
 placeholder_text = "port (default 1992)"
 
 [node name="HostGameButton" type="Button" parent="CanvasLayer"]
-offset_left = 288.0
-offset_top = 272.0
-offset_right = 496.0
-offset_bottom = 336.0
+offset_left = 592.0
+offset_top = 208.0
+offset_right = 832.0
+offset_bottom = 272.0
 text = "Host Game"
 
 [node name="JoinGameButton" type="Button" parent="CanvasLayer"]
-offset_left = 288.0
-offset_top = 368.0
-offset_right = 496.0
-offset_bottom = 432.0
+offset_left = 608.0
+offset_top = 304.0
+offset_right = 832.0
+offset_bottom = 368.0
 text = "Join Game"
 
 [node name="StartLanGameButton" type="Button" parent="CanvasLayer"]
 offset_left = 288.0
-offset_top = 464.0
+offset_top = 400.0
 offset_right = 864.0
-offset_bottom = 528.0
-text = "Play against computer (not yet)"
+offset_bottom = 464.0
+text = "Start Game"
 
 [node name="ErrorAlertLabel" type="Label" parent="CanvasLayer"]
 visible = false
-offset_left = 384.0
-offset_right = 768.0
+offset_left = 320.0
+offset_right = 832.0
 offset_bottom = 128.0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_val4m")
 text = "default error message"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="HostPortLabel" type="Label" parent="CanvasLayer"]
-offset_left = 528.0
-offset_top = 272.0
-offset_right = 656.0
-offset_bottom = 336.0
+[node name="PortLabel" type="Label" parent="CanvasLayer"]
+offset_left = 320.0
+offset_top = 208.0
+offset_right = 400.0
+offset_bottom = 272.0
 text = "Port"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="JoinAddressPortLabel" type="Label" parent="CanvasLayer"]
-offset_left = 512.0
-offset_top = 368.0
-offset_right = 640.0
-offset_bottom = 432.0
-text = "Address
-Port"
+offset_left = 320.0
+offset_top = 304.0
+offset_right = 416.0
+offset_bottom = 368.0
+text = "Server Address"
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="ErrorAlertLabelShowTimer" type="Timer" parent="."]

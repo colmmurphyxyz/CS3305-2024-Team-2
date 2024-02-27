@@ -22,7 +22,6 @@ GameManager="*res://GameManager.gd"
 
 [display]
 
-window/size/viewport_width=800
 window/stretch/mode="canvas_items"
 
 [dotnet]
