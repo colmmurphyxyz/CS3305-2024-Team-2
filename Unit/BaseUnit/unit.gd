@@ -53,7 +53,7 @@ var carrying_ore:bool = false
 @onready var hit_timer:Timer = Timer.new()
 var width:int
 func _ready():
-
+	
 	add_to_group("Units")	
 	#State system setup
 	state_factory = StateFactory.new()
@@ -68,7 +68,8 @@ func _ready():
 	hit_timer.wait_time=.1
 	hit_timer.start()
 	hit_timer.timeout.connect(hit_timer_timeout)
-	
+	#Spawn sound
+	play_unit_sound()
 	#Used for getting explosion width by getting idle texture size
 	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
 	
@@ -117,7 +118,11 @@ func path_to_point(point:Vector2):
 	body.get_collision_mask_value(3)
 	body.create_path()
 	change_state("moving")
-	
+
+func play_unit_sound():
+		$Body/SpawnSound.pitch_scale = randf_range(.9,1.1)
+		$Body/SpawnSound.play()
+
 func reset_chase():
 	is_chasing=null
 
@@ -160,6 +165,8 @@ func check_if_visible(unit:Unit):
 			unit.visible=false
 	else:
 		unit.visible=true
+		if unit.team != GameManager.team:
+			unit.light.visible=false
 
 @rpc("any_peer", "call_local", "reliable")
 func damage(damage_amount):

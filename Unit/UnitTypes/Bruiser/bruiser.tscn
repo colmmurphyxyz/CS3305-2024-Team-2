@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dts3ydmuiulbc"]
+[gd_scene load_steps=39 format=3 uid="uid://dts3ydmuiulbc"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_yfqk7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_yvu3u"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dtjm2iu2x8sah" path="res://Assets/Units/Brusier/bruiser-attack-Sheet.png" id="7_hn543"]
 [ext_resource type="Texture2D" uid="uid://c3whwvgr168ff" path="res://Assets/Units/Brusier/brusier_idle-Sheet.png" id="8_8boe0"]
 [ext_resource type="Texture2D" uid="uid://bqhkrpubvqvqn" path="res://Assets/Units/Brusier/brusier_move-Sheet.png" id="9_r15ro"]
+[ext_resource type="AudioStream" uid="uid://blfbh7gypedpi" path="res://Assets/SFX/bruiser_spawn.wav" id="11_c1dyd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq8om"]
 resource_local_to_scene = true
@@ -305,6 +306,12 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/DetectionArea"]
 shape = SubResource("CircleShape2D_63wa2")
 debug_color = Color(0.0823529, 0.278431, 1, 0.419608)
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="Body"]
+visible = false
+stream = ExtResource("11_c1dyd")
+volume_db = -12.791
+bus = &"SFX"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u1tnv")

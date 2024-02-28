@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://clmbrda1kycju"]
+[gd_scene load_steps=25 format=3 uid="uid://clmbrda1kycju"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_yrkb0"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_k16xq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_6ni13"]
 [ext_resource type="Texture2D" uid="uid://dmhyykbhhnvcs" path="res://Assets/Units/Scout/scout-idle-Sheet.png" id="7_mpase"]
 [ext_resource type="Texture2D" uid="uid://podvr73er4uy" path="res://Assets/Units/Scout/scout-move-Sheet.png" id="8_4s0v7"]
+[ext_resource type="AudioStream" uid="uid://cq5nsb8667n5v" path="res://Assets/SFX/scout_spawn.wav" id="9_t6mev"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k2ju"]
 resource_local_to_scene = true
@@ -215,6 +216,12 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/DetectionArea"]
 shape = SubResource("CircleShape2D_4ae7c")
 debug_color = Color(0.0823529, 0.278431, 1, 0.419608)
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="Body"]
+visible = false
+stream = ExtResource("9_t6mev")
+volume_db = -1.618
+bus = &"SFX"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ttag5")
