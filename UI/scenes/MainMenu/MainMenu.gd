@@ -141,11 +141,13 @@ func _show_error_message(message: String):
 		
 @rpc("any_peer", "call_local")
 func start_game():
+	self.hide()
+	get_parent().hide()
+	$ParallaxBackground.hide()
+	$CanvasLayer.hide()
 	var scene = game_scene.instantiate()
 	get_tree().root.add_child(scene)
 	scene.get_node("PlayerCamera").is_locked = true
-	self.hide()
-	$CanvasLayer.hide()
 
 
 func _on_start_lan_game_button_pressed():
