@@ -7,7 +7,7 @@ var iron = 0 # replace with location of resource values
 
 func _ready():
 	super._ready()
-	max_hp = 100.0
+	max_hp = 1000.0
 	health = max_hp / 2
 	is_active = false
 	control = get_node("VBoxContainer")
@@ -16,20 +16,20 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	# toggle button uss based on criteria matched
-	#if laboratory_placed:
-		#get_node("VBoxContainer/Scout").set_disabled(false)
-		#get_node("VBoxContainer/Warden").set_disabled(false)
-	#else:
-		#get_node("VBoxContainer/Scout").disabled = true
-		#get_node("VBoxContainer/Warden").disabled = true
-	#if barrack_placed:
-		#get_node("VBoxContainer/Bruiser").disabled = false
-		#get_node("VBoxContainer/Sniper").disabled = false
-		#get_node("VBoxContainer/Marrauder").disabled = false
-	#else:
-		#get_node("VBoxContainer/Bruiser").disabled = true
-		#get_node("VBoxContainer/Sniper").disabled = true
-		#get_node("VBoxContainer/Marrauder").disabled = true
+	if GameManager.laboratory_placed:
+		get_node("VBoxContainer/Scout").disabled = false
+		get_node("VBoxContainer/Warden").disabled = false
+	else:
+		get_node("VBoxContainer/Scout").disabled = true
+		get_node("VBoxContainer/Warden").disabled = true
+	if GameManager.barrack_placed:
+		get_node("VBoxContainer/Bruiser").disabled = false
+		get_node("VBoxContainer/Sniper").disabled = false
+		get_node("VBoxContainer/Fusion Screecher").disabled = false
+	else:
+		get_node("VBoxContainer/Bruiser").disabled = true
+		get_node("VBoxContainer/Sniper").disabled = true
+		get_node("VBoxContainer/Fusion Screecher").disabled = true
 	if free_spawn > 0:
 		free_spawn -= delta
 

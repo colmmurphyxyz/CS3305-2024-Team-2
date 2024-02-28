@@ -1,7 +1,7 @@
 extends Base
 
 func _ready():
-	max_hp = 250.0
+	max_hp = 500.0
 	super._ready()
 	add_to_group("Constructions")
 	GameManager.laboratory_placed = true

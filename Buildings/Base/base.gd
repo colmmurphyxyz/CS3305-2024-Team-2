@@ -6,7 +6,7 @@ signal building_destroyed
 # export variables
 @export var team: String = "1"
 @export var sprite_texture:Texture2D
-@export var max_hp = 100.0
+@export var max_hp = 250.0
 @export var health = 1.0
 @export var is_following_mouse = true
 ## what exactly does 'being active' refer to?
