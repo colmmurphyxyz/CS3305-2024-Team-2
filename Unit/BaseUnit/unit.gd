@@ -155,7 +155,7 @@ func _on_detection_area_body_entered(body: PhysicsBody2D):
 	# check for buildings entering detection area
 	if body is StaticBody2D:
 		unit = body
-	if unit.team != GameManager.team:
+	if unit.team != team:
 		unit.visibility_number+=1
 		check_if_visible(unit)
 
@@ -164,7 +164,7 @@ func _on_detection_area_body_exited(body: PhysicsBody2D):
 	# check for buildings entering detection area
 	if body is StaticBody2D:
 		unit = body
-	if unit.team != GameManager.team:
+	if unit.team != team:
 		unit.visibility_number-=1
 		check_if_visible(unit)
 
