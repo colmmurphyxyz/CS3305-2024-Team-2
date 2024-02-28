@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c8dvsq2pks7yl"]
+[gd_scene load_steps=45 format=3 uid="uid://c8dvsq2pks7yl"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_ybkgh"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_p8aom"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_gnm7c"]
 [ext_resource type="Texture2D" uid="uid://nkqmpoud0qax" path="res://Assets/Units/Sniper/sniper-attack-Sheet.png" id="7_5x7ia"]
 [ext_resource type="Texture2D" uid="uid://dr5ga30grtubu" path="res://Assets/Units/Sniper/sniper_idle-Sheet.png" id="8_2ykhf"]
+[ext_resource type="AudioStream" uid="uid://jhdqlh1q0gi3" path="res://Assets/SFX/sniper_spawn.wav" id="10_vjg10"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k2ju"]
 resource_local_to_scene = true
@@ -249,6 +250,9 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qhwn"]
 radius = 284.007
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbscg"]
+radius = 315.0
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ww76p"]
 properties/0/path = NodePath("Body:position")
 properties/0/spawn = true
@@ -349,6 +353,19 @@ show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
 
+[node name="DetectionArea" type="Area2D" parent="Body"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/DetectionArea"]
+shape = SubResource("CircleShape2D_tbscg")
+debug_color = Color(0.0823529, 0.278431, 1, 0.419608)
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="Body"]
+visible = false
+stream = ExtResource("10_vjg10")
+volume_db = -15.0
+bus = &"SFX"
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ww76p")
 
@@ -356,3 +373,5 @@ replication_config = SubResource("SceneReplicationConfig_ww76p")
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="Body/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Body/DetectionArea" to="." method="_on_detection_area_body_exited"]

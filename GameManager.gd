@@ -11,7 +11,7 @@ var Host: Dictionary = {
 }
 var Client: Dictionary = {
 	"name": "clientgamer",
-	"id": 3927,
+	"id": 3927,	# placeholder, will be set properly when llaunching the game through MainMenu.tscn
 }
 ## client's team, either 1 or 2
 var team: String

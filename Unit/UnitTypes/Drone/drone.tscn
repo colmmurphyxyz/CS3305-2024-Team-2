@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cqktfbnalbrhf"]
+[gd_scene load_steps=30 format=3 uid="uid://cqktfbnalbrhf"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Drone/drone.gd" id="1_eb3s1"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_cidp4"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://deewykrm304jx" path="res://Assets/Units/Drone/drone-attack-Sheet.png" id="7_y4hjt"]
 [ext_resource type="Texture2D" uid="uid://sajdfqsbg1hm" path="res://Assets/Units/Drone/drone_idle-Sheet.png" id="8_v4x17"]
 [ext_resource type="Texture2D" uid="uid://dptey81feiux6" path="res://Assets/Units/Drone/drone_move.png" id="9_tr1fq"]
+[ext_resource type="AudioStream" uid="uid://cvow5bmbc46k1" path="res://Assets/SFX/drone_spawn.mp3" id="11_ugkoe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_58hgt"]
+radius = 143.056
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8rvk1"]
 resource_local_to_scene = true
@@ -167,6 +171,13 @@ wall_min_slide_angle = 0.0
 floor_stop_on_slope = false
 script = ExtResource("2_hrvbj")
 
+[node name="DetectionArea" type="Area2D" parent="Body"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/DetectionArea"]
+shape = SubResource("CircleShape2D_58hgt")
+debug_color = Color(0.0823529, 0.278431, 1, 0.419608)
+
 [node name="AttackSnd" type="AudioStreamPlayer2D" parent="Body"]
 stream = ExtResource("4_a7y1c")
 volume_db = -5.718
@@ -220,9 +231,17 @@ show_behind_parent = true
 shape = SubResource("CircleShape2D_4qhwn")
 debug_color = Color(0.623529, 0.54902, 0.529412, 0.419608)
 
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="Body"]
+visible = false
+stream = ExtResource("11_ugkoe")
+volume_db = -1.618
+bus = &"SFX"
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7ga7d")
 
+[connection signal="body_entered" from="Body/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Body/DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="velocity_computed" from="Body/NavigationAgent2D" to="Body" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]

@@ -49,10 +49,14 @@ func _unhandled_input(event):
 	#When right click check if theres a building or unit under cursor,
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		var played = false
 		if event.is_released():
 			for unit in selected:
 				if is_instance_valid(unit.collider):
 					if unit.collider.get_parent().has_method("select") and is_instance_valid(unit.collider):
+						if played ==false:
+							played=true
+							unit.collider.get_parent().play_unit_sound()
 						var pos:Vector2 = get_viewport().get_camera_2d().get_global_mouse_position()
 						var cursor_unit = get_node_under_cursor(pos)
 						if cursor_unit:

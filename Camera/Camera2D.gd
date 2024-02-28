@@ -46,15 +46,20 @@ func _process(delta: float):
 	if get_parent().is_locked:
 		return
 	var velocity: Vector2 = Vector2.ZERO
+
 	# pan camera with arrow keys
 	if Input.is_action_pressed("camera_pan_left"):
-		velocity.x -= 1
+		if global_position.x > 0:
+			velocity.x -= 1
 	if Input.is_action_pressed("camera_pan_down"):
-		velocity.y += 1
+		if global_position.y < 1800:
+			velocity.y += 1
 	if Input.is_action_pressed("camera_pan_right"):
-		velocity.x += 1
+		if global_position.x < 2300:
+			velocity.x += 1
 	if Input.is_action_pressed("camera_pan_up"):
-		velocity.y -= 1
+		if global_position.y > -50:
+			velocity.y -= 1
 
 	# camera zoom
 	if Input.is_action_just_released("camera_zoom_in"):

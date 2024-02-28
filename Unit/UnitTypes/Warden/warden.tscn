@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://b7kqn0grwhcue"]
+[gd_scene load_steps=51 format=3 uid="uid://b7kqn0grwhcue"]
 
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_ajir7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_dfqyy"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dxn3jsc6ioovw" path="res://Assets/Units/Warden/warden-move-Sheet.png" id="9_ftrya"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="9_vydme"]
 [ext_resource type="AudioStream" uid="uid://d2a4onbe6p2i0" path="res://Assets/SFX/warden_attack.wav" id="10_ou61j"]
+[ext_resource type="AudioStream" uid="uid://yrb0qhwyxh2h" path="res://Assets/SFX/warden_spawn.wav" id="11_4yhkp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kq8om"]
 resource_local_to_scene = true
@@ -279,6 +280,9 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qhwn"]
 radius = 205.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_45cop"]
+radius = 187.011
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r0gwd"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -379,6 +383,18 @@ volume_db = 1.0
 max_distance = 300.0
 bus = &"SFX"
 
+[node name="DetectionArea" type="Area2D" parent="Body"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/DetectionArea"]
+shape = SubResource("CircleShape2D_45cop")
+debug_color = Color(0.0823529, 0.278431, 1, 0.419608)
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="Body"]
+stream = ExtResource("11_4yhkp")
+volume_db = -12.48
+bus = &"SFX"
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_r0gwd")
 
@@ -386,3 +402,5 @@ replication_config = SubResource("SceneReplicationConfig_r0gwd")
 [connection signal="timeout" from="Body/Timer" to="Body" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Body/AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="Body/AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_entered" from="Body/DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Body/DetectionArea" to="." method="_on_detection_area_body_exited"]
