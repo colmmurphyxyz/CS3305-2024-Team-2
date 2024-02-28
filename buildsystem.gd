@@ -3,7 +3,7 @@ extends Node2D
 ## Placed buildings will be children of this node.
 ## Unplaced children will be children of the node this script is attached to.
 @export var building_root: Node
-
+var building=true
 var spawned_object = null
 var selected_building_path: String = ""
 var placement_allowed: bool = false
