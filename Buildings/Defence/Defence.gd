@@ -74,28 +74,28 @@ func update_tower_stats():
 # Adjust variables based on the current tier
 	match tier:
 		1:
-			attack_damage = 10
-			attack_speed = 200
-			reload = 5.0
+			attack_damage = 50
+			attack_speed = 250
+			reload = 2.5
 			attack_range = 100.0
-			max_hp = 100.0
+			max_hp = 750.0
 			sprite.texture = sprite_texture_tier_1
 			healthbar.max_value = round(max_hp)
-		2:
-			attack_damage = 10
-			attack_speed = 200
-			reload = 5.0
-			attack_range = 15.0
-			max_hp = 100.0
-			sprite.texture = sprite_texture_tier_2
-			healthbar.max_value = round(max_hp)
-		3:
-			attack_damage = 10
-			attack_speed = 200
-			reload = 5.0
-			attack_range = 15.0
-			max_hp = 100.0
-			healthbar.max_value = round(max_hp)
+		#2:
+			#attack_damage = 10
+			#attack_speed = 200
+			#reload = 5.0
+			#attack_range = 15.0
+			#max_hp = 100.0
+			#sprite.texture = sprite_texture_tier_2
+			#healthbar.max_value = round(max_hp)
+		#3:
+			#attack_damage = 10
+			#attack_speed = 200
+			#reload = 5.0
+			#attack_range = 15.0
+			#max_hp = 100.0
+			#healthbar.max_value = round(max_hp)
 			#change sprite
 
 # Upgrade and downgrade system
