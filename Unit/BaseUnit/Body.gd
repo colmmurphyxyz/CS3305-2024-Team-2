@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var target:Vector2 = Vector2.ZERO
-
+var is_building=false
 var speed: int
 var target_max: int = 1
 #navigation

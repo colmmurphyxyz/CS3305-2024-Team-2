@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c72v4xvr6pmtu"
-path="res://.godot/imported/fission screecher-Sheet.png-100cc6e2a1bf9ece74951181b595b0d5.ctex"
+path="res://.godot/imported/fission screecher-Sheet.png-54575d9ad52ef779662d6a35094adc68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Units/fission screecher-Sheet.png"
-dest_files=["res://.godot/imported/fission screecher-Sheet.png-100cc6e2a1bf9ece74951181b595b0d5.ctex"]
+source_file="res://Assets/Units/Fusion/fission screecher-Sheet.png"
+dest_files=["res://.godot/imported/fission screecher-Sheet.png-54575d9ad52ef779662d6a35094adc68.ctex"]
 
 [params]
 

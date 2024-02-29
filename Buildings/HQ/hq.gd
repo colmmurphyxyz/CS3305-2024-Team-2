@@ -12,6 +12,7 @@ func _ready():
 	is_active = false
 	control = get_node("VBoxContainer")
 	control.hide()
+	health=100
 	
 func _process(delta):
 	super._process(delta)
@@ -100,6 +101,7 @@ func _on_area_2d_body_entered(body):
 			unit.load_ore()
 			GameManager.iron += 1
 			unit.change_state("mining")
+			print(unit.carrying_ore,"SHOULD BE FALSE")
 		if body.get_parent().can_mine == true: 
 			close_mining_units.append(body)
 		

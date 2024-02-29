@@ -1,15 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
-[ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
+[ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/Buildings/hq.png" id="2_y4py5"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_uju10"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_g862d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nk80h"]
 size = Vector2(160, 272)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_spgvb"]
-radius = 204.245
+radius = 184.011
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4o1ea"]
 properties/0/path = NodePath(".:team")
@@ -40,11 +40,11 @@ properties/7/replication_mode = 2
 [node name="Hq" type="StaticBody2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_udwv5")
-sprite_texture = ExtResource("2_wmued")
+sprite_texture = ExtResource("2_y4py5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("2_wmued")
+texture = ExtResource("2_y4py5")
 
 [node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -54,6 +54,7 @@ shape = SubResource("RectangleShape2D_nk80h")
 collision_mask = 2049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(2, 22)
 shape = SubResource("CircleShape2D_spgvb")
 
 [node name="Healthbar" type="TextureProgressBar" parent="."]

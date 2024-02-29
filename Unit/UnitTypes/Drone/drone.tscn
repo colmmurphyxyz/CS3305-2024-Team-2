@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="2_hrvbj"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_paml7"]
 [ext_resource type="AudioStream" uid="uid://csbxjjfdn60ep" path="res://Assets/SFX/basic_attack.wav" id="4_a7y1c"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_wpd88"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_xuftl"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="5_exyxe"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="6_adcd1"]
 [ext_resource type="Texture2D" uid="uid://deewykrm304jx" path="res://Assets/Units/Drone/drone-attack-Sheet.png" id="7_y4hjt"]
 [ext_resource type="Texture2D" uid="uid://sajdfqsbg1hm" path="res://Assets/Units/Drone/drone_idle-Sheet.png" id="8_v4x17"]
 [ext_resource type="Texture2D" uid="uid://dptey81feiux6" path="res://Assets/Units/Drone/drone_move.png" id="9_tr1fq"]
@@ -197,8 +197,8 @@ grow_horizontal = 2
 grow_vertical = 0
 rounded = true
 nine_patch_stretch = true
-texture_under = ExtResource("4_wpd88")
-texture_progress = ExtResource("5_xuftl")
+texture_under = ExtResource("5_exyxe")
+texture_progress = ExtResource("6_adcd1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 material = SubResource("ShaderMaterial_8rvk1")

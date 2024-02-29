@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcs513p8qtavr"
-path="res://.godot/imported/healthbarUnder.png-d28dbec3ce4f3ab2f00a77b2091ea9e9.ctex"
+uid="uid://cn72pap31glih"
+path="res://.godot/imported/fusion.png-f8db82c5583fe3eb68ba573616014bb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/healthbarUnder.png"
-dest_files=["res://.godot/imported/healthbarUnder.png-d28dbec3ce4f3ab2f00a77b2091ea9e9.ctex"]
+source_file="res://Assets/Buildings/fusion.png"
+dest_files=["res://.godot/imported/fusion.png-f8db82c5583fe3eb68ba573616014bb2.ctex"]
 
 [params]
 

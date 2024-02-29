@@ -12,7 +12,8 @@ signal building_destroyed
 ## what exactly does 'being active' refer to?
 @export var is_active: bool = false
 @export var is_placed: bool = false
-
+var visibility_number = 0
+var is_building = true
 # public variables
 var explosion_scene: PackedScene = \
 		preload("res://Unit/BaseUnit/Explosion.tscn") as PackedScene
@@ -22,6 +23,7 @@ var is_broken = true
 var allies_in_area: Array = []
 var enemies_in_area: Array = []
 var close_mining_units: Array = []
+var light:PointLight2D
 #var barrack_placed: bool = false
 #var laboratory_placed: bool = false
 #var fusion_lab_placed: bool = false
@@ -49,7 +51,14 @@ func _ready():
 	#
 	#collision_circle.shape = CircleShape2D.new()
 	#collision_circle.shape.radius = sprite_half_extents.length() * 2
-	
+	light = PointLight2D.new()
+	add_child(light)
+	light.scale=Vector2(2,2)
+	light.texture=load("res://Assets/pointLightTexture.webp")
+	light.blend_mode=Light2D.BLEND_MODE_MIX
+	if GameManager.team != team:
+		light.visible==false
+		visible=false
 # Disable collisons before placement 
 	collision_layer = 0
 	collision_mask = 1 + 2
@@ -74,10 +83,12 @@ func _ready():
 	z_index = 10 # Move on top layer, fix for ore deposit sprite layering
 	
 func _process(delta: float):
-	visible = is_placed or GameManager.team == team
+
+	#visible = is_placed or GameManager.team == team
 	if !is_multiplayer_authority():
 		return
-	
+	if visibility_number< 1 and GameManager.team != team:
+		visible=false
 	if is_following_mouse:
 		global_position = get_global_mouse_position()
 		final_collision = move_and_collide(Vector2.ZERO, true, 0.08, true)

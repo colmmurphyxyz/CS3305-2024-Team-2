@@ -130,6 +130,7 @@ func get_state()->String:
 	return state_name
 	
 func load_ore():
+	print("loading ore")
 	if carrying_ore == false:
 		carrying_ore=true
 		var ore_sprite:Sprite2D = Sprite2D.new()
@@ -139,6 +140,7 @@ func load_ore():
 	else:
 		body.remove_child(body.get_node("Ore"))
 		carrying_ore=false
+
 			
 func set_chase(chase:CharacterBody2D):
 	is_chasing=chase
@@ -148,18 +150,26 @@ func set_target_building(building:StaticBody2D):
 #Visbility detection
 #Works by when body enters, its visibiltiy_number is increased by 1, if leaves, decrease by 1
 func _on_detection_area_body_entered(body):
-	var unit = body.get_parent()
+	var unit 
+	if body.is_building ==false:
+		unit = body.get_parent()
+	else:
+		unit = body
 	if unit.team != team:
 		unit.visibility_number+=1
 		check_if_visible(unit)
 
 func _on_detection_area_body_exited(body):
-	var unit = body.get_parent()
+	var unit 
+	if body.is_building ==false:
+		unit = body.get_parent()
+	else:
+		unit = body
 	if unit.team != team:
 		unit.visibility_number-=1
 		check_if_visible(unit)
 
-func check_if_visible(unit:Unit):
+func check_if_visible(unit):
 	if unit.visibility_number<=0:
 		if unit.team != GameManager.team:
 			unit.visible=false

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhg4gi80jp5m0"
-path="res://.godot/imported/gold_mine0001.png-7d6ff8271280b4b0737b53d3b5adde6f.ctex"
+path="res://.godot/imported/gold_mine0001.png-7faa63e43676f3feb2cd28aec4f98425.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gold_mine0001.png"
-dest_files=["res://.godot/imported/gold_mine0001.png-7d6ff8271280b4b0737b53d3b5adde6f.ctex"]
+source_file="res://Assets/Buildings/gold_mine0001.png"
+dest_files=["res://.godot/imported/gold_mine0001.png-7faa63e43676f3feb2cd28aec4f98425.ctex"]
 
 [params]
 

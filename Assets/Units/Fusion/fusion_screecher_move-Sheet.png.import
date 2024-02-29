@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bakdcwewv820"
-path="res://.godot/imported/hq_build.png-d2acd7dca35729724435c4c80fa2f80c.ctex"
+uid="uid://414rcgna7550"
+path="res://.godot/imported/fusion_screecher_move-Sheet.png-32f634c42d1036c586a687eccaf3d396.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/hq_build.png"
-dest_files=["res://.godot/imported/hq_build.png-d2acd7dca35729724435c4c80fa2f80c.ctex"]
+source_file="res://Assets/Units/Fusion/fusion_screecher_move-Sheet.png"
+dest_files=["res://.godot/imported/fusion_screecher_move-Sheet.png-32f634c42d1036c586a687eccaf3d396.ctex"]
 
 [params]
 

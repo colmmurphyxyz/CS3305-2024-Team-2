@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bmqs225p7jlxh"]
 
 [ext_resource type="Script" path="res://Buildings/Barracks/barracks.gd" id="1_ktc2n"]
-[ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/barracks.png" id="2_s5x6n"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_v6g7h"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_6gcog"]
+[ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/Buildings/barracks.png" id="2_s5x6n"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_v6g7h"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_6gcog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxh0m"]
 size = Vector2(48, 84)

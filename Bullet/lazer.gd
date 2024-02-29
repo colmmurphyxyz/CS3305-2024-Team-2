@@ -48,7 +48,7 @@ func _process(_delta: float):
 	for i:RayCast2D in ray_array:
 		i.target_position = to_local(global_position+direction*5000)
 		if i.is_colliding():
-			if (i.get_collider().get_parent() in get_tree().get_nodes_in_group("Units")\
+			if (is_instance_valid(i.get_collider()) and i.get_collider().get_parent() in get_tree().get_nodes_in_group("Units")\
 					or i.get_collider().is_in_group("Buildings")) and damaging==true:
 				var collider: PhysicsBody2D = i.get_collider()
 				var target_brain = collider if collider.is_in_group("Buildings") else collider.get_parent()

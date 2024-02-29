@@ -39,10 +39,11 @@ func _on_increase_timer_timeout():
 	if is_active:
 		for unit_body in close_mining_units:
 			var unit:Unit = unit_body.get_parent()
-			print(unit.get_state())
 			if unit.get_state() == "mining" and unit.carrying_ore==false:
+				print("giveth")
 				increase_value-=1
 				unit.load_ore()
+				
 		if stored_resources < max_storage:
 			if has_unobtainium:
 				increase_value += 1
