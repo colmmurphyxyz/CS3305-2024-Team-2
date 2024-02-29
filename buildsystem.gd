@@ -11,12 +11,15 @@ var deposit: bool = false
 var mine: bool = false
 var unobtainium = false
 
+@onready var error_timer: Timer = Timer.new()
+
 func _process(_delta: float):
 	if Input.is_action_just_pressed("right_click"): # click at any time to cancel placing an object
 		cancel_placement()
 
 	if Input.is_action_just_pressed("left_click"):
 		if mine or GameManager.player_hq.global_position.distance_to(get_global_mouse_position()) < 300:
+			hide_error_label()
 			if spawned_object != null && placement_allowed:
 				print("placing(?)")
 				if mine && deposit == false:
@@ -38,9 +41,15 @@ func _process(_delta: float):
 					#spawned_object.sprite.modulate=Color(1,1,1)
 					#spawned_object.remove_from_group("Constructions")
 					mine = false
+		else:
+			if spawned_object != null:
+				show_error_label()
+				
+				
 		
 func _ready():
-	pass
+	add_child(error_timer)  # Adding the Timer as a child of this node
+	error_timer.timeout.connect(hide_error_label)
 
 func spawn_object(resource):
 	spawned_object = resource.instantiate()
@@ -147,3 +156,13 @@ func set_collision_layer(node_name: String, layers: int):
 	var building: StaticBody2D = building_root.get_node(node_name)
 	building.collision_layer = layers
 	building.collision_mask = 1 + 2
+	
+func show_error_label():
+	if spawned_object != null:
+		spawned_object.get_node("Label").visible = true
+		error_timer.wait_time = 1.0
+		error_timer.start()
+	
+func hide_error_label():
+	if spawned_object != null:
+		spawned_object.get_node("Label").visible = false

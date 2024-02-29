@@ -86,6 +86,15 @@ shape = SubResource("CircleShape2D_p2ros")
 
 [node name="Border" type="Line2D" parent="."]
 
+[node name="Label" type="Label" parent="."]
+visibility_layer = 1023
+offset_left = 40.0
+offset_top = -45.0
+offset_right = 234.0
+offset_bottom = -22.0
+theme_override_colors/font_color = Color(0.921569, 0.231373, 0.231373, 1)
+text = "Position too far from HQ!"
+
 [connection signal="body_entered" from="MiningUnitDetectionArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="MiningUnitDetectionArea" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
