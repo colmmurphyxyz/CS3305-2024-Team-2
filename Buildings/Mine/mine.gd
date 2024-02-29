@@ -10,8 +10,8 @@ var last_updated_value = stored_resources
 var has_unobtainium = false # Flagset by buildsystem, if a mine was placed in a 'Klassium' ore deposit
 
 func _ready():
-	max_hp = 100.0
-	health = 99.0
+	max_hp = 250.0
+	health = 100.0
 	super._ready()
 	# timer for syncronous ore generation and prevent float values for resources
 	is_active=false
@@ -39,12 +39,16 @@ func _on_increase_timer_timeout():
 	if is_active:
 		for unit_body in close_mining_units:
 			var unit:Unit = unit_body.get_parent()
-			print(unit.get_state())
 			if unit.get_state() == "mining" and unit.carrying_ore==false:
+				print("giveth")
 				increase_value-=1
 				unit.load_ore()
+				
 		if stored_resources < max_storage:
-			increase_value += 1
+			if has_unobtainium:
+				increase_value += 1
+			else:
+				increase_value += 2
 
 
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://csnaat1gu7uyn"]
+[gd_scene load_steps=11 format=3 uid="uid://csnaat1gu7uyn"]
 
 [ext_resource type="Theme" uid="uid://bqgwg6jqqupa1" path="res://UI/scenes/MainMenu/MainMenuTheme.tres" id="1_hvcae"]
 [ext_resource type="Script" path="res://UI/scenes/MainMenu/MainMenu.gd" id="1_o5ron"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c1xxpa77xqar7" path="res://Assets/background/desert_background2.png" id="5_lgscq"]
 [ext_resource type="Texture2D" uid="uid://cv16ledvpvntq" path="res://Assets/background/desert_background6.png" id="6_6v8km"]
 [ext_resource type="Texture2D" uid="uid://dcrdx8pqawvkk" path="res://Assets/background/desert_background4.png" id="8_5mhuv"]
+[ext_resource type="Texture2D" uid="uid://pn5k2vtf4vwk" path="res://Assets/gametitle.png" id="9_ujr0q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_val4m"]
 bg_color = Color(1, 0.48886, 0.469093, 1)
@@ -89,7 +90,13 @@ offset = Vector2(400, 324)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(562, 63)
+scale = Vector2(2.73118, 3.15385)
+texture = ExtResource("9_ujr0q")
+
 [node name="GameTitleLabel" type="Label" parent="CanvasLayer"]
+visible = false
 offset_left = 256.0
 offset_top = 32.0
 offset_right = 896.0

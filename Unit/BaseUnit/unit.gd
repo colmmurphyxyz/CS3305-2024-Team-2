@@ -130,6 +130,7 @@ func get_state()->String:
 	return state_name
 	
 func load_ore():
+	print("loading ore")
 	if carrying_ore == false:
 		carrying_ore=true
 		var ore_sprite:Sprite2D = Sprite2D.new()
@@ -139,6 +140,7 @@ func load_ore():
 	else:
 		body.remove_child(body.get_node("Ore"))
 		carrying_ore=false
+
 			
 func set_chase(chase:CharacterBody2D):
 	is_chasing=chase
