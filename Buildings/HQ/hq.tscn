@@ -85,31 +85,37 @@ offset_bottom = 124.0
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Drone"
+alignment = 0
 
 [node name="Bruiser" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Bruiser"
+alignment = 0
 
 [node name="Sniper" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Sniper"
+alignment = 0
 
 [node name="Scout" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Scout"
+alignment = 0
 
 [node name="Warden" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Warden"
+alignment = 0
 
 [node name="Fusion Screecher" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Fusion Screecher"
+alignment = 0
 
 [node name="Border" type="Line2D" parent="."]
 
