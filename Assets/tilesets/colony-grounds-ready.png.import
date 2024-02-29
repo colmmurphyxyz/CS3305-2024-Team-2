@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c24yydqkfr8u1"
-path="res://.godot/imported/fusion_screecher.png-f9a4e82c24e2759c544ff685a6c1f6e5.ctex"
+uid="uid://buybtmnbwpgwe"
+path="res://.godot/imported/colony-grounds-ready.png-73bbc7a20e09aa12dd0f606384a7b6be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Units/fusion_screecher.png"
-dest_files=["res://.godot/imported/fusion_screecher.png-f9a4e82c24e2759c544ff685a6c1f6e5.ctex"]
+source_file="res://Assets/tilesets/colony-grounds-ready.png"
+dest_files=["res://.godot/imported/colony-grounds-ready.png-73bbc7a20e09aa12dd0f606384a7b6be.ctex"]
 
 [params]
 

@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_yfqk7"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_yvu3u"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="3_boljh"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_4tx4v"]
 [ext_resource type="AudioStream" uid="uid://ej2b0pqj4jxl" path="res://Assets/SFX/brusier_attack.wav" id="4_j5dbc"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_xn4ue"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_6uemm"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="5_sqe3i"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="6_k6jtq"]
 [ext_resource type="Texture2D" uid="uid://dtjm2iu2x8sah" path="res://Assets/Units/Brusier/bruiser-attack-Sheet.png" id="7_hn543"]
 [ext_resource type="Texture2D" uid="uid://c3whwvgr168ff" path="res://Assets/Units/Brusier/brusier_idle-Sheet.png" id="8_8boe0"]
 [ext_resource type="Texture2D" uid="uid://bqhkrpubvqvqn" path="res://Assets/Units/Brusier/brusier_move-Sheet.png" id="9_r15ro"]
@@ -265,8 +265,8 @@ grow_horizontal = 2
 grow_vertical = 0
 rounded = true
 nine_patch_stretch = true
-texture_under = ExtResource("4_4tx4v")
-texture_progress = ExtResource("5_6uemm")
+texture_under = ExtResource("5_sqe3i")
+texture_progress = ExtResource("6_k6jtq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 material = SubResource("ShaderMaterial_kq8om")

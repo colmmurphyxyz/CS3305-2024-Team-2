@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dot7fuxwat44f"
-path="res://.godot/imported/spelunky_shop.png-8a563c397b1e13d6adfb1418b7fb92f0.ctex"
+uid="uid://bcs513p8qtavr"
+path="res://.godot/imported/healthbarUnder.png-e21891f2563e6a8eb3f10a650a9e5cd6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/spelunky_shop.png"
-dest_files=["res://.godot/imported/spelunky_shop.png-8a563c397b1e13d6adfb1418b7fb92f0.ctex"]
+source_file="res://Assets/Units/healthbarUnder.png"
+dest_files=["res://.godot/imported/healthbarUnder.png-e21891f2563e6a8eb3f10a650a9e5cd6.ctex"]
 
 [params]
 

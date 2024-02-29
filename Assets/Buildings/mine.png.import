@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhui6y403snrs"
-path="res://.godot/imported/barracks.png-1e23acf5315f2effaa3c436b53d0a933.ctex"
+uid="uid://citx6shaapt4p"
+path="res://.godot/imported/mine.png-14e977ff9ff135374d31967a0d89899d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/barracks.png"
-dest_files=["res://.godot/imported/barracks.png-1e23acf5315f2effaa3c436b53d0a933.ctex"]
+source_file="res://Assets/Buildings/mine.png"
+dest_files=["res://.godot/imported/mine.png-14e977ff9ff135374d31967a0d89899d.ctex"]
 
 [params]
 
