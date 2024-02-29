@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=19 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://ca0d7iipih2xs" path="res://Assets/temp_ore_texture.png" id="7_4hrch"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
+[ext_resource type="Texture2D" uid="uid://cv5k24ykpgh23" path="res://Assets/unobtainium.png" id="7_t6n34"]
 [ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
 [ext_resource type="TileSet" uid="uid://cp54s3b4scm2h" path="res://asethetic_tileset.tres" id="14_ohbse"]
@@ -41,6 +42,10 @@ layer_1/tile_data = PackedInt32Array(3604591, 655360, 0, 3735658, 720896, 0)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Volume" parent="CanvasLayer" instance=ExtResource("11_70bgv")]
+offset_left = 23.0
+offset_top = -31.0
+offset_right = 23.0
+offset_bottom = -31.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 layout_direction = 3
@@ -80,6 +85,168 @@ text = "Laboratory"
 [node name="Fusion Lab" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Fusion Lab"
+
+[node name="OreDeposits" type="Node2D" parent="."]
+
+[node name="Iron" type="Area2D" parent="OreDeposits"]
+position = Vector2(575, 326)
+script = ExtResource("5_7lovr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(607.074, 1326.08)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(961, -157)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(1466, 1270)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(1352, 1309)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(-299, 20)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, 15.4398, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
+position = Vector2(-6, -140)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, 15.4398, -512, -512, 512, -512)
+
+[node name="Sprite2D" type="Sprite2D" parent="OreDeposits/Iron"]
+texture_repeat = 2
+position = Vector2(607.074, 1328.08)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_4hrch")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D3" type="Sprite2D" parent="OreDeposits/Iron"]
+texture_repeat = 2
+position = Vector2(960, -157)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_4hrch")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D5" type="Sprite2D" parent="OreDeposits/Iron"]
+texture_repeat = 2
+position = Vector2(960, -157)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_4hrch")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D4" type="Sprite2D" parent="OreDeposits/Iron"]
+texture_repeat = 2
+position = Vector2(1465, 1269)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_4hrch")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D6" type="Sprite2D" parent="OreDeposits/Iron"]
+texture_repeat = 2
+position = Vector2(1351, 1308)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_4hrch")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D2" type="Sprite2D" parent="OreDeposits/Iron"]
+texture_repeat = 2
+position = Vector2(-301, 20)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_4hrch")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D7" type="Sprite2D" parent="OreDeposits/Iron"]
+texture_repeat = 2
+position = Vector2(-9, -141)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_4hrch")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Unobtainium" type="Area2D" parent="OreDeposits"]
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
+position = Vector2(1599, 960)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D10" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
+position = Vector2(979, 666)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D9" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
+position = Vector2(1217, 773)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="CollisionPolygon2D8" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
+position = Vector2(1349, 885)
+scale = Vector2(0.0867604, 0.0867705)
+polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
+
+[node name="Sprite2D8" type="Sprite2D" parent="OreDeposits/Unobtainium"]
+texture_repeat = 2
+position = Vector2(1208, 781)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_t6n34")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D9" type="Sprite2D" parent="OreDeposits/Unobtainium"]
+texture_repeat = 2
+position = Vector2(978, 671)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_t6n34")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D11" type="Sprite2D" parent="OreDeposits/Unobtainium"]
+texture_repeat = 2
+position = Vector2(1597, 959)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_t6n34")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D13" type="Sprite2D" parent="OreDeposits/Unobtainium"]
+texture_repeat = 2
+position = Vector2(1339, 879)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_t6n34")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D12" type="Sprite2D" parent="OreDeposits/Unobtainium"]
+texture_repeat = 2
+position = Vector2(1354, 890)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_t6n34")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
+
+[node name="Sprite2D10" type="Sprite2D" parent="OreDeposits/Unobtainium"]
+texture_repeat = 2
+position = Vector2(1220, 771)
+scale = Vector2(0.139062, 0.139062)
+texture = ExtResource("7_t6n34")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 756, 756)
 
 [node name="Buildings" type="Node2D" parent="." node_paths=PackedStringArray("building_root")]
 script = ExtResource("4_atcb7")
@@ -147,7 +314,7 @@ position = Vector2(1210, 368)
 position = Vector2(1202, 323)
 
 [node name="Drone3" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(915, 594)
+position = Vector2(1045, 709)
 
 [node name="Drone4" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
 position = Vector2(965, 394)
@@ -183,37 +350,6 @@ color = Color(0.313726, 0.313726, 0.313726, 1)
 
 [node name="SelectionSystem" parent="." instance=ExtResource("3_0hf7f")]
 
-[node name="OreDeposits" type="Node2D" parent="."]
-
-[node name="Iron" type="Area2D" parent="OreDeposits"]
-position = Vector2(575, 326)
-script = ExtResource("5_7lovr")
-
-[node name="Sprite2D" type="Sprite2D" parent="OreDeposits/Iron"]
-position = Vector2(201, 207)
-scale = Vector2(0.0867604, 0.0867705)
-texture = ExtResource("7_4hrch")
-
-[node name="Sprite2D2" type="Sprite2D" parent="OreDeposits/Iron"]
-position = Vector2(433, 385)
-scale = Vector2(0.0867604, 0.0867705)
-texture = ExtResource("7_4hrch")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
-position = Vector2(201, 207)
-scale = Vector2(0.0867604, 0.0867705)
-polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OreDeposits/Iron"]
-position = Vector2(433, 385)
-scale = Vector2(0.0867604, 0.0867705)
-polygon = PackedVector2Array(512, 512, -512, 512, -512, -512, 512, -512)
-
-[node name="Unobtainium" type="Area2D" parent="OreDeposits"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OreDeposits/Unobtainium"]
-polygon = PackedVector2Array(1264, 307, 1260, 420, 1364, 420, 1366, 301)
-
 [node name="PlayerCamera" parent="." instance=ExtResource("6_m8lky")]
 position = Vector2(809, 494)
 
@@ -248,11 +384,11 @@ layer_1/tile_data = PackedInt32Array(4718649, 65538, 3, 4653113, 458754, 0, 4653
 [connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_entered"]
 [connection signal="mouse_exited" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_exited"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_press_select" binds= ["fusion"]]
-[connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]
 [connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
-[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
+[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
+[connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]
 [connection signal="timeout" from="FreeIronTimer" to="FreeIronTimer" method="_on_timeout"]

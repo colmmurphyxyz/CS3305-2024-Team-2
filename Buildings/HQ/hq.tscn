@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
-[ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/hq.png" id="2_wmued"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_uju10"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_g862d"]
+[ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/Buildings/hq.png" id="2_wmued"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_uju10"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_g862d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nk80h"]
 size = Vector2(160, 272)

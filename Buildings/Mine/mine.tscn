@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://0icby4tj0lfw"]
 
 [ext_resource type="Script" path="res://Buildings/Mine/mine.gd" id="1_7le25"]
-[ext_resource type="Texture2D" uid="uid://citx6shaapt4p" path="res://Assets/mine.png" id="2_p52ui"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_gtleh"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_oybxj"]
+[ext_resource type="Texture2D" uid="uid://citx6shaapt4p" path="res://Assets/Buildings/mine.png" id="2_p52ui"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_gtleh"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_oybxj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wds7w"]
 size = Vector2(80, 80)

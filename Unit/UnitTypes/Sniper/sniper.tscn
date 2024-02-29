@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Unit/UnitTypes/Sniper/sniper.gd" id="1_ybkgh"]
 [ext_resource type="PackedScene" uid="uid://cu6458xvv561i" path="res://Bullet/Bullet.tscn" id="2_p8aom"]
 [ext_resource type="Script" path="res://Unit/BaseUnit/Body.gd" id="3_bxfdf"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_0cqk1"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_od0ol"]
 [ext_resource type="AudioStream" uid="uid://bghquflivr1vc" path="res://Assets/SFX/sniper_attack.wav" id="4_x7dpq"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_gnm7c"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="5_sp4v2"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="6_rxyrg"]
 [ext_resource type="Texture2D" uid="uid://nkqmpoud0qax" path="res://Assets/Units/Sniper/sniper-attack-Sheet.png" id="7_5x7ia"]
 [ext_resource type="Texture2D" uid="uid://dr5ga30grtubu" path="res://Assets/Units/Sniper/sniper_idle-Sheet.png" id="8_2ykhf"]
 [ext_resource type="AudioStream" uid="uid://jhdqlh1q0gi3" path="res://Assets/SFX/sniper_spawn.wav" id="10_vjg10"]
@@ -319,8 +319,8 @@ grow_horizontal = 2
 grow_vertical = 0
 rounded = true
 nine_patch_stretch = true
-texture_under = ExtResource("4_0cqk1")
-texture_progress = ExtResource("5_gnm7c")
+texture_under = ExtResource("5_sp4v2")
+texture_progress = ExtResource("6_rxyrg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 material = SubResource("ShaderMaterial_8k2ju")

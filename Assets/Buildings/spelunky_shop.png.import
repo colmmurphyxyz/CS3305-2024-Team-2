@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf0xfiny4duir"
-path="res://.godot/imported/thirdlayer.png-af9ae024e00a8c116b72cd3854621a23.ctex"
+uid="uid://dot7fuxwat44f"
+path="res://.godot/imported/spelunky_shop.png-97f69952b6373fc1b4b3113b5b956e05.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/thirdlayer.png"
-dest_files=["res://.godot/imported/thirdlayer.png-af9ae024e00a8c116b72cd3854621a23.ctex"]
+source_file="res://Assets/Buildings/spelunky_shop.png"
+dest_files=["res://.godot/imported/spelunky_shop.png-97f69952b6373fc1b4b3113b5b956e05.ctex"]
 
 [params]
 

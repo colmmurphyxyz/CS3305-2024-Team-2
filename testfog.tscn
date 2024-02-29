@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c1ebte16oy5lt" path="res://Assets/icon.svg" id="1_2br50"]
 [ext_resource type="Shader" path="res://game.gdshader" id="2_sgos1"]
-[ext_resource type="Texture2D" uid="uid://dsu5unigaw2w6" path="res://Assets/temp_bullet.png" id="3_rpn68"]
+[ext_resource type="Texture2D" uid="uid://dsu5unigaw2w6" path="res://Assets/Units/temp_bullet.png" id="3_rpn68"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nsrn7"]
 shader = ExtResource("2_sgos1")

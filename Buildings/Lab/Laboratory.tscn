@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://krjni0wkbq25"]
 
 [ext_resource type="Script" path="res://Buildings/Lab/Laboratory.gd" id="1_1s287"]
-[ext_resource type="Texture2D" uid="uid://c0b2r88y3u3lt" path="res://Assets/laboratory.png" id="2_ny8f0"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="4_htyui"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="5_rfr5v"]
+[ext_resource type="Texture2D" uid="uid://c0b2r88y3u3lt" path="res://Assets/Buildings/laboratory.png" id="2_ny8f0"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_htyui"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_rfr5v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_geo3k"]
 size = Vector2(80, 56)

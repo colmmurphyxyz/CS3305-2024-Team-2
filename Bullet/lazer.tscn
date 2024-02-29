@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c64be60pbkhj5"]
 
 [ext_resource type="Script" path="res://Bullet/lazer.gd" id="1_dj0u7"]
-[ext_resource type="Texture2D" uid="uid://bw3evl37nxrtj" path="res://Assets/Units/lazer.png" id="2_y57f3"]
+[ext_resource type="Texture2D" uid="uid://bw3evl37nxrtj" path="res://Assets/Units/Fusion/lazer.png" id="2_y57f3"]
 [ext_resource type="AudioStream" uid="uid://852xd67hq2x6" path="res://Assets/SFX/lazer.wav" id="3_43qy6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p5i5u"]

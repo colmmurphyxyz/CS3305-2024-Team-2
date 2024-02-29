@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://citx6shaapt4p"
-path="res://.godot/imported/mine.png-7f0ce2c70462aa99165c39ef0c5f7568.ctex"
+uid="uid://cv5k24ykpgh23"
+path="res://.godot/imported/unobtainium.png-024aadcb2da56151786dd5767a95f7af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/mine.png"
-dest_files=["res://.godot/imported/mine.png-7f0ce2c70462aa99165c39ef0c5f7568.ctex"]
+source_file="res://Assets/unobtainium.png"
+dest_files=["res://.godot/imported/unobtainium.png-024aadcb2da56151786dd5767a95f7af.ctex"]
 
 [params]
 

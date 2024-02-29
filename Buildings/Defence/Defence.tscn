@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://dr1npldas1wa4"]
 
 [ext_resource type="Script" path="res://Buildings/Defence/Defence.gd" id="1_akq7d"]
-[ext_resource type="Texture2D" uid="uid://2ika8fx1ppga" path="res://Assets/defence_mid.png" id="2_vucpx"]
-[ext_resource type="Texture2D" uid="uid://dp5q1x4pn8ppx" path="res://Assets/defence_base.png" id="3_g5jrf"]
-[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/healthbarUnder.png" id="5_jy5te"]
-[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/healthbarProgress.png" id="6_sg53v"]
+[ext_resource type="Texture2D" uid="uid://2ika8fx1ppga" path="res://Assets/Buildings/defence_mid.png" id="2_vucpx"]
+[ext_resource type="Texture2D" uid="uid://dp5q1x4pn8ppx" path="res://Assets/Buildings/defence_base.png" id="3_g5jrf"]
+[ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="5_jy5te"]
+[ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="6_sg53v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t375u"]
 size = Vector2(48, 72)

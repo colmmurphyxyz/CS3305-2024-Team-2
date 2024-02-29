@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2sxy2tal3k0r"
-path="res://.godot/imported/colony-grounds-ready copy.png-86b97b373120995e46b1be77d9e96c39.ctex"
+uid="uid://bf0xfiny4duir"
+path="res://.godot/imported/thirdlayer.png-995cc28e635fc2978d8203b673a9ef7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/colony-grounds-ready copy.png"
-dest_files=["res://.godot/imported/colony-grounds-ready copy.png-86b97b373120995e46b1be77d9e96c39.ctex"]
+source_file="res://Assets/tilesets/thirdlayer.png"
+dest_files=["res://.godot/imported/thirdlayer.png-995cc28e635fc2978d8203b673a9ef7d.ctex"]
 
 [params]
 
