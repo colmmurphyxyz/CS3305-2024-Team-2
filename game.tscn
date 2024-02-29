@@ -63,9 +63,10 @@ offset_bottom = -31.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 layout_direction = 3
-offset_top = 30.0
-offset_right = 113.0
-offset_bottom = 134.0
+offset_left = 25.0
+offset_top = 26.0
+offset_right = 138.0
+offset_bottom = 197.0
 script = SubResource("GDScript_tgthy")
 
 [node name="Mine" type="Button" parent="CanvasLayer/VBoxContainer"]
@@ -75,22 +76,27 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.0941176, 0.745098, 0.388235, 1)
 theme_override_colors/font_hover_color = Color(0.184314, 0.490196, 0.635294, 1)
 text = "Mine"
+alignment = 2
 
 [node name="Defence" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Defence"
+alignment = 2
 
 [node name="Barracks" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Barracks"
+alignment = 2
 
 [node name="Laboratory" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Laboratory"
+alignment = 2
 
 [node name="Fusion Lab" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Fusion Lab"
+alignment = 2
 
 [node name="OreDeposits" type="Node2D" parent="."]
 

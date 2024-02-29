@@ -95,31 +95,37 @@ func _spawn_unit(type: String):
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						spawn_position)
+				GameManager.iron -= drone_cost
 		"bruiser":
 			if GameManager.barrack_placed and GameManager.iron >= bruiser_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Bruiser/bruiser.tscn", \
 						spawn_position)
+				GameManager.iron -= bruiser_cost
 		"scout":
 			if GameManager.laboratory_placed and GameManager.iron >= scout_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Scout/scout.tscn", \
 						spawn_position)
+				GameManager.iron -= scout_cost
 		"sniper":
 			if GameManager.barrack_placed and GameManager.iron >= sniper_cost :
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Sniper/sniper.tscn", \
 						spawn_position)
+				GameManager.iron -= sniper_cost
 		"warden":
 			if GameManager.laboratory_placed and GameManager.unobtainium >= warden_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Warden/warden.tscn", \
 						spawn_position)
+				GameManager.iron -= warden_cost
 		"screecher":
 			if GameManager.barrack_placed and GameManager.unobtainium >= screecher_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
 						spawn_position)
+				GameManager.iron -= screecher_cost
 		_:
 			print("Not valid button")
 
