@@ -16,26 +16,29 @@ func _process(_delta: float):
 		cancel_placement()
 
 	if Input.is_action_just_pressed("left_click"):
-		if spawned_object != null && placement_allowed:
-			print("placing(?)")
-			if mine && deposit == false:
-				print("No deposit found nearby")
-			elif spawned_object.stop_following_mouse() == true:
-				# have the server spawn and replicate a new building 
-				# and delete one following the mouse
-				print("can place")
-				var spawn_pos: Vector2 = spawned_object.global_position
-				spawned_object.visible = false
-				spawned_object.free()
-				spawned_object = null
-				place_building.rpc_id(1, selected_building_path,
-						multiplayer.get_unique_id(),
-						spawn_pos
-					)
-				#spawned_object.sprite.modulate=Color(1,1,1)
-				#spawned_object.remove_from_group("Constructions")
-				mine = false
-				
+		if mine or GameManager.player_hq.global_position.distance_to(get_global_mouse_position()) < 300:
+			if spawned_object != null && placement_allowed:
+				print("placing(?)")
+				if mine && deposit == false:
+					print("No deposit found nearby")
+				elif spawned_object.stop_following_mouse() == true:
+					# have the server spawn and replicate a new building 
+					# and delete one following the mouse
+					print("can place")
+					var spawn_pos: Vector2 = spawned_object.global_position
+					if mine:
+						spawned_object.has_unobtainium = unobtainium
+					spawned_object.visible = false
+					spawned_object.free()
+					spawned_object = null
+					place_building.rpc_id(1, selected_building_path,
+							multiplayer.get_unique_id(),
+							spawn_pos
+						)
+					#spawned_object.sprite.modulate=Color(1,1,1)
+					#spawned_object.remove_from_group("Constructions")
+					mine = false
+		
 func _ready():
 	pass
 
