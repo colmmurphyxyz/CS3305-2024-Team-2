@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dq4opma3tj3tg"]
+[gd_scene load_steps=7 format=3 uid="uid://dq4opma3tj3tg"]
 
 [ext_resource type="Script" path="res://UI/scenes/UI.gd" id="1_nj4mk"]
-[ext_resource type="Texture2D" uid="uid://dk3c06mknomou" path="res://UI/scenes/chest.png" id="2_167pn"]
-[ext_resource type="Texture2D" uid="uid://r0okpa1olj0l" path="res://UI/scenes/striking-diamonds (1).png" id="3_012q6"]
-[ext_resource type="Texture2D" uid="uid://l2ldokntj1xa" path="res://UI/scenes/i-beam.png" id="4_wbhd7"]
+[ext_resource type="Texture2D" uid="uid://crxgm4c5tbwfo" path="res://UI/scenes/camera_lock.png" id="2_bmi6m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3x13c"]
 bg_color = Color(0.686275, 0.490196, 0, 1)
@@ -78,7 +76,6 @@ offset_bottom = 364.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
-texture = ExtResource("2_167pn")
 
 [node name="diamond" type="Panel" parent="info_box"]
 layout_mode = 1
@@ -102,7 +99,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_012q6")
 expand_mode = 1
 
 [node name="diamond_value" type="Label" parent="info_box/diamond"]
@@ -137,7 +133,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_wbhd7")
 expand_mode = 1
 
 [node name="iron_label" type="Label" parent="info_box/iron"]
@@ -165,3 +160,17 @@ offset_bottom = 138.224
 grow_vertical = 0
 scale = Vector2(2, 2)
 theme_override_styles/panel = SubResource("StyleBoxFlat_oajvh")
+
+[node name="CameraLockIcon" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 16.0
+offset_right = 352.0
+offset_bottom = 64.0
+
+[node name="TextureRect" type="TextureRect" parent="CameraLockIcon"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("2_bmi6m")
+expand_mode = 1

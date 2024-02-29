@@ -15,6 +15,10 @@ func _ready():
 func _process(_delta: float):
 	camera_size = get_viewport_rect().size / $Camera2D.zoom
 	if Input.is_action_just_pressed("toggle_camera_lock"):
-		is_locked = !is_locked
+		toggle_camera_locked()
 	if Input.is_action_just_pressed("toggle_mouse_pan_lock"):
 		enable_cursor_pan = !enable_cursor_pan
+		
+func toggle_camera_locked():
+	is_locked = !is_locked
+	$"../CanvasLayer/UI/CameraLockIcon".visible = !$"../CanvasLayer/UI/CameraLockIcon".visible

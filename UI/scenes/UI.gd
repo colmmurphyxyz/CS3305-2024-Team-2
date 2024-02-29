@@ -16,10 +16,10 @@ func _process(delta):
 	# Update iron value every 10 seconds
 	iron_timer += delta
 	if iron_timer >= iron_increment_interval:
-		iron += 1
+		GameManager.iron += 1
 		iron_timer = 0.0
-		iron_label.text = str(iron)  # Update the label text
-		print("Iron value:", iron)
+		iron_label.text = str(GameManager.iron)  # Update the label text
+		print("Iron value:", GameManager.iron)
 
 func _on_selection_system_export_units_to_ui(unit_brains_array):
 	var max_columns: int = 5
