@@ -3,7 +3,6 @@ extends Base
 const free_unit_time = 60.0
 var free_spawn = free_unit_time
 var control = null
-var iron = 0 # replace with location of resource values
 
 const drone_cost = 10
 const bruiser_cost = 15
@@ -86,38 +85,38 @@ func _spawn_unit(type: String):
 	var spawn_position = getRandomPositionInDonut(35,60)
 	match type:
 		"drone":
-			if free_spawn >= 0:
+			if free_spawn <= 0:
 				free_spawn = free_unit_time
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						spawn_position)
-			elif iron > 10:
+			elif GameManager.iron >= drone_cost:
 				free_spawn = free_unit_time
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						spawn_position)
 		"bruiser":
-			if GameManager.barrack_placed and iron > 10:
+			if GameManager.barrack_placed and GameManager.iron >= bruiser_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Bruiser/bruiser.tscn", \
 						spawn_position)
 		"scout":
-			if GameManager.laboratory_placed and iron > 10:
+			if GameManager.laboratory_placed and GameManager.iron >= scout_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Scout/scout.tscn", \
 						spawn_position)
 		"sniper":
-			if GameManager.barrack_placed and iron > 10:
+			if GameManager.barrack_placed and GameManager.iron >= sniper_cost :
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Sniper/sniper.tscn", \
 						spawn_position)
 		"warden":
-			if GameManager.laboratory_placed and iron > 10:
+			if GameManager.laboratory_placed and GameManager.unobtainium >= warden_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Warden/warden.tscn", \
 						spawn_position)
 		"screecher":
-			if GameManager.barrack_placed and iron > 10:
+			if GameManager.barrack_placed and GameManager.unobtainium >= screecher_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
 						spawn_position)
