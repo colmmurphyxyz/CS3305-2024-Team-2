@@ -8,11 +8,12 @@ func _ready():
 			1 if child.team == "1" else client_id,
 			true
 		)
-		#for child in node.get_children():
-			#child.set_multiplayer_authority(
-				#1 if node.team == "1" else client_id,
-				#true
-			#)
+	# add units and buildings to appropriate groups
+	for child in get_children():
+		if child is StaticBody2D:
+			child.add_to_group("Buildings")
+		else:
+			child.add_to_group("Units")
 
 func _input(event: InputEvent):
 	if event is InputEventKey and event.pressed:
