@@ -65,9 +65,6 @@ func _button_press_select(building_name: String): # Arg passed by a signal for s
 			mine = true
 			selected_building_path = "res://Buildings/Mine/mine.tscn"
 			spawn_object(preload("res://Buildings/Mine/mine.tscn"))
-		"hq":
-			selected_building_path = "res://Buildings/HQ/hq.tscn"
-			spawn_object(preload("res://Buildings/HQ/hq.tscn"))
 		"defence":
 			selected_building_path = "res://Buildings/Defence/Defence.tscn"
 			spawn_object(preload("res://Buildings/Defence/Defence.tscn"))

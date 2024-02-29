@@ -83,3 +83,5 @@ shape = SubResource("CircleShape2D_x1hw5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u74s8")
+
+[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]

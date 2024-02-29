@@ -1,11 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=21 format=3 uid="uid://cylybcl5txpup"]
 
 [ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
 [ext_resource type="Script" path="res://game.gd" id="1_oau4h"]
 [ext_resource type="PackedScene" uid="uid://c8dvsq2pks7yl" path="res://Unit/UnitTypes/Sniper/sniper.tscn" id="2_2ip8b"]
+[ext_resource type="AudioStream" uid="uid://ru50l0v0k0d8" path="res://Assets/SFX/wind_tunnel_ambience.wav" id="2_d786y"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
 [ext_resource type="PackedScene" uid="uid://dts3ydmuiulbc" path="res://Unit/UnitTypes/Bruiser/bruiser.tscn" id="3_clc6p"]
+[ext_resource type="AudioStream" uid="uid://dfy3nyv2sh1rc" path="res://Assets/SFX/desert_ambience.wav" id="3_u2ewo"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 [ext_resource type="Script" path="res://SpawnRoot.gd" id="4_hiv35"]
 [ext_resource type="Script" path="res://Buildings/Mine/DepositAreas.gd" id="5_7lovr"]
@@ -23,6 +25,18 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_oau4h")
 metadata/_edit_horizontal_guides_ = [-143.0]
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_d786y")
+volume_db = -22.0
+autoplay = true
+bus = &"SFX_master"
+
+[node name="Ambience2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u2ewo")
+volume_db = -17.219
+autoplay = true
+bus = &"SFX_master"
 
 [node name="Asethetics2" type="TileMap" parent="."]
 tile_set = ExtResource("14_ohbse")

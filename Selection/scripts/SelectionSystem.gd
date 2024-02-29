@@ -2,7 +2,7 @@ extends Node2D
 
 var dragging = false
 var selected = []
-
+@onready var cursor = load("res://Selection/scenes/Cursor.tscn")
 var drag_start = Vector2.ZERO
 var select_rectangle = RectangleShape2D.new()
 var team="1"
@@ -50,6 +50,9 @@ func _unhandled_input(event):
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		var played = false
+		var cursor_node = cursor.instantiate()
+		add_child(cursor_node)
+		cursor_node.global_position= get_viewport().get_camera_2d().get_global_mouse_position()
 		if event.is_released():
 			for unit in selected:
 				if is_instance_valid(unit.collider):
