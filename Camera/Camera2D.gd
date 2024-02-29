@@ -4,8 +4,8 @@ extends Camera2D
 const CAMERA_PAN_SPEED: int = 400
 # how much the increment/decrement the camera zoom with each 'press' of the scroll wheel
 const CAMERA_ZOOM_DELTA: Vector2 = Vector2(0.1, 0.1)
-const CAMERA_ZOOM_MIN: float = 0.4
-const CAMERA_ZOOM_MAX: float = 4.0
+const CAMERA_ZOOM_MIN: float = 0.6
+const CAMERA_ZOOM_MAX: float = 3.0
 
 # multiplier for the speed the camera moves at when panning with the middle mouse button
 # change as needed
@@ -100,7 +100,7 @@ func _input(event):
 			zoom_out()
 			
 func change_volume(zoom_amount:float):
-	const max_db = 0.0
+	const max_db = -10
 	const min_db = -60.0
 	
 	var	volume = (min_db + ((zoom_amount - CAMERA_ZOOM_MIN) / (CAMERA_ZOOM_MAX - CAMERA_ZOOM_MIN)) * (max_db - min_db))
