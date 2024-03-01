@@ -50,6 +50,7 @@ func _process(_delta: float):
 							multiplayer.get_unique_id(),
 							spawn_pos,
 							unobtainium_field,
+							mine
 						)
 					#spawned_object.sprite.modulate=Color(1,1,1)
 					#spawned_object.remove_from_group("Constructions")
@@ -138,14 +139,6 @@ func _deposit_enter():
 func _deposit_exit():
 	deposit = false
 	
-# Special ore areas
-func _unobtainium_area():
-	unobtainium_field = true
-	
-func _not_unobtainium_area():
-	unobtainium_field = false
-	
-
 func cancel_placement():
 	if spawned_object != null:
 		spawned_object.queue_free()
@@ -160,7 +153,7 @@ func _on_v_box_container_mouse_exited():
 	placement_allowed = true
 	
 @rpc("any_peer", "call_local", "reliable")
-func place_building(scene_path: String, called_by: int, spawn_pos: Vector2, unobtainium_field: bool=false):
+func place_building(scene_path: String, called_by: int, spawn_pos: Vector2, unobtainium_field: bool = false, mine: bool = false):
 	print("placing")
 	var new_building: StaticBody2D = load(scene_path).instantiate()
 	new_building.team = "1" if called_by == 1 else "2"
@@ -202,3 +195,9 @@ func show_error_label():
 func hide_error_label():
 	if spawned_object != null and not mine:
 		spawned_object.get_node("Label").visible = false
+
+func _unobtainium_area():
+	unobtainium_field = true
+	
+func _not_unobtainium_area():
+	unobtainium_field = false
