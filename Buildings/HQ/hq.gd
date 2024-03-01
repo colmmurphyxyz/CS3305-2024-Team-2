@@ -17,6 +17,7 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	# toggle button uss based on criteria matched
+
 	if GameManager.laboratory_placed:
 		get_node("VBoxContainer/Scout").disabled = false
 		get_node("VBoxContainer/Warden").disabled = false

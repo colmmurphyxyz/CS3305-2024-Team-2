@@ -40,7 +40,6 @@ func _on_increase_timer_timeout():
 		for unit_body in close_mining_units:
 			var unit:Unit = unit_body.get_parent()
 			if unit.get_state() == "mining" and unit.carrying_ore==false:
-				print("giveth")
 				increase_value-=1
 				unit.load_ore()
 				

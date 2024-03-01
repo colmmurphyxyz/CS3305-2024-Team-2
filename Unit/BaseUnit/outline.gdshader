@@ -5,7 +5,7 @@ uniform float width : hint_range(0, 10) = 1.0;
 uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
 uniform bool inside = false;
 uniform bool add_margins = true; // only useful when inside is false
-uniform bool shader_enabled = true; // Added parameter to enable or disable the shader
+uniform bool shader_enabled = false; // Added parameter to enable or disable the shader
 
 uniform bool team2 = false; // Added parameter to enable or disable the shader
 

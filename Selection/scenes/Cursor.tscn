@@ -49,11 +49,11 @@ script = ExtResource("1_y77jk")
 position = Vector2(0, -9.53674e-07)
 scale = Vector2(2.40625, 2.3125)
 sprite_frames = SubResource("SpriteFrames_6043h")
-frame_progress = 0.468761
+frame_progress = 0.822001
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_anl84")
-volume_db = -8.0
+volume_db = -13.6
 autoplay = true
 bus = &"SFX_master"
 

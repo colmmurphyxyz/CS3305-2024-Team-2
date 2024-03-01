@@ -1,9 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmqs225p7jlxh"]
+[gd_scene load_steps=11 format=3 uid="uid://bmqs225p7jlxh"]
 
 [ext_resource type="Script" path="res://Buildings/Barracks/barracks.gd" id="1_ktc2n"]
-[ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/Buildings/barracks.png" id="2_s5x6n"]
+[ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/Buildings/barracks.png" id="2_tn0nd"]
+[ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_ls0e2"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_v6g7h"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_6gcog"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwrd7"]
+resource_local_to_scene = true
+shader = ExtResource("3_ls0e2")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
+shader_parameter/active = false
+shader_parameter/tint = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxh0m"]
 size = Vector2(48, 84)
@@ -42,11 +56,12 @@ properties/7/replication_mode = 2
 
 [node name="Barracks" type="StaticBody2D"]
 script = ExtResource("1_ktc2n")
-sprite_texture = ExtResource("2_s5x6n")
+sprite_texture = ExtResource("2_tn0nd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kwrd7")
 scale = Vector2(2, 2)
-texture = ExtResource("2_s5x6n")
+texture = ExtResource("2_tn0nd")
 
 [node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -83,5 +98,3 @@ shape = SubResource("CircleShape2D_x1hw5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u74s8")
-
-[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]

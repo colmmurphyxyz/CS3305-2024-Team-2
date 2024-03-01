@@ -9,7 +9,7 @@ func _ready():
 	
 func _process(delta):
 	super._process(delta)
-
-
+	if team !=GameManager.team:
+		$Sprite2D.material.set("shader_parameter/team2",true)
 func _on_building_destroyed():
 	GameManager.fusion_lab_placed = false

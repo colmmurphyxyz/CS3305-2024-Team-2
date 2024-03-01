@@ -1,10 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr1npldas1wa4"]
+[gd_scene load_steps=12 format=3 uid="uid://dr1npldas1wa4"]
 
 [ext_resource type="Script" path="res://Buildings/Defence/Defence.gd" id="1_akq7d"]
-[ext_resource type="Texture2D" uid="uid://2ika8fx1ppga" path="res://Assets/Buildings/defence_mid.png" id="2_vucpx"]
-[ext_resource type="Texture2D" uid="uid://dp5q1x4pn8ppx" path="res://Assets/Buildings/defence_base.png" id="3_g5jrf"]
+[ext_resource type="Texture2D" uid="uid://dp5q1x4pn8ppx" path="res://Assets/Buildings/defence_base.png" id="2_gjlpd"]
+[ext_resource type="Texture2D" uid="uid://2ika8fx1ppga" path="res://Assets/Buildings/defence_mid.png" id="3_bcoct"]
+[ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_ty4kf"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="5_jy5te"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="6_sg53v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7urm"]
+resource_local_to_scene = true
+shader = ExtResource("4_ty4kf")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
+shader_parameter/active = false
+shader_parameter/tint = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t375u"]
 size = Vector2(48, 72)
@@ -42,12 +56,13 @@ properties/7/replication_mode = 2
 
 [node name="Defence" type="StaticBody2D"]
 script = ExtResource("1_akq7d")
-sprite_texture_tier_1 = ExtResource("3_g5jrf")
-sprite_texture_tier_2 = ExtResource("2_vucpx")
+sprite_texture_tier_1 = ExtResource("2_gjlpd")
+sprite_texture_tier_2 = ExtResource("3_bcoct")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_j7urm")
 scale = Vector2(2, 2)
-texture = ExtResource("3_g5jrf")
+texture = ExtResource("2_gjlpd")
 
 [node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

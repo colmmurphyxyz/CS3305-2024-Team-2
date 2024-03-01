@@ -1,9 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://0icby4tj0lfw"]
+[gd_scene load_steps=11 format=3 uid="uid://0icby4tj0lfw"]
 
 [ext_resource type="Script" path="res://Buildings/Mine/mine.gd" id="1_7le25"]
 [ext_resource type="Texture2D" uid="uid://citx6shaapt4p" path="res://Assets/Buildings/mine.png" id="2_vgfkm"]
+[ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_g6icx"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_gtleh"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_oybxj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r27ca"]
+resource_local_to_scene = true
+shader = ExtResource("3_g6icx")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
+shader_parameter/active = false
+shader_parameter/tint = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wds7w"]
 size = Vector2(80, 80)
@@ -45,6 +59,7 @@ script = ExtResource("1_7le25")
 sprite_texture = ExtResource("2_vgfkm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_r27ca")
 scale = Vector2(2, 2)
 texture = ExtResource("2_vgfkm")
 

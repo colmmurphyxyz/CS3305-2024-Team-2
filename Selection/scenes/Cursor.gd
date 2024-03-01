@@ -3,6 +3,7 @@ extends StaticBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.play()
+	$AudioStreamPlayer2D.pitch_scale = randf_range(.9,1.1)
 	pass # Replace with function body.
 
 

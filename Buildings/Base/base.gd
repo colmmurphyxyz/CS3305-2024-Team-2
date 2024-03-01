@@ -34,16 +34,20 @@ var light:PointLight2D
 @onready var detection_area: Area2D = $DetectionArea
 @onready var collision_circle: CollisionShape2D = $DetectionArea/CollisionShape2D
 @onready var healthbar: TextureProgressBar = $Healthbar
-
+var building_sfx:AudioStreamPlayer2D
 # failsafe for other object detection
 var overlapping: Array = []
 
 func _ready():
 	add_to_group("Buildings")
 	var collision_shape: CollisionShape2D = $BuildingCollisionShape
-
+	building_sfx = AudioStreamPlayer2D.new()
+	add_child(building_sfx)
+	building_sfx.bus="SFX"
+	building_sfx.stream=load("res://Assets/SFX/building_sfx.wav")
+	if team !=GameManager.team:
+		$Sprite2D.material.set("shader_parameter/team2",true)
 	# set shape of collision
-
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
 	#rectangle_shape.extents = sprite_half_extents
@@ -85,6 +89,7 @@ func _ready():
 func _process(delta: float):
 
 	#visible = is_placed or GameManager.team == team
+
 	if !is_multiplayer_authority():
 		return
 	if visibility_number< 1 and GameManager.team != team:
@@ -108,9 +113,8 @@ func _process(delta: float):
 			if allies_in_area.size() > 0:
 				for body in allies_in_area:
 					if !is_instance_valid(body): continue
-					if !(body.is_in_group("Buildings")): # if body is not a bulding
-						health += 0.5 * delta
-						#print("Repairing...", round(health), "/", max_hp)
+					if body.is_building==false and body.get_parent().state_name=="building": # if body is not a bulding
+						health += 10 * delta
 				if health >= max_hp:
 					is_active = true
 					sprite.modulate=Color(1,1,1)

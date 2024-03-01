@@ -6,8 +6,10 @@ func _ready():
 	pass
 
 func _process(_delta: float):
-	if persistent_state.target_building != null and persistent_state.target_building.is_active==false:
+	print(persistent_state.target_building)
+	if persistent_state.target_building != null:
 		persistent_state.body.target=persistent_state.target_building.global_position
+		persistent_state.body.create_path()
 	else:
 		persistent_state.change_state("idle")
 		persistent_state.body.target=persistent_state.body.global_position

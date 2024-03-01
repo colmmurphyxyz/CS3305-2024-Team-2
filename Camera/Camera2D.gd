@@ -101,7 +101,7 @@ func _input(event):
 			
 func change_volume(zoom_amount:float):
 	const max_db = -10
-	const min_db = -60.0
+	const min_db = -25.0
 	
 	var	volume = (min_db + ((zoom_amount - CAMERA_ZOOM_MIN) / (CAMERA_ZOOM_MAX - CAMERA_ZOOM_MIN)) * (max_db - min_db))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),volume)
