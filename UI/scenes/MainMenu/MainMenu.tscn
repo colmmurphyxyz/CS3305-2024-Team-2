@@ -86,8 +86,7 @@ texture = ExtResource("3_cra6a")
 centered = false
 
 [node name="MainMenuCamera" type="Camera2D" parent="."]
-visible = false
-offset = Vector2(400, 324)
+position = Vector2(576, 320)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
