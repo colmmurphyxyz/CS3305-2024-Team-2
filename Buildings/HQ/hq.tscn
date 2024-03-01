@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_uju10"]
 [ext_resource type="AudioStream" uid="uid://bmlfmh3blrle0" path="res://Assets/SFX/hq_ambience.wav" id="5_bfg8k"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_g862d"]
-[ext_resource type="AudioStream" uid="uid://blfbh7gypedpi" path="res://Assets/SFX/bruiser_spawn.wav" id="7_xvoxj"]
+[ext_resource type="AudioStream" uid="uid://c4qr42m7xu1yn" path="res://Assets/SFX/building_spawn.wav" id="7_wxicu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6140k"]
 resource_local_to_scene = true
@@ -146,8 +146,9 @@ max_distance = 500.0
 attenuation = 0.812252
 bus = &"SFX"
 
-[node name="SpawnFx" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_xvoxj")
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_wxicu")
+volume_db = -1.618
 bus = &"SFX"
 
 [connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]

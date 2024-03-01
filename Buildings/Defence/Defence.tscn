@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr1npldas1wa4"]
+[gd_scene load_steps=13 format=3 uid="uid://dr1npldas1wa4"]
 
 [ext_resource type="Script" path="res://Buildings/Defence/Defence.gd" id="1_akq7d"]
 [ext_resource type="Texture2D" uid="uid://dp5q1x4pn8ppx" path="res://Assets/Buildings/defence_base.png" id="2_gjlpd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="4_ty4kf"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="5_jy5te"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="6_sg53v"]
+[ext_resource type="AudioStream" uid="uid://c4qr42m7xu1yn" path="res://Assets/SFX/building_spawn.wav" id="7_2warv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j7urm"]
 resource_local_to_scene = true
@@ -110,6 +111,11 @@ offset_right = 100.0
 offset_bottom = -58.0
 theme_override_colors/font_color = Color(0.921569, 0.231373, 0.231373, 1)
 text = "Position too far from HQ!"
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_2warv")
+volume_db = -1.618
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
