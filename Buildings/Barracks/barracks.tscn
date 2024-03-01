@@ -98,3 +98,15 @@ shape = SubResource("CircleShape2D_x1hw5")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_u74s8")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+visibility_layer = 1023
+offset_left = -97.0
+offset_top = -89.0
+offset_right = 97.0
+offset_bottom = -66.0
+theme_override_colors/font_color = Color(0.921569, 0.231373, 0.231373, 1)
+text = "Position too far from HQ!"
+
+[connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]

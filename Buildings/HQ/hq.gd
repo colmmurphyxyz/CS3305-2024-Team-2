@@ -3,7 +3,21 @@ extends Base
 const free_unit_time = 60.0
 var free_spawn = free_unit_time
 var control = null
-var iron = 0 # replace with location of resource values
+
+const drone_cost = 10
+const bruiser_cost = 15
+const sniper_cost = 15
+const scout_cost = 15
+const warden_cost = 10 #unob 
+const screecher_cost = 15 #unob
+
+var drone_button
+var bruiser_button
+var sniper_button
+var scout_button
+var warden_button
+var screecher_button
+
 
 func _ready():
 	super._ready()
@@ -14,24 +28,40 @@ func _ready():
 	control.hide()
 	health=100
 	
+	drone_button = get_node("VBoxContainer/Drone")
+	bruiser_button = get_node("VBoxContainer/Bruiser")
+	sniper_button = get_node("VBoxContainer/Sniper")
+	scout_button = get_node("VBoxContainer/Scout")
+	warden_button = get_node("VBoxContainer/Warden")
+	screecher_button = get_node("VBoxContainer/Fusion Screecher")
+	
 func _process(delta):
 	super._process(delta)
 	# toggle button uss based on criteria matched
 
 	if GameManager.laboratory_placed:
-		get_node("VBoxContainer/Scout").disabled = false
-		get_node("VBoxContainer/Warden").disabled = false
+		scout_button.disabled = false
+		warden_button.disabled = false
 	else:
-		get_node("VBoxContainer/Scout").disabled = true
-		get_node("VBoxContainer/Warden").disabled = true
+		scout_button.disabled = true
+		warden_button.disabled = true
 	if GameManager.barrack_placed:
-		get_node("VBoxContainer/Bruiser").disabled = false
-		get_node("VBoxContainer/Sniper").disabled = false
-		get_node("VBoxContainer/Fusion Screecher").disabled = false
+		bruiser_button.disabled = false
+		sniper_button.disabled = false
+		screecher_button.disabled = false
 	else:
-		get_node("VBoxContainer/Bruiser").disabled = true
-		get_node("VBoxContainer/Sniper").disabled = true
-		get_node("VBoxContainer/Fusion Screecher").disabled = true
+		bruiser_button.disabled = true
+		sniper_button.disabled = true
+		screecher_button.disabled = true
+		
+	#update text on buttons to show price
+	drone_button.text = "(%d) Drone - %d Iron" % [round(free_spawn), drone_cost]
+	bruiser_button.text = "Bruiser - %d Iron" % bruiser_cost
+	sniper_button.text = "Sniper - %d Iron" % sniper_cost
+	scout_button.text = "Scout - %d Iron" % scout_cost
+	warden_button.text = "Warder - %d Unob." % warden_cost
+	screecher_button.text = "Screecher - %d Unob." % screecher_cost
+	
 	if free_spawn > 0:
 		free_spawn -= delta
 
@@ -55,43 +85,48 @@ func getRandomPositionInDonut(innerRadius: float, outerRadius: float) -> Vector2
 func _spawn_unit(type: String):
 	var spawn_position = getRandomPositionInDonut(35,60)
 	match type:
-		# Set resources required
 		"drone":
-			if free_spawn >= 0:
+			if free_spawn <= 0:
 				free_spawn = free_unit_time
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						spawn_position)
-			elif iron > 10:
+			elif GameManager.iron >= drone_cost:
 				free_spawn = free_unit_time
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						spawn_position)
+				GameManager.iron -= drone_cost
 		"bruiser":
-			if GameManager.barrack_placed and iron > 10:
+			if GameManager.barrack_placed and GameManager.iron >= bruiser_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Bruiser/bruiser.tscn", \
 						spawn_position)
+				GameManager.iron -= bruiser_cost
 		"scout":
-			if GameManager.laboratory_placed and iron > 10:
+			if GameManager.laboratory_placed and GameManager.iron >= scout_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Scout/scout.tscn", \
 						spawn_position)
+				GameManager.iron -= scout_cost
 		"sniper":
-			if GameManager.barrack_placed and iron > 10:
+			if GameManager.barrack_placed and GameManager.iron >= sniper_cost :
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Sniper/sniper.tscn", \
 						spawn_position)
+				GameManager.iron -= sniper_cost
 		"warden":
-			if GameManager.laboratory_placed and iron > 10:
+			if GameManager.laboratory_placed and GameManager.unobtainium >= warden_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Warden/warden.tscn", \
 						spawn_position)
+				GameManager.iron -= warden_cost
 		"screecher":
-			if GameManager.barrack_placed and iron > 10:
+			if GameManager.barrack_placed and GameManager.unobtainium >= screecher_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
 						spawn_position)
+				GameManager.iron -= screecher_cost
 		_:
 			print("Not valid button")
 
