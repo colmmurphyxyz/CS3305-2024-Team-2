@@ -193,5 +193,5 @@ func show_error_label():
 		error_timer.start()
 	
 func hide_error_label():
-	if spawned_object != null:
+	if spawned_object != null and not mine:
 		spawned_object.get_node("Label").visible = false
