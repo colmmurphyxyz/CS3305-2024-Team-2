@@ -16,6 +16,7 @@ func _ready():
 	speed=get_parent().speed
 
 func _physics_process(delta):
+
 	if !nav_loaded:
 		nav_loaded = true
 		return
@@ -24,6 +25,11 @@ func _physics_process(delta):
 	var direction:Vector2 = to_local(nav_agent.get_next_path_position()).normalized()
 	var intended_velocty:Vector2 = direction*speed
 	velocity=intended_velocty
+	#if is_instance_valid(get_parent().ray_manager):
+		#for ray:RayCast2D in get_parent().ray_manager.get_children():
+			#if ray.is_colliding():
+				#var collision_normal = ray.get_collision_normal()
+				#velocity=collision_normal*50
 	move_and_slide()
 	
 

@@ -24,6 +24,7 @@ var allies_in_area: Array = []
 var enemies_in_area: Array = []
 var close_mining_units: Array = []
 var light:PointLight2D
+
 #var barrack_placed: bool = false
 #var laboratory_placed: bool = false
 #var fusion_lab_placed: bool = false
@@ -41,10 +42,6 @@ var overlapping: Array = []
 func _ready():
 	add_to_group("Buildings")
 	var collision_shape: CollisionShape2D = $BuildingCollisionShape
-	building_sfx = AudioStreamPlayer2D.new()
-	add_child(building_sfx)
-	building_sfx.bus="SFX"
-	building_sfx.stream=load("res://Assets/SFX/building_sfx.wav")
 	if team !=GameManager.team:
 		$Sprite2D.material.set("shader_parameter/team2",true)
 	# set shape of collision
@@ -58,6 +55,7 @@ func _ready():
 	if GameManager.team != team:
 		light.visible==false
 		visible=false
+			
 # Disable collisons before placement 
 	collision_layer = 0
 	collision_mask = 1 + 2
@@ -234,7 +232,8 @@ func _on_area_2d_body_entered(body: Node2D):
 		return
 	if body.get_parent().team == team and body.get_parent().can_mine == true: 
 			close_mining_units.append(body)
-			
+
+
 @rpc("any_peer", "call_local", "reliable")
 func spawn_bullet(called_by: int, target_name: String, spawn_pos: Vector2, damage, speed):
 	var new_bullet = preload("res://Bullet/Bullet.tscn").instantiate()

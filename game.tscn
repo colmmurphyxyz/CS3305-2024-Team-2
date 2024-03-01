@@ -1,13 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://cylybcl5txpup"]
+[gd_scene load_steps=21 format=3 uid="uid://cylybcl5txpup"]
 
-[ext_resource type="PackedScene" uid="uid://cqktfbnalbrhf" path="res://Unit/UnitTypes/Drone/drone.tscn" id="1_5c3c7"]
 [ext_resource type="TileSet" uid="uid://dske6hm1wpec8" path="res://new_tile_set.tres" id="1_hhckg"]
 [ext_resource type="Script" path="res://game.gd" id="1_oau4h"]
-[ext_resource type="PackedScene" uid="uid://c8dvsq2pks7yl" path="res://Unit/UnitTypes/Sniper/sniper.tscn" id="2_2ip8b"]
 [ext_resource type="AudioStream" uid="uid://ru50l0v0k0d8" path="res://Assets/SFX/wind_tunnel_ambience.wav" id="2_d786y"]
 [ext_resource type="AudioStream" uid="uid://cg1v3xrhcglwy" path="res://Assets/msuqieu/low.wav" id="2_rlis5"]
 [ext_resource type="PackedScene" uid="uid://3ba2rxtkdekx" path="res://Selection/scenes/SelectionSystem.tscn" id="3_0hf7f"]
-[ext_resource type="PackedScene" uid="uid://dts3ydmuiulbc" path="res://Unit/UnitTypes/Bruiser/bruiser.tscn" id="3_clc6p"]
 [ext_resource type="AudioStream" uid="uid://dfy3nyv2sh1rc" path="res://Assets/SFX/desert_ambience.wav" id="3_u2ewo"]
 [ext_resource type="Script" path="res://buildsystem.gd" id="4_atcb7"]
 [ext_resource type="Script" path="res://SpawnRoot.gd" id="4_hiv35"]
@@ -18,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://ca0d7iipih2xs" path="res://Assets/temp_ore_texture.png" id="7_4hrch"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
 [ext_resource type="Texture2D" uid="uid://cv5k24ykpgh23" path="res://Assets/unobtainium.png" id="7_t6n34"]
-[ext_resource type="PackedScene" uid="uid://b7kqn0grwhcue" path="res://Unit/UnitTypes/Warden/warden.tscn" id="10_d8kfn"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
 [ext_resource type="TileSet" uid="uid://cp54s3b4scm2h" path="res://asethetic_tileset.tres" id="14_ohbse"]
 [ext_resource type="Script" path="res://FreeIronTimer.gd" id="15_xl2v7"]
@@ -275,69 +271,6 @@ spawn_path = NodePath("../SpawnRoot")
 [node name="SpawnRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("4_hiv35")
-
-[node name="Drone5" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(966, 371)
-
-[node name="Drone6" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(971, 347)
-
-[node name="Drone7" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(992, 338)
-
-[node name="Bruiser" parent="SpawnRoot" instance=ExtResource("3_clc6p")]
-position = Vector2(1122, 306)
-
-[node name="Bruiser2" parent="SpawnRoot" instance=ExtResource("3_clc6p")]
-position = Vector2(1124, 354)
-
-[node name="Bruiser3" parent="SpawnRoot" instance=ExtResource("3_clc6p")]
-position = Vector2(1118, 392)
-
-[node name="Warden" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
-position = Vector2(1328, 469)
-
-[node name="Warden2" parent="SpawnRoot" instance=ExtResource("10_d8kfn")]
-position = Vector2(1064, 411)
-
-[node name="Sniper" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1207, 563)
-
-[node name="Sniper2" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1422, 562)
-
-[node name="Sniper3" parent="SpawnRoot" instance=ExtResource("2_2ip8b")]
-position = Vector2(1359, 643)
-
-[node name="Drone" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1203, 416)
-
-[node name="Drone13" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1165, 391)
-
-[node name="Drone8" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1172, 434)
-
-[node name="Drone12" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1139, 454)
-
-[node name="Drone9" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1172, 325)
-
-[node name="Drone10" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1210, 368)
-
-[node name="Drone11" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1202, 323)
-
-[node name="Drone3" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(1045, 709)
-
-[node name="Drone4" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(965, 394)
-
-[node name="Drone2" parent="SpawnRoot" instance=ExtResource("1_5c3c7")]
-position = Vector2(934, 424)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Unit/UnitTypes/Bruiser/bruiser.tscn", "res://Unit/UnitTypes/Drone/drone.tscn", "res://Unit/UnitTypes/Sniper/sniper.tscn", "res://Bullet/Bullet.tscn", "res://Unit/BaseUnit/BulletHit.tscn", "res://Unit/BaseUnit/Explosion.tscn", "res://Unit/UnitTypes/Warden/warden.tscn", "res://Unit/UnitTypes/Scout/scout.tscn", "res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", "res://Bullet/lazer.tscn")

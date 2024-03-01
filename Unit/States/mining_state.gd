@@ -1,12 +1,14 @@
 extends State
 class_name MiningState
 var pathing:bool=false
+
 func _ready():
 	print("mining")
 	print("carrying ore: ",persistent_state.carrying_ore)
 	pass
 
 func _process(_delta: float):
+
 	persistent_state.sprite2d.rotation = persistent_state.body.velocity.angle()+4.71239		
 	#Ore will be granted by mine, so when it gets ore from mine, path back to base
 	#print(persistent_state.target_building)
