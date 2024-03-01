@@ -90,34 +90,47 @@ texture_under = ExtResource("4_uju10")
 texture_progress = ExtResource("5_g862d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 104.0
-offset_top = -140.0
-offset_right = 196.0
-offset_bottom = 72.0
+visibility_layer = 524289
+offset_left = 80.0
+offset_top = -126.0
+offset_right = 312.0
+offset_bottom = 124.0
 
 [node name="Drone" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Drone"
+alignment = 0
 
 [node name="Bruiser" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Bruiser"
+alignment = 0
 
 [node name="Sniper" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Sniper"
+alignment = 0
 
 [node name="Scout" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Scout"
+alignment = 0
 
 [node name="Warden" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Warden"
+alignment = 0
 
 [node name="Fusion Screecher" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "Fusion Screecher"
+alignment = 0
 
 [node name="Border" type="Line2D" parent="."]
 

@@ -101,6 +101,16 @@ replication_config = SubResource("SceneReplicationConfig_rp7r5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_pety5")
 
+[node name="Label" type="Label" parent="."]
+visible = false
+visibility_layer = 1023
+offset_left = -94.0
+offset_top = -81.0
+offset_right = 100.0
+offset_bottom = -58.0
+theme_override_colors/font_color = Color(0.921569, 0.231373, 0.231373, 1)
+text = "Position too far from HQ!"
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
