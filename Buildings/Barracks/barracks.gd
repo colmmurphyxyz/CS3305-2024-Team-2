@@ -5,11 +5,11 @@ func _ready():
 	super._ready()
 	add_to_group("Constructions")
 	GameManager.barrack_placed = true
-	
-	
+
+
+
 func _process(delta):
 	super._process(delta)
-
 
 
 func _on_building_destroyed():

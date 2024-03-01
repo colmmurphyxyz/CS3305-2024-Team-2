@@ -38,6 +38,7 @@ func _ready():
 func _process(delta):
 	super._process(delta)
 	# toggle button uss based on criteria matched
+
 	if GameManager.laboratory_placed:
 		scout_button.disabled = false
 		warden_button.disabled = false

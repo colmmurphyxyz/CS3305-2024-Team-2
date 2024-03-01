@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://csnaat1gu7uyn"]
+[gd_scene load_steps=12 format=3 uid="uid://csnaat1gu7uyn"]
 
 [ext_resource type="Theme" uid="uid://bqgwg6jqqupa1" path="res://UI/scenes/MainMenu/MainMenuTheme.tres" id="1_hvcae"]
 [ext_resource type="Script" path="res://UI/scenes/MainMenu/MainMenu.gd" id="1_o5ron"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cv16ledvpvntq" path="res://Assets/background/desert_background6.png" id="6_6v8km"]
 [ext_resource type="Texture2D" uid="uid://dcrdx8pqawvkk" path="res://Assets/background/desert_background4.png" id="8_5mhuv"]
 [ext_resource type="Texture2D" uid="uid://pn5k2vtf4vwk" path="res://Assets/gametitle.png" id="9_ujr0q"]
+[ext_resource type="AudioStream" uid="uid://ddqddlkcvnuy4" path="res://Assets/msuqieu/title.mp3" id="10_ghynu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_val4m"]
 bg_color = Color(1, 0.48886, 0.469093, 1)
@@ -30,7 +31,7 @@ motion_scale = Vector2(0.1, 0)
 motion_mirroring = Vector2(1155, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackgroundLayer"]
-position = Vector2(0, -94)
+position = Vector2(12, -95)
 scale = Vector2(1.65, 1.65)
 texture = ExtResource("3_1fw0u")
 centered = false
@@ -91,7 +92,8 @@ offset = Vector2(400, 324)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(562, 63)
+self_modulate = Color(0.517647, 0.427451, 0.643137, 1)
+position = Vector2(576, 63)
 scale = Vector2(2.73118, 3.15385)
 texture = ExtResource("9_ujr0q")
 
@@ -185,6 +187,10 @@ autowrap_mode = 3
 [node name="ErrorAlertLabelShowTimer" type="Timer" parent="."]
 wait_time = 2.5
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ghynu")
+volume_db = -13.227
 
 [connection signal="pressed" from="CanvasLayer/HostGameButton" to="." method="_on_host_game_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/JoinGameButton" to="." method="_on_join_game_button_pressed"]

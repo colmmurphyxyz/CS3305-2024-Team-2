@@ -1,10 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk80g7cgdc68h"]
+[gd_scene load_steps=11 format=3 uid="uid://bk80g7cgdc68h"]
 
 [ext_resource type="Script" path="res://Buildings/HQ/hq.gd" id="1_udwv5"]
 [ext_resource type="Texture2D" uid="uid://bhtpcwbe0rrgr" path="res://Assets/Buildings/hq.png" id="2_y4py5"]
+[ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_o2j45"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_uju10"]
 [ext_resource type="AudioStream" uid="uid://bmlfmh3blrle0" path="res://Assets/SFX/hq_ambience.wav" id="5_bfg8k"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_g862d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6140k"]
+resource_local_to_scene = true
+shader = ExtResource("3_o2j45")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
+shader_parameter/active = false
+shader_parameter/tint = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nk80h"]
 size = Vector2(160, 272)
@@ -44,6 +58,7 @@ script = ExtResource("1_udwv5")
 sprite_texture = ExtResource("2_y4py5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6140k")
 scale = Vector2(2, 2)
 texture = ExtResource("2_y4py5")
 

@@ -4,6 +4,7 @@ extends Control
 #For now 
 var in_use:bool = false
 var bus_index = AudioServer.get_bus_index("SFX_master")
+var music_index = AudioServer.get_bus_index("Music")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	AudioServer.set_bus_mute(bus_index, true)
@@ -12,7 +13,15 @@ func _ready():
 	$Panel.process_mode = Node.PROCESS_MODE_DISABLED
 	visible=false
 	$Panel/HSlider.max_value=10
+	$Panel/HSlider.min_value=1
 	$Panel/HSlider.value=10
+	
+	AudioServer.set_bus_mute(music_index, true)
+	AudioServer.set_bus_volume_db(music_index,linear_to_db(100))
+	$Panel/musicvalue.text = "%d%%" % 10
+	$Panel/MusicSlider.max_value=10
+	$Panel/MusicSlider.min_value=1
+	$Panel/MusicSlider.value=10
 	pass # Replace with function body.
 
 
@@ -46,3 +55,13 @@ func set_bus_volume(bus_name:String, value:float):
 func _on_check_box_toggled(toggled_on):
 	AudioServer.set_bus_mute(bus_index, toggled_on)
 
+
+
+func _on_music_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(music_index,value)
+	$Panel/musicvalue.text = "%d%%" % (value*10)
+	pass # Re
+
+
+func _on_music_box_toggled(toggled_on):
+	AudioServer.set_bus_mute(music_index, toggled_on)

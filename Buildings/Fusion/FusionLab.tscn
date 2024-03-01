@@ -1,15 +1,41 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgc4ygbt05gci"]
+[gd_scene load_steps=12 format=3 uid="uid://dgc4ygbt05gci"]
 
 [ext_resource type="Script" path="res://Buildings/Fusion/FusionLab.gd" id="1_25yva"]
-[ext_resource type="Texture2D" uid="uid://cn72pap31glih" path="res://Assets/Buildings/fusion.png" id="2_uel15"]
+[ext_resource type="Texture2D" uid="uid://cn72pap31glih" path="res://Assets/Buildings/fusion.png" id="2_djvb4"]
+[ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_0hy0u"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_7167x"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_20sqx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q860x"]
+resource_local_to_scene = true
+shader = ExtResource("3_0hy0u")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
+shader_parameter/active = false
+shader_parameter/tint = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqv6u"]
 size = Vector2(64, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_44myr"]
 radius = 104.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4kadg"]
+shader = ExtResource("3_0hy0u")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/shader_enabled = true
+shader_parameter/team2 = false
+shader_parameter/active = false
+shader_parameter/tint = Color(0.1, 0.1, 0.1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_paqb6"]
 radius = 104.0
@@ -42,11 +68,12 @@ properties/7/replication_mode = 2
 
 [node name="FusionLab" type="StaticBody2D"]
 script = ExtResource("1_25yva")
-sprite_texture = ExtResource("2_uel15")
+sprite_texture = ExtResource("2_djvb4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_q860x")
 scale = Vector2(2, 2)
-texture = ExtResource("2_uel15")
+texture = ExtResource("2_djvb4")
 
 [node name="BuildingCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tqv6u")
@@ -60,6 +87,7 @@ shape = SubResource("CircleShape2D_44myr")
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+material = SubResource("ShaderMaterial_4kadg")
 shape = SubResource("CircleShape2D_paqb6")
 
 [node name="Healthbar" type="TextureProgressBar" parent="."]

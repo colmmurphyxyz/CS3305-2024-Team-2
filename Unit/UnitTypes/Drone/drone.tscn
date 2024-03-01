@@ -212,10 +212,10 @@ shape = SubResource("CircleShape2D_e4e7f")
 path_desired_distance = 30.68
 target_desired_distance = 32.0
 navigation_layers = 7
+avoidance_enabled = true
 radius = 5.58
 neighbor_distance = 16.6
 max_speed = 400.0
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="Body"]
 wait_time = 0.1

@@ -62,7 +62,7 @@ func _ready():
 	#HP bar
 	healthbar.max_value=hp
 	healthbar.value=hp
-	
+
 	#Hit frame shader timer
 	add_child(hit_timer)
 	hit_timer.wait_time=.1
@@ -73,7 +73,7 @@ func _ready():
 	#Used for getting explosion width by getting idle texture size
 	width=sprite2d.sprite_frames.get_frame_texture("idle",0).get_width()
 	
-	if team == "2":
+	if team !=GameManager.team:
 		sprite2d.material.set("shader_parameter/team2",true)
 		#sprite2d.texture = load("res://Assets/unit_temp.png")
 	check_if_visible(self)

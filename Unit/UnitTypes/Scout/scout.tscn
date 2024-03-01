@@ -195,7 +195,6 @@ navigation_layers = 7
 radius = 5.58
 neighbor_distance = 16.6
 max_speed = 400.0
-debug_enabled = true
 
 [node name="Timer" type="Timer" parent="Body"]
 wait_time = 0.1

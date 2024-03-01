@@ -21,26 +21,58 @@ offset_bottom = 334.0
 
 [node name="HSlider" type="HSlider" parent="Panel"]
 layout_mode = 0
-offset_left = 259.0
-offset_top = 313.0
-offset_right = 983.0
-offset_bottom = 363.0
+offset_left = 86.0
+offset_top = 282.0
+offset_right = 810.0
+offset_bottom = 332.0
 
 [node name="CheckBox" type="CheckBox" parent="Panel"]
 layout_mode = 0
-offset_left = 259.0
-offset_top = 287.0
-offset_right = 290.0
-offset_bottom = 314.0
+offset_left = 86.0
+offset_top = 256.0
+offset_right = 117.0
+offset_bottom = 283.0
 button_pressed = true
 
 [node name="value2" type="Label" parent="Panel/CheckBox"]
 layout_mode = 0
 offset_left = 31.0
-offset_right = 126.0
+offset_right = 108.0
 offset_bottom = 23.0
 text = "Mute SFX
 "
 
+[node name="musicvalue" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 408.0
+offset_right = 175.0
+offset_bottom = 431.0
+
+[node name="MusicSlider" type="HSlider" parent="Panel"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 410.0
+offset_right = 810.0
+offset_bottom = 460.0
+
+[node name="MusicBox" type="CheckBox" parent="Panel"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 384.0
+offset_right = 117.0
+offset_bottom = 411.0
+button_pressed = true
+
+[node name="value2" type="Label" parent="Panel/MusicBox"]
+layout_mode = 0
+offset_left = 31.0
+offset_right = 126.0
+offset_bottom = 23.0
+text = "Mute Music
+"
+
 [connection signal="value_changed" from="Panel/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="toggled" from="Panel/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="value_changed" from="Panel/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="toggled" from="Panel/MusicBox" to="." method="_on_music_box_toggled"]

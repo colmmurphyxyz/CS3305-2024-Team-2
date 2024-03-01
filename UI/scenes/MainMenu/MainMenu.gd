@@ -73,6 +73,7 @@ func _on_play_computer_button_pressed():
 		_show_error_message("Please enter a name")
 	else:
 		get_tree().change_scene_to_packed(game_scene)
+		
 
 
 func _on_error_alert_label_show_timer_timeout():
@@ -148,6 +149,8 @@ func start_game():
 	var scene = game_scene.instantiate()
 	get_tree().root.add_child(scene)
 	scene.get_node("PlayerCamera").is_locked = true
+	$AudioStreamPlayer.stream_paused=true
+
 
 
 func _on_start_lan_game_button_pressed():
