@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://chcffv7xahe1u"]
+[gd_scene load_steps=11 format=3 uid="uid://chcffv7xahe1u"]
 
 [ext_resource type="Script" path="res://Buildings/Base/base.gd" id="1_rcxq8"]
 [ext_resource type="Texture2D" uid="uid://bakdcwewv820" path="res://Assets/Buildings/hq_build.png" id="2_msyjy"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="3_8vxph"]
 [ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/Buildings/barracks.png" id="3_31jc6"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="4_p5w77"]
+[ext_resource type="AudioStream" uid="uid://c4qr42m7xu1yn" path="res://Assets/SFX/building_spawn.wav" id="6_2t8ts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke4o0"]
 size = Vector2(48, 84)
@@ -94,6 +95,11 @@ offset_right = 234.0
 offset_bottom = -22.0
 theme_override_colors/font_color = Color(0.921569, 0.231373, 0.231373, 1)
 text = "Position too far from HQ!"
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2t8ts")
+volume_db = -1.618
+bus = &"SFX"
 
 [connection signal="body_entered" from="MiningUnitDetectionArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="MiningUnitDetectionArea" to="." method="_on_area_2d_body_exited"]
