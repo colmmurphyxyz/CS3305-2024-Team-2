@@ -124,9 +124,9 @@ func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	# set buildings to be full hp and active on spawn, for debugging reasons
 	new_building.health = new_building.max_hp
 	new_building.is_active = true
-	
 	building_root.add_child(new_building, true)
 	new_building.add_to_group("Buildings")
+
 	# set collision layers
 	var layers = [1, 2, 12]
 	var layers_mask = 0
