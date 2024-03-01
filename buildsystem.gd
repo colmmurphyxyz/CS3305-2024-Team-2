@@ -9,7 +9,7 @@ var selected_building_path: String = ""
 var placement_allowed: bool = false
 var deposit: bool = false
 var mine: bool = false
-var unobtainium = false
+var unobtainium_field = false
 
 var mine_cost = 10
 var defence_cost = 20
@@ -42,13 +42,14 @@ func _process(_delta: float):
 					print("can place")
 					var spawn_pos: Vector2 = spawned_object.global_position
 					if mine:
-						spawned_object.has_unobtainium = unobtainium
+						spawned_object.has_unobtainium = unobtainium_field
 					spawned_object.visible = false
 					spawned_object.free()
 					spawned_object = null
 					place_building.rpc_id(1, selected_building_path,
 							multiplayer.get_unique_id(),
-							spawn_pos
+							spawn_pos,
+							unobtainium_field,
 						)
 					#spawned_object.sprite.modulate=Color(1,1,1)
 					#spawned_object.remove_from_group("Constructions")
@@ -86,7 +87,7 @@ func placing():
 				print("No deposit found nearby")
 			elif spawned_object.stop_following_mouse() == true: # if placed
 				if mine:
-					spawned_object.has_unobtainium = unobtainium
+					spawned_object.has_unobtainium = unobtainium_field
 				spawned_object = null
 				mine = false
 	
@@ -139,10 +140,10 @@ func _deposit_exit():
 	
 # Special ore areas
 func _unobtainium_area():
-	unobtainium = true
+	unobtainium_field = true
 	
 func _not_unobtainium_area():
-	unobtainium = false
+	unobtainium_field = false
 	
 
 func cancel_placement():
@@ -159,7 +160,7 @@ func _on_v_box_container_mouse_exited():
 	placement_allowed = true
 	
 @rpc("any_peer", "call_local", "reliable")
-func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
+func place_building(scene_path: String, called_by: int, spawn_pos: Vector2, unobtainium_field: bool=false):
 	print("placing")
 	var new_building: StaticBody2D = load(scene_path).instantiate()
 	new_building.team = "1" if called_by == 1 else "2"
@@ -169,6 +170,8 @@ func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	# set buildings to be full hp and active on spawn, for debugging reasons
 	new_building.health = new_building.max_hp
 	new_building.is_active = true
+	if mine:
+		new_building.has_unobtainium = unobtainium_field
 	building_root.add_child(new_building, true)
 	new_building.add_to_group("Buildings")
 

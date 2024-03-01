@@ -7,7 +7,7 @@ const max_storage = 250
 var stored_resources = 0
 var last_updated_value = stored_resources
 
-var has_unobtainium = false # Flagset by buildsystem, if a mine was placed in a 'Klassium' ore deposit
+@export var has_unobtainium = false # Flagset by buildsystem, if a mine was placed in a 'unobtainium' ore deposit
 
 func _ready():
 	max_hp = 250.0

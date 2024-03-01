@@ -53,6 +53,9 @@ properties/6/replication_mode = 2
 properties/7/path = NodePath(".:health")
 properties/7/spawn = true
 properties/7/replication_mode = 2
+properties/8/path = NodePath(".:has_unobtainium")
+properties/8/spawn = true
+properties/8/replication_mode = 2
 
 [node name="Mines" type="StaticBody2D"]
 script = ExtResource("1_7le25")
