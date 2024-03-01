@@ -1,11 +1,7 @@
 extends Control
 
 @onready var unit_box: Panel = $info_box/UnitInfo
-@onready var iron_label = $info_box/iron/iron_label
-
-var iron: int = 0
-var iron_timer: float = 0.0
-var iron_increment_interval: float = 10.0
+@onready var iron_label: Label = $info_box/iron/iron_label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,13 +9,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# Update iron value every 10 seconds
-	iron_timer += delta
-	if iron_timer >= iron_increment_interval:
-		GameManager.iron += 1
-		iron_timer = 0.0
-		iron_label.text = str(GameManager.iron)  # Update the label text
-		print("Iron value:", GameManager.iron)
+	# Update iron value
+	iron_label.text = str(GameManager.iron)  # Update the label text
 
 func _on_selection_system_export_units_to_ui(unit_brains_array):
 	var max_columns: int = 5
@@ -52,5 +43,3 @@ func _on_selection_system_export_units_to_ui(unit_brains_array):
 		count += 1
 		if count >= max_columns * max_rows:
 			break  # Limit the number of displayed units
-
-	pass  # Replace with function body.
