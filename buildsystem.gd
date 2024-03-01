@@ -14,10 +14,11 @@ var unobtainium = false
 var mine_cost = 10
 var defence_cost = 20
 var barracks_cost = 50
-var laboratory_cost = 20
-var fusionlab_cost = 40
+var laboratory_cost = 10 #unob
+var fusionlab_cost = 50 #unob
 
-var current_value = 0
+var current_value_iron = 0
+var current_value_unob = 0
 
 @onready var error_timer: Timer = Timer.new()
 
@@ -52,8 +53,11 @@ func _process(_delta: float):
 					#spawned_object.sprite.modulate=Color(1,1,1)
 					#spawned_object.remove_from_group("Constructions")
 					mine = false
-					GameManager.iron -= current_value
-					current_value = 0
+					GameManager.iron -= current_value_iron
+					GameManager.unobtainium -= current_value_unob
+					current_value_iron = 0
+					current_value_unob = 0
+					
 		else:
 			if spawned_object != null:
 				show_error_label()
@@ -67,8 +71,8 @@ func _ready():
 	vbox_node.get_node("Mine").text = "Mine - %d Iron" % mine_cost
 	vbox_node.get_node("Defence").text = "Defence - %d Iron" % defence_cost
 	vbox_node.get_node("Barracks").text = "Barracks - %d Iron" % barracks_cost
-	vbox_node.get_node("Laboratory").text = "Lab - %d Iron" % laboratory_cost
-	vbox_node.get_node("Fusion Lab").text = "Fusion Lab - %d Iron" % fusionlab_cost
+	vbox_node.get_node("Laboratory").text = "Lab - %d Unob." % laboratory_cost
+	vbox_node.get_node("Fusion Lab").text = "Fusion Lab - %d Unob." % fusionlab_cost
 
 func spawn_object(resource):
 	spawned_object = resource.instantiate()
@@ -91,28 +95,28 @@ func _button_press_select(building_name: String): # Arg passed by a signal for s
 	match building_name:
 		"mine":
 			if GameManager.iron >= mine_cost:
-				current_value = mine_cost
+				current_value_iron = mine_cost
 				mine = true
 				selected_building_path = "res://Buildings/Mine/mine.tscn"
 				spawn_object(preload("res://Buildings/Mine/mine.tscn"))
 		"defence":
 			if GameManager.iron >= defence_cost:
-				current_value = defence_cost
+				current_value_iron = defence_cost
 				selected_building_path = "res://Buildings/Defence/Defence.tscn"
 				spawn_object(preload("res://Buildings/Defence/Defence.tscn"))
 		"barracks":
 			if GameManager.iron >= barracks_cost:
-				current_value = barracks_cost
+				current_value_iron = barracks_cost
 				selected_building_path = "res://Buildings/Barracks/barracks.tscn"
 				spawn_object(preload("res://Buildings/Barracks/barracks.tscn"))
 		"laboratory":
-			if GameManager.iron >= laboratory_cost:
-				current_value = laboratory_cost
+			if GameManager.unobtainium >= laboratory_cost:
+				current_value_unob = laboratory_cost
 				selected_building_path = "res://Buildings/Lab/Laboratory.tscn"
 				spawn_object(preload("res://Buildings/Lab/Laboratory.tscn"))
 		"fusion":
-			if GameManager.iron >= fusionlab_cost:
-				current_value = fusionlab_cost
+			if GameManager.unobtainium >= fusionlab_cost:
+				current_value_unob = fusionlab_cost
 				selected_building_path = "res://Buildings/Fusion/FusionLab.tscn"
 				spawn_object(preload("res://Buildings/Fusion/FusionLab.tscn"))
 		_:

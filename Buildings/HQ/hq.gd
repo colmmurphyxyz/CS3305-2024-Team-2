@@ -1,15 +1,13 @@
 extends Base
 
-const free_unit_time = 60.0
-var free_spawn = free_unit_time
 var control = null
 
 const drone_cost = 10
-const bruiser_cost = 15
-const sniper_cost = 15
-const scout_cost = 15
-const warden_cost = 10 #unob 
-const screecher_cost = 15 #unob
+const bruiser_cost = 20
+const sniper_cost = 50
+const scout_cost = 30
+const warden_cost = 20 #unob 
+const screecher_cost = 30 #unob
 
 var drone_button
 var bruiser_button
@@ -48,22 +46,20 @@ func _process(delta):
 	if GameManager.barrack_placed:
 		bruiser_button.disabled = false
 		sniper_button.disabled = false
-		screecher_button.disabled = false
 	else:
 		bruiser_button.disabled = true
 		sniper_button.disabled = true
+	if GameManager.fusion_lab_placed:
+		screecher_button.disabled = false
+	else:
 		screecher_button.disabled = true
-		
 	#update text on buttons to show price
-	drone_button.text = "(%d) Drone - %d Iron" % [round(free_spawn), drone_cost]
+	drone_button.text = "Drone - %d Iron" % drone_cost
 	bruiser_button.text = "Bruiser - %d Iron" % bruiser_cost
 	sniper_button.text = "Sniper - %d Iron" % sniper_cost
 	scout_button.text = "Scout - %d Iron" % scout_cost
 	warden_button.text = "Warder - %d Unob." % warden_cost
 	screecher_button.text = "Screecher - %d Unob." % screecher_cost
-	
-	if free_spawn > 0:
-		free_spawn -= delta
 
 # if tower is clicked show interaction menu
 func _input(event):
@@ -86,13 +82,7 @@ func _spawn_unit(type: String):
 	var spawn_position = getRandomPositionInDonut(35,60)
 	match type:
 		"drone":
-			if free_spawn <= 0:
-				free_spawn = free_unit_time
-				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
-						"res://Unit/UnitTypes/Drone/drone.tscn", \
-						spawn_position)
-			elif GameManager.iron >= drone_cost:
-				free_spawn = free_unit_time
+			if GameManager.iron >= drone_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Drone/drone.tscn", \
 						spawn_position)
@@ -122,7 +112,7 @@ func _spawn_unit(type: String):
 						spawn_position)
 				GameManager.iron -= warden_cost
 		"screecher":
-			if GameManager.barrack_placed and GameManager.unobtainium >= screecher_cost:
+			if GameManager.fusion_lab_placed and GameManager.unobtainium >= screecher_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
 						spawn_position)
@@ -141,7 +131,6 @@ func _on_area_2d_body_entered(body):
 		if body.get_parent().can_mine == true: 
 			close_mining_units.append(body)
 		
-			
 func _on_area_2d_body_exited(body):
 	close_mining_units.erase(body)
 
