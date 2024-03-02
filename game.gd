@@ -6,7 +6,6 @@ func _ready():
 	$PlayerCamera/Camera2D.make_current()
 	# spawn HQ's for both teams
 	# only call RPC from server, to avoid dupicate buildings at the same location
-	# func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	if multiplayer.get_unique_id() == 1:
 		$Buildings.place_building.rpc_id(1,
 			"res://Buildings/HQ/hq.tscn",
@@ -19,11 +18,15 @@ func _ready():
 			GameManager.TEAM_2_HQ_POSITION
 			)
 		GameManager.player_hq = $SpawnRoot.get_node("Hq")
-		set_client_hq.rpc_id(GameManager.Client["id"])
+		# set camera position to be on player's hq
+		$PlayerCamera/Camera2D.position = GameManager.player_hq.position
+		# set GameManager.player_hq field and camera position on client-side
+		set_client_hq_and_camera.rpc_id(GameManager.Client["id"])
 		
 @rpc("authority", "call_remote", "reliable")
-func set_client_hq():
+func set_client_hq_and_camera():
 	GameManager.player_hq = $SpawnRoot.get_node("Hq2")
+	$PlayerCamera/Camera2D.position = GameManager.player_hq.position
 
 func _process(_delta: float):
 	pass

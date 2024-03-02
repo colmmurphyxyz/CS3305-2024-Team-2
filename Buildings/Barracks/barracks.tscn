@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmqs225p7jlxh"]
+[gd_scene load_steps=12 format=3 uid="uid://bmqs225p7jlxh"]
 
 [ext_resource type="Script" path="res://Buildings/Barracks/barracks.gd" id="1_ktc2n"]
 [ext_resource type="Texture2D" uid="uid://dhui6y403snrs" path="res://Assets/Buildings/barracks.png" id="2_tn0nd"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_ls0e2"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_v6g7h"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_6gcog"]
+[ext_resource type="AudioStream" uid="uid://c4qr42m7xu1yn" path="res://Assets/SFX/building_spawn.wav" id="6_3mnth"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kwrd7"]
 resource_local_to_scene = true
@@ -108,5 +109,10 @@ offset_right = 97.0
 offset_bottom = -66.0
 theme_override_colors/font_color = Color(0.921569, 0.231373, 0.231373, 1)
 text = "Position too far from HQ!"
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_3mnth")
+volume_db = -1.618
+bus = &"SFX"
 
 [connection signal="building_destroyed" from="." to="." method="_on_building_destroyed"]

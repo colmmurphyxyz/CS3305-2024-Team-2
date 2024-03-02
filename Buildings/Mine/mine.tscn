@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://0icby4tj0lfw"]
+[gd_scene load_steps=12 format=3 uid="uid://0icby4tj0lfw"]
 
 [ext_resource type="Script" path="res://Buildings/Mine/mine.gd" id="1_7le25"]
 [ext_resource type="Texture2D" uid="uid://citx6shaapt4p" path="res://Assets/Buildings/mine.png" id="2_vgfkm"]
 [ext_resource type="Shader" path="res://Unit/BaseUnit/outline.gdshader" id="3_g6icx"]
 [ext_resource type="Texture2D" uid="uid://bcs513p8qtavr" path="res://Assets/Units/healthbarUnder.png" id="4_gtleh"]
 [ext_resource type="Texture2D" uid="uid://bkch8xx3r1esm" path="res://Assets/Units/healthbarProgress.png" id="5_oybxj"]
+[ext_resource type="AudioStream" uid="uid://c4qr42m7xu1yn" path="res://Assets/SFX/building_spawn.wav" id="6_12vg8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r27ca"]
 resource_local_to_scene = true
@@ -103,6 +104,11 @@ shape = SubResource("CircleShape2D_277pj")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_muclb")
+
+[node name="SpawnSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_12vg8")
+volume_db = -1.618
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

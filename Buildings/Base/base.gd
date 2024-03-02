@@ -47,11 +47,6 @@ func _ready():
 	# set shape of collision
 	var sprite_half_extents = sprite.texture.get_size() * sprite.scale / 4.00
 	var rectangle_shape = RectangleShape2D.new()
-	#rectangle_shape.extents = sprite_half_extents
-	#collision_shape.shape = rectangle_shape
-	#
-	#collision_circle.shape = CircleShape2D.new()
-	#collision_circle.shape.radius = sprite_half_extents.length() * 2
 	light = PointLight2D.new()
 	add_child(light)
 	light.scale=Vector2(2,2)
@@ -79,10 +74,17 @@ func _ready():
 	border.default_color = Color(1, 1, 1)  # Set the border color to white
 	border.width = 1  # Adjust the width of the border
 
-# Add healthbar and add to repairable class
+	# Add healthbar and add to repairable class
 	healthbar.max_value = round(max_hp)
 	add_to_group("Constructions")
 	z_index = 10 # Move on top layer, fix for ore deposit sprite layering
+	
+	# playspawn SFX on building place
+	if is_placed and team == GameManager.team:
+		print("playing spawn sound, id=", multiplayer.get_unique_id())
+		$SpawnSound.play()
+	else:
+		print("not playing spawn sound, I am ", GameManager.team)
 	
 func _process(delta: float):
 
