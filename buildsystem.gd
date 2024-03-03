@@ -9,15 +9,16 @@ var selected_building_path: String = ""
 var placement_allowed: bool = false
 var deposit: bool = false
 var mine: bool = false
-var unobtainium = false
+var unobtainium_field = false
 
 var mine_cost = 10
 var defence_cost = 20
 var barracks_cost = 50
-var laboratory_cost = 20
-var fusionlab_cost = 40
+var laboratory_cost = 10 #unob
+var fusionlab_cost = 50 #unob
 
-var current_value = 0
+var current_value_iron = 0
+var current_value_unob = 0
 
 @onready var error_timer: Timer = Timer.new()
 
@@ -41,19 +42,24 @@ func _process(_delta: float):
 					print("can place")
 					var spawn_pos: Vector2 = spawned_object.global_position
 					if mine:
-						spawned_object.has_unobtainium = unobtainium
+						spawned_object.has_unobtainium = unobtainium_field
 					spawned_object.visible = false
 					spawned_object.free()
 					spawned_object = null
 					place_building.rpc_id(1, selected_building_path,
 							multiplayer.get_unique_id(),
-							spawn_pos
+							spawn_pos,
+							unobtainium_field,
+							mine
 						)
 					#spawned_object.sprite.modulate=Color(1,1,1)
 					#spawned_object.remove_from_group("Constructions")
 					mine = false
-					GameManager.iron -= current_value
-					current_value = 0
+					GameManager.iron -= current_value_iron
+					GameManager.unobtainium -= current_value_unob
+					current_value_iron = 0
+					current_value_unob = 0
+					
 		else:
 			if spawned_object != null:
 				show_error_label()
@@ -67,8 +73,8 @@ func _ready():
 	vbox_node.get_node("Mine").text = "Mine - %d Iron" % mine_cost
 	vbox_node.get_node("Defence").text = "Defence - %d Iron" % defence_cost
 	vbox_node.get_node("Barracks").text = "Barracks - %d Iron" % barracks_cost
-	vbox_node.get_node("Laboratory").text = "Lab - %d Iron" % laboratory_cost
-	vbox_node.get_node("Fusion Lab").text = "Fusion Lab - %d Iron" % fusionlab_cost
+	vbox_node.get_node("Laboratory").text = "Lab - %d Unob." % laboratory_cost
+	vbox_node.get_node("Fusion Lab").text = "Fusion Lab - %d Unob." % fusionlab_cost
 
 func spawn_object(resource):
 	spawned_object = resource.instantiate()
@@ -82,7 +88,7 @@ func placing():
 				print("No deposit found nearby")
 			elif spawned_object.stop_following_mouse() == true: # if placed
 				if mine:
-					spawned_object.has_unobtainium = unobtainium
+					spawned_object.has_unobtainium = unobtainium_field
 				spawned_object = null
 				mine = false
 	
@@ -91,28 +97,28 @@ func _button_press_select(building_name: String): # Arg passed by a signal for s
 	match building_name:
 		"mine":
 			if GameManager.iron >= mine_cost:
-				current_value = mine_cost
+				current_value_iron = mine_cost
 				mine = true
 				selected_building_path = "res://Buildings/Mine/mine.tscn"
 				spawn_object(preload("res://Buildings/Mine/mine.tscn"))
 		"defence":
 			if GameManager.iron >= defence_cost:
-				current_value = defence_cost
+				current_value_iron = defence_cost
 				selected_building_path = "res://Buildings/Defence/Defence.tscn"
 				spawn_object(preload("res://Buildings/Defence/Defence.tscn"))
 		"barracks":
 			if GameManager.iron >= barracks_cost:
-				current_value = barracks_cost
+				current_value_iron = barracks_cost
 				selected_building_path = "res://Buildings/Barracks/barracks.tscn"
 				spawn_object(preload("res://Buildings/Barracks/barracks.tscn"))
 		"laboratory":
-			if GameManager.iron >= laboratory_cost:
-				current_value = laboratory_cost
+			if GameManager.unobtainium >= laboratory_cost:
+				current_value_unob = laboratory_cost
 				selected_building_path = "res://Buildings/Lab/Laboratory.tscn"
 				spawn_object(preload("res://Buildings/Lab/Laboratory.tscn"))
 		"fusion":
-			if GameManager.iron >= fusionlab_cost:
-				current_value = fusionlab_cost
+			if GameManager.unobtainium >= fusionlab_cost:
+				current_value_unob = fusionlab_cost
 				selected_building_path = "res://Buildings/Fusion/FusionLab.tscn"
 				spawn_object(preload("res://Buildings/Fusion/FusionLab.tscn"))
 		_:
@@ -133,14 +139,6 @@ func _deposit_enter():
 func _deposit_exit():
 	deposit = false
 	
-# Special ore areas
-func _unobtainium_area():
-	unobtainium = true
-	
-func _not_unobtainium_area():
-	unobtainium = false
-	
-
 func cancel_placement():
 	if spawned_object != null:
 		spawned_object.queue_free()
@@ -155,7 +153,7 @@ func _on_v_box_container_mouse_exited():
 	placement_allowed = true
 	
 @rpc("any_peer", "call_local", "reliable")
-func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
+func place_building(scene_path: String, called_by: int, spawn_pos: Vector2, unobtainium_field: bool = false, mine: bool = false):
 	print("placing")
 	var new_building: StaticBody2D = load(scene_path).instantiate()
 	new_building.team = "1" if called_by == 1 else "2"
@@ -165,6 +163,8 @@ func place_building(scene_path: String, called_by: int, spawn_pos: Vector2):
 	# set buildings to be full hp and active on spawn, for debugging reasons
 	new_building.health = new_building.max_hp
 	new_building.is_active = true
+	if mine:
+		new_building.has_unobtainium = unobtainium_field
 	building_root.add_child(new_building, true)
 	new_building.add_to_group("Buildings")
 
@@ -195,3 +195,9 @@ func show_error_label():
 func hide_error_label():
 	if spawned_object != null and not mine:
 		spawned_object.get_node("Label").visible = false
+
+func _unobtainium_area():
+	unobtainium_field = true
+	
+func _not_unobtainium_area():
+	unobtainium_field = false
