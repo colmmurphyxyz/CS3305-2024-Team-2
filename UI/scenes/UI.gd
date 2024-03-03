@@ -2,7 +2,7 @@ extends Control
 
 @onready var unit_box: Panel = $info_box/UnitInfo
 @onready var iron_label: Label = $info_box/iron/iron_label
-
+@onready var unobtainium_label: Label = $info_box/unobtainium/unobtainium_value
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Working")
@@ -11,7 +11,7 @@ func _ready():
 func _process(delta):
 	# Update iron value
 	iron_label.text = str(GameManager.iron)  # Update the label text
-
+	unobtainium_label.text = str(GameManager.unobtainium)
 func _on_selection_system_export_units_to_ui(unit_brains_array):
 	var max_columns: int = 5
 	var max_rows: int = 3

@@ -124,10 +124,14 @@ func _on_area_2d_body_entered(body):
 	if body.get_parent() in get_tree().get_nodes_in_group("Units"):
 		var unit:Unit = body.get_parent()
 		if unit.carrying_ore == true: 
+
+			if body.get_node_or_null("Iron")==null:
+				GameManager.unobtainium += 1
+			else:
+				GameManager.iron +=1
 			unit.load_ore()
-			GameManager.iron += 1
 			unit.change_state("mining")
-			print(unit.carrying_ore,"SHOULD BE FALSE")
+			print(GameManager.unobtainium)
 		if body.get_parent().can_mine == true: 
 			close_mining_units.append(body)
 		

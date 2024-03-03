@@ -3,8 +3,7 @@ class_name MiningState
 var pathing:bool=false
 
 func _ready():
-	print("mining")
-	print("carrying ore: ",persistent_state.carrying_ore)
+
 	pass
 
 func _process(_delta: float):

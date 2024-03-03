@@ -134,14 +134,22 @@ func load_ore():
 	if carrying_ore == false:
 		carrying_ore=true
 		var ore_sprite:Sprite2D = Sprite2D.new()
-		ore_sprite.texture=load("res://Assets/iron.png")
-		ore_sprite.name="Ore"
-		body.add_child(ore_sprite)
+		if target_building.has_unobtainium == false:
+			ore_sprite.texture=load("res://Assets/iron.png")
+			ore_sprite.name="Iron"
+			body.add_child(ore_sprite)
+		else:
+			ore_sprite.texture=load("res://Assets/unobtainiumore.png")
+			ore_sprite.name="Unobtainum"
+			body.add_child(ore_sprite)
 	else:
-		body.remove_child(body.get_node("Ore"))
+		var ore = body.get_node_or_null("Iron")
+		if ore == null:
+			ore = body.get_node_or_null("Unobtainum")
+		print(ore)
+		body.remove_child(ore)
 		carrying_ore=false
 
-			
 func set_chase(chase:CharacterBody2D):
 	is_chasing=chase
 func set_target_building(building:StaticBody2D):
