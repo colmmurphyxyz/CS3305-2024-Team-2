@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dcgcbhbn0gi6s" path="res://Camera/PlayerCamera.tscn" id="6_m8lky"]
 [ext_resource type="Texture2D" uid="uid://ca0d7iipih2xs" path="res://Assets/temp_ore_texture.png" id="7_4hrch"]
 [ext_resource type="Texture2D" uid="uid://cy80ae1mjb3f3" path="res://Assets/Light.png" id="7_is7xx"]
+[ext_resource type="PackedScene" uid="uid://dq4opma3tj3tg" path="res://UI/scenes/UI.tscn" id="7_so8h1"]
 [ext_resource type="Texture2D" uid="uid://cv5k24ykpgh23" path="res://Assets/unobtainium.png" id="7_t6n34"]
-[ext_resource type="PackedScene" uid="uid://dq4opma3tj3tg" path="res://UI/scenes/UI.tscn" id="7_w3bqa"]
 [ext_resource type="PackedScene" uid="uid://beiyerc6nuxbi" path="res://UI/scenes/Volume.tscn" id="11_70bgv"]
 [ext_resource type="TileSet" uid="uid://cp54s3b4scm2h" path="res://asethetic_tileset.tres" id="14_ohbse"]
 [ext_resource type="Script" path="res://FreeIronTimer.gd" id="15_xl2v7"]
@@ -99,8 +99,7 @@ layout_mode = 2
 text = "Fusion Lab"
 alignment = 2
 
-[node name="UI" parent="CanvasLayer" instance=ExtResource("7_w3bqa")]
-mouse_filter = 2
+[node name="UI" parent="CanvasLayer" instance=ExtResource("7_so8h1")]
 
 [node name="OreDeposits" type="Node2D" parent="."]
 
@@ -357,9 +356,9 @@ bus = &"Music"
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Fusion Lab" to="Buildings" method="_button_press_select" binds= ["fusion"]]
 [connection signal="mouse_entered" from="OreDeposits/Iron" to="Buildings" method="_deposit_enter"]
 [connection signal="mouse_exited" from="OreDeposits/Iron" to="Buildings" method="_deposit_exit"]
-[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
 [connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_enter"]
-[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
+[connection signal="mouse_entered" from="OreDeposits/Unobtainium" to="Buildings" method="_unobtainium_area"]
 [connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_deposit_exit"]
+[connection signal="mouse_exited" from="OreDeposits/Unobtainium" to="Buildings" method="_not_unobtainium_area"]
 [connection signal="child_entered_tree" from="SpawnRoot" to="SpawnRoot" method="_on_child_entered_tree"]
 [connection signal="timeout" from="FreeIronTimer" to="FreeIronTimer" method="_on_timeout"]

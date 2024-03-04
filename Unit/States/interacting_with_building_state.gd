@@ -26,7 +26,6 @@ func _ready():
 					persistent_state.target_building = null
 		else:
 			#IF building is ENEMY
-			print("ENEMY")
 			persistent_state.current_target=persistent_state.target_building
 			persistent_state.is_chasing=persistent_state.target_building
 			persistent_state.change_state("attacking")

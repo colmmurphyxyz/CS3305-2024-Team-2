@@ -22,7 +22,7 @@ var current_value_unob = 0
 
 @onready var error_timer: Timer = Timer.new()
 
-@onready var vbox_node = get_parent().get_node("CanvasLayer/VBoxContainer")
+@onready var vbox_node = get_parent().get_node("CanvasLayer/Panel/VBoxContainer")
 
 
 func _process(_delta: float):
@@ -70,11 +70,11 @@ func _ready():
 	add_child(error_timer)  # Adding the Timer as a child of this node
 	error_timer.timeout.connect(hide_error_label)
 		#Update prices on buttons
-	vbox_node.get_node("Mine").text = "Mine - %d Iron" % mine_cost
-	vbox_node.get_node("Defence").text = "Defence - %d Iron" % defence_cost
-	vbox_node.get_node("Barracks").text = "Barracks - %d Iron" % barracks_cost
-	vbox_node.get_node("Laboratory").text = "Lab - %d Unob." % laboratory_cost
-	vbox_node.get_node("Fusion Lab").text = "Fusion Lab - %d Unob." % fusionlab_cost
+	#vbox_node.get_node("Mine").text = "Mine - %d Iron" % mine_cost
+	#vbox_node.get_node("Defence").text = "Defence Tower - %d Iron" % defence_cost
+	#vbox_node.get_node("Barracks").text = "Barracks - %d Iron" % barracks_cost
+	#vbox_node.get_node("Laboratory").text = "Laboratry - %d Unobtainum" % laboratory_cost
+	#vbox_node.get_node("Fusion Lab").text = "Fusion Lab - %d Unobtainum" % fusionlab_cost
 
 func spawn_object(resource):
 	spawned_object = resource.instantiate()
