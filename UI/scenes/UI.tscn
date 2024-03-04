@@ -157,7 +157,6 @@ offset_bottom = 612.0
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="CameraLockIcon"]
-visible = false
 layout_mode = 0
 offset_right = 48.0
 offset_bottom = 48.0

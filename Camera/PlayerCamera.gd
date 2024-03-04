@@ -21,4 +21,4 @@ func _process(_delta: float):
 		
 func toggle_camera_locked():
 	is_locked = !is_locked
-	#$"../CanvasLayer/UI/CameraLockIcon".visible = !$"../CanvasLayer/UI/CameraLockIcon".visible
+	$"../CanvasLayer/UI/CameraLockIcon".visible = !$"../CanvasLayer/UI/CameraLockIcon".visible
