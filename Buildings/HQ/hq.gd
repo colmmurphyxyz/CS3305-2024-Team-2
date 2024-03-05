@@ -15,7 +15,7 @@ var sniper_button
 var scout_button
 var warden_button
 var screecher_button
-
+var end_scence =load("res://UI/scenes/EndScreen.tscn")
 
 func _ready():
 	super._ready()
@@ -140,5 +140,20 @@ func _on_area_2d_body_exited(body):
 
 # called when the HQ is destroyed
 func _on_building_destroyed():
-	print("Team %s just lost. rip bozo" % team)
+	show_end_scene.rpc()
+	
+@rpc("any_peer", "call_local", "reliable")
+func show_end_scene():
+	var end_text:String = "Win"
+	if health <= 0:
+		end_text="Lose"
+	var end_node = end_scence.instantiate()
+	end_node.get_node("End").text=end_text
+	get_tree().get_root().add_child(end_node)
+	get_tree().get_root().get_node("Game").queue_free()
+	
+	#get_tree().queue_delete()
+	#var end_node = new
+	#get_tree().add_child(end_scence)
+	#get_tree().change_scene_to_packed(end_scence)
 	#TODO Endgame logic

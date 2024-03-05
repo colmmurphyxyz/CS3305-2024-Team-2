@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbub8pp66i14k"]
+
+[ext_resource type="Script" path="res://UI/scenes/EndScreen.gd" id="1_kndv8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i8dqw"]
+bg_color = Color(0.121569, 0.027451, 0.00392157, 1)
+
+[sub_resource type="Gradient" id="Gradient_6fi64"]
+offsets = PackedFloat32Array(0.0702782, 0.920937, 1)
+colors = PackedColorArray(0.211765, 0.0784314, 0.0862745, 1, 0.482353, 0.305882, 0.235294, 1, 0.482353, 0.305882, 0.235294, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uy717"]
+gradient = SubResource("Gradient_6fi64")
+fill_from = Vector2(0.525, 1)
+fill_to = Vector2(0.525031, 0)
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_kndv8")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 1176.0
+offset_bottom = 677.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_i8dqw")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 15.0
+offset_right = 1135.0
+offset_bottom = 629.0
+texture = SubResource("GradientTexture2D_uy717")
+
+[node name="TextPanel" type="Panel" parent="Panel/TextureRect"]
+layout_mode = 0
+offset_left = 167.0
+offset_top = 102.0
+offset_right = 956.0
+offset_bottom = 529.0
+
+[node name="Panel" type="Panel" parent="Panel/TextureRect/TextPanel"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 33.0
+offset_right = 579.0
+offset_bottom = 88.0
+
+[node name="PlayerName" type="Label" parent="Panel/TextureRect/TextPanel/Panel"]
+layout_mode = 0
+offset_top = -33.0
+offset_right = 394.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 20
+text = "YOU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Panel/TextureRect/TextPanel"]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 260.0
+offset_right = 577.0
+offset_bottom = 334.0
+text = "Exit To Menu"
+
+[node name="End" type="Label" parent="."]
+layout_mode = 0
+offset_left = 369.0
+offset_top = 234.0
+offset_right = 763.0
+offset_bottom = 358.0
+theme_override_colors/font_color = Color(0.87451, 0.584314, 0.180392, 1)
+theme_override_colors/font_shadow_color = Color(0.407843, 0, 0.219608, 1)
+theme_override_colors/font_outline_color = Color(0.556863, 0.176471, 0.243137, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 90
+text = "WIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 325)
+
+[connection signal="button_down" from="Panel/TextureRect/TextPanel/Button" to="." method="_on_button_button_down"]
