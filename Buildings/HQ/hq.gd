@@ -110,13 +110,13 @@ func _spawn_unit(type: String):
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/Warden/warden.tscn", \
 						spawn_position)
-				GameManager.iron -= warden_cost
+				GameManager.unobtainium -= warden_cost
 		"screecher":
 			if GameManager.fusion_lab_placed and GameManager.unobtainium >= screecher_cost:
 				get_parent().spawn_unit.rpc_id(1, multiplayer.get_unique_id(), \
 						"res://Unit/UnitTypes/FusionScreecher/FusionScreecher.tscn", \
 						spawn_position)
-				GameManager.iron -= screecher_cost
+				GameManager.unobtainium -= screecher_cost
 		_:
 			print("Not valid button")
 

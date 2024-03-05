@@ -6,6 +6,11 @@ extends Node2D
 @export var enable_cursor_pan: bool = true
 ## Can also be toggled with the z key
 @export var is_locked: bool = false
+@export_group("Camera Limits")
+@export var limit_left: int = -100
+@export var limit_right: int = 2500
+@export var limit_top: int = -100
+@export var limit_bottom: int = 2000
 
 var camera_size: Vector2
 
