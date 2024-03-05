@@ -30,7 +30,7 @@ func _process(_delta: float):
 		cancel_placement()
 
 	if Input.is_action_just_pressed("left_click"):
-		if mine or GameManager.player_hq.global_position.distance_to(get_global_mouse_position()) < 300:
+		if mine or GameManager.player_hq.global_position.distance_to(get_global_mouse_position()) < 500:
 			hide_error_label()
 			if spawned_object != null && placement_allowed:
 				print("placing(?)")
