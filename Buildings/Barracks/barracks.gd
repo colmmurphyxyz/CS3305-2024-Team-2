@@ -4,7 +4,8 @@ func _ready():
 	max_hp = 500.0
 	super._ready()
 	add_to_group("Constructions")
-	GameManager.barrack_placed = true
+	if GameManager.team == team:
+		GameManager.barrack_placed = true
 
 
 
@@ -13,4 +14,5 @@ func _process(delta):
 
 
 func _on_building_destroyed():
-	GameManager.barrack_placed = false
+	if GameManager.team == team:
+		GameManager.barrack_placed = false
