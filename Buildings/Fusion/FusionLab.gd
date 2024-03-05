@@ -13,5 +13,5 @@ func _process(delta):
 	if team !=GameManager.team:
 		$Sprite2D.material.set("shader_parameter/team2",true)
 func _on_building_destroyed():
-	if GameManager.team == team
+	if GameManager.team == team:
 		GameManager.fusion_lab_placed = false
