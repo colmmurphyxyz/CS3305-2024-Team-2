@@ -139,19 +139,25 @@ radius = 65.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7ga7d"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 properties/1/path = NodePath("Body:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 properties/2/path = NodePath("Body/AnimatedSprite2D:rotation")
 properties/2/spawn = true
-properties/2/replication_mode = 1
+properties/2/replication_mode = 2
 properties/3/path = NodePath(".:team")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 properties/4/path = NodePath("Body/Healthbar:value")
 properties/4/spawn = true
 properties/4/replication_mode = 2
+properties/5/path = NodePath("Body/AnimatedSprite2D:frame")
+properties/5/spawn = true
+properties/5/replication_mode = 2
+properties/6/path = NodePath("Body/AnimatedSprite2D:animation")
+properties/6/spawn = true
+properties/6/replication_mode = 2
 
 [node name="Drone" type="Node2D"]
 y_sort_enabled = true
@@ -203,7 +209,7 @@ texture_progress = ExtResource("6_adcd1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
 material = SubResource("ShaderMaterial_8rvk1")
 sprite_frames = SubResource("SpriteFrames_e18to")
-animation = &"attack"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("CircleShape2D_e4e7f")
