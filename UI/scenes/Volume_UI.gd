@@ -16,7 +16,7 @@ func _ready():
 	$Panel/HSlider.min_value=1
 	$Panel/HSlider.value=10
 	
-	AudioServer.set_bus_mute(music_index, true)
+	AudioServer.set_bus_mute(music_index, false)
 	AudioServer.set_bus_volume_db(music_index,linear_to_db(100))
 	$Panel/musicvalue.text = "%d%%" % 10
 	$Panel/MusicSlider.max_value=10
