@@ -8,16 +8,9 @@
 
 **Repository**: [Github - Sands of Orisis](https://github.com/colmmurphyxyz/CS3305-2024-Team-2)  
 ### Synopsis
-Osiris has been recently discovered to hold the incredibly rare and valuable resource,
-unobtainium.
-ou, commander of a fleet, have landed near a deposit of unobtainium to find that you are
-not the only one to have discovered this planet's treasure.
+Orisis has been recently discovered to hold the incredibly rare and valuable resource, unobtainium. You, commander of a fleet, have landed near a deposit of unobtainium to find that you are not the only one to have discovered this planet's treasure.
 
-Face off in 1v1 battles with another player as you compete for control over ore deposits of
-iron and unobtainium. As each player obtains more resources they can progress further up
-the technology tree, allowing the construction of powerful machines with the help of scientific
-laboratories and weapons barracks.
-
+Face off in 1v1 battles with another player as you compete for control over ore deposits of iron and unobtainium. As each player obtains more resources they can progress further up the technology tree, allowing the construction of powerful machines with the help of scientific laboratories and weapons barracks.
 ---
 ## User guide
 This is a quick start guide to the game. Discussing the controls, the objective, and suggested game play.
@@ -51,7 +44,7 @@ Destroy the enemy headquarters.
 ---
 - **Gather resources** - To gather resources, place a mine on a resource deposit. Then build a drone to gather the resources. The drone will return the resources to the HQ.
 
-- **Barracks** - Build a barracks to unlock the ability to spawn to attack and defend.
+- **Barracks** - Build a barracks to unlock the ability to spawn units to attack and defend.
 
 - **Defence** - Build a defence tower to protect your base.
 
@@ -60,7 +53,7 @@ Destroy the enemy headquarters.
 - **Attack** - Scout the area, progress to centre of the map and gain control of the enemy headquarters.
 
 ## Developer guide (Documentation)
-This is an overview of the game important features, covering them in more detail.
+This is an overview of the game's important features, covering them in more detail.
 
 ### Structures and mechanics
 ---
@@ -68,32 +61,32 @@ This is an overview of the game important features, covering them in more detail
 A running process is in place to verify whether a variable has been assigned an instance, specifically a building in this case. This check is done through a string received from a button signal from the sidebar interaction menu, which triggers a switch case function. Once the variable is assigned a building, it tracks the player's mouse movements and continuously updates until the building is placed, at which point its position is locked. The placement is finalized through a network function that removes the building and simultaneously replaces it, reflecting changes for both players.
 
 This class also includes validation for placements, checking for collisions and restricted areas. In the case of mines, it examines ore deposit areas and their types to create mine instances. The class also handles user error reporting for incorrect placements and dynamically updates the prices of each building for the corresponding button.
-![Finite state diagram for build system](./Doc_Images/placementFSM.png)
+![Finite state diagram for build system](./Doc_Images/PlacementFSM.png)
 
 #### **Build and repair** 
-Each building is equipped with a repair function, activated when a drone is assigned to a damaged building. The drone initiates repairs, and works until the building is fully restored. Following the repair, the drone needs to be reassigned to building to interact. Repurposing the detection system; Repairing is proportional to the number of units in the detection radius, the more units the faster the repair. This is done by getting the number of units in the detection radius, increasing the health partially.
+Each building is equipped with a repair function, activated when a drone is assigned to a damaged building. The drone initiates repairs, and works until the building is fully restored, or all assigned drones are eliminated. Following the repair, the drone needs to be reassigned to building to interact. Repurposing the detection system; Repairing is proportional to the number of units in the detection radius, the more units the faster the repair. This is done by getting the number of units in the detection radius, increasing the health partially.
 
 #### **Base File**
-This serves as the parent superclass for every building within the game, provides the base framework for all essential functions. Once a building is place it is added to a group for easier management. The superclass defines key variables such as team number, health data, borders, state, and detection mechanisms. It also sets the lighting and shading for Fog of War (F.O.W.), adds borders and detection radii for structures. Following this setup, buildings are scheduled for construction.
+This serves as the parent superclass for every building within the game, and provides the base framework for all essential functions. Once a building is place it is added to a group for easier management. The superclass defines key variables such as team number, health data, borders, state, and detection mechanisms. It also sets the lighting and shading for Fog of War (F.O.W.), adds borders and detection radii for structures. Following this setup, buildings are scheduled for construction.
 
-Functions in this script are responsible for repairs, damage and destruction event as well as enemy and collision detection.
+Functions in this script are responsible for repairs, damage and destruction events as well as enemy and collision detection.
 
 #### **Headquarters**
 The headquarters is the central building for the player, it acts as the command centre as well as the win condition. It's main function is to train (spawn) new units through an interaction menu and to store collected resources. It also updates displayed price for units and controls button visibility based on game progression.
 
 #### **Valid placement**
-In order to balance and maintain a fair game, we limited player to placing buildings (other than mines) only within the vicinity of the HQ, preventing the defence of resources using structures, as well as using them to uncover fog of war. This is done by using taking the line distance between the HQ position and current mouse placement position.
+In order to balance and maintain a fair game, we limited players to placing buildings (other than mines) only within the vicinity of the HQ, preventing the defence of resources using structures, as well as using them to uncover fog of war. This is done by using taking the line distance between the HQ position and current mouse placement position.
 
 #### **Spawning units**
 To optimize for mass buying units (spamming) and prevent grouping of units, we implemented a spawn radius near HQ which should distribute the spawning randomly. We implemented this by taking the HQ position as a center vector, a random angle and min/max distance to locate a random point within a ring round HQ.
 
 #### **Mine**
-There are two types of mines, iron and unobtainium, this is automatically set by the deposit that it is placed on. All mines have a maximum storage capacity and a mining rate. Mines need to be built (fully repaired) before they start working. Each mine has a mining rate and maximum storage capacity. Drones need to be assigned to a mine to transport resources to HQ.
-![Finite state diagram for mines](./Doc_Images/minesFSM.png)
+There are two types of mines, iron and unobtainium, this is automatically set by the deposit that the mine is placed on. All mines have a maximum storage capacity and a mining rate. Mines need to be built (fully repaired) before they start working. Each mine has a mining rate and maximum storage capacity. Drones need to be assigned to a mine to transport resources to HQ.
+![Finite state diagram for mines](./Doc_Images/MinesFSM.png)
 
 #### **Defence**
 Towers are your second line of defence should your units fail. These medium-ranged, high HP buildings with quick reload and fast bullet travel will pack a punch with almost any enemy nearby. A tier system was in place to upgrade defences for higher range, faster reload and more health; this was scrapped due to time constraints and complexity of integration. (*In development*)
-![Finite state diagram for defences](./Doc_Images/defenceFSM.png)
+![Finite state diagram for defences](./Doc_Images/DefenceFSM.png)
 
 #### **Detection system**
 Each building has an invisible collision area, this serves as the detection radius. Once a unit enters a building's range, the unit is classified into a friendly or enemy array determined by their assigned team. As an issue arose, units that were already in the detection radius before placing were not accounted for; An addition failsafe was devised to get all unit (bodies) in the area and sort them before the primary system logic starts.
@@ -114,7 +107,7 @@ Our primary mode of communication was a Discord server, chosen for its organized
 ![Discord](./Doc_Images/discord.png) 
 
 ### Planning
-We chose Trello for project planning due to its intuitive board system. Tasks were sorted into lists representing different states of development. Early, Mid and Late-Development objectives, tracking in-progress and marking Done or Half-done(bugged) tasks. The option to assign task to members provided accountability and improved communication.
+We chose Trello for project planning due to its intuitive board system. Tasks were sorted into lists representing different states of development. Early, Mid and Late-Development objectives, tracking in-progress and marking Done or Half-done(bugged) tasks. The option to assign task to members provided accountability and improved communication.  
 For bug tracking we combined a Trello list and the built-in Github feature for quick resolutions.
 ![Team trello board](./Doc_Images/trello.png)
 
