@@ -20,11 +20,10 @@ var end_scence = preload("res://UI/scenes/EndScreen.tscn")
 func _ready():
 	super._ready()
 	max_hp = 1000.0
-	health = max_hp / 2
-	is_active = false
+	health = max_hp
+	is_active = true
 	control = get_node("VBoxContainer")
 	control.hide()
-	health=100
 	
 	drone_button = get_node("VBoxContainer/Drone")
 	bruiser_button = get_node("VBoxContainer/Bruiser")
