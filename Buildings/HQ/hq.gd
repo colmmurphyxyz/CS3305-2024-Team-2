@@ -15,7 +15,7 @@ var sniper_button
 var scout_button
 var warden_button
 var screecher_button
-var end_scence =load("res://UI/scenes/EndScreen.tscn")
+var end_scence = preload("res://UI/scenes/EndScreen.tscn")
 
 func _ready():
 	super._ready()
@@ -139,18 +139,19 @@ func _on_area_2d_body_exited(body):
 	close_mining_units.erase(body)
 
 # called when the HQ is destroyed
+# only executed on the peer who is the authority of the building
 func _on_building_destroyed():
+	# hacky workaround to call this method on all peers
 	show_end_scene.rpc()
 	
 @rpc("any_peer", "call_local", "reliable")
 func show_end_scene():
-	var end_text:String = "Win"
+	var end_text:String = "You Win"
 	if health <= 0:
-		end_text="Lose"
+		end_text="You Lose"
 	var end_node = end_scence.instantiate()
 	end_node.get_node("End").text=end_text
 	get_tree().get_root().add_child(end_node)
-	get_tree().get_root().get_node("Game").queue_free()
 	
 	#get_tree().queue_delete()
 	#var end_node = new

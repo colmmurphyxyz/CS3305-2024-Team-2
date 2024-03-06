@@ -1,17 +1,24 @@
 extends Control
 
+@onready var camera: Camera2D = $Camera2D
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	# remove the game scene
+	var game_scene = get_parent().get_node_or_null("Game")
+	if game_scene != null:
+		game_scene.queue_free()
+	# set this scene's camera to be the current camera
+	camera.make_current()
 func _process(delta):
 	pass
 
 
 func _on_button_button_down():
-	get_tree().get_root().get_node("MainMenu").visible=true
-	
-	visible=false
+	# close all active connections
+	var main_menu = get_parent().get_node("MainMenu")
+	var p: ENetMultiplayerPeer = main_menu.peer
+	p.disconnect_peer(GameManager.Client["id"])
+	p.disconnect_peer(GameManager.Host["id"])
+	p.close()
+	get_tree().get_root().get_node("MainMenu").set_main_menu_visibility(true)
+	hide()

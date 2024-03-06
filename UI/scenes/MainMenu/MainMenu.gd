@@ -18,6 +18,7 @@ var peer: ENetMultiplayerPeer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	camera.make_current()
 	start_game_button.visible = false
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
@@ -142,16 +143,18 @@ func _show_error_message(message: String):
 		
 @rpc("any_peer", "call_local")
 func start_game():
-	self.hide()
-	get_parent().hide()
-	$ParallaxBackground.hide()
-	$CanvasLayer.hide()
+	set_main_menu_visibility(false)
 	var scene = game_scene.instantiate()
 	get_tree().root.add_child(scene)
 	scene.get_node("PlayerCamera").is_locked = true
 	$AudioStreamPlayer.stream_paused=true
 
-
+func set_main_menu_visibility(visibility: bool):
+	visible = visibility
+	for child in get_children():
+		# if property "visible" in child's property list
+		if "visible" in child:
+			child.visible = visibility
 
 func _on_start_lan_game_button_pressed():
 	start_game.rpc()
