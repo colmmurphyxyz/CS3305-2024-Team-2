@@ -19,7 +19,7 @@ var end_scence = preload("res://UI/scenes/EndScreen.tscn")
 
 func _ready():
 	super._ready()
-	max_hp = 1000.0
+	max_hp = 400.0
 	health = max_hp
 	is_active = true
 	control = get_node("VBoxContainer")
