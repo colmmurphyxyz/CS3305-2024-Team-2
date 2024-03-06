@@ -13,7 +13,15 @@ Face off in 1v1 battles with another player as you compete for control over ore 
 
 ---
 ## User guide
+
 This is a quick start guide to the game. Discussing the controls, the objective, and suggested game play.
+
+### Installation
+---
+1. **Import project** - Clone the repository and open the project in Godot.
+2. **Run the game** - Run the game by pressing the play button in the top right corner of the Godot editor.
+- **Note**: If you wish to test the game with two instances. In godot, go to 'Debug' -> 'Run multiple instances' and select 2 instances before running the game.
+3. **Remote connection** - If you wish to play with a friend, you can host the game and give your friend your local IP address. Set the same port and address in the main menu. *Make sure both computers are on the same network.*
 
 ### Controls
 ---
@@ -51,12 +59,13 @@ Destroy the enemy headquarters.
 - **Laboratories** - Build a science and fusion lab to unlock new units and build your army.
 
 - **Attack** - Scout the area, progress to centre of the map and gain control of the enemy headquarters.
-
+---
 ## Developer guide (Documentation)
+
 This is an overview of the game's important features, covering them in more detail.
 
 ### Structures and mechanics
----
+
 #### **Placement System**
 A running process is in place to verify whether a variable has been assigned an instance, specifically a building in this case. This check is done through a string received from a button signal from the sidebar interaction menu, which triggers a switch case function. Once the variable is assigned a building, it tracks the player's mouse movements and continuously updates until the building is placed, at which point its position is locked. The placement is finalized through a network function that removes the building and simultaneously replaces it, reflecting changes for both players.
 
@@ -115,3 +124,13 @@ For bug tracking we combined a Trello list and the built-in Github feature for q
 Used Lucidchart to created roadmaps, flow graphs and diagrams for game and logic design which was used as a visual reference point throughout development.
 ![Game logic flow](./Doc_Images/GameflowDIAGRAM.png) 
 
+## Lessons learned
+---
+### Consistency and best practices
+We learned the importance of consistency in coding practices, such as naming conventions, commenting, and code structure or even just general implementation of solutions. Given the time constraints, not all members had the same level of experience with Godot and GDScript, so it was important to keep the codebase as clean and understandable as possible. Reflecting on this, we could have benefited from a more more elegant solutions and better code organization.
+
+### Communication
+We learned the importance of clear communication and the impact it has on the project. We had a few instances where a lack of communication led to conflicts. Uncertainty from inconsistent progress updates resulted in minor delays. We could have benefited from a more structured approach to communication, such as daily reports.
+
+### Game Development
+It is a misconception that game development is easy. We learned that game development is a complex process that requires a lot of time, effort and advanced planning. It was important to have a clear plan and to stick to it, as attempts to add new (key) features or change existing ones (entirely) can lead to a lot of bugs and issues with existing implementations.
