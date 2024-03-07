@@ -1,13 +1,13 @@
 # Sands of Orisis
 ![Game title: Sands of Orisis](./Doc_Images/gametitle.png)  
-**Contributors**:  
-- Colm Murphy
-- Darragh Murphy
-- Ben Shorten
-- David Wilson  
+# Contributors:  
+- [Colm Murphy](https://github.com/colmmurphyxyz)
+- [Darragh Murphy](https://github.com/Durph21)
+- [Ben Shorten](https://github.com/benshorten72)
+- [David Wilson](https://github.com/Szazlo)
 
 Sands of Orisis is a Real Time Strategy game developed in [Godot](https://github.com/godotengine/godot) 4 as our submission for CS3305 - Team Software Project
-### Synopsis
+# Synopsis
 Orisis has been recently discovered to hold the incredibly rare and valuable resource, unobtainium. You, commander of a fleet, have landed near a deposit of unobtainium to find that you are not the only one to have discovered this planet's treasure.
 Face off in 1v1 battles with another player as you compete for control over ore deposits of iron and unobtainium. As each player obtains more resources they can progress further up the technology tree, allowing the construction of powerful machines with the help of scientific laboratories and weapons barracks.
 
