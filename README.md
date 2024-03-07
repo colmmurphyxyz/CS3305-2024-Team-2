@@ -30,4 +30,4 @@ Face off in 1v1 battles with another player as you compete for control over ore 
 ## Windows
 - Download `sandsoforisis_windows.x86_64.zip` from the [Releases](https://github.com/colmmurphyxyz/CS3305-2024-Team-2/releases) page
 - extract the zip archive and run `sandsoforisis_windows.x86_64.exe`
-- **subject to testing by david**
+- Windows Defender may give you some grief. We promise you we come in peace
