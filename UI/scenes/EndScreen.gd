@@ -21,4 +21,6 @@ func _on_button_button_down():
 	p.disconnect_peer(GameManager.Host["id"])
 	p.close()
 	get_tree().get_root().get_node("MainMenu").set_main_menu_visibility(true)
-	hide()
+	get_tree().get_root()\
+			.get_node("MainMenu/CanvasLayer/StartLanGameButton").visible = false
+	queue_free()
