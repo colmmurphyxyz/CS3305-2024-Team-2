@@ -18,6 +18,7 @@ This is a quick start guide to the game. Discussing the controls, the objective,
 
 ### Installation
 ---
+#TODO change this to instructions for running the compiled game
 1. **Import project** - Clone the repository and open the project in Godot.
 2. **Run the game** - Run the game by pressing the play button in the top right corner of the Godot editor.
 - **Note**: If you wish to test the game with two instances. In godot, go to 'Debug' -> 'Run multiple instances' and select 2 instances before running the game.
@@ -27,17 +28,29 @@ This is a quick start guide to the game. Discussing the controls, the objective,
 ### Controls
 - **Z** - Lock/Unlock the camera
 - **Mouse** - With camera unlocked, move the cursor to the edge of the screen to move the camera.
+- **Middle Mouse Button** - With camera unlocked, hold down MMB and drag the cursor to pan the camera
+- **Arrow Keys** - With camera unlocked, use the arrow keys to pan the camera
+- **Scroll Wheel** - zoom the camera in/out
 - **Left click** - Interact/Cancel interaction
 - **Left Click and drag** - Select units
 - **Right click** - Move selected units. Or interact with a building with selected units.
 - **Esc** - Open the menu (SFX, Music)
----
+#### Secret Debug Controls
+- We used these controls for testing and debugging purposes. They have been left in the final game as an optional extra for players who wish to use them
+	- **d, s, b, w, f, t keys** - spawn a Drone, Sniper, Bruiser, Warden, Fusion Screecher or Scout, repectively at the current cursor position
+	- **I**  grant the player 100 iron
+	- **U** grant the player 100 unobtainium
 
 ### Objective
-Destroy the enemy headquarters.
+---
+- Gather iron to expand your army
+- Contest the valuable unobtainium deposits in the centre of the map
+- Use your newly-acquired unobtaiunium to bolster your army with the powerful Warden and Fusion Screecher units
+- Launch an attack to crush your enemies, and wipe their headquarters from the face of Orisis
 
 ### Mechanics
-- **Resources** - A small amount of Iron is generated at the HQ. Iron is used to build certain structures and units.
+---
+- **Resources** - A small amount of Iron is generated periodically at the HQ.  Iron is used to build certain structures and units.
 
 - **Buildings** - Buildings are used to gather resources, unlock units, and provide other benefits. Buildings (except mines), can be build near the HQ. Some buildings need to be repaired/build before they begin to function.
 
