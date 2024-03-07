@@ -2,3 +2,9 @@
 .godot/
 
 build/
+
+# ignore obsidian data
+.obsidian/
+
+# ignore .imports for images used in the report
+Doc_images/*.import
