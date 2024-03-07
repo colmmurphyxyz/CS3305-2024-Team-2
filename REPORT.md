@@ -111,9 +111,7 @@ We realised that the engine implicitly recalculates the path every second which 
 ---
 
 ### How do units know what to do
-Due to the nature of games and the many possibilities and outcomes that comes with giving players full control of what happens, this usually requires a sophisticated state machine. Our state machine works off of a base state, the persistent state, which is the unit's brain. This holds the functions that carry out regardless of the unit's current state.
-
-Below is a finite state machine diagram with a simplified version of the entry and exit points for each state.
+Below is a finite state machine diagram with a simplified version of the entry and exit points for each state that units can hold.
 
 ![StateMachine](./Doc_Images/StateMachine.png)
 
@@ -192,12 +190,11 @@ The vertex portion of a shader has access to individual pixel corners in an imag
 
 The fragment shader is responsible for modifying the output of individual pixel colour/alpha.
 
+For example:
+
 In our shader for the units, the vertex shader calculates whether or not the pixel has a neighbour that has an alpha value of 0, if it does, return true. The fragment then checks every pixel and runs the vertex function. If the function returns true, colour the pixel white.
 
-When units are damaged they turn white, which also is shader based, which is fragment shader based, simply checks if the pixel alpha is 1, if it is, set pixel colour to white. A uniform boolean toggles this part of the shader based on a timer. 
-
-Any unit that is not on the same team as the client instance has each pixel's RGB multiplied by an average that makes it appear more red, to differentiate between your own units and the enemies.
-
+Shaders are also used for damage flashing and team differentiaton. 
 ---
 
 ## Sound
@@ -216,8 +213,6 @@ This means we could adjust the SFX bus by zooming in/out the camera, keeping the
 
 ![BusImage](./Doc_Images/BusImage.png)
 
-At every point we attempted to inject a sound effect into actions that the user performs such as clicking, placing builds and selecting specific units. This gives alongside the visual feedback, audio feedback, which is important to give a game a more immersive feel.
-
 ---
 
 ### Music
@@ -229,8 +224,6 @@ In keeping with the dynamic soundscape we also wanted this to extend to the musi
 We implemented this via 3 separate music tracks that play at different periods of the game.
 
 Each is the same length so all 3 are playing at the same time, with only 1 playing at an audible volume. When a barracks/fusion laboratory is placed, this signals the mid/end stage of the game and triggers the switching of volumes of the playing tracks.
-
- 
 
 In using separate buses, we were able to swifty design a volume UI when ESC is pressed as seen below.
 
@@ -275,10 +268,8 @@ This class also includes validation for placements, checking for collisions and 
 #### **Build and repair** 
 Each building is equipped with a repair function, activated when a drone is assigned to a damaged building. The drone initiates repairs, and works until the building is fully restored, or all assigned drones are eliminated. Following the repair, the drone needs to be reassigned to building to interact. Repurposing the detection system; Repairing is proportional to the number of units in the detection radius, the more units the faster the repair. This is done by getting the number of units in the detection radius, increasing the health partially.
 
-#### **Base File**
-This serves as the parent superclass for every building within the game, and provides the base framework for all essential functions. Once a building is place it is added to a group for easier management. The superclass defines key variables such as team number, health data, borders, state, and detection mechanisms. It also sets the lighting and shading for Fog of War (F.O.W.), adds borders and detection radii for structures. Following this setup, buildings are scheduled for construction.
-
-Functions in this script are responsible for repairs, damage and destruction events as well as enemy and collision detection.
+#### **Base Building Node**
+All buildings inherit from a base class, allowing for modular development
 
 #### **Headquarters**
 The headquarters is the central building for the player, it acts as the command centre as well as the win condition. It's main function is to train (spawn) new units through an interaction menu and to store collected resources. It also updates displayed price for units and controls button visibility based on game progression.
@@ -295,8 +286,7 @@ Towers are your second line of defence should your units fail. These medium-rang
 ![Finite state diagram for defences](./Doc_Images/DefenceFSM.png)
 
 #### **Detection system**
-Each building has an invisible collision area, this serves as the detection radius. Once a unit enters a building's range, the unit is classified into a friendly or enemy array determined by their assigned team. As an issue arose, units that were already in the detection radius before placing were not accounted for; An addition failsafe was devised to get all unit (bodies) in the area and sort them before the primary system logic starts.
-The friendly array is used for the likes of repair and interaction, while the enemy array contains targets for defences in order of FIFO. When a unit exits this range it is no longer targeted, and will be lower priority when reentering.
+Collision Circles are used to detect whether a unit is close to the building. This is nescessary for repairing and mining.
 
 #### Barracks, Science Lab, Fusion Lab
 **Barracks**
@@ -394,3 +384,12 @@ We learned the importance of clear communication and the impact it has on the pr
 
 ### Game Development
 We learned that game development is a complex process that requires a lot of time, effort and advanced planning. It was important to have a clear and thorough design plan before writing any code, as attempts to add new features or change existing ones can easily lead to unexpected behaviour.
+
+## Credits
+- Amazing SFX pack by Helton Yan that helped bring the units to life: https://heltonyan.itch.io/retroanimesfx
+- A crunchy, techy sound effects pack that formed the beeps and bops of the project: https://wangleline.itch.io/data-hammer?download
+- General fx sourced from: https://pixabay.com/sound-effects/
+- Music Wretched Weaponry by Keiichi Okabe from Nier Automata Soundtrack https://open.spotify.com/track/7w0lm7M5Qw6IrddeN0w4Ll?si=7a02ed93435d46ee (plz do not sue us square enix :) )
+- The opensource pixelart pack that formed the buildings, terrain and asethetic of the units: https://opengameart.org/content/colony-sim-extended-version
+- Rest of pixelart & animations by contributer Ben Shorten
+

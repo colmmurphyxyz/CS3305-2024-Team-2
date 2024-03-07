@@ -26,7 +26,8 @@ Face off in 1v1 battles with another player as you compete for control over ore 
 - Head to the [Releases](https://github.com/colmmurphyxyz/CS3305-2024-Team-2/releases) page and download the `sandsoforosis_linux.x86_64` binary and `sandsoforisis_linux.sh` scripts
 - with both files in the same directory, run the `sandsoforisis_linux.sh` script
 ## Mac
-- ask ben idk i don't own a mac
+ - Download `sandsoforisis_mac.x86_64.zip` from the [Releases](https://github.com/colmmurphyxyz/CS3305-2024-Team-2/releases) page
+ - Run RTS.app file
 ## Windows
 - Download `sandsoforisis_windows.x86_64.zip` from the [Releases](https://github.com/colmmurphyxyz/CS3305-2024-Team-2/releases) page
 - extract the zip archive and run `sandsoforisis_windows.x86_64.exe`
