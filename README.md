@@ -316,9 +316,9 @@ A late-game building that unlocks the final tier of units, the Fusion Screecher.
 Multiplayer is a crucial component of our game. It is imperative that players can compete against each other seamlessly over the network with minimal lag or de-synchronisation.  In our implementation we made use of Godot's Multiplayer API wherever appropriate and we implemented custom networking logic for situations where the built-in libraries weren't suitable
 
 ### Godot multiplayer API
-The latest version of the Godot engine overhauled its multiplayer networking and synchronisation APIs. Multiplayer logic is configured primarily through the built-in *MultiplayerSpawner* and *MultiplayerSynchronizer* nodes. These nodes handle the spawning and despawning of actor nodes, as well as synchronising their properties across peers. 
+The latest version of the Godot engine overhauled its multiplayer networking and synchronisation APIs. Multiplayer logic is configured primarily through the built-in *MultiplayerSpawner* and *MultiplayerSynchronizer* nodes.
 Godot assigns every peer in a network a unique 16-bit id. The server is always assigned the id 1, while other peers are assigned randomly-generated ids.
-Every node has a *multiplayer authority* property. This is a 16-bit integer id of the peer that "owns" the node. This value defaults to 1 (the server) if not explicitly set. Note that the peer that spawns a node into the game may not always be its multiplayer authority.
+Every node has a *multiplayer authority* property. This is the id of the peer that "owns" the node. This value defaults to 1 (the server) if not explicitly set.
 We make use of RPC methods to perform additional network actions not provided by the MultiplayerSpawner and MultiplayerSynchronizer nodes
 #### MultiplayerSpawner
 The MultiplayerSpawner node will watch for the creation and deletion of nodes. If the type of the node created/deleted is listed in the MultiplayerSpawner's Auto-Spawn List, it will broadcast a signal to all other peers to replicate the new node, or to remove the deleted node on all instances.
@@ -331,13 +331,13 @@ This approach reduces the computational approach on all peers, as they do not ha
 ### Peer to Peer Architecture
 Sands or Orisis uses a peer-to-peer network architecture, where one player 'hosts' the game and the other player will connect to the host's computer. This eliminates the need for a dedicated server to be present.
 From the game's main menu, one peer will input a port number and select the 'Host Game' button. They will be referred to as the 'host' in this document. The host will then listen for connections on the provided port. Another peer will input a port number and an IP address, then select the 'Join Game' button. They will be referred to as the 'client' from here on. They will attempt to connect to a host at the specified address and port. If a connection is established, both players will be prompted to begin the game when they are ready.
-We made the decision to only concern ourselves with LAN networking, but not to outright forbid playing over the internet.
-**NB: Firewall policies may restrict P2P connections over LAN, for example, eduroam will, by default, not allow connections between between network clients on the same LAN. In our testing we used a mobile hotspot to work around this when necessary**
-### Application Layer Netcode Architecture
+We made the decision to only concern ourselves with LAN networking, but not to outright forbid playing over the internet. Those who wish to play over the internet will have to work with port forwarding and firewalls though
+**NB: Firewall policies may restrict connections over LAN, for example, eduroam will, by default, not allow connections between clients on the same LAN. In our testing we used a mobile hotspot to work around this**
+### Actors
 As stated previously, a game in Godot is composed of *nodes* Some nodes can be considered *actors*. An Actor is an object that represents a single game entity, for example, an instance of the Sniper scene can be considered an actor. 
 Every actor has functionality to make calls over the network to update the actor's properties (position, velocity, etc) or to execute a method. This is done via the RPC protocol
 
-### Transport Layer Netcode Architecture
+### RPC and transport layer netcode
 RPC calls can be declared as either 'reliable' or 'unreliable'. RPC methods will default to being sent unreliably unless otherwise specified.
 Reliable calls will be sent over TCP, and the order in which they are executed by the recipient is guaranteed to be the same order in which they were sent. Most of out RPC methods are declared as reliable as they relate to critical logic, such as actor spawning, signalling damage to an actor or signalling to change the game scene.
 For non-critical logic, such as triggering sound effects, we declare the associated RPC methods as unreliable. Meaning they will be sent over UDP and it is not guaranteed they will be executed by the recipient
