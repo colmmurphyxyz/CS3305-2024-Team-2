@@ -288,29 +288,27 @@ The headquarters is the central building for the player, it acts as the command 
 #### **Valid placement**
 In order to balance and maintain a fair game, we limited players to placing buildings (other than mines) only within the vicinity of the HQ, preventing the defence of resources using structures, as well as using them to uncover fog of war. This is done by using taking the line distance between the HQ position and current mouse placement position.
 
-#### **Spawning units**
-To optimize for mass buying units (spamming) and prevent grouping of units, we implemented a spawn radius near HQ which should distribute the spawning randomly. We implemented this by taking the HQ position as a center vector, a random angle and min/max distance to locate a random point within a ring round HQ.
-
 #### **Mine**
-There are two types of mines, iron and unobtainium, this is automatically set by the deposit that the mine is placed on. All mines have a maximum storage capacity and a mining rate. Mines need to be built (fully repaired) before they start working. Each mine has a mining rate and maximum storage capacity. Drones need to be assigned to a mine to transport resources to HQ.
+Mines can produce either iron or unobtainium depending on the deposit on which they are built. All mines have a maximum storage capacity and a mining rate. Mines need to be fully repaired before they produce ore. Drones must be used to transport resources to the HQ.
 ![Finite state diagram for mines](./Doc_Images/MinesFSM.png)
 
 #### **Defence**
-Towers are your second line of defence should your units fail. These medium-ranged, high HP buildings with quick reload and fast bullet travel will pack a punch with almost any enemy nearby. A tier system was in place to upgrade defences for higher range, faster reload and more health; this was scrapped due to time constraints and complexity of integration. (*In development*)
+Towers are your second line of defence should your units fail. These medium-ranged, high health buildings with quick reload and fast bullet travel will pack a punch with almost any enemy nearby, and act as a bullet-sponge to protect your units.
 ![Finite state diagram for defences](./Doc_Images/DefenceFSM.png)
 
 #### **Detection system**
 Each building has an invisible collision area, this serves as the detection radius. Once a unit enters a building's range, the unit is classified into a friendly or enemy array determined by their assigned team. As an issue arose, units that were already in the detection radius before placing were not accounted for; An addition failsafe was devised to get all unit (bodies) in the area and sort them before the primary system logic starts.
 The friendly array is used for the likes of repair and interaction, while the enemy array contains targets for defences in order of FIFO. When a unit exits this range it is no longer targeted, and will be lower priority when reentering.
 
-#### **Barracks**
-This building is the first upgrade to begin the game, it allows the player to spawn units other than the default drone. It unlocks the Bruiser and Sniper units, which are the first tier capable of attacking. As for all other progression buildings, once destroyed the player will lose the ability to spawn these units.
-
-#### **Science Lab**
-Unlocked after the barrack, this building signifies mid-game progression. It unlocks the second tier of units, the Scout and Warden. The Scout is a fast, low health unit that can be used to uncover fog-of-war and gather information. The Warden is a high health, high damage unit that can be used to tank damage and deal damage to enemy units.
-
-#### **Fusion Lab**
-A late-game building that unlocks the final tier of units, the Fusion Screecher. A high damage, high health unit, equipped with a deadly laser that obliterates enemies in its path.
+#### Barracks, Science Lab, Fusion Lab
+**Barracks**
+- The first upgrade to begin the game. Unlocks the Sniper and Bruiser units,
+- Snipers and Bruisers are the first units capable of attacking
+**Science Lab**
+- Unlocks the Warden and Scout units
+**Fusion Lab**
+- Unlocks the powerful Fusion Screecher, a high-damage, high-health with a deadly laser capable of obliterating anything in its path
+Only one of each of these buildings can be present at a time. When one is destroyed the player will lose the ability to spawn units unlocked by that building.
 
 ## Networking (I sure hope it is)
 Multiplayer is a crucial component of our game. It is imperative that players can compete against each other seamlessly over the network with minimal lag or de-synchronisation.  In our implementation we made use of Godot's Multiplayer API wherever appropriate and we implemented custom networking logic for situations where the built-in libraries weren't suitable
