@@ -312,6 +312,69 @@ Unlocked after the barrack, this building signifies mid-game progression. It unl
 #### **Fusion Lab**
 A late-game building that unlocks the final tier of units, the Fusion Screecher. A high damage, high health unit, equipped with a deadly laser that obliterates enemies in its path.
 
+## Networking (I sure hope it is)
+Multiplayer is a crucial component of our game. It is imperative that players can compete against each other seamlessly over the network with minimal lag or de-synchronisation.  In our implementation we made use of Godot's Multiplayer API wherever appropriate and we implemented custom networking logic for situations where the built-in libraries weren't suitable
+
+### Godot multiplayer API
+The latest version of the Godot engine overhauled its multiplayer networking and synchronisation APIs. Multiplayer logic is configured primarily through the built-in *MultiplayerSpawner* and *MultiplayerSynchronizer* nodes. These nodes handle the spawning and despawning of actor nodes, as well as synchronising their properties across peers. 
+Godot assigns every peer in a network a unique 16-bit id. The server is always assigned the id 1, while other peers are assigned randomly-generated ids.
+Every node has a *multiplayer authority* property. This is a 16-bit integer id of the peer that "owns" the node. This value defaults to 1 (the server) if not explicitly set. Note that the peer that spawns a node into the game may not always be its multiplayer authority.
+We make use of RPC methods to perform additional network actions not provided by the MultiplayerSpawner and MultiplayerSynchronizer nodes
+#### MultiplayerSpawner
+The MultiplayerSpawner node will watch for the creation and deletion of nodes. If the type of the node created/deleted is listed in the MultiplayerSpawner's Auto-Spawn List, it will broadcast a signal to all other peers to replicate the new node, or to remove the deleted node on all instances.
+In our game, only the host's game instance is considered by the MultiplayerSpawner, this the host is the single point of truth for the list of actors current present in the game scene. This provides the benefit of avoiding conflicts between peers over what actors are present in the game. If a non-host peer wishes to spawn a unit they must remotely call the `spawn_unit` method on the server via an RPC, providing the unit's type and initial position as arguments. The server can infer other parameters, such as the unit's team from the data provided
+#### MultiplayerSynchronizer
+The MultiplayerSynchronizer node takes a list of properties, and will attempt to send the values of these properties to other peers on the network. 
+![](replicationconfig.png)
+The synchroniser will 'run' at specific periodic intervals. In our implementation we set the synchroniser to run every network frame (~60 times per second), Properties set to replicate 'On Change' will be sent to other peers every frame only if their value has changed since the last network frame. Properties set to replicate 'Always' will be sent to other peers every network frame, regardless of their value.
+This approach reduces the computational approach on all peers, as they do not have to process pathfinding, state changes, or damage calculation on actors for which they are not the multiplayer authority
+### Peer to Peer Architecture
+Sands or Orisis uses a peer-to-peer network architecture, where one player 'hosts' the game and the other player will connect to the host's computer. This eliminates the need for a dedicated server to be present.
+From the game's main menu, one peer will input a port number and select the 'Host Game' button. They will be referred to as the 'host' in this document. The host will then listen for connections on the provided port. Another peer will input a port number and an IP address, then select the 'Join Game' button. They will be referred to as the 'client' from here on. They will attempt to connect to a host at the specified address and port. If a connection is established, both players will be prompted to begin the game when they are ready.
+We made the decision to only concern ourselves with LAN networking, but not to outright forbid playing over the internet.
+**NB: Firewall policies may restrict P2P connections over LAN, for example, eduroam will, by default, not allow connections between between network clients on the same LAN. In our testing we used a mobile hotspot to work around this when necessary**
+### Application Layer Netcode Architecture
+As stated previously, a game in Godot is composed of *nodes* Some nodes can be considered *actors*. An Actor is an object that represents a single game entity, for example, an instance of the Sniper scene can be considered an actor. 
+Every actor has functionality to make calls over the network to update the actor's properties (position, velocity, etc) or to execute a method. This is done via the RPC protocol
+
+### Transport Layer Netcode Architecture
+RPC calls can be declared as either 'reliable' or 'unreliable'. RPC methods will default to being sent unreliably unless otherwise specified.
+Reliable calls will be sent over TCP, and the order in which they are executed by the recipient is guaranteed to be the same order in which they were sent. Most of out RPC methods are declared as reliable as they relate to critical logic, such as actor spawning, signalling damage to an actor or signalling to change the game scene.
+For non-critical logic, such as triggering sound effects, we declare the associated RPC methods as unreliable. Meaning they will be sent over UDP and it is not guaranteed they will be executed by the recipient
+
+### Netcode implementation
+To create a seamless networked multiplayer experience we needed to ensure the properties of all actors are synchronised across all peers. 
+To achieve this, we made use of Godot's multiplayer API's to synchronise properties and states of all actors in the game, and implemented additional RPC methods to handle special cases such as damage calculation unit/building spawning
+![](spawnunitlogic.png)
+The image above shows our logic for spawning and replicating units
+- A peer will remotely call to the server and request to spawn a node of the given type at the given position
+- The server will instantiate the node, set its position and team, then add it to the scene tree
+- The server's MultiplayerSpawner will see this and ensure the new node is replicated across other peers
+- The server will then call for all peers to set the multiplayer authority of the new node
+Similar logic is used for spawning buildings and despawning actors.
+#### State and networking
+In the context of the MVC architecture, an actor's state can be considered its Model. The properties of an actor will be modified by its state, consider these properties the View of the actor. In our multiplayer architecture only the View is replicated across peers.
+If Bob spawns a sniper unit and moves it in range of Alice's drone, Alice doesn't know, or care about the sniper's current state, pathfinding target or targeted unit. Alice only receives the sniper's current position, sprite, animation frame and team from Bob.
+Alice will see the sniper's charge-up animation and then see a bullet spawn from the sniper and fly towards her drone. Meanwhile on Bob's instance He will assign his sniper to enter the move state and navigate towards Alice's sniper, then he will command his sniper to enter the attack state and the sniper will compute the animation to play, the direction to rotate the sprite and when to fire the bullet. This logic is only computed on Bob's machine, and the resulting View is provided to Alice
+
+### Compression
+Compressing network traffic is an easy and effective method to reduce network bandwidth usage, at the cost of increased latency caused by compressing and decompressing.
+We were solely focused on LAN multiplayer, thus Bandwidth usage and network congestion was not a major concern.
+Using Godot's network profiler to measure network bandwidth, we discovered that in a relatively "busy" game scenario only ~78 KiB/s of data was being transmitted over the network.  Far too low to raise concerns of congestion
+![](networkprofiler.png)
+Using this information, we deemed the best compression option was to actually use no compression. This allows us to achieve the lowest latency possible and to avoid consuming additional CPU/Memory when compressing and decompressing.
+
+## Camera
+Sands of Orisis features a camera that players use to get a bird's eye view of the battlefield. For the design of this camera we took inspiration from other RTS games such as Starcraft. 
+Sands of Orisis is a game, and games should be fun. Wrestling with the camera in the midst of an intergalactic skirmish is not fun. Our camera needed to be simple, intuitive to use, and unobtrusive to the player
+The camera can be panned in three ways
+- Using the arrow keys
+- Holding down the middle mouse button and dragging the mouse in the intended direction
+- Navigating the cursor to the outer regions of the window will pan the camera in that direction
+Providing multiple methods to move the camera allows the player to select the method they find least intrusive.
+The camera can be zoomed in and out by scrolling the mouse. The speed at which the camera moves scales inversely with the camera's zoom such that its relative speed is constant. i.e. the camera will always move 1 screen width every n seconds, regardless of zoom.
+We found that panning the camera by moving the cursor to the edge of the window was the most common method of moving the camera, but could feel obtrusive at times, as the player may not always want to move the camera when their cursor is at the screen edge. To resolve this, we allow players to 'lock' camera movement with the z key.
+
 ## Team planning and communication
 ### Communication
 Our primary mode of communication was a Discord server, chosen for its organized instant messaging. It allowed for quick updates, coordination and brainstorming, minimizing errors and conflicts as all members were informed of any task changes.

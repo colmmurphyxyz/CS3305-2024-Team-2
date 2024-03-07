@@ -5,6 +5,7 @@ build/
 
 # ignore obsidian data
 .obsidian/
+Report.md
 
 # ignore .imports for images used in the report
-Doc_images/*.import
+Doc_Images/**/*.import
