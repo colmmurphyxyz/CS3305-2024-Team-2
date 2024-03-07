@@ -376,13 +376,9 @@ The camera can be zoomed in and out by scrolling the mouse. The speed at which t
 We found that panning the camera by moving the cursor to the edge of the window was the most common method of moving the camera, but could feel obtrusive at times, as the player may not always want to move the camera when their cursor is at the screen edge. To resolve this, we allow players to 'lock' camera movement with the z key.
 
 ## Team planning and communication
-### Communication
-Our primary mode of communication was a Discord server, chosen for its organized instant messaging. It allowed for quick updates, coordination and brainstorming, minimizing errors and conflicts as all members were informed of any task changes.
-![Discord](./Doc_Images/discord.png) 
-
 ### Planning
-We chose Trello for project planning due to its intuitive board system. Tasks were sorted into lists representing different states of development. Early, Mid and Late-Development objectives, tracking in-progress and marking Done or Half-done(bugged) tasks. The option to assign task to members provided accountability and improved communication.  
-For bug tracking we combined a Trello list and the built-in Github feature for quick resolutions.
+We chose to use Trello for project planning. Tasks were sorted into lists representing different states of development. Early, Mid and Late-Development objectives, tracking in-progress and marking Done or in-progress tasks. The option to assign task to members provided accountability and improved communication.  
+For bug tracking we combined a Trello list and the Issues feature on GitHub for quick resolutions.
 ![Team trello board](./Doc_Images/trello.png)
 
 ### Design
@@ -392,10 +388,13 @@ Used Lucidchart to created roadmaps, flow graphs and diagrams for game and logic
 ## Lessons learned
 ---
 ### Consistency and best practices
-We learned the importance of consistency in coding practices, such as naming conventions, commenting, and code structure or even just general implementation of solutions. Given the time constraints, not all members had the same level of experience with Godot and GDScript, so it was important to keep the codebase as clean and understandable as possible. Reflecting on this, we could have benefited from a more more elegant solutions and better code organization.
+We learned the importance of consistency in coding practices, such as naming conventions, commenting, and code structure or even just general implementation of solutions. None of us had worked on a project of this scale previously, we found it beneficial to keep code simple wherever possible
+
+### Version Control
+We all had some minor experience with Git previously. This project showed us the importance of atomic commits, meaningful commit messages and following best practices when working with Git. This project also showed us first-hand the punishment for failing to follow these best practices
 
 ### Communication
 We learned the importance of clear communication and the impact it has on the project. We had a few instances where a lack of communication led to conflicts. Uncertainty from inconsistent progress updates resulted in minor delays. We could have benefited from a more structured approach to communication, such as daily reports.
 
 ### Game Development
-It is a misconception that game development is easy. We learned that game development is a complex process that requires a lot of time, effort and advanced planning. It was important to have a clear plan and to stick to it, as attempts to add new (key) features or change existing ones (entirely) can lead to a lot of bugs and issues with existing implementations.
+We learned that game development is a complex process that requires a lot of time, effort and advanced planning. It was important to have a clear and thorough design plan before writing any code, as attempts to add new features or change existing ones can easily lead to unexpected behaviour.
