@@ -18,11 +18,9 @@ This is a quick start guide to the game. Discussing the controls, the objective,
 
 ### Installation
 ---
-#TODO change this to instructions for running the compiled game
-1. **Import project** - Clone the repository and open the project in Godot.
-2. **Run the game** - Run the game by pressing the play button in the top right corner of the Godot editor.
-- **Note**: If you wish to test the game with two instances. In godot, go to 'Debug' -> 'Run multiple instances' and select 2 instances before running the game.
-3. **Remote connection** - If you wish to play with a friend, you can host the game and give your friend your local IP address. Set the same port and address in the main menu. *Make sure both computers are on the same network.*
+-  Clone the repository from Github or download a compiled binary from the releases page or Canvas submission
+-  Run the game from the Godot editor, or directly execute the binary
+- More detailed instructions are available at https://github.com/colmmurphyxyz/CS3305-2024-Team-2/blob/main/INSTALLATION.md
 
 ---
 ### Controls
