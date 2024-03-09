@@ -160,8 +160,6 @@ func place_building(scene_path: String, called_by: int, spawn_pos: Vector2, unob
 	new_building.global_position = spawn_pos
 	new_building.is_placed = true
 	new_building.is_following_mouse = false
-	# set buildings to be full hp and active on spawn, for debugging reasons
-	new_building.health = new_building.max_hp
 	new_building.is_active = true
 	if mine:
 		new_building.has_unobtainium = unobtainium_field
