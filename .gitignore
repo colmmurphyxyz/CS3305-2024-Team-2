@@ -1,7 +1,12 @@
 # Godot 4+ specific ignores
 .godot/
 
-build/
+build/windows
+build/mac
+build/windows
+build/submission
+build/all
+build/*.zip
 
 # ignore obsidian data
 .obsidian/
